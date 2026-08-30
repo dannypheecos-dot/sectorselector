@@ -22,34 +22,45 @@
   <header class="wrap mast">
     <a class="wordmark" href="./">sectorselector<span>.ai</span></a>
     <nav class="mast-meta">
-      <span class="sim-pill mast-desk">Simulated</span>
-      <span class="mast-desk">v2 · monthly list</span>
+      <span class="sim-pill">Simulated</span>
       <a class="mast-desk" href="#map">Map</a>
       <a class="mast-desk" href="#waterfall">Waterfall</a>
       <a class="mast-desk" href="#blotter">Research</a>
-      <a href="#capture">List</a>
+      <a class="mast-list" href="#capture">List</a>
     </nav>
   </header>
 
   <main>
     <section class="wrap hero" id="capture">
-      <p class="kicker">11 SPDR sectors · vs SPY · 28 Aug 2026 close</p>
-      <h1>KNOW WHERE THE MONEY IS MOVING<span class="caret" aria-hidden="true"></span></h1>
-      <p class="lede">
-        Most traders pick a stock first. That’s backwards. We rank where capital is in the 11 SPDR sectors, then send one defined-risk way to play the leader.
-      </p>
-      <ul class="offer">
-        <li>This month’s plan emailed immediately: sector, entry, exit, invalidation.</li>
-        <li>The Friday close map every week (who leads, who is skipping).</li>
-        <li>Founding 1,000 keep that list free.</li>
-      </ul>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">11 SPDR sectors · vs SPY · 28 Aug 2026 close</p>
+          <h1>KNOW WHERE THE MONEY IS MOVING<span class="caret" aria-hidden="true"></span></h1>
 
-      <form class="capture" id="hero-form" action="https://formsubmit.co/dannyphee.cos@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Sector Selector monthly list">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://sectorselector.ai/?thanks=1#trade">
-        <input type="hidden" name="_autoresponse" value="Sector Selector — this month's plan (simulated, not advice)
+          <div class="greedy-block">
+            <p class="greedy">
+              <span class="greedy-ticker">XLV</span>
+              <span class="greedy-score">95/100</span>
+              <span class="greedy-sep" aria-hidden="true">·</span>
+              <span class="greedy-rs">+13.1  13w RS vs SPY</span>
+            </p>
+            <p class="greedy-sub">Health Care · 28 Aug close · score = clip(round(50 + 3.2×rs13w + 0.6×vs50d), 0, 100)</p>
+          </div>
+
+          <p class="lede">Most traders pick a stock first. That’s backwards. Rank the 11 SPDRs, then one defined-risk play on the leader.</p>
+
+          <ul class="offer">
+            <li>This month’s plan, emailed now: sector, entry, exit, invalidation.</li>
+            <li>Friday-close map every week. Who leads. Who is skipping.</li>
+            <li>Founding 1,000 keep that list free.</li>
+          </ul>
+
+          <form class="capture" id="hero-form" action="https://formsubmit.co/dannyphee.cos@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="Sector Selector monthly list">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://sectorselector.ai/?thanks=1#trade">
+            <input type="hidden" name="_autoresponse" value="Sector Selector — this month's plan (simulated, not advice)
 
 ENTRY: XLV debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums. Max loss = the debit paid.
 
@@ -58,20 +69,83 @@ EXIT: First of — drops out of the top 3 on Friday 13-week RS rank; time stop a
 INVALIDATION: Drops out of the top 3 on 13-week relative strength vs SPY.
 
 Friday-close emails follow with the 11-sector map. We may text later about product webinars — no texts today. Cos Analyst is an AI research desk for Danny Phee. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
-        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="source" value="sectorselector.ai / hero">
-        <p class="hook">Email + phone. We send this month’s plan.</p>
-        <label for="hero-email">Email</label>
-        <label for="hero-phone">Mobile number</label>
-        <div class="capture-row">
-          <input id="hero-email" name="email" type="email" autocomplete="email" required placeholder="your email">
-          <input id="hero-phone" name="phone" type="tel" autocomplete="tel" required placeholder="your mobile">
-          <button type="submit">SEND ME THIS MONTH’S PLAN</button>
+            <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="source" value="sectorselector.ai / hero">
+            <p class="hook">Email + phone. We send this month’s plan.</p>
+            <label for="hero-email">Email</label>
+            <label for="hero-phone">Mobile number</label>
+            <div class="capture-row">
+              <input id="hero-email" name="email" type="email" autocomplete="email" required placeholder="your email">
+              <input id="hero-phone" name="phone" type="tel" autocomplete="tel" required placeholder="your mobile">
+              <button type="submit">SEND ME THIS MONTH’S PLAN ›</button>
+            </div>
+            <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
+            <p class="ps">P.S. Ticker, strike, and expiry stay gated until you submit. This is this month’s plan — not a replay. Founding 1,000 keep the list free.</p>
+            <p class="next-map">Next map: this Friday close.</p>
+          </form>
+          <p class="wait-msg" id="hero-msg" role="status" aria-live="polite"></p>
+          <p class="fine">This month’s plan by email. Friday-close map every week. We may text later about product webinars. Unsubscribe anytime.</p>
         </div>
-        <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
-      </form>
-      <p class="wait-msg" id="hero-msg" role="status" aria-live="polite"></p>
-      <p class="fine">This month’s plan by email. Friday-close map every week. We may text later about product webinars. Unsubscribe anytime.</p>
+
+        <aside class="hero-gate">
+          <div class="contract" id="contract">
+            <p class="dl-label">Top trade</p>
+            <dl class="locked-dl" id="locked-dl">
+              <div>
+                <dt>Sector</dt>
+                <dd>Health Care</dd>
+              </div>
+              <div>
+                <dt>Score</dt>
+                <dd class="phosphor">95</dd>
+              </div>
+              <div>
+                <dt>RS</dt>
+                <dd>+13.1</dd>
+              </div>
+              <div>
+                <dt>Location</dt>
+                <dd>+4.5 vs 50d</dd>
+              </div>
+            </dl>
+            <div class="gated-block">
+              <p class="contract-stamp" aria-hidden="true">PRIVATE</p>
+              <dl class="locked-dl gated-dl">
+                <div>
+                  <dt>Ticker</dt>
+                  <dd class="redact">████</dd>
+                </div>
+                <div class="strike-row">
+                  <dt>Strike</dt>
+                  <dd class="redact redact-blur">████ / ████</dd>
+                </div>
+                <div>
+                  <dt>Expiration</dt>
+                  <dd class="redact">████</dd>
+                </div>
+              </dl>
+            </div>
+            <div class="unlocked-dl" id="unlocked-dl" hidden>
+              <p class="cash">XLV · Health Care</p>
+              <p class="emailed">This also just emailed you.</p>
+              <div class="card-row">
+                <p class="dl-label">Entry</p>
+                <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
+              </div>
+              <div class="card-row">
+                <p class="dl-label">Exit</p>
+                <p>First of: drops out of the top 3 on Friday 13-week rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
+              </div>
+              <div class="card-row">
+                <p class="dl-label">Invalidation</p>
+                <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
+              </div>
+              <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+            </div>
+            <p class="contract-caption">This month’s card — ticker, strike, expiry locked.</p>
+          </div>
+        </aside>
+      </div>
     </section>
 
     <section class="wrap section" id="waterfall">
@@ -111,6 +185,21 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
         0DTE is one layer of modern structure, with price, liquidity, vol, macro, and sector flows.
         It does not control the market.
       </p>
+    </section>
+
+    <section class="wrap offer-strip" id="offer-strip" aria-label="What you get">
+      <article class="offer-cell">
+        <h3>The card</h3>
+        <p>This month’s plan: sector, entry, exit, invalidation.</p>
+      </article>
+      <article class="offer-cell">
+        <h3>The Friday map</h3>
+        <p>Who leads. Who is skipping. Every Friday close.</p>
+      </article>
+      <article class="offer-cell">
+        <h3>Founding-list: free</h3>
+        <p>Founding 1,000 keep that list free.</p>
+      </article>
     </section>
 
     <section class="wrap section" id="map">
@@ -220,10 +309,20 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
       </p>
     </section>
 
+    <section class="wrap cta-strip" id="cta-repeat" aria-label="Get this month’s plan">
+      <p class="greedy greedy-mini">
+        <span class="greedy-ticker">XLV</span>
+        <span class="greedy-score">95/100</span>
+        <span class="greedy-sep" aria-hidden="true">·</span>
+        <span class="greedy-rs">+13.1  13w RS vs SPY</span>
+      </p>
+      <a class="cta-btn" href="#capture">SEND ME THIS MONTH’S PLAN ›</a>
+    </section>
+
     <section class="wrap section" id="trade">
       <div class="section-head">
         <h2>This month’s top-ranked sector</h2>
-        <p class="asof">Healthcare · XLV · 28 Aug 2026 close</p>
+        <p class="asof">Health Care · 28 Aug 2026 close</p>
       </div>
 
       <div class="gate">
@@ -236,38 +335,30 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
           <div><p class="dl-label">Options environment</p><p class="dl-val">30–60 DTE defined-risk</p></div>
         </div>
 
-        <aside class="contract" id="contract">
-          <p class="dl-label">Top trade</p>
-          <dl class="locked-dl" id="locked-dl">
-            <div><dt>Ticker</dt><dd class="redact">████</dd></div>
-            <div><dt>Strike</dt><dd class="redact">████</dd></div>
-            <div><dt>Expiration</dt><dd class="redact">████</dd></div>
-            <div><dt>Score</dt><dd>95/100</dd></div>
-          </dl>
-          <div class="unlocked-dl" id="unlocked-dl" hidden>
-            <p class="cash">XLV · Health Care</p>
-            <p class="emailed">This also just emailed you.</p>
-            <div class="card-row">
-              <p class="dl-label">Entry</p>
-              <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
-            </div>
-            <div class="card-row">
-              <p class="dl-label">Exit</p>
-              <p>First of: drops out of the top 3 on Friday 13-week rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
-            </div>
-            <div class="card-row">
-              <p class="dl-label">Invalidation</p>
-              <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
-            </div>
-            <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+        <div class="trade-plan unlocked-dl">
+          <p class="cash">XLV · Health Care</p>
+          <p class="emailed">This also just emailed you.</p>
+          <div class="card-row">
+            <p class="dl-label">Entry</p>
+            <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
           </div>
+          <div class="card-row">
+            <p class="dl-label">Exit</p>
+            <p>First of: drops out of the top 3 on Friday 13-week rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
+          </div>
+          <div class="card-row">
+            <p class="dl-label">Invalidation</p>
+            <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
+          </div>
+          <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+        </div>
 
-          <form class="capture gate-form" id="gate-form" action="https://formsubmit.co/dannyphee.cos@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Sector Selector monthly list">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://sectorselector.ai/?thanks=1#trade">
-        <input type="hidden" name="_autoresponse" value="Sector Selector — this month's plan (simulated, not advice)
+        <form class="capture gate-form" id="gate-form" action="https://formsubmit.co/dannyphee.cos@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Sector Selector monthly list">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://sectorselector.ai/?thanks=1#trade">
+          <input type="hidden" name="_autoresponse" value="Sector Selector — this month's plan (simulated, not advice)
 
 ENTRY: XLV debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums. Max loss = the debit paid.
 
@@ -276,20 +367,21 @@ EXIT: First of — drops out of the top 3 on Friday 13-week RS rank; time stop a
 INVALIDATION: Drops out of the top 3 on 13-week relative strength vs SPY.
 
 Friday-close emails follow with the 11-sector map. We may text later about product webinars — no texts today. Cos Analyst is an AI research desk for Danny Phee. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
-        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <input type="hidden" name="source" value="sectorselector.ai / unlock">
-            <p class="hook">Email + phone. We send this month’s plan.</p>
-            <label for="gate-email">Email</label>
-            <label for="gate-phone">Mobile number</label>
-            <div class="capture-row">
-              <input id="gate-email" name="email" type="email" autocomplete="email" required placeholder="your email">
-              <input id="gate-phone" name="phone" type="tel" autocomplete="tel" required placeholder="your mobile">
-              <button type="submit">SEND ME THIS MONTH’S PLAN</button>
-            </div>
-            <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
-          </form>
-          <p class="wait-msg" id="gate-msg" role="status" aria-live="polite"></p>
-        </aside>
+          <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="source" value="sectorselector.ai / unlock">
+          <p class="hook">Email + phone. We send this month’s plan.</p>
+          <label for="gate-email">Email</label>
+          <label for="gate-phone">Mobile number</label>
+          <div class="capture-row">
+            <input id="gate-email" name="email" type="email" autocomplete="email" required placeholder="your email">
+            <input id="gate-phone" name="phone" type="tel" autocomplete="tel" required placeholder="your mobile">
+            <button type="submit">SEND ME THIS MONTH’S PLAN ›</button>
+          </div>
+          <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
+          <p class="ps">P.S. Ticker, strike, and expiry stay gated until you submit. This is this month’s plan — not a replay. Founding 1,000 keep the list free.</p>
+          <p class="next-map">Next map: this Friday close.</p>
+        </form>
+        <p class="wait-msg" id="gate-msg" role="status" aria-live="polite"></p>
       </div>
     </section>
 
@@ -313,7 +405,7 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
           <tbody id="blotter-body">
             <tr>
               <td>2026-08-30</td>
-              <td>XLV</td>
+              <td class="redact blotter-ticker">████</td>
               <td>Debit call spread, 30–60 DTE</td>
               <td><span class="status-open">OPEN</span></td>
               <td>—</td>
@@ -384,6 +476,11 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
       <span>sectorselector.ai · 28 Aug 2026 close</span>
     </div>
   </footer>
+
+  <div class="sticky-bar" id="sticky-bar">
+    <p class="sticky-lockup">XLV 95 · this month’s plan</p>
+    <a class="cta-btn" href="#capture">SEND ME THIS MONTH’S PLAN ›</a>
+  </div>
 
   <script src="app.js"></script>
 </body>

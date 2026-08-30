@@ -24,6 +24,12 @@
     el.textContent = text || "";
   }
 
+  var blotterTickets = null;
+
+  function isUnlocked() {
+    return document.body.classList.contains("unlocked");
+  }
+
   function revealTrade() {
     document.body.classList.add("unlocked");
     var locked = $("locked-dl");
@@ -44,6 +50,8 @@
       "ok",
       "Unlocked. This also just emailed you. Simulated debit call spread — not a quote, not advice."
     );
+    if (blotterTickets) renderBlotter(blotterTickets);
+    else unlockStaticBlotter();
   }
 
   function persistUnlock() {
@@ -133,23 +141,41 @@
     return "";
   }
 
+  function publicTicker(ticket) {
+    if (isUnlocked()) return ticket.ticker || "—";
+    return "████";
+  }
+
+  function unlockStaticBlotter() {
+    var cells = document.querySelectorAll("#blotter-body .blotter-ticker");
+    cells.forEach(function (td) {
+      td.textContent = "XLV";
+      td.classList.remove("redact");
+    });
+  }
+
   function renderBlotter(tickets) {
     var body = $("blotter-body");
     if (!body || !tickets || !tickets.length) return;
+    blotterTickets = tickets;
     body.textContent = "";
     tickets.forEach(function (t) {
       var tr = document.createElement("tr");
       var status = String(t.status || "").toUpperCase();
       var result = t.result == null || t.result === "" ? "—" : String(t.result);
+      var ticker = publicTicker(t);
       var cells = [
         t.date || "—",
-        t.ticker || "—",
+        ticker,
         t.structure || "—",
         status || "—",
         result
       ];
       cells.forEach(function (val, i) {
         var td = document.createElement("td");
+        if (i === 1 && !isUnlocked()) {
+          td.className = "redact blotter-ticker";
+        }
         if (i === 3) {
           var span = document.createElement("span");
           span.className = statusClass(t.status);
@@ -174,7 +200,7 @@
         if (data && data.tickets) renderBlotter(data.tickets);
       })
       .catch(function () {
-        /* static row in HTML is the fallback */
+        /* static row in HTML is the fallback; ticker stays redacted until unlock */
       });
   }
 
