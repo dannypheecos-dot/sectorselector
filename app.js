@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var POST_URL = "https://formsubmit.co/ajax/dannyphee.cos@gmail.com";
+  var POST_URL = "https://formsubmit.co/ajax/2ae01d62a7a0f6637dfe47cc1c673d1c";
   var SUBJECT = "Sector Selector monthly list";
   var UNLOCK_KEY = "sectorselector.v2.unlocked";
 
@@ -24,6 +24,12 @@
     el.textContent = text || "";
   }
 
+  var blotterTickets = null;
+
+  function isUnlocked() {
+    return document.body.classList.contains("unlocked");
+  }
+
   function revealTrade() {
     document.body.classList.add("unlocked");
     var locked = $("locked-dl");
@@ -37,13 +43,15 @@
     setMsg(
       $("hero-msg"),
       "ok",
-      "Thank you. You’re on the monthly list. This also just emailed you the card — entry, exit, invalidation. Healthcare (XLV) is below. Simulated. Not advice."
+      "Your Sector Selector is unlocked. The full sector report is in your inbox. Simulated. Not advice."
     );
     setMsg(
       $("gate-msg"),
       "ok",
-      "Unlocked. This also just emailed you. Simulated debit call spread — not a quote, not advice."
+      "Unlocked. The full sector report is in your inbox. Simulated. Not advice."
     );
+    if (blotterTickets) renderBlotter(blotterTickets);
+    else unlockStaticBlotter();
   }
 
   function persistUnlock() {
@@ -133,23 +141,41 @@
     return "";
   }
 
+  function publicTicker(ticket) {
+    if (isUnlocked()) return ticket.ticker || "—";
+    return "████";
+  }
+
+  function unlockStaticBlotter() {
+    var cells = document.querySelectorAll("#blotter-body .blotter-ticker");
+    cells.forEach(function (td) {
+      td.textContent = "XLV";
+      td.classList.remove("redact");
+    });
+  }
+
   function renderBlotter(tickets) {
     var body = $("blotter-body");
     if (!body || !tickets || !tickets.length) return;
+    blotterTickets = tickets;
     body.textContent = "";
     tickets.forEach(function (t) {
       var tr = document.createElement("tr");
       var status = String(t.status || "").toUpperCase();
       var result = t.result == null || t.result === "" ? "—" : String(t.result);
+      var ticker = publicTicker(t);
       var cells = [
         t.date || "—",
-        t.ticker || "—",
+        ticker,
         t.structure || "—",
         status || "—",
         result
       ];
       cells.forEach(function (val, i) {
         var td = document.createElement("td");
+        if (i === 1 && !isUnlocked()) {
+          td.className = "redact blotter-ticker";
+        }
         if (i === 3) {
           var span = document.createElement("span");
           span.className = statusClass(t.status);
@@ -174,12 +200,25 @@
         if (data && data.tickets) renderBlotter(data.tickets);
       })
       .catch(function () {
-        /* static row in HTML is the fallback */
+        /* static row in HTML is the fallback; ticker stays redacted until unlock */
       });
+  }
+
+  function bindFullSetup() {
+    var btn = $("view-full-setup");
+    var panel = $("full-setup");
+    if (!btn || !panel) return;
+    btn.addEventListener("click", function () {
+      var open = panel.hidden;
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "HIDE FULL SETUP ↑" : "VIEW FULL SETUP →";
+    });
   }
 
   bind($("hero-form"), $("hero-email"), $("hero-msg"));
   bind($("gate-form"), $("gate-email"), $("gate-msg"));
+  bindFullSetup();
   loadBlotter();
 
   if (alreadyUnlocked()) {
