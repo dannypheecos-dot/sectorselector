@@ -101,7 +101,7 @@
     if (row.role === "bench") return "bench";
     if (row.role === "watch" || row.label === "ROTATION WATCH") return "watch";
     if (row.role === "leader" || row.label === "LEADER") return "leader";
-    if (row.role === "skip") return "skip";
+    if (row.role === "skip") return "is-skip";
     return "";
   }
 

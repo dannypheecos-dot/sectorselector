@@ -78,7 +78,7 @@ a {
 
 a:hover { color: var(--text); }
 
-.skip {
+.skip-link {
   position: absolute;
   left: 0.75rem;
   top: -3rem;
@@ -90,7 +90,7 @@ a:hover { color: var(--text); }
   font-family: var(--mono);
   font-size: 0.75rem;
 }
-.skip:focus { top: 0.75rem; }
+.skip-link:focus { top: 0.75rem; }
 
 .wrap {
   width: min(var(--max), calc(100% - 2.25rem));
@@ -291,6 +291,7 @@ a:hover { color: var(--text); }
   border: 0;
   padding: 0.78rem 1rem;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .capture button:hover { filter: brightness(1.06); }
@@ -361,6 +362,13 @@ a:hover { color: var(--text); }
 .section {
   padding: 3rem 0 2.75rem;
   border-bottom: 1px solid var(--line);
+}
+
+#board,
+#gate,
+#thanks,
+#list {
+  scroll-margin-top: 3.25rem;
 }
 
 .section-head {
@@ -622,8 +630,8 @@ tr.watch td.col-ticker {
   box-shadow: inset 3px 0 0 var(--amber), 6px 0 8px -8px rgba(0, 0, 0, 0.7);
 }
 
-tr.skip td { opacity: 0.88; }
-tr.skip td.col-ticker {
+tr.is-skip td { opacity: 0.92; }
+tr.is-skip td.col-ticker {
   box-shadow: inset 3px 0 0 var(--text-4), 6px 0 8px -8px rgba(0, 0, 0, 0.7);
 }
 
@@ -831,4 +839,6 @@ body.is-unlocked .gate-trade .term-id,
 @media (max-width: 420px) {
   .wordmark { font-size: 0.72rem; letter-spacing: 0.1em; }
   .fact-row { grid-template-columns: 1fr; }
+  .capture-row { flex-direction: column; }
+  .capture button { width: 100%; }
 }
