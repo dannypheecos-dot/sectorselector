@@ -33,9 +33,13 @@
     setMsg(
       $("hero-msg"),
       "ok",
-      "Thank you. You’re on the monthly list. Healthcare (XLV) is #1 this week — paper structure below. Simulated. Not advice."
+      "Thank you. You’re on the monthly list. This also just emailed you the card — entry, exit, invalidation. Healthcare (XLV) is below. Simulated. Not advice."
     );
-    setMsg($("gate-msg"), "ok", "Unlocked. Simulated debit call spread — not a quote, not advice.");
+    setMsg(
+      $("gate-msg"),
+      "ok",
+      "Unlocked. This also just emailed you. Simulated debit call spread — not a quote, not advice."
+    );
   }
 
   function persistUnlock() {
@@ -52,21 +56,23 @@
     return q.get("thanks") === "1";
   }
 
-  function payload(email, source) {
+  function payload(form, email, source) {
     var body = new FormData();
     body.append("email", email);
     body.append("_subject", SUBJECT);
     body.append("_captcha", "false");
     body.append("_template", "table");
     body.append("source", source || "sectorselector.ai");
+    var auto = form && form.querySelector("input[name='_autoresponse']");
+    if (auto && auto.value) body.append("_autoresponse", auto.value);
     return body;
   }
 
-  function send(email, source) {
+  function send(form, email, source) {
     return fetch(POST_URL, {
       method: "POST",
       headers: { Accept: "application/json" },
-      body: payload(email, source)
+      body: payload(form, email, source)
     }).then(function (res) {
       if (!res.ok) throw new Error("formsubmit " + res.status);
       return res.json().catch(function () {
@@ -91,7 +97,7 @@
       if (btn) btn.disabled = true;
       setMsg(msg, "", "Sending…");
       var source = (form.querySelector("input[name='source']") || {}).value || "sectorselector.ai";
-      send(email, source)
+      send(form, email, source)
         .then(function () {
           persistUnlock();
           revealTrade();
@@ -108,8 +114,61 @@
     });
   }
 
+  function statusClass(status) {
+    var s = String(status || "").toLowerCase();
+    if (s === "open") return "status-open";
+    if (s === "closed") return "status-closed";
+    return "";
+  }
+
+  function renderBlotter(tickets) {
+    var body = $("blotter-body");
+    if (!body || !tickets || !tickets.length) return;
+    body.textContent = "";
+    tickets.forEach(function (t) {
+      var tr = document.createElement("tr");
+      var status = String(t.status || "").toUpperCase();
+      var result = t.result == null || t.result === "" ? "—" : String(t.result);
+      var cells = [
+        t.date || "—",
+        t.ticker || "—",
+        t.structure || "—",
+        status || "—",
+        result
+      ];
+      cells.forEach(function (val, i) {
+        var td = document.createElement("td");
+        if (i === 3) {
+          var span = document.createElement("span");
+          span.className = statusClass(t.status);
+          span.textContent = val;
+          td.appendChild(span);
+        } else {
+          td.textContent = val;
+        }
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+  }
+
+  function loadBlotter() {
+    fetch("blotter.json", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("blotter " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.tickets) renderBlotter(data.tickets);
+      })
+      .catch(function () {
+        /* static row in HTML is the fallback */
+      });
+  }
+
   bind($("hero-form"), $("hero-email"), $("hero-msg"));
   bind($("gate-form"), $("gate-email"), $("gate-msg"));
+  loadBlotter();
 
   if (alreadyUnlocked()) {
     persistUnlock();

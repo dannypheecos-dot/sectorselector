@@ -27,7 +27,7 @@
     {
       "ticker": "XLF",
       "name": "Financials",
-      "last": 58.10,
+      "last": 58.1,
       "chg1m": 1.93,
       "rs13w": 11.1,
       "rs6m": 0.82,
@@ -97,7 +97,7 @@
       "ticker": "XLI",
       "name": "Industrials",
       "last": 177.14,
-      "chg1m": -0.70,
+      "chg1m": -0.7,
       "rs13w": 0.6,
       "rs6m": -12.15,
       "vs50": -2.6,
@@ -200,10 +200,11 @@
   "blotter": {
     "badge": "SIMULATED RESULTS — NOT LIVE MONEY — NOT ADVICE",
     "caption": "Healthcare is #1 on 13-week RS and location. Structure is a 30–60 DTE debit call spread. Premium is the Monday open snapshot — not printed, not invented.",
+    "ledger": "blotter.json",
     "tickets": [
       {
-        "id": "2026-w35-xlv",
-        "openedLabel": "Pending — Monday open snapshot",
+        "id": "2026-08-30-xlv",
+        "date": "2026-08-30",
         "ticker": "XLV",
         "name": "Health Care",
         "structure": "Debit call spread, 30–60 DTE",
@@ -212,9 +213,10 @@
         "debitLabel": "Not published — Monday open snapshot. We do not invent premiums.",
         "maxLoss": "The debit paid",
         "dte": "30–60",
-        "status": "SIMULATED",
+        "status": "open",
         "result": null,
-        "resultLabel": "—"
+        "resultLabel": "—",
+        "notes": "Monday open snapshot for strikes. We do not invent premiums. Invalidation: drops out of top 3 on 13w RS vs SPY."
       }
     ]
   }

@@ -1,0 +1,17 @@
+{
+  "asOf": "2026-08-30",
+  "asOfLabel": "30 Aug 2026",
+  "disclosure": "Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets.",
+  "tickets": [
+    {
+      "id": "2026-08-30-xlv",
+      "date": "2026-08-30",
+      "ticker": "XLV",
+      "structure": "Debit call spread, 30–60 DTE",
+      "status": "open",
+      "debit": null,
+      "result": null,
+      "notes": "Monday open snapshot for strikes. We do not invent premiums. Invalidation: drops out of top 3 on 13w RS vs SPY. Max loss = debit paid."
+    }
+  ]
+}
