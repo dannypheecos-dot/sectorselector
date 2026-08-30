@@ -43,12 +43,12 @@
     setMsg(
       $("hero-msg"),
       "ok",
-      "Thank you. You’re on the monthly list. This also just emailed you the card — entry, exit, invalidation. Healthcare (XLV) is below. Simulated. Not advice."
+      "Your Sector Selector is unlocked. The full sector report is in your inbox. Simulated. Not advice."
     );
     setMsg(
       $("gate-msg"),
       "ok",
-      "Unlocked. This also just emailed you. Simulated debit call spread — not a quote, not advice."
+      "Unlocked. The full sector report is in your inbox. Simulated. Not advice."
     );
     if (blotterTickets) renderBlotter(blotterTickets);
     else unlockStaticBlotter();
@@ -204,8 +204,21 @@
       });
   }
 
+  function bindFullSetup() {
+    var btn = $("view-full-setup");
+    var panel = $("full-setup");
+    if (!btn || !panel) return;
+    btn.addEventListener("click", function () {
+      var open = panel.hidden;
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "HIDE FULL SETUP ↑" : "VIEW FULL SETUP →";
+    });
+  }
+
   bind($("hero-form"), $("hero-email"), $("hero-msg"));
   bind($("gate-form"), $("gate-email"), $("gate-msg"));
+  bindFullSetup();
   loadBlotter();
 
   if (alreadyUnlocked()) {

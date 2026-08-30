@@ -31,6 +31,7 @@
   </header>
 
   <main>
+    <!-- Funnel (not a cart): X → sectorselector.ai → email opt-in → free opportunity → beginner paper/training OR experienced full setup → later webinar → later Pro. Free site shows what we found. Webinar later explains why the framework matters. Pro does the ongoing work. Do not give away the entire solution here. -->
     <section class="wrap hero" id="capture">
       <div class="hero-grid">
         <div class="hero-copy">
@@ -89,7 +90,7 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
 
         <aside class="hero-gate">
           <div class="contract" id="contract">
-            <p class="dl-label">Top trade</p>
+            <p class="dl-label">Top-ranked setup</p>
             <dl class="locked-dl" id="locked-dl">
               <div>
                 <dt>Sector</dt>
@@ -126,26 +127,141 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
               </dl>
             </div>
             <div class="unlocked-dl" id="unlocked-dl" hidden>
-              <p class="cash">XLV · Health Care</p>
-              <p class="emailed">This also just emailed you.</p>
-              <div class="card-row">
-                <p class="dl-label">Entry</p>
-                <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
-              </div>
-              <div class="card-row">
-                <p class="dl-label">Exit</p>
-                <p>First of: drops out of the top 3 on Friday 13-week rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
-              </div>
-              <div class="card-row">
-                <p class="dl-label">Invalidation</p>
-                <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
-              </div>
-              <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+              <p class="unlock-kicker">Your Sector Selector is unlocked</p>
+              <p class="emailed">✓ Your full sector report has been emailed</p>
+              <p class="dl-label">#1 ranked sector</p>
+              <p class="unlock-sector">Health Care</p>
+              <p class="cash">XLV</p>
+              <dl class="brief-dl">
+                <div><dt>Sector score</dt><dd>95 / 100</dd></div>
+                <div><dt>Relative strength</dt><dd>Strong</dd></div>
+                <div><dt>Money flow</dt><dd>Leading</dd></div>
+                <div><dt>Swing environment</dt><dd>Favorable</dd></div>
+              </dl>
+              <p class="dl-label">This month’s top-ranked setup</p>
+              <p class="cash">XLV · Bullish</p>
+              <p class="setup-line">Defined-risk options strategy</p>
+              <p class="setup-line">30–60 day window</p>
+              <p class="setup-jump"><a href="#trade">Two ways to follow this →</a></p>
             </div>
             <p class="contract-caption">This month’s card — ticker, strike, expiry locked.</p>
           </div>
         </aside>
       </div>
+    </section>
+
+    <section class="wrap unlock-report" id="trade">
+      <p class="unlock-kicker">Your Sector Selector is unlocked</p>
+      <p class="emailed">✓ Your full sector report has been emailed</p>
+
+      <div class="unlock-grid">
+        <article class="unlock-research">
+          <p class="dl-label">#1 ranked sector</p>
+          <h2 class="unlock-sector">Health Care</h2>
+          <p class="cash">XLV</p>
+          <dl class="brief-dl">
+            <div><dt>Sector score</dt><dd>95 / 100</dd></div>
+            <div><dt>Relative strength</dt><dd>Strong</dd></div>
+            <div><dt>Money flow</dt><dd>Leading</dd></div>
+            <div><dt>Swing environment</dt><dd>Favorable</dd></div>
+          </dl>
+        </article>
+
+        <article class="unlock-setup">
+          <p class="dl-label">This month’s top-ranked setup</p>
+          <p class="cash">XLV · Bullish</p>
+          <p class="setup-line">Defined-risk options strategy</p>
+          <p class="setup-line">30–60 day window</p>
+          <p class="setup-note">What we found this Friday close. Simulated research. Not a personalized recommendation.</p>
+        </article>
+      </div>
+
+      <div class="unlock-paths">
+        <article class="path path-new" id="path-new">
+          <h3>New to options?</h3>
+          <p class="path-lead">Don’t trade this with real money yet.</p>
+          <p>Follow this Sector Selector idea first using a simulated / paper-trading account.</p>
+          <ol class="path-steps">
+            <li>
+              <span class="path-step-n">1</span>
+              <div>
+                <h4>Add it to your watchlist</h4>
+                <p>Add the selected ETF or stock and follow how it performs during the week.</p>
+              </div>
+            </li>
+            <li>
+              <span class="path-step-n">2</span>
+              <div>
+                <h4>Paper trade the setup</h4>
+                <p>Use your broker’s simulated trading feature so no real capital is at risk.</p>
+              </div>
+            </li>
+            <li>
+              <span class="path-step-n">3</span>
+              <div>
+                <h4>Track the result</h4>
+                <p>Follow the setup along with changes in the Sector Selector ranking.</p>
+              </div>
+            </li>
+          </ol>
+          <div class="path-gap" id="training-cta">
+            <h4>Never placed an options trade before?</h4>
+            <p>Join our free Sector Selector training and we’ll walk through how traders can use the Market → Sector → Stock → Option framework and how to follow Sector Selector research.</p>
+            <a class="cta-btn" href="#training">RESERVE MY SEAT →</a>
+          </div>
+        </article>
+
+        <article class="path path-exp">
+          <h3>Experienced options trader</h3>
+          <p>The full research card — structure, entry framework, exit, invalidation. Strikes stay unpublished until the Monday open snapshot. We do not invent premiums.</p>
+          <button type="button" class="ghost-btn" id="view-full-setup" aria-expanded="false" aria-controls="full-setup">VIEW FULL SETUP →</button>
+          <div class="full-setup" id="full-setup" hidden>
+            <p class="dl-label">Top-ranked setup</p>
+            <dl class="full-setup-dl">
+              <div><dt>Sector</dt><dd>Health Care</dd></div>
+              <div><dt>Ticker</dt><dd>XLV</dd></div>
+              <div><dt>Direction</dt><dd>Bullish</dd></div>
+              <div><dt>Option strategy</dt><dd>Debit call spread</dd></div>
+              <div class="strike-row">
+                <dt>Strike</dt>
+                <dd class="redact redact-blur">████ / ████</dd>
+              </div>
+              <div>
+                <dt>Expiration</dt>
+                <dd class="redact">████</dd>
+              </div>
+              <div><dt>DTE</dt><dd>30–60</dd></div>
+              <div><dt>Sector score</dt><dd>95 / 100</dd></div>
+              <div><dt>Relative strength</dt><dd>Strong · +13.1 pp 13w vs SPY</dd></div>
+              <div><dt>Options positioning / structure</dt><dd>30–60 DTE defined-risk. Not a published options score.</dd></div>
+              <div><dt>Location</dt><dd>+4.5% vs 50d · +10.5% vs 200d</dd></div>
+            </dl>
+            <div class="card-row">
+              <p class="dl-label">Entry</p>
+              <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
+            </div>
+            <div class="card-row">
+              <p class="dl-label">Exit</p>
+              <p>First of: drops out of the top 3 on Friday 13-week rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
+            </div>
+            <div class="card-row">
+              <p class="dl-label">Invalidation</p>
+              <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
+            </div>
+            <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+            <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap section" id="training">
+      <div class="section-head">
+        <h2>Sector Selector training</h2>
+        <p class="asof">Market → Sector → Stock → Option</p>
+      </div>
+      <p class="intro">A free class on the framework and how to follow this research. Seat registration will live here. We do not send you to a third-party pitch page from this link.</p>
+      <p class="fine">Not open yet. Founding 1,000 stay on the list. Simulated. Not advice.</p>
     </section>
 
     <section class="wrap section" id="waterfall">
@@ -319,7 +435,7 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
       <a class="cta-btn" href="#capture">SEND ME THIS MONTH’S PLAN ›</a>
     </section>
 
-    <section class="wrap section" id="trade">
+    <section class="wrap section" id="list-again">
       <div class="section-head">
         <h2>This month’s top-ranked sector</h2>
         <p class="asof">Health Care · 28 Aug 2026 close</p>
@@ -332,25 +448,7 @@ Friday-close emails follow with the 11-sector map. We may text later about produ
           <div><p class="dl-label">Relative strength</p><p class="dl-val">Strong · +13.1 pp 13w vs SPY</p></div>
           <div><p class="dl-label">Location</p><p class="dl-val">+4.5% vs 50d · +10.5% vs 200d</p></div>
           <div><p class="dl-label">Money flow</p><p class="dl-val">Leading the quarter</p></div>
-          <div><p class="dl-label">Options environment</p><p class="dl-val">30–60 DTE defined-risk</p></div>
-        </div>
-
-        <div class="trade-plan unlocked-dl">
-          <p class="cash">XLV · Health Care</p>
-          <p class="emailed">This also just emailed you.</p>
-          <div class="card-row">
-            <p class="dl-label">Entry</p>
-            <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
-          </div>
-          <div class="card-row">
-            <p class="dl-label">Exit</p>
-            <p>First of: drops out of the top 3 on Friday 13-week rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
-          </div>
-          <div class="card-row">
-            <p class="dl-label">Invalidation</p>
-            <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
-          </div>
-          <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+          <div><p class="dl-label">Options positioning / structure</p><p class="dl-val">30–60 DTE defined-risk. Not a published options score.</p></div>
         </div>
 
         <form class="capture gate-form" id="gate-form" action="https://formsubmit.co/dannyphee.cos@gmail.com" method="POST">
