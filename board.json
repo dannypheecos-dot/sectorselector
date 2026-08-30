@@ -1,9 +1,10 @@
 {
   "asOf": "2026-08-28",
   "asOfLabel": "Friday 28 Aug 2026 close",
+  "formula": "clip(round(50 + 3.2*rs13w + 0.6*vs50d), 0, 100)",
+  "formulaNote": "rs13w is closelook.net 63-session excess vs SPY (price-only, pp). vs50d is percent distance to the 50-day SMA (thetrading.tools sector-health, same close). Missing vs50d (XLP, XLY) uses 0 and is footnoted — not invented. Scores are the formula, not mockup numbers.",
   "source": "thetrading.tools + closelook.net, price-only",
-  "sourceNote": "Price-only returns (dividends excluded). 13-week RS is closelook.net 63-session excess vs SPY. Location (vs 50d / 200d, regime) from thetrading.tools sector-health, same close. XLY and XLP vs-SMA prints were not in the health table this week — shown as em dash, not zero.",
-  "sortDefault": "rs13w",
+  "sortDefault": "score",
   "sortDir": "desc",
   "rows": [
     {
@@ -13,13 +14,15 @@
       "chg1m": 4.67,
       "rs13w": 13.1,
       "rs6m": -5.31,
-      "ret6m": 6.84,
       "vs50": 4.5,
       "vs200": 10.5,
       "regime": "STRONG",
       "rank": 1,
+      "score": 95,
+      "raw": 94.62,
+      "flag": "LEADER",
       "role": "ticket",
-      "note": "This week's ticket"
+      "note": "This week's ticket. 50 + 3.2×13.1 + 0.6×4.5 = 94.62 → 95."
     },
     {
       "ticker": "XLF",
@@ -28,13 +31,15 @@
       "chg1m": 1.93,
       "rs13w": 11.1,
       "rs6m": 0.82,
-      "ret6m": 12.97,
       "vs50": 2.9,
       "vs200": 8.9,
       "regime": "STRONG",
       "rank": 2,
+      "score": 87,
+      "raw": 87.26,
+      "flag": "LEADER",
       "role": "ticket",
-      "note": "This week's ticket"
+      "note": "Top two. Same structure family. 50 + 3.2×11.1 + 0.6×2.9 = 87.26 → 87."
     },
     {
       "ticker": "XLE",
@@ -43,13 +48,15 @@
       "chg1m": 6.31,
       "rs13w": 10.2,
       "rs6m": -0.06,
-      "ret6m": 12.09,
       "vs50": 7.8,
       "vs200": 15.3,
       "regime": "STRONG",
       "rank": 3,
+      "score": 87,
+      "raw": 87.32,
+      "flag": "LEADER",
       "role": "hold",
-      "note": "Confirmed. Not a new ticket — rule is top two."
+      "note": "Confirmed leader. Not a new ticket — rule is top two. 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87."
     },
     {
       "ticker": "XLB",
@@ -58,13 +65,15 @@
       "chg1m": 2.98,
       "rs13w": 2.4,
       "rs6m": -12.58,
-      "ret6m": -0.43,
       "vs50": 2.8,
       "vs200": 6.7,
       "regime": "STRONG",
       "rank": 4,
+      "score": 59,
+      "raw": 59.36,
+      "flag": "SKIP",
       "role": "skip",
-      "note": "Skip. YTD beat, not 13-week leadership."
+      "note": "Skip. YTD beat, not 13-week leadership. 50 + 3.2×2.4 + 0.6×2.8 = 59.36 → 59."
     },
     {
       "ticker": "XLP",
@@ -73,13 +82,16 @@
       "chg1m": -0.02,
       "rs13w": 1.8,
       "rs6m": -17.22,
-      "ret6m": -5.07,
       "vs50": null,
       "vs200": null,
+      "vs50Missing": true,
       "regime": null,
       "rank": 5,
+      "score": 56,
+      "raw": 55.76,
+      "flag": "NEUTRAL",
       "role": null,
-      "note": null
+      "note": "vs50d missing this week; location term = 0. 50 + 3.2×1.8 + 0 = 55.76 → 56."
     },
     {
       "ticker": "XLI",
@@ -88,13 +100,15 @@
       "chg1m": -0.70,
       "rs13w": 0.6,
       "rs6m": -12.15,
-      "ret6m": 0.00,
       "vs50": -2.6,
       "vs200": 4.1,
       "regime": "WEAKENING",
       "rank": 6,
+      "score": 50,
+      "raw": 50.36,
+      "flag": "WEAKENING",
       "role": null,
-      "note": null
+      "note": "Below 50d, above 200d. Mixed location. 50 + 3.2×0.6 + 0.6×(−2.6) = 50.36 → 50."
     },
     {
       "ticker": "XLRE",
@@ -103,28 +117,15 @@
       "chg1m": -1.81,
       "rs13w": 0.0,
       "rs6m": -10.69,
-      "ret6m": 1.46,
       "vs50": -0.9,
       "vs200": 3.5,
       "regime": "WEAKENING",
       "rank": 7,
+      "score": 49,
+      "raw": 49.46,
+      "flag": "WEAKENING",
       "role": null,
-      "note": null
-    },
-    {
-      "ticker": "SPY",
-      "name": "S&P 500",
-      "last": 769.35,
-      "chg1m": 3.73,
-      "rs13w": 0.0,
-      "rs6m": 0.0,
-      "ret6m": 12.15,
-      "vs50": null,
-      "vs200": null,
-      "regime": "BENCH",
-      "rank": null,
-      "role": "bench",
-      "note": "Benchmark. 13w RS is zero by construction."
+      "note": "50 + 3.2×0.0 + 0.6×(−0.9) = 49.46 → 49."
     },
     {
       "ticker": "XLC",
@@ -133,13 +134,15 @@
       "chg1m": 6.01,
       "rs13w": -4.0,
       "rs6m": -16.44,
-      "ret6m": -4.29,
       "vs50": 2.6,
       "vs200": -0.9,
       "regime": "RECOVERY",
       "rank": 8,
+      "score": 39,
+      "raw": 38.76,
+      "flag": "ROTATION WATCH",
       "role": null,
-      "note": null
+      "note": "13w still lags; location recovering above 50d. Not a ticket. 50 + 3.2×(−4.0) + 0.6×2.6 = 38.76 → 39."
     },
     {
       "ticker": "XLK",
@@ -148,13 +151,15 @@
       "chg1m": 5.67,
       "rs13w": -4.6,
       "rs6m": 21.67,
-      "ret6m": 33.82,
       "vs50": 1.6,
       "vs200": 16.5,
       "regime": "STRONG",
       "rank": 9,
+      "score": 36,
+      "raw": 36.24,
+      "flag": "SKIP",
       "role": "skip",
-      "note": "Owns the 6-month tape; lost the last quarter. No ticket."
+      "note": "Owns the 6-month tape; lost the last quarter. No ticket. 50 + 3.2×(−4.6) + 0.6×1.6 = 36.24 → 36."
     },
     {
       "ticker": "XLY",
@@ -163,13 +168,16 @@
       "chg1m": 4.29,
       "rs13w": -4.8,
       "rs6m": -11.85,
-      "ret6m": 0.30,
       "vs50": null,
       "vs200": null,
+      "vs50Missing": true,
       "regime": null,
       "rank": 10,
+      "score": 35,
+      "raw": 34.64,
+      "flag": "WEAKENING",
       "role": null,
-      "note": null
+      "note": "vs50d missing this week; location term = 0. 50 + 3.2×(−4.8) + 0 = 34.64 → 35."
     },
     {
       "ticker": "XLU",
@@ -178,18 +186,20 @@
       "chg1m": -4.32,
       "rs13w": -5.2,
       "rs6m": -22.63,
-      "ret6m": -10.48,
       "vs50": -4.4,
       "vs200": -4.4,
       "regime": "WEAK",
       "rank": 11,
+      "score": 31,
+      "raw": 30.72,
+      "flag": "WEAKENING",
       "role": "skip",
-      "note": "Laggard. No short: board is healthy (8/11 above 50d)."
+      "note": "Laggard. No short: board is healthy (8/11 above 50d). 50 + 3.2×(−5.2) + 0.6×(−4.4) = 30.72 → 31."
     }
   ],
   "blotter": {
-    "badge": "SIMULATED RESULTS — NOT LIVE MONEY",
-    "caption": "Two paper tickets this week. Debit is the Monday open snapshot — not marked, not invented. Open rows show cost basis only after a fill. No P&L until a close.",
+    "badge": "SIMULATED RESULTS — NOT LIVE MONEY — NOT ADVICE",
+    "caption": "Healthcare is #1 on 13-week RS and location. Structure is a 30–60 DTE debit call spread. Premium is the Monday open snapshot — not printed, not invented.",
     "tickets": [
       {
         "id": "2026-w35-xlv",
@@ -197,34 +207,15 @@
         "ticker": "XLV",
         "name": "Health Care",
         "structure": "Debit call spread, 30–60 DTE",
+        "geometry": "Long ATM-ish call / short call ~3–5% OTM. Width 2–4. Illustrative geometry, not a quote.",
         "debit": null,
-        "debitLabel": "TBD — Monday open snapshot",
-        "maxLoss": "The debit",
+        "debitLabel": "Not published — Monday open snapshot. We do not invent premiums.",
+        "maxLoss": "The debit paid",
         "dte": "30–60",
-        "status": "OPEN",
-        "result": null,
-        "resultLabel": "—"
-      },
-      {
-        "id": "2026-w35-xlf",
-        "openedLabel": "Pending — Monday open snapshot",
-        "ticker": "XLF",
-        "name": "Financials",
-        "structure": "Debit call spread, 30–60 DTE",
-        "debit": null,
-        "debitLabel": "TBD — Monday open snapshot",
-        "maxLoss": "The debit",
-        "dte": "30–60",
-        "status": "OPEN",
+        "status": "SIMULATED",
         "result": null,
         "resultLabel": "—"
       }
     ]
-  },
-  "read": [
-    { "ticker": "XLV", "kind": "ticket", "text": "ticket" },
-    { "ticker": "XLF", "kind": "ticket", "text": "ticket" },
-    { "ticker": "XLE", "kind": "hold", "text": "confirmed, not a new ticket" },
-    { "ticker": "XLB", "kind": "skip", "text": "skip (YTD not 13w)" }
-  ]
+  }
 }
