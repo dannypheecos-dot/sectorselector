@@ -1,0 +1,19 @@
+{
+  "asOf": "2026-08-28",
+  "desk": "Cos Analyst",
+  "model": "X is the tease. Saveable notes live here. Not every post becomes an article.",
+  "articles": [
+    {
+      "slug": "spy-opex-rolloff.html",
+      "date": "2026-08-28",
+      "title": "SPY weekly OPEX: gamma negative at Friday’s close",
+      "dek": "Independent EOD book flipped +$4.78B Thursday to −$0.93B Friday. Delta sign is not agreed across books. Cos does not print G-D+. Simulated. Not a ticket."
+    },
+    {
+      "slug": "regime-robustness.html",
+      "date": "2026-08-28",
+      "title": "Most signals fail one regime. Health Care still leads.",
+      "dek": "XLV 95/100 as of Friday 28 Aug 2026 close. Same published map. Not a live performance book."
+    }
+  ]
+}

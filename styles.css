@@ -8,6 +8,7 @@
   --line: #1c262e;
   --line-2: #2a3640;
   --text: #d5dee6;
+  --ivory: #f3ecdc;
   --muted: #8b98a3;
   --dim: #5c6973;
   --phos: #7cffb2;
@@ -121,6 +122,9 @@ a:hover { color: var(--text); }
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   font-family: var(--mono);
   font-size: 0.95rem;
   font-weight: 500;
@@ -128,8 +132,16 @@ a:hover { color: var(--text); }
   text-transform: lowercase;
   color: var(--text);
   text-decoration: none;
+  min-width: 0;
 }
 .wordmark span { color: var(--phos); }
+.mast-fox {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: none;
+  border-radius: 50%;
+  display: block;
+}
 
 .mast-meta {
   display: flex;
@@ -1479,6 +1491,156 @@ body.unlocked .unlocked-dl { display: block; }
 }
 .page-cta .capture-row { max-width: 40rem; }
 
+/* research desk */
+.cos-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: #07090b;
+  overflow: hidden;
+  max-height: 9.5rem;
+}
+.cos-banner img {
+  display: block;
+  width: 100%;
+  height: 9.5rem;
+  object-fit: cover;
+  object-position: left center;
+}
+.desk-note {
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  max-width: 46rem;
+  font-size: 0.95rem;
+}
+
+.desk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.desk-list li {
+  border-bottom: 1px solid var(--line);
+}
+.desk-list li:first-child { border-top: 1px solid var(--line); }
+.desk-list a {
+  display: block;
+  padding: 1.05rem 0 1.1rem;
+  text-decoration: none;
+  color: inherit;
+}
+.desk-list a:hover .desk-title { color: var(--phos); }
+.desk-date {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--phos);
+  margin: 0 0 0.35rem;
+}
+.desk-title {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+  letter-spacing: 0.02em;
+  color: var(--ivory);
+  margin: 0 0 0.35rem;
+}
+.desk-dek {
+  margin: 0;
+  color: var(--muted);
+  max-width: 42rem;
+  font-size: 0.95rem;
+}
+
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.85rem;
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.byline img {
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+}
+.byline strong {
+  color: var(--ivory);
+  font-weight: 500;
+}
+
+.essay {
+  max-width: 40rem;
+}
+.essay h1 {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: clamp(1.35rem, 3.2vw, 2.05rem);
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  color: var(--ivory);
+  margin: 0 0 0.75rem;
+  text-transform: none;
+  max-width: 28ch;
+}
+.essay .lede {
+  color: var(--ivory);
+  font-size: 1.05rem;
+}
+.essay p {
+  color: var(--ivory);
+  margin: 0 0 1rem;
+}
+.essay p.muted,
+.essay .footnote {
+  color: var(--muted);
+}
+
+.fact-card {
+  margin: 0 0 1.2rem;
+  padding: 0.95rem 1rem 1.05rem;
+  background: var(--bg-2);
+  border: 1px solid var(--phos-line);
+}
+.fact-card h2 {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+  margin: 0 0 0.55rem;
+}
+.fact-card dl { margin: 0; }
+.fact-card div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.38rem 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+.fact-card div:last-child { border-bottom: 0; }
+.fact-card dt { color: var(--dim); }
+.fact-card dd { margin: 0; color: var(--phos); text-align: right; }
+.fact-card dd.warn { color: var(--amber); }
+
+.article-nav {
+  margin: 1.4rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
 @media (max-width: 859.98px) {
   .hero-copy { display: contents; }
   .kicker { order: 1; }
@@ -1512,7 +1674,7 @@ body.unlocked .unlocked-dl { display: block; }
   }
   .hero { padding: 1.8rem 0 2.2rem; }
   .hero h1 { max-width: none; }
-  .lede { display: none; }
+  .hero .lede { display: none; }
   .contract { padding: 0.8rem 0.85rem 0.9rem; }
   .locked-dl > div,
   .gated-dl > div { padding: 0.28rem 0; font-size: 0.8rem; }

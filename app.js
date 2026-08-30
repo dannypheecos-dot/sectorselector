@@ -161,10 +161,11 @@
   }
 
   function bindAllCaptures() {
-    bind($("hero-form"), $("hero-email"), $("hero-msg"));
-    bind($("gate-form"), $("gate-email"), $("gate-msg"));
-    bind($("soon-form"), $("soon-email"), $("soon-msg"));
-    bind($("record-form"), $("record-email"), $("record-msg"));
+    document.querySelectorAll("form.capture").forEach(function (form) {
+      var email = form.querySelector("input[name='email']");
+      var msgId = form.id ? form.id.replace(/-form$/, "-msg") : "";
+      bind(form, email, msgId ? $(msgId) : null);
+    });
   }
 
   function statusClass(status) {
