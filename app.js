@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var POST_URL = "https://formsubmit.co/ajax/dannyphee.cos@gmail.com";
+  var POST_URL = "https://formsubmit.co/ajax/2ae01d62a7a0f6637dfe47cc1c673d1c";
   var SUBJECT = "Sector Selector monthly list";
   var UNLOCK_KEY = "sectorselector.v2.unlocked";
 
