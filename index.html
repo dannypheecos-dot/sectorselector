@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Sector Selector — Know where the money is moving</title>
   <meta name="description" content="Eleven SPDR sectors ranked versus SPY. Free monthly defined-risk options list. Simulated research, not advice. Cos Analyst.">
   <meta name="theme-color" content="#07090b">
@@ -22,11 +22,11 @@
   <header class="wrap mast">
     <a class="wordmark" href="./">sectorselector<span>.ai</span></a>
     <nav class="mast-meta">
-      <span class="sim-pill">Simulated</span>
-      <span>v2 · monthly list</span>
-      <a href="#map">Map</a>
-      <a href="#waterfall">Waterfall</a>
-      <a href="#blotter">Research</a>
+      <span class="sim-pill mast-desk">Simulated</span>
+      <span class="mast-desk">v2 · monthly list</span>
+      <a class="mast-desk" href="#map">Map</a>
+      <a class="mast-desk" href="#waterfall">Waterfall</a>
+      <a class="mast-desk" href="#blotter">Research</a>
       <a href="#capture">List</a>
     </nav>
   </header>
@@ -36,10 +36,13 @@
       <p class="kicker">11 SPDR sectors · vs SPY · 28 Aug 2026 close</p>
       <h1>KNOW WHERE THE MONEY IS MOVING<span class="caret" aria-hidden="true"></span></h1>
       <p class="lede">
-        A dated map of capital across the eleven sector ETFs — then one defined-risk way to express the leader.
-        Paper / simulated. Rules on the page. Not advice.
+        Most traders pick a stock first. That’s backwards. We rank where capital is in the 11 SPDR sectors, then send one defined-risk way to play the leader.
       </p>
-      <p class="cohort">Founding 1,000 keep the monthly list free. After that, Sector Selector Pro.</p>
+      <ul class="offer">
+        <li>This month’s plan emailed immediately: sector, entry, exit, invalidation.</li>
+        <li>The Friday close map every week (who leads, who is skipping).</li>
+        <li>Founding 1,000 keep that list free.</li>
+      </ul>
 
       <form class="capture" id="hero-form" action="https://formsubmit.co/dannyphee.cos@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="Sector Selector monthly list">
@@ -54,19 +57,21 @@ EXIT: First of — drops out of the top 3 on Friday 13-week RS rank; time stop a
 
 INVALIDATION: Drops out of the top 3 on 13-week relative strength vs SPY.
 
-Friday-close emails follow with the 11-sector map. Cos Analyst is an AI research desk for Danny Phee. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
+Friday-close emails follow with the 11-sector map. We may text later about product webinars — no texts today. Cos Analyst is an AI research desk for Danny Phee. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="source" value="sectorselector.ai / hero">
-        <p class="hook">Get the entry, the exit, and the invalidation — this month’s plan.</p>
+        <p class="hook">Email + phone. We send this month’s plan.</p>
         <label for="hero-email">Email</label>
+        <label for="hero-phone">Mobile number</label>
         <div class="capture-row">
           <input id="hero-email" name="email" type="email" autocomplete="email" required placeholder="you@domain.com">
-          <button type="submit">SHOW ME THE SECTORS →</button>
+          <input id="hero-phone" name="phone" type="tel" autocomplete="tel" required placeholder="Mobile number">
+          <button type="submit">SEND ME THIS MONTH’S PLAN</button>
         </div>
         <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
       </form>
       <p class="wait-msg" id="hero-msg" role="status" aria-live="polite"></p>
-      <p class="fine">One Friday-close email. No webinar. No Discord. Unsubscribe anytime.</p>
+      <p class="fine">This month’s plan by email. Friday-close map every week. We may text later about product webinars. Unsubscribe anytime.</p>
     </section>
 
     <section class="wrap section" id="waterfall">
@@ -270,14 +275,16 @@ EXIT: First of — drops out of the top 3 on Friday 13-week RS rank; time stop a
 
 INVALIDATION: Drops out of the top 3 on 13-week relative strength vs SPY.
 
-Friday-close emails follow with the 11-sector map. Cos Analyst is an AI research desk for Danny Phee. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
+Friday-close emails follow with the 11-sector map. We may text later about product webinars — no texts today. Cos Analyst is an AI research desk for Danny Phee. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="source" value="sectorselector.ai / unlock">
-            <p class="hook">Get the entry, the exit, and the invalidation — this month’s plan.</p>
+            <p class="hook">Email + phone. We send this month’s plan.</p>
             <label for="gate-email">Email</label>
+            <label for="gate-phone">Mobile number</label>
             <div class="capture-row">
               <input id="gate-email" name="email" type="email" autocomplete="email" required placeholder="you@domain.com">
-              <button type="submit">UNLOCK THE TRADE FREE</button>
+              <input id="gate-phone" name="phone" type="tel" autocomplete="tel" required placeholder="Mobile number">
+              <button type="submit">SEND ME THIS MONTH’S PLAN</button>
             </div>
             <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
           </form>
@@ -370,7 +377,7 @@ Friday-close emails follow with the 11-sector map. Cos Analyst is an AI research
   <footer class="wrap foot">
     <p>Sector Selector / sectorselector.ai is a publisher of market education and simulated research. Cos Analyst is an AI model operated as a research desk for Danny Phee. We are not a registered investment adviser, broker-dealer, or commodity trading advisor. Nothing on this site or in our emails is personalized financial advice or an offer to buy or sell any security or option.</p>
     <p>Trading and options involve substantial risk of loss. You can lose 100% of a debit. Past relative strength is not a forecast. Simulated results omit fills, slippage, and the experience of real loss. Do your own work. Consult a licensed adviser for your situation before putting real money at risk.</p>
-    <p>By submitting your email you agree to receive the monthly list and related research. Unsubscribe anytime.</p>
+    <p>By submitting your email and mobile number you agree to receive the monthly list and related research by email. We may text later about product webinars. Unsubscribe anytime.</p>
     <p>Price-only series (dividends excluded) unless a total-return figure is labelled as such. Official SPDR tables lag to month-end. This map uses Friday session closes from closelook.net and thetrading.tools.</p>
     <div class="colophon">
       <span>Sector Selector · Cos Analyst / Danny Phee</span>

@@ -14,6 +14,10 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
   }
 
+  function validPhone(s) {
+    return String(s || "").replace(/\D/g, "").length >= 7;
+  }
+
   function setMsg(el, kind, text) {
     if (!el) return;
     el.className = "wait-msg" + (kind ? " " + kind : "");
@@ -56,9 +60,10 @@
     return q.get("thanks") === "1";
   }
 
-  function payload(form, email, source) {
+  function payload(form, email, phone, source) {
     var body = new FormData();
     body.append("email", email);
+    body.append("phone", phone);
     body.append("_subject", SUBJECT);
     body.append("_captcha", "false");
     body.append("_template", "table");
@@ -68,11 +73,11 @@
     return body;
   }
 
-  function send(form, email, source) {
+  function send(form, email, phone, source) {
     return fetch(POST_URL, {
       method: "POST",
       headers: { Accept: "application/json" },
-      body: payload(form, email, source)
+      body: payload(form, email, phone, source)
     }).then(function (res) {
       if (!res.ok) throw new Error("formsubmit " + res.status);
       return res.json().catch(function () {
@@ -81,23 +86,30 @@
     });
   }
 
-  function bind(form, input, msg) {
-    if (!form || !input) return;
+  function bind(form, emailInput, msg) {
+    if (!form || !emailInput) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var email = (input.value || "").trim();
+      var email = (emailInput.value || "").trim();
+      var phoneInput = form.querySelector("input[name='phone']");
+      var phone = phoneInput ? (phoneInput.value || "").trim() : "";
       var honey = form.querySelector(".honey");
       if (honey && honey.value) return;
       if (!validEmail(email)) {
         setMsg(msg, "err", "Need a real email.");
-        input.focus();
+        emailInput.focus();
+        return;
+      }
+      if (!validPhone(phone)) {
+        setMsg(msg, "err", "Need a real mobile number.");
+        if (phoneInput) phoneInput.focus();
         return;
       }
       var btn = form.querySelector("button[type='submit']");
       if (btn) btn.disabled = true;
       setMsg(msg, "", "Sending…");
       var source = (form.querySelector("input[name='source']") || {}).value || "sectorselector.ai";
-      send(form, email, source)
+      send(form, email, phone, source)
         .then(function () {
           persistUnlock();
           revealTrade();
