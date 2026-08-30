@@ -1,12 +1,14 @@
 {
   "asOf": "2026-08-30",
   "asOfLabel": "30 Aug 2026",
-  "disclosure": "Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets.",
+  "disclosure": "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. Weeks with no setup publish as no ticket.",
+  "closedNeededForWinRate": 20,
   "tickets": [
     {
       "id": "2026-08-30-xlv",
       "date": "2026-08-30",
       "ticker": "XLV",
+      "sector": "Health Care",
       "structure": "Debit call spread, 30–60 DTE",
       "status": "open",
       "debit": null,
