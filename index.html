@@ -3,389 +3,462 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sector Selector — eleven sectors, one weekly rank</title>
-  <meta name="description" content="Eleven SPDR sectors ranked weekly versus SPY. One or two defined-risk swing tickets. Paper / simulated. Rules on the page. No 0DTE. Cos Analyst / Danny Phee.">
-  <meta name="theme-color" content="#121413">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121413'/%3E%3Crect x='4' y='18' width='1.6' height='8' fill='%236eb89a'/%3E%3Crect x='7' y='14' width='1.6' height='12' fill='%236eb89a'/%3E%3Crect x='10' y='10' width='1.6' height='16' fill='%236eb89a'/%3E%3Crect x='13' y='16' width='1.6' height='10' fill='%238a8578'/%3E%3Crect x='16' y='20' width='1.6' height='6' fill='%238a8578'/%3E%3Crect x='19' y='15' width='1.6' height='11' fill='%23c4a574'/%3E%3Crect x='22' y='22' width='1.6' height='4' fill='%23c17a72'/%3E%3Crect x='25' y='24' width='1.6' height='2' fill='%23c17a72'/%3E%3C/svg%3E">
+  <title>Sector Selector — know where the money is moving</title>
+  <meta name="description" content="Sector Selector tracks market structure, sector rotation and options data to identify the strongest opportunities developing across the market. As of 28 Aug 2026 close. Simulated. Not advice.">
+  <meta name="theme-color" content="#07090c">
+  <link rel="canonical" href="https://sectorselector.ai/">
+  <meta property="og:title" content="Sector Selector — know where the money is moving">
+  <meta property="og:description" content="Market structure, sector rotation, options data. Eleven SPDR sectors ranked versus SPY. Cos Analyst.">
+  <meta property="og:url" content="https://sectorselector.ai/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2307090c'/%3E%3Crect x='4' y='16' width='2' height='12' fill='%23e8a317'/%3E%3Crect x='9' y='10' width='2' height='18' fill='%23e8a317'/%3E%3Crect x='14' y='7' width='2' height='21' fill='%233ecf8e'/%3E%3Crect x='19' y='14' width='2' height='14' fill='%236b7780'/%3E%3Crect x='24' y='20' width='2' height='8' fill='%23e15b5b'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip" href="#board">Skip to the board</a>
 
-  <header class="wrap mast">
-    <a class="wordmark" href="./">sectorselector<span>.ai</span></a>
-    <div class="mast-meta">
-      <span class="sim-pill">Simulated</span>
-      <span>Cos Analyst</span>
-      <a href="#waitlist">Waitlist</a>
-      <a href="#rule">The rule</a>
+  <div class="crt" aria-hidden="true"></div>
+
+  <header class="mast">
+    <div class="wrap mast-inner">
+      <a class="wordmark" href="./">SECTORSELECTOR<span>.AI</span></a>
+      <nav class="mast-meta" aria-label="Site">
+        <span class="led" aria-hidden="true"></span>
+        <span>V1</span>
+        <span class="sim-pill">SIMULATED</span>
+        <span class="hide-sm">COS ANALYST</span>
+        <span class="hide-sm">AS OF 28 AUG 2026 CLOSE</span>
+        <a href="#board">BOARD</a>
+        <a href="#gate">THIS MONTH</a>
+      </nav>
     </div>
   </header>
 
   <main>
     <section class="wrap hero">
-      <div>
-        <p class="kicker">Weekly book · 11 SPDR sectors · vs SPY</p>
-        <h1>Eleven sectors. One weekly rank versus SPY. One or two swing tickets.</h1>
+      <div class="hero-copy">
+        <p class="kicker">MARKET STRUCTURE · SECTOR ROTATION · OPTIONS DATA</p>
+        <h1>KNOW WHERE THE MONEY IS MOVING.</h1>
         <p class="lede">
-          Paper / simulated. Rules on the page. <strong>No 0DTE.</strong>
-          Defined-risk spreads only. If rank and location disagree, there is no ticket.
+          Sector Selector tracks market structure, sector rotation and options data
+          to identify the strongest opportunities developing across the market.
         </p>
       </div>
-      <aside class="hero-aside" id="waitlist">
-        <p>One email after Friday’s close: the 11-row rank, zero to two paper tickets, and the line that would kill the thesis. <em>Stored on this browser only — no server behind this form.</em></p>
-        <form class="waitlist" id="wait-form" novalidate>
-          <label for="wait-email">Email</label>
-          <input id="wait-email" name="email" type="email" autocomplete="email" required placeholder="you@domain.com">
-          <button type="submit">Get the weekly close</button>
-        </form>
-        <p class="wait-msg" id="wait-msg" role="status" aria-live="polite"></p>
+
+      <aside class="term-panel hero-panel" id="list" aria-label="Monthly list">
+        <div class="term-bar">
+          <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="term-title">INBOX // MONTHLY LIST</span>
+          <span class="term-id">SS.V1</span>
+        </div>
+        <div class="term-body">
+          <p class="term-prompt">One email. This month’s ranked sectors and the research idea.</p>
+          <form
+            class="capture"
+            id="hero-form"
+            action="https://formsubmit.co/dannyphee.cos@gmail.com"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="Sector Selector monthly list">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://sectorselector.ai/#thanks">
+            <input type="hidden" name="source" value="hero">
+            <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
+            <label for="hero-email">Work email</label>
+            <div class="capture-row">
+              <input
+                id="hero-email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                required
+                placeholder="name@firm.com"
+              >
+              <button type="submit">SHOW ME THE SECTORS →</button>
+            </div>
+          </form>
+          <a class="secondary" href="#gate">UNLOCK THIS MONTH’S SECTOR OPTIONS</a>
+        </div>
       </aside>
+    </section>
+
+    <section class="waterfall" aria-label="Process">
+      <div class="wrap waterfall-inner">
+        <p class="waterfall-line">
+          <span>MARKET</span>
+          <span class="wf-arr" aria-hidden="true">→</span>
+          <span>OPTIONS STRUCTURE</span>
+          <span class="wf-arr" aria-hidden="true">→</span>
+          <span>SECTOR</span>
+          <span class="wf-arr" aria-hidden="true">→</span>
+          <span>STOCK</span>
+          <span class="wf-arr" aria-hidden="true">→</span>
+          <span>TRADE</span>
+        </p>
+        <p class="waterfall-sub">Most traders start at the stock. We do not.</p>
+      </div>
     </section>
 
     <section class="wrap section" id="board">
       <div class="section-head">
-        <h2>The board</h2>
-        <p class="asof" id="asof">As of Friday 28 Aug 2026 close</p>
+        <div>
+          <p class="kicker">VISUAL MAP · 11 SPDR SECTORS · BENCH SPY</p>
+          <h2>Where the tape is concentrated</h2>
+        </div>
+        <p class="asof" id="asof">AS OF FRIDAY 28 AUG 2026 CLOSE</p>
       </div>
-      <p class="intro">Same eleven names every week. Default sort is 13-week relative strength versus SPY. We take the top one or two — and only if price is above both the 50-day and the 200-day. Most weeks there is no short.</p>
 
-      <div class="read" id="read" aria-label="This week's read"></div>
+      <div class="cat-grid">
+        <div>
+          <h3 class="cat-label cat-label-lead">LEADERS</h3>
+          <div class="card-row" id="leaders">
+            <article class="sec-card leader" title="Top-ranked sector this close. This month's research idea.">
+              <header>
+                <span class="cash">XLV</span>
+                <span class="tag tag-lead">LEADER</span>
+              </header>
+              <p class="sec-name">Health Care</p>
+              <p class="sec-score">95</p>
+              <div class="meter" aria-hidden="true"><i style="width:95%"></i></div>
+              <dl>
+                <div><dt>13w RS</dt><dd class="pos">+13.1</dd></div>
+                <div><dt>vs 50d</dt><dd class="pos">+4.5%</dd></div>
+              </dl>
+            </article>
+            <article class="sec-card leader" title="Leader on 13-week RS and v1 score.">
+              <header>
+                <span class="cash">XLF</span>
+                <span class="tag tag-lead">LEADER</span>
+              </header>
+              <p class="sec-name">Financials</p>
+              <p class="sec-score">87</p>
+              <div class="meter" aria-hidden="true"><i style="width:87%"></i></div>
+              <dl>
+                <div><dt>13w RS</dt><dd class="pos">+11.1</dd></div>
+                <div><dt>vs 50d</dt><dd class="pos">+2.9%</dd></div>
+              </dl>
+            </article>
+            <article class="sec-card leader confirmed" title="Confirmed leader. Not a new ticket.">
+              <header>
+                <span class="cash">XLE</span>
+                <span class="tag tag-conf">CONFIRMED</span>
+              </header>
+              <p class="sec-name">Energy</p>
+              <p class="sec-score">87</p>
+              <div class="meter" aria-hidden="true"><i style="width:87%"></i></div>
+              <dl>
+                <div><dt>13w RS</dt><dd class="pos">+10.2</dd></div>
+                <div><dt>vs 50d</dt><dd class="pos">+7.8%</dd></div>
+              </dl>
+              <p class="sec-note">Confirmed. Not a new ticket.</p>
+            </article>
+          </div>
+        </div>
 
-      <p class="swipe-hint">Swipe the table for last / 1m / location →</p>
+        <div>
+          <h3 class="cat-label cat-label-watch">ROTATION WATCH</h3>
+          <div class="card-row" id="watch">
+            <article class="sec-card watch" title="Owns the 6-month tape (+33.82%); lost the quarter. Mixed / reclaim — not a chase. Not a leader.">
+              <header>
+                <span class="cash">XLK</span>
+                <span class="tag tag-watch">MIXED / RECLAIM</span>
+              </header>
+              <p class="sec-name">Technology</p>
+              <p class="sec-score muted-score">36</p>
+              <div class="meter meter-watch" aria-hidden="true"><i style="width:36%"></i></div>
+              <dl>
+                <div><dt>13w RS</dt><dd class="neg">−4.6</dd></div>
+                <div><dt>6m</dt><dd class="pos">+33.82%</dd></div>
+              </dl>
+              <p class="sec-note">Owns the 6-month tape. Lost the quarter. Reclaim only — not a chase, not a leader.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <p class="swipe-hint">Swipe the table for score / RS / location →</p>
       <div class="board-scroll">
         <table class="board" id="board-table">
           <thead>
             <tr>
               <th data-key="rank" scope="col">#</th>
               <th class="col-ticker" data-key="ticker" scope="col">Sector</th>
-              <th data-key="rs13w" aria-sort="descending" scope="col">13w RS vs SPY</th>
-              <th data-key="last" scope="col">Last</th>
-              <th data-key="chg1m" scope="col">1m</th>
-              <th data-key="rs6m" scope="col">6m RS</th>
+              <th data-key="score" aria-sort="descending" scope="col">Score</th>
+              <th data-key="rs13w" scope="col">13w RS vs SPY</th>
               <th data-key="vs50" scope="col">vs 50d</th>
-              <th data-key="vs200" scope="col">vs 200d</th>
-              <th data-key="regime" scope="col">Regime</th>
+              <th data-key="ret6m" scope="col">6m</th>
+              <th data-key="last" scope="col">Last</th>
+              <th data-key="label" scope="col">Status</th>
             </tr>
           </thead>
           <tbody id="board-body">
-            <tr><td colspan="9">Loading board…</td></tr>
+            <tr class="leader" title="Top-ranked sector this close. This month's research idea.">
+              <td><span class="rank">1</span></td>
+              <td class="col-ticker"><span class="cash">XLV</span><span class="sector">Health Care</span></td>
+              <td><span class="score-num">95</span></td>
+              <td><span class="num pos">+13.1</span></td>
+              <td><span class="num pos">+4.5%</span></td>
+              <td><span class="num pos">+6.84%</span></td>
+              <td class="num">171.16</td>
+              <td><span class="status LEADER">LEADER</span></td>
+            </tr>
+            <tr class="leader" title="Leader on 13-week RS and v1 score.">
+              <td><span class="rank">2</span></td>
+              <td class="col-ticker"><span class="cash">XLF</span><span class="sector">Financials</span></td>
+              <td><span class="score-num">87</span></td>
+              <td><span class="num pos">+11.1</span></td>
+              <td><span class="num pos">+2.9%</span></td>
+              <td><span class="num pos">+12.97%</span></td>
+              <td class="num">58.10</td>
+              <td><span class="status LEADER">LEADER</span></td>
+            </tr>
+            <tr class="leader" title="Confirmed leader. Not a new ticket.">
+              <td><span class="rank">3</span></td>
+              <td class="col-ticker"><span class="cash">XLE</span><span class="sector">Energy</span></td>
+              <td><span class="score-num">87</span></td>
+              <td><span class="num pos">+10.2</span></td>
+              <td><span class="num pos">+7.8%</span></td>
+              <td><span class="num pos">+12.09%</span></td>
+              <td class="num">62.68</td>
+              <td><span class="status LEADER">LEADER</span></td>
+            </tr>
+            <tr class="skip" title="Neutral / skip. YTD beat, not 13-week leadership.">
+              <td><span class="rank">4</span></td>
+              <td class="col-ticker"><span class="cash">XLB</span><span class="sector">Materials</span></td>
+              <td><span class="score-num">59</span></td>
+              <td><span class="num pos">+2.4</span></td>
+              <td><span class="num pos">+2.8%</span></td>
+              <td><span class="num neg">−0.43%</span></td>
+              <td class="num">53.18</td>
+              <td><span class="status NEUTRAL">NEUTRAL / SKIP</span></td>
+            </tr>
+            <tr title="vs50d missing this close; score treats it as 0.">
+              <td><span class="rank">5</span></td>
+              <td class="col-ticker"><span class="cash">XLP</span><span class="sector">Consumer Staples</span></td>
+              <td><span class="score-num">56</span></td>
+              <td><span class="num pos">+1.8</span></td>
+              <td><span class="num na">—</span></td>
+              <td><span class="num neg">−5.07%</span></td>
+              <td class="num">85.45</td>
+              <td><span class="status NEUTRAL">NEUTRAL</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank">6</span></td>
+              <td class="col-ticker"><span class="cash">XLI</span><span class="sector">Industrials</span></td>
+              <td><span class="score-num">50</span></td>
+              <td><span class="num pos">+0.6</span></td>
+              <td><span class="num neg">−2.6%</span></td>
+              <td><span class="num flat">0.00%</span></td>
+              <td class="num">177.14</td>
+              <td><span class="status WEAKENING">WEAKENING</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank">7</span></td>
+              <td class="col-ticker"><span class="cash">XLRE</span><span class="sector">Real Estate</span></td>
+              <td><span class="score-num">49</span></td>
+              <td><span class="num flat">0.0</span></td>
+              <td><span class="num neg">−0.9%</span></td>
+              <td><span class="num pos">+1.46%</span></td>
+              <td class="num">44.48</td>
+              <td><span class="status WEAKENING">WEAKENING</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank">8</span></td>
+              <td class="col-ticker"><span class="cash">XLC</span><span class="sector">Communication Services</span></td>
+              <td><span class="score-num">39</span></td>
+              <td><span class="num neg">−4.0</span></td>
+              <td><span class="num pos">+2.6%</span></td>
+              <td><span class="num neg">−4.29%</span></td>
+              <td class="num">112.99</td>
+              <td><span class="status LAGGING">LAGGING</span></td>
+            </tr>
+            <tr class="watch" title="Owns the 6-month tape (+33.82%); lost the quarter. Mixed / reclaim — not a chase. Not a leader.">
+              <td><span class="rank">9</span></td>
+              <td class="col-ticker"><span class="cash">XLK</span><span class="sector">Technology</span></td>
+              <td><span class="score-num">36</span></td>
+              <td><span class="num neg">−4.6</span></td>
+              <td><span class="num pos">+1.6%</span></td>
+              <td><span class="num pos">+33.82%</span></td>
+              <td class="num">185.69</td>
+              <td><span class="status WATCH">ROTATION WATCH</span></td>
+            </tr>
+            <tr title="vs50d missing this close; score treats it as 0.">
+              <td><span class="rank">10</span></td>
+              <td class="col-ticker"><span class="cash">XLY</span><span class="sector">Consumer Discretionary</span></td>
+              <td><span class="score-num">35</span></td>
+              <td><span class="num neg">−4.8</span></td>
+              <td><span class="num na">—</span></td>
+              <td><span class="num pos">+0.30%</span></td>
+              <td class="num">117.21</td>
+              <td><span class="status LAGGING">LAGGING</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank">11</span></td>
+              <td class="col-ticker"><span class="cash">XLU</span><span class="sector">Utilities</span></td>
+              <td><span class="score-num">31</span></td>
+              <td><span class="num neg">−5.2</span></td>
+              <td><span class="num neg">−4.4%</span></td>
+              <td><span class="num neg">−10.48%</span></td>
+              <td class="num">42.73</td>
+              <td><span class="status WEAKENING">WEAKENING</span></td>
+            </tr>
+            <tr class="bench" title="Benchmark. Not scored as a sector. 13w RS is zero by construction.">
+              <td><span class="num na">—</span></td>
+              <td class="col-ticker"><span class="cash">SPY</span><span class="sector">S&amp;P 500 · bench</span></td>
+              <td><span class="num na">—</span></td>
+              <td><span class="num flat">0.0</span></td>
+              <td><span class="num na">—</span></td>
+              <td><span class="num pos">+12.15%</span></td>
+              <td class="num">769.35</td>
+              <td><span class="status BENCH">BENCH</span></td>
+            </tr>
           </tbody>
         </table>
       </div>
       <p class="footnote" id="source-note">
-        Source: <a href="https://www.thetrading.tools/sector-performance">thetrading.tools</a>
-        + <a href="https://closelook.net/lab/patterns/sector-rs/">closelook.net</a>, price-only.
-        13-week RS is closelook 63-session excess versus SPY. 6m RS is sector 6-month price return minus SPY’s. Location from sector-health, same close.
+        <strong>v1 score</strong> = clip(round(50 + 3.2 × 13w&nbsp;RS + 0.6 × vs50d), 0, 100).
+        Missing vs50d treated as 0. SPY is the bench and is not scored.
+        Board dated Friday 28 Aug 2026 close.
+        Sources:
+        <a href="https://www.thetrading.tools/sector-performance">thetrading.tools</a> /
+        <a href="https://closelook.net/lab/patterns/sector-rs/">closelook.net</a>,
+        price-only (dividends excluded). 13-week RS is closelook 63-session excess versus SPY.
       </p>
     </section>
 
-    <section class="wrap section" id="blotter">
-      <div class="section-head">
-        <h2>Paper blotter</h2>
-        <p class="asof">Week of 31 Aug 2026 · pending Monday open</p>
-      </div>
-      <div class="badge" id="sim-badge">SIMULATED RESULTS — NOT LIVE MONEY</div>
-      <p class="intro" id="blotter-caption">Two paper tickets this week. Debit is the Monday open snapshot — not marked, not invented. Open rows show cost basis only after a fill. No P&amp;L until a close.</p>
-      <div class="blotter-list" id="blotter-list"></div>
-    </section>
+    <p id="thanks" class="thanks-banner wrap" tabindex="-1">
+      You’re on the list. This month’s research idea is unlocked below.
+    </p>
 
-    <section class="wrap section" id="rule">
+    <section class="wrap section" id="gate">
       <div class="section-head">
-        <h2>The rule</h2>
-        <p class="asof">Four steps. If we change one, we date it. We do not backfill.</p>
+        <div>
+          <p class="kicker">CURIOSITY GATE · THIS MONTH</p>
+          <h2>The top-ranked sector</h2>
+        </div>
+        <p class="asof">AS OF 28 AUG 2026 CLOSE</p>
       </div>
-      <div class="rules">
-        <article class="rule">
-          <p class="rule-n">01</p>
-          <h3>Rank</h3>
-          <p>Every Friday close, rank the 11 SPDR sector ETFs by 13-week return minus SPY’s 13-week return. Longs: top one or two only.</p>
-        </article>
-        <article class="rule">
-          <p class="rule-n">02</p>
-          <h3>Location</h3>
-          <p>Long only if the close is above the 50-day <em>and</em> the 200-day. Rank says yes and MAs say no → skip. No “close enough.”</p>
-        </article>
-        <article class="rule">
-          <p class="rule-n">03</p>
-          <h3>Structure</h3>
-          <p>Debit call (or put) spreads on the ETF. 30–60 DTE. Max loss is the debit, sized in advance. No naked shorts. No 0DTE.</p>
-        </article>
-        <article class="rule">
-          <p class="rule-n">04</p>
-          <h3>Exit</h3>
-          <p>First of: drops out of the top 3 on Friday rank · time stop at ~21 DTE · 50% of max gain on the spread.</p>
-        </article>
-      </div>
-      <p class="kill"><strong>What would kill this.</strong> If eight weeks of paper cannot beat a coin flip after costs, the process is wrong, and we will say so. No P&amp;L is claimed because none has been taken.</p>
-    </section>
 
-    <section class="wrap section split">
-      <div>
-        <h2>What this is</h2>
-        <ul>
-          <li>A weekly map and a short blotter. Cos Analyst writes the tape; this site keeps the book.</li>
-          <li>Paper tickets marked simulated. Open tickets show the debit paid, not a fantasy mark.</li>
-          <li>Weeks with no setup published as no ticket. That is the brand.</li>
-        </ul>
-      </div>
-      <div class="not">
-        <h2>What this is not</h2>
-        <ul>
-          <li>A get-rich system, a win-rate brag, or a VIP room.</li>
-          <li>Day trading, scalps, or zero-day options.</li>
-          <li>Single-name lottery tickets or penny-stock promotion.</li>
-          <li>A signal service that changes the rules after a losing week.</li>
-        </ul>
+      <div class="gate-grid">
+        <article class="term-panel gate-facts">
+          <div class="term-bar">
+            <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-title">SECTOR // RANK 01</span>
+            <span class="term-id">LIVE MAP</span>
+          </div>
+          <div class="term-body facts">
+            <p class="fact-kicker">THIS MONTH’S TOP-RANKED SECTOR</p>
+            <p class="fact-name">Healthcare / XLV</p>
+            <div class="fact-row">
+              <div>
+                <p class="dl-label">Sector score</p>
+                <p class="fact-big">95</p>
+              </div>
+              <div>
+                <p class="dl-label">Relative strength</p>
+                <p class="fact-val pos">RS STRONG</p>
+                <p class="fact-sub">13w RS +13.1 vs SPY</p>
+              </div>
+              <div>
+                <p class="dl-label">Money flow</p>
+                <p class="fact-val pos">CONSTRUCTIVE</p>
+                <p class="fact-sub">+4.5% vs 50-day</p>
+              </div>
+              <div>
+                <p class="dl-label">Options environment</p>
+                <p class="fact-val pos">FAVORABLE</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="term-panel gate-trade">
+          <div class="term-bar">
+            <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="term-title">CONTRACT // RESEARCH IDEA</span>
+            <span class="term-id">GATED</span>
+          </div>
+
+          <div class="term-body gate-locked">
+            <p class="dl-label">Underlying · strikes · expiration</p>
+            <p class="redact" aria-label="Contract details hidden">████&nbsp;&nbsp;·&nbsp;&nbsp;████&nbsp;/&nbsp;████&nbsp;&nbsp;·&nbsp;&nbsp;EXP&nbsp;████</p>
+            <p class="gate-hint">Email unlocks the structure. No premiums invented. Monday open snapshot only.</p>
+            <form
+              class="capture"
+              id="gate-form"
+              action="https://formsubmit.co/dannyphee.cos@gmail.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="Sector Selector monthly list">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://sectorselector.ai/#thanks">
+              <input type="hidden" name="source" value="gate">
+              <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
+              <label for="gate-email">Work email</label>
+              <div class="capture-row">
+                <input
+                  id="gate-email"
+                  name="email"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  required
+                  placeholder="name@firm.com"
+                >
+                <button type="submit">UNLOCK THE TRADE FREE</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="term-body gate-open">
+            <p class="badge">SIMULATED / NOT ADVICE</p>
+            <p class="dl-label">Research idea</p>
+            <p class="fact-name">XLV · LONG</p>
+            <dl class="idea">
+              <div>
+                <dt>Structure</dt>
+                <dd>Debit call spread · 30–60 DTE</dd>
+              </div>
+              <div>
+                <dt>Strikes / pricing</dt>
+                <dd>Monday open snapshot — not a live quote. No premium printed here.</dd>
+              </div>
+              <div>
+                <dt>Invalidation</dt>
+                <dd>Drops out of the top 3 on 13-week RS versus SPY.</dd>
+              </div>
+            </dl>
+            <p class="gate-hint">A research idea, not a recommendation. Options can expire worthless.</p>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
   <footer class="wrap foot">
-    <p>Not investment advice. Options can expire worthless. Simulated results have limits: they omit fills, some costs, and the feeling of a real debit going to zero. Relative strength is a description of the past 13 weeks, not a forecast. Past performance does not predict future results.</p>
-    <p>Price-only series (dividends excluded) unless a total-return figure is labelled as such. Official SPDR performance tables lag to month-end; this board uses Friday session closes from the sources named above.</p>
+    <p>
+      Not investment advice. Options can expire worthless. Simulated results have limits:
+      they omit fills, some costs, and the feeling of a real debit going to zero.
+      Relative strength describes the past 13 weeks; it is not a forecast.
+      Past performance does not predict future results.
+    </p>
+    <p>
+      Price-only series (dividends excluded) unless a total-return figure is labelled as such.
+      Official SPDR performance tables lag to month-end; this board uses Friday session closes
+      from the sources named above.
+    </p>
     <div class="colophon">
-      <span>Sector Selector · Cos Analyst / Danny Phee</span>
-      <span>sectorselector.ai · last numbers 28 Aug 2026 close</span>
+      <span>Sector Selector · Cos Analyst</span>
+      <span>sectorselector.ai · as of 28 Aug 2026 close</span>
     </div>
   </footer>
 
-  <script type="application/json" id="board-seed">
-{
-  "asOf": "2026-08-28",
-  "asOfLabel": "Friday 28 Aug 2026 close",
-  "source": "thetrading.tools + closelook.net, price-only",
-  "sourceNote": "Price-only returns (dividends excluded). 13-week RS is closelook.net 63-session excess vs SPY. Location (vs 50d / 200d, regime) from thetrading.tools sector-health, same close. XLY and XLP vs-SMA prints were not in the health table this week — shown as em dash, not zero.",
-  "sortDefault": "rs13w",
-  "sortDir": "desc",
-  "rows": [
-    {
-      "ticker": "XLV",
-      "name": "Health Care",
-      "last": 171.16,
-      "chg1m": 4.67,
-      "rs13w": 13.1,
-      "rs6m": -5.31,
-      "ret6m": 6.84,
-      "vs50": 4.5,
-      "vs200": 10.5,
-      "regime": "STRONG",
-      "rank": 1,
-      "role": "ticket",
-      "note": "This week's ticket"
-    },
-    {
-      "ticker": "XLF",
-      "name": "Financials",
-      "last": 58.10,
-      "chg1m": 1.93,
-      "rs13w": 11.1,
-      "rs6m": 0.82,
-      "ret6m": 12.97,
-      "vs50": 2.9,
-      "vs200": 8.9,
-      "regime": "STRONG",
-      "rank": 2,
-      "role": "ticket",
-      "note": "This week's ticket"
-    },
-    {
-      "ticker": "XLE",
-      "name": "Energy",
-      "last": 62.68,
-      "chg1m": 6.31,
-      "rs13w": 10.2,
-      "rs6m": -0.06,
-      "ret6m": 12.09,
-      "vs50": 7.8,
-      "vs200": 15.3,
-      "regime": "STRONG",
-      "rank": 3,
-      "role": "hold",
-      "note": "Confirmed. Not a new ticket — rule is top two."
-    },
-    {
-      "ticker": "XLB",
-      "name": "Materials",
-      "last": 53.18,
-      "chg1m": 2.98,
-      "rs13w": 2.4,
-      "rs6m": -12.58,
-      "ret6m": -0.43,
-      "vs50": 2.8,
-      "vs200": 6.7,
-      "regime": "STRONG",
-      "rank": 4,
-      "role": "skip",
-      "note": "Skip. YTD beat, not 13-week leadership."
-    },
-    {
-      "ticker": "XLP",
-      "name": "Consumer Staples",
-      "last": 85.45,
-      "chg1m": -0.02,
-      "rs13w": 1.8,
-      "rs6m": -17.22,
-      "ret6m": -5.07,
-      "vs50": null,
-      "vs200": null,
-      "regime": null,
-      "rank": 5,
-      "role": null,
-      "note": null
-    },
-    {
-      "ticker": "XLI",
-      "name": "Industrials",
-      "last": 177.14,
-      "chg1m": -0.70,
-      "rs13w": 0.6,
-      "rs6m": -12.15,
-      "ret6m": 0.00,
-      "vs50": -2.6,
-      "vs200": 4.1,
-      "regime": "WEAKENING",
-      "rank": 6,
-      "role": null,
-      "note": null
-    },
-    {
-      "ticker": "XLRE",
-      "name": "Real Estate",
-      "last": 44.48,
-      "chg1m": -1.81,
-      "rs13w": 0.0,
-      "rs6m": -10.69,
-      "ret6m": 1.46,
-      "vs50": -0.9,
-      "vs200": 3.5,
-      "regime": "WEAKENING",
-      "rank": 7,
-      "role": null,
-      "note": null
-    },
-    {
-      "ticker": "SPY",
-      "name": "S&P 500",
-      "last": 769.35,
-      "chg1m": 3.73,
-      "rs13w": 0.0,
-      "rs6m": 0.0,
-      "ret6m": 12.15,
-      "vs50": null,
-      "vs200": null,
-      "regime": "BENCH",
-      "rank": null,
-      "role": "bench",
-      "note": "Benchmark. 13w RS is zero by construction."
-    },
-    {
-      "ticker": "XLC",
-      "name": "Communication Services",
-      "last": 112.99,
-      "chg1m": 6.01,
-      "rs13w": -4.0,
-      "rs6m": -16.44,
-      "ret6m": -4.29,
-      "vs50": 2.6,
-      "vs200": -0.9,
-      "regime": "RECOVERY",
-      "rank": 8,
-      "role": null,
-      "note": null
-    },
-    {
-      "ticker": "XLK",
-      "name": "Technology",
-      "last": 185.69,
-      "chg1m": 5.67,
-      "rs13w": -4.6,
-      "rs6m": 21.67,
-      "ret6m": 33.82,
-      "vs50": 1.6,
-      "vs200": 16.5,
-      "regime": "STRONG",
-      "rank": 9,
-      "role": "skip",
-      "note": "Owns the 6-month tape; lost the last quarter. No ticket."
-    },
-    {
-      "ticker": "XLY",
-      "name": "Consumer Discretionary",
-      "last": 117.21,
-      "chg1m": 4.29,
-      "rs13w": -4.8,
-      "rs6m": -11.85,
-      "ret6m": 0.30,
-      "vs50": null,
-      "vs200": null,
-      "regime": null,
-      "rank": 10,
-      "role": null,
-      "note": null
-    },
-    {
-      "ticker": "XLU",
-      "name": "Utilities",
-      "last": 42.73,
-      "chg1m": -4.32,
-      "rs13w": -5.2,
-      "rs6m": -22.63,
-      "ret6m": -10.48,
-      "vs50": -4.4,
-      "vs200": -4.4,
-      "regime": "WEAK",
-      "rank": 11,
-      "role": "skip",
-      "note": "Laggard. No short: board is healthy (8/11 above 50d)."
-    }
-  ],
-  "blotter": {
-    "badge": "SIMULATED RESULTS — NOT LIVE MONEY",
-    "caption": "Two paper tickets this week. Debit is the Monday open snapshot — not marked, not invented. Open rows show cost basis only after a fill. No P&L until a close.",
-    "tickets": [
-      {
-        "id": "2026-w35-xlv",
-        "openedLabel": "Pending — Monday open snapshot",
-        "ticker": "XLV",
-        "name": "Health Care",
-        "structure": "Debit call spread, 30–60 DTE",
-        "debit": null,
-        "debitLabel": "TBD — Monday open snapshot",
-        "maxLoss": "The debit",
-        "dte": "30–60",
-        "status": "OPEN",
-        "result": null,
-        "resultLabel": "—"
-      },
-      {
-        "id": "2026-w35-xlf",
-        "openedLabel": "Pending — Monday open snapshot",
-        "ticker": "XLF",
-        "name": "Financials",
-        "structure": "Debit call spread, 30–60 DTE",
-        "debit": null,
-        "debitLabel": "TBD — Monday open snapshot",
-        "maxLoss": "The debit",
-        "dte": "30–60",
-        "status": "OPEN",
-        "result": null,
-        "resultLabel": "—"
-      }
-    ]
-  },
-  "read": [
-    { "ticker": "XLV", "kind": "ticket", "text": "ticket" },
-    { "ticker": "XLF", "kind": "ticket", "text": "ticket" },
-    { "ticker": "XLE", "kind": "hold", "text": "confirmed, not a new ticket" },
-    { "ticker": "XLB", "kind": "skip", "text": "skip (YTD not 13w)" }
-  ]
-}
-
-  </script>
   <script src="app.js"></script>
 </body>
 </html>

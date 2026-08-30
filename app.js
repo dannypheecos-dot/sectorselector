@@ -1,29 +1,68 @@
-/* Sector Selector — board + blotter from board.json. Waitlist in localStorage. */
+/* Sector Selector V1 — board sort + FormSubmit return unlock. */
 (function () {
   "use strict";
 
-  var WAIT_KEY = "sectorselector.waitlist";
-  var RS_SCALE = 15; // bar scale for ±13.1-ish 13w RS
+  function v1Score(rs13w, vs50) {
+    var vs = vs50 == null || vs50 === "" ? 0 : Number(vs50);
+    var raw = 50 + 3.2 * Number(rs13w) + 0.6 * vs;
+    return Math.max(0, Math.min(100, Math.round(raw)));
+  }
 
   function $(id) {
     return document.getElementById(id);
   }
 
-  function fmtPrice(n) {
-    if (n == null || Number.isNaN(n)) return "—";
-    return Number(n).toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+  function setNextUrls() {
+    var next = window.location.origin + window.location.pathname.replace(/index\.html$/, "") + "#thanks";
+    document.querySelectorAll('input[name="_next"]').forEach(function (el) {
+      el.value = next;
     });
   }
 
-  function fmtSigned(n, digits) {
+  function unlockFromReturn() {
+    var hash = (window.location.hash || "").replace("#", "");
+    if (hash === "thanks" || hash === "unlocked") {
+      document.body.classList.add("is-unlocked");
+      try {
+        sessionStorage.setItem("sectorselector.unlocked", "1");
+      } catch (e) {}
+      var banner = $("thanks");
+      if (banner && typeof banner.focus === "function") {
+        banner.focus();
+      }
+      var gate = $("gate");
+      if (gate) {
+        gate.scrollIntoView({ block: "start" });
+      }
+    } else {
+      try {
+        if (sessionStorage.getItem("sectorselector.unlocked") === "1") {
+          document.body.classList.add("is-unlocked");
+        }
+      } catch (e) {}
+    }
+  }
+
+  function bindForms() {
+    document.querySelectorAll("form.capture").forEach(function (form) {
+      form.addEventListener("submit", function (e) {
+        var email = form.querySelector('input[type="email"]');
+        if (!email) return;
+        var value = (email.value || "").trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          e.preventDefault();
+          email.focus();
+        }
+      });
+    });
+  }
+
+  function fmtSigned(n, digits, suffix) {
     if (n == null || n === "" || Number.isNaN(Number(n))) return null;
     var v = Number(n);
     var abs = Math.abs(v).toFixed(digits);
-    if (v > 0) return "+" + abs;
-    if (v < 0) return "\u2212" + abs; // minus sign, not hyphen
-    return (0).toFixed(digits);
+    var sign = v > 0 ? "+" : v < 0 ? "\u2212" : "";
+    return sign + abs + (suffix || "");
   }
 
   function clsFor(n) {
@@ -35,31 +74,35 @@
   }
 
   function cellNum(n, digits, suffix) {
-    var signed = fmtSigned(n, digits);
-    if (signed == null) return '<span class="num na">—</span>';
-    return '<span class="num ' + clsFor(n) + '">' + signed + (suffix || "") + "</span>";
+    var signed = fmtSigned(n, digits, suffix);
+    if (signed == null) return '<span class="num na">\u2014</span>';
+    return '<span class="num ' + clsFor(n) + '">' + signed + "</span>";
   }
 
-  function rsBar(n) {
-    if (n == null || Number.isNaN(Number(n))) return "";
-    var v = Number(n);
-    var pct = Math.round(Math.min(50, (Math.abs(v) / RS_SCALE) * 50) * 10) / 10;
-    var side = v > 0 ? "pos" : v < 0 ? "neg" : "flat";
-    var style =
-      v >= 0
-        ? "width:" + pct + "%;left:50%"
-        : "width:" + pct + "%;right:50%;left:auto";
-    return (
-      '<span class="rs-bar" aria-hidden="true"><i class="' +
-      side +
-      '" style="' +
-      style +
-      '"></i></span>'
-    );
+  function fmtPrice(n) {
+    if (n == null || Number.isNaN(n)) return "\u2014";
+    return Number(n).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
   }
 
-  function cash(ticker) {
-    return "$" + ticker;
+  function statusClass(label) {
+    if (label === "LEADER") return "LEADER";
+    if (label === "ROTATION WATCH") return "WATCH";
+    if (label === "NEUTRAL") return "NEUTRAL";
+    if (label === "WEAKENING") return "WEAKENING";
+    if (label === "LAGGING") return "LAGGING";
+    if (label === "BENCH") return "BENCH";
+    return "";
+  }
+
+  function rowClass(row) {
+    if (row.role === "bench") return "bench";
+    if (row.role === "watch" || row.label === "ROTATION WATCH") return "watch";
+    if (row.role === "leader" || row.label === "LEADER") return "leader";
+    if (row.role === "skip") return "skip";
+    return "";
   }
 
   function compare(a, b, key, dir) {
@@ -86,152 +129,83 @@
       return r.role === "bench";
     });
     sectors.sort(function (a, b) {
-      return compare(a, b, key, dir);
+      var primary = compare(a, b, key, dir);
+      if (primary !== 0) return primary;
+      return compare(a, b, "rs13w", "desc");
     });
     return sectors.concat(bench);
   }
 
-  function roleTag(row) {
-    if (row.role === "ticket") return '<span class="role-tag">ticket</span>';
-    if (row.role === "hold") return '<span class="role-tag">hold</span>';
-    if (row.role === "skip") return '<span class="role-tag">skip</span>';
-    if (row.role === "bench") return '<span class="role-tag">bench</span>';
-    return "";
-  }
-
   function renderRow(row) {
-    var role = row.role || "";
+    var score =
+      row.role === "bench"
+        ? '<span class="num na">\u2014</span>'
+        : '<span class="score-num">' + v1Score(row.rs13w, row.vs50) + "</span>";
     var rank =
       row.rank == null
-        ? '<span class="num na">—</span>'
+        ? '<span class="num na">\u2014</span>'
         : '<span class="rank">' + row.rank + "</span>";
-    var regime = row.regime
-      ? '<span class="regime ' + row.regime + '">' + row.regime + "</span>"
-      : '<span class="num na">—</span>';
+    var label = row.label || "";
+    var displayLabel = row.ticker === "XLB" ? "NEUTRAL / SKIP" : label;
     var title = row.note ? ' title="' + String(row.note).replace(/"/g, "&quot;") + '"' : "";
     return (
-      "<tr class=\"" +
-      role +
-      "\"" +
+      '<tr class="' +
+      rowClass(row) +
+      '"' +
       title +
       ">" +
       "<td>" +
       rank +
       "</td>" +
       '<td class="col-ticker"><span class="cash">' +
-      cash(row.ticker) +
-      "</span>" +
-      roleTag(row) +
-      '<span class="sector">' +
+      row.ticker +
+      '</span><span class="sector">' +
       (row.name || "") +
+      (row.role === "bench" ? " · bench" : "") +
       "</span></td>" +
-      '<td><span class="rs-cell">' +
-      rsBar(row.rs13w) +
+      "<td>" +
+      score +
+      "</td>" +
+      "<td>" +
       cellNum(row.rs13w, 1) +
-      "</span></td>" +
-      '<td class="num">' +
-      fmtPrice(row.last) +
-      "</td>" +
-      "<td>" +
-      cellNum(row.chg1m, 2, "%") +
-      "</td>" +
-      "<td>" +
-      cellNum(row.rs6m, 2) +
       "</td>" +
       "<td>" +
       cellNum(row.vs50, 1, "%") +
       "</td>" +
       "<td>" +
-      cellNum(row.vs200, 1, "%") +
+      cellNum(row.ret6m, 2, "%") +
       "</td>" +
-      "<td>" +
-      regime +
+      '<td class="num">' +
+      fmtPrice(row.last) +
       "</td>" +
+      '<td><span class="status ' +
+      statusClass(label) +
+      '">' +
+      displayLabel +
+      "</span></td>" +
       "</tr>"
     );
   }
 
-  function renderRead(items) {
-    var el = $("read");
-    if (!el || !items || !items.length) return;
-    el.innerHTML = items
-      .map(function (item) {
-        return (
-          '<span class="chip ' +
-          (item.kind || "") +
-          '"><span class="cash">' +
-          cash(item.ticker) +
-          "</span> " +
-          item.text +
-          "</span>"
-        );
-      })
-      .join("");
-  }
-
-  function renderBlotter(blotter) {
-    if (!blotter) return;
-    var badge = $("sim-badge");
-    var cap = $("blotter-caption");
-    var list = $("blotter-list");
-    if (badge && blotter.badge) badge.textContent = blotter.badge;
-    if (cap && blotter.caption) cap.textContent = blotter.caption;
-    if (!list) return;
-    list.innerHTML = (blotter.tickets || [])
-      .map(function (t) {
-        var debit =
-          t.debit == null
-            ? '<p class="dl-val tbd">' + (t.debitLabel || "TBD") + "</p>"
-            : '<p class="dl-val">' + t.debit + "</p>";
-        var result =
-          t.result == null
-            ? '<p class="dl-val tbd">' + (t.resultLabel || "—") + "</p>"
-            : '<p class="dl-val">' + t.result + "</p>";
-        return (
-          '<article class="ticket-card">' +
-          "<div><p class=\"dl-label\">Name</p><p class=\"dl-val\"><span class=\"cash\">" +
-          cash(t.ticker) +
-          "</span> " +
-          (t.name || "") +
-          "</p></div>" +
-          "<div><p class=\"dl-label\">Structure</p><p class=\"dl-val\">" +
-          t.structure +
-          "</p></div>" +
-          "<div><p class=\"dl-label\">Debit / max loss</p>" +
-          debit +
-          '<p class="dl-val" style="color:var(--ivory-3);font-size:0.85rem;margin-top:0.2rem">' +
-          (t.maxLoss || "The debit") +
-          "</p></div>" +
-          "<div><p class=\"dl-label\">Opened</p><p class=\"dl-val\">" +
-          t.openedLabel +
-          '</p><p class="status-open">' +
-          t.status +
-          "</p></div>" +
-          "<div><p class=\"dl-label\">Result</p>" +
-          result +
-          "</div>" +
-          "</article>"
-        );
-      })
-      .join("");
-  }
-
   var state = {
     rows: [],
-    sortKey: "rs13w",
+    sortKey: "score",
     sortDir: "desc"
   };
 
   function paint() {
     var body = $("board-body");
-    if (!body) return;
-    var sorted = sortRows(state.rows, state.sortKey, state.sortDir);
-    body.innerHTML = sorted.map(renderRow).join("");
-    var heads = document.querySelectorAll("#board-table thead th[data-key]");
-    heads.forEach(function (th) {
+    if (!body || !state.rows.length) return;
+    body.innerHTML = sortRows(state.rows, state.sortKey, state.sortDir)
+      .map(renderRow)
+      .join("");
+    document.querySelectorAll("#board-table thead th[data-key]").forEach(function (th) {
       var key = th.getAttribute("data-key");
-      if (key === state.sortKey) th.setAttribute("aria-sort", state.sortDir === "desc" ? "descending" : "ascending");
-      else th.removeAttribute("aria-sort");
+      if (key === state.sortKey) {
+        th.setAttribute("aria-sort", state.sortDir === "desc" ? "descending" : "ascending");
+      } else {
+        th.removeAttribute("aria-sort");
+      }
     });
   }
 
@@ -245,116 +219,41 @@
           state.sortDir = state.sortDir === "desc" ? "asc" : "desc";
         } else {
           state.sortKey = key;
-          state.sortDir = key === "ticker" || key === "regime" ? "asc" : "desc";
+          state.sortDir = key === "ticker" || key === "label" ? "asc" : "desc";
         }
         paint();
       });
     });
   }
 
-  function loadBoard() {
-    return fetch("board.json", { cache: "no-store" })
-      .then(function (r) {
-        if (!r.ok) throw new Error("board.json " + r.status);
-        return r.json();
-      })
-      .catch(function () {
-        var seed = $("board-seed");
-        if (seed && seed.textContent.trim()) return JSON.parse(seed.textContent);
-        throw new Error("No board data");
-      });
-  }
-
-  function validEmail(s) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-  }
-
-  function readList() {
-    try {
-      var raw = localStorage.getItem(WAIT_KEY);
-      var list = raw ? JSON.parse(raw) : [];
-      return Array.isArray(list) ? list : [];
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function writeList(list) {
-    localStorage.setItem(WAIT_KEY, JSON.stringify(list));
-  }
-
-  function alreadyOn(email) {
-    var needle = email.toLowerCase();
-    return readList().some(function (row) {
-      return row.email && row.email.toLowerCase() === needle;
+  function hydrate(data) {
+    (data.rows || []).forEach(function (row) {
+      if (row.role !== "bench") {
+        row.score = v1Score(row.rs13w, row.vs50);
+      }
     });
-  }
-
-  function bindWaitlist() {
-    var form = $("wait-form");
-    var input = $("wait-email");
-    var msg = $("wait-msg");
-    if (!form || !input || !msg) return;
-
-    var existing = readList();
-    if (existing.length) {
-      msg.className = "wait-msg ok";
-      msg.textContent = "You’re on the list on this browser. One email after Friday’s close — when a host is wired. Nothing leaves this device.";
+    state.rows = data.rows || [];
+    state.sortKey = data.sortDefault || "score";
+    state.sortDir = data.sortDir || "desc";
+    if (data.asOfLabel && $("asof")) {
+      $("asof").textContent = "AS OF " + String(data.asOfLabel).toUpperCase();
     }
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var email = (input.value || "").trim();
-      msg.className = "wait-msg";
-      if (!validEmail(email)) {
-        msg.className = "wait-msg err";
-        msg.textContent = "Need a real email — stored here, not sent anywhere.";
-        input.focus();
-        return;
-      }
-      if (alreadyOn(email)) {
-        msg.className = "wait-msg ok";
-        msg.textContent = "Already on the waitlist on this browser. Thank you.";
-        form.hidden = true;
-        return;
-      }
-      var list = readList();
-      list.push({ email: email, ts: new Date().toISOString() });
-      try {
-        writeList(list);
-      } catch (err) {
-        msg.className = "wait-msg err";
-        msg.textContent = "Could not store the address in this browser.";
-        return;
-      }
-      form.hidden = true;
-      msg.className = "wait-msg ok";
-      msg.textContent =
-        "Thank you. You’re on the waitlist on this device. No Discord. No webinar. One note after Friday’s close — when we send from a real host, not from this page.";
-    });
+    paint();
   }
 
-  bindWaitlist();
+  setNextUrls();
+  bindForms();
+  unlockFromReturn();
+  window.addEventListener("hashchange", unlockFromReturn);
   bindSort();
 
-  loadBoard()
-    .then(function (data) {
-      state.rows = data.rows || [];
-      state.sortKey = data.sortDefault || "rs13w";
-      state.sortDir = data.sortDir || "desc";
-      if (data.asOfLabel && $("asof")) {
-        $("asof").textContent = "As of " + data.asOfLabel;
-      }
-      renderRead(data.read);
-      renderBlotter(data.blotter);
-      paint();
+  fetch("board.json", { cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("board.json " + r.status);
+      return r.json();
     })
-    .catch(function (err) {
-      var body = $("board-body");
-      if (body) {
-        body.innerHTML =
-          '<tr><td colspan="9">Could not load board.json. Open this folder via any static host, or keep board-seed in the page.</td></tr>';
-      }
-      console.warn(err);
+    .then(hydrate)
+    .catch(function () {
+      /* Static table already in the document. */
     });
 })();
