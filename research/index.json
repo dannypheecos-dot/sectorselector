@@ -1,8 +1,14 @@
 {
-  "asOf": "2026-08-30",
+  "asOf": "2026-08-31",
   "desk": "Sector Selector",
   "model": "Product notes on the Friday map. Not a magazine. Unlock this month’s plan or see the current map.",
   "articles": [
+    {
+      "slug": "larak-jordan.html",
+      "date": "2026-08-31",
+      "title": "Larak, then Jordan. Vol is still asleep.",
+      "dek": "Sunday 30 Aug 2026 night / Monday 31 Aug dawn. First US strike in a month. IRGC named the reply. Jordan counted intercepts. VIX did not care."
+    },
     {
       "slug": "hormuz-monday.html",
       "date": "2026-08-30",
