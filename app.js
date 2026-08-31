@@ -1,8 +1,19 @@
-/* Sector Selector — Kit capture + unlock + chrome. */
+/* Sector Selector — Kit capture + unlock + chrome.
+ *
+ * Architecture (not built):
+ * - Real-time scoring: snapshots stay dated JSON. Never overwrite a prior YYYY-MM-DD.
+ * - Names-in-sector: see /coming-soon/. Not a live stock list.
+ * - 0DTE: market-structure input only. Never a control claim.
+ * - Rotation Score 0–100: field reserved (COMING SOON). Do not invent values.
+ *   Do not treat 13-week RS as a validated 30–60 day forecast.
+ * - 80+ is a V1 Sector Score threshold, not an 80% win rate and not 80% PoP.
+ * - No member portal paywall. No $997 webinar product. Billing is not enabled.
+ */
 (function () {
   "use strict";
 
   var UNLOCK_KEY = "sectorselector.v2.unlocked";
+  var PRO_PRICE_MONTHLY = 97; /* configurable; do not enable billing */
 
   function $(id) {
     return document.getElementById(id);
@@ -52,6 +63,7 @@
     );
     if (blotterTickets) renderHomeBlotter(blotterTickets);
     else unlockStaticBlotter();
+    syncStickyCta();
   }
 
   function persistUnlock() {
@@ -355,11 +367,172 @@
     });
   }
 
+  function rootPrefix() {
+    return dataAttr("data-root", "");
+  }
+
+  function syncStickyCta() {
+    var btn = $("sticky-cta-btn");
+    if (!btn) return;
+    document.body.classList.add("has-sticky");
+    if (isUnlocked()) {
+      btn.textContent = "VIEW MY SECTOR REPORT →";
+      btn.setAttribute("href", "#trade");
+    } else {
+      btn.textContent = "UNLOCK THIS MONTH'S #1 SETUP →";
+      btn.setAttribute("href", "#capture");
+    }
+  }
+
+  function bindRankingsRanges() {
+    var note = $("rankings-range-note");
+    var buttons = document.querySelectorAll("[data-range]");
+    if (!buttons.length) return;
+    var prefix = rootPrefix();
+    fetch(prefix + "data/rankings/index.json", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("rankings index " + res.status);
+        return res.json();
+      })
+      .then(function (index) {
+        var ranges = (index && index.ranges) || {};
+        buttons.forEach(function (btn) {
+          var key = btn.getAttribute("data-range");
+          var spec = ranges[key] || {};
+          if (spec.ready === false) {
+            btn.disabled = true;
+            btn.setAttribute("aria-disabled", "true");
+            btn.title = spec.reason || "History not published yet.";
+          }
+          btn.addEventListener("click", function () {
+            buttons.forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+            btn.setAttribute("aria-pressed", "true");
+            if (spec.ready === false && note) {
+              note.textContent = spec.reason || "History not published yet. Improving / Stable / Deteriorating needs two stored dates.";
+            } else if (note) {
+              note.textContent = "Current snapshot · " + (index.currentLabel || "As of Friday 28 Aug 2026 close") + ". First stored day — CHANGE is —.";
+            }
+          });
+        });
+        if (note && (!index.dates || index.dates.length < 2)) {
+          note.textContent = "First snapshot. Improving / Stable / Deteriorating will appear when a second date is stored.";
+        }
+      })
+      .catch(function () {
+        if (note) {
+          note.textContent = "Showing the published Friday 28 Aug 2026 close board. History files are not loaded.";
+        }
+      });
+  }
+
+  function bindProCheckout() {
+    document.querySelectorAll("[data-pro-price]").forEach(function (el) {
+      el.textContent = String(PRO_PRICE_MONTHLY);
+    });
+    var form = $("pro-checkout");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setMsg(
+        $("pro-checkout-msg"),
+        "ok",
+        "Prototype only. Billing is not enabled. No payment was taken."
+      );
+    });
+    var cancel = $("pro-cancel");
+    if (cancel) {
+      cancel.addEventListener("click", function (e) {
+        e.preventDefault();
+        setMsg(
+          $("pro-checkout-msg"),
+          "ok",
+          "Cancellation is not live. This prototype cannot charge or cancel anything."
+        );
+      });
+    }
+  }
+
+  function awaitingText(value, fallback) {
+    if (value == null || value === "") return fallback || "awaiting verified data";
+    return String(value);
+  }
+
+  function moneyOrAwaiting(value) {
+    if (value == null || value === "") return "awaiting verified data";
+    var n = typeof value === "number" ? value : Number(value);
+    if (isNaN(n)) return String(value);
+    return "$" + n.toFixed(2);
+  }
+
+  function renderEightyHistory(data) {
+    var body = $("eighty-history-body");
+    if (!body || !data || !data.entries) return;
+    body.textContent = "";
+    data.entries.forEach(function (row) {
+      var tr = document.createElement("tr");
+      addCell(tr, row.label || (row.kind === "demo" ? "DEMO / SAMPLE — NOT A LIVE SIGNAL" : "—"));
+      addCell(tr, row.asOfLabel || row.asOf || "—", "mono");
+      addCell(tr, row.sector || "—");
+      addCell(tr, row.score != null ? String(row.score) : "—", "mono");
+      addCell(tr, row.rotationScore != null ? String(row.rotationScore) : "COMING SOON", "mono");
+      addCell(tr, row.direction || "—");
+      addCell(tr, row.live ? "LIVE" : "NOT A LIVE SIGNAL");
+      body.appendChild(tr);
+    });
+  }
+
+  function fillEightyCard(data) {
+    var entry = data && data.entries && data.entries[0];
+    if (!entry) return;
+    function set(id, text) {
+      var el = $(id);
+      if (el) el.textContent = text;
+    }
+    set("ep-sector", awaitingText(entry.sector));
+    set("ep-ticker", awaitingText(entry.ticker));
+    set("ep-score", entry.score != null ? String(entry.score) : "awaiting verified data");
+    set("ep-rotation", "COMING SOON");
+    set("ep-direction", awaitingText(entry.direction));
+    set("ep-underlying", awaitingText(entry.underlying));
+    set("ep-strategy", awaitingText(entry.strategy));
+    set("ep-exp", awaitingText(entry.expiration));
+    set("ep-strikes", awaitingText(entry.strikes));
+    set("ep-debit", moneyOrAwaiting(entry.maxDebit));
+    set("ep-risk", entry.maxRisk != null ? "$" + String(entry.maxRisk) : "awaiting verified data");
+    set("ep-management", awaitingText(entry.management));
+    set("ep-invalidation", awaitingText(entry.invalidation));
+    set("ep-catalyst", awaitingText(entry.catalyst));
+    set("ep-horizon", awaitingText(entry.horizon));
+    set("ep-why", awaitingText(entry.why80));
+    set("ep-timestamp", awaitingText(entry.timestamp || entry.asOfLabel));
+  }
+
+  function loadEightyPlus() {
+    var needCard = $("ep-sector");
+    var needHist = $("eighty-history-body");
+    if (!needCard && !needHist) return;
+    var prefix = rootPrefix();
+    fetch(prefix + "data/eighty-plus/history.json", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("eighty-plus " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (needCard) fillEightyCard(data);
+        if (needHist) renderEightyHistory(data);
+      })
+      .catch(function () {});
+  }
+
   bindAllCaptures();
   bindFullSetup();
   bindNav();
   bindBoard();
+  bindRankingsRanges();
+  bindProCheckout();
+  loadEightyPlus();
   loadBlotter();
+  syncStickyCta();
 
   if ($("trade") && alreadyUnlocked()) {
     persistUnlock();

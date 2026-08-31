@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page="home">
   <a class="skip" href="#map">Skip to the map</a>
 
   <header class="mast">
@@ -53,46 +53,176 @@
         <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
       </div>
       <nav class="mast-nav" id="site-nav" aria-label="Primary">
-        <a href="#map">Map</a>
-        <a href="#method">Method</a>
+        <a href="#map">Rankings</a>
+        <a href="why-sectors/">Why</a>
         <a href="research/">Research</a>
         <a href="track-record/">Track Record</a>
+        <a href="pro/">Pro</a>
         <a class="nav-cta" href="#capture">Get the Plan</a>
       </nav>
     </div>
   </header>
 
   <main>
+    <section class="wrap hero" id="top">
+      <div class="hero-copy">
+        <p class="kicker">11 SPDR SECTORS · VS SPY · UPDATED FRIDAY CLOSE</p>
+        <h1>KNOW WHERE THE MONEY IS MOVING</h1>
+
+        <div class="result-block">
+          <p class="result-rank">#1</p>
+          <p class="result-name">HEALTH CARE</p>
+          <p class="result-score"><span class="mono">XLV</span> <strong class="mono">95/100</strong></p>
+          <p class="result-rs mono">+13.1 pp 13-week RS vs SPY</p>
+        </div>
+
+        <p class="lede">Most traders start by choosing a stock. Sector Selector starts one layer higher — by finding where relative strength is already concentrating.</p>
+
+        <ul class="benefits">
+          <li>
+            <span class="benefit-k">MONTHLY PLAN</span>
+            <span>The current research card: sector, structure, entry, exit, invalidation.</span>
+          </li>
+          <li>
+            <span class="benefit-k">FRIDAY MAP</span>
+            <span>Who leads and who is skipping, recut every Friday close.</span>
+          </li>
+          <li>
+            <span class="benefit-k">FOUNDING ACCESS</span>
+            <span>Founding 1,000 keep the weekly list free.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap section" id="map">
+      <p class="kicker outlook-kicker">SECTOR SELECTOR / 30–60 DAY OUTLOOK</p>
+      <div class="section-head">
+        <h2>CURRENT SECTOR RANKINGS</h2>
+        <p class="asof mono">As of Friday 28 Aug 2026 close</p>
+      </div>
+      <p class="intro">Same eleven names every week. Score is the published V1 Sector Score, not a vibe. Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is confirmed — not a new ticket (rule is top two). Materials is a YTD beat that is not 13-week leadership.</p>
+
+      <div class="board-wrap">
+        <table class="board">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th class="col-sector">Sector</th>
+              <th class="col-score">Score</th>
+              <th class="col-state">Status</th>
+              <th class="col-chg">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">01</td>
+              <td class="col-sector">Health Care <span class="mono dim">XLV</span></td>
+              <td class="col-score mono">95</td>
+              <td class="col-state"><span class="state leader">LEADER</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Health Care · XLV · +13.1 pp 13-week RS vs SPY · +4.5% vs 50d · +10.5% vs 200d · 50 + 3.2×13.1 + 0.6×4.5 = 94.62 → 95</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">02</td>
+              <td class="col-sector">Financials <span class="mono dim">XLF</span></td>
+              <td class="col-score mono">87</td>
+              <td class="col-state"><span class="state leader">LEADER</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Financials · XLF · +11.1 pp 13-week RS vs SPY · +2.9% vs 50d · 50 + 3.2×11.1 + 0.6×2.9 = 87.26 → 87</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">03</td>
+              <td class="col-sector">Energy <span class="mono dim">XLE</span></td>
+              <td class="col-score mono">87</td>
+              <td class="col-state"><span class="state confirmed">CONFIRMED</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Energy · XLE · HOLD · +10.2 pp 13-week RS vs SPY · +7.8% vs 50d · confirmed, not a new ticket · 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">04</td>
+              <td class="col-sector">Materials <span class="mono dim">XLB</span></td>
+              <td class="col-score mono">59</td>
+              <td class="col-state"><span class="state skip">SKIP</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Materials · XLB · YTD beat, not 13-week leadership · 50 + 3.2×2.4 + 0.6×2.8 = 59.36 → 59</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">05</td>
+              <td class="col-sector">Consumer Staples <span class="mono dim">XLP</span></td>
+              <td class="col-score mono">56</td>
+              <td class="col-state"><span class="state neutral">NEUTRAL</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Consumer Staples · XLP · vs50d missing this week; location term = 0 · 50 + 3.2×1.8 = 55.76 → 56</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">06</td>
+              <td class="col-sector">Industrials <span class="mono dim">XLI</span></td>
+              <td class="col-score mono">50</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Industrials · XLI · below 50d, above 200d · 50 + 3.2×0.6 + 0.6×(−2.6) = 50.36 → 50</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">07</td>
+              <td class="col-sector">Real Estate <span class="mono dim">XLRE</span></td>
+              <td class="col-score mono">49</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Real Estate · XLRE · 50 + 3.2×0.0 + 0.6×(−0.9) = 49.46 → 49</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">08</td>
+              <td class="col-sector">Communication Services <span class="mono dim">XLC</span></td>
+              <td class="col-score mono">39</td>
+              <td class="col-state"><span class="state watch">WATCH</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Communication Services · XLC · 13w still lags; location recovering above 50d · 50 + 3.2×(−4.0) + 0.6×2.6 = 38.76 → 39</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">09</td>
+              <td class="col-sector">Technology <span class="mono dim">XLK</span></td>
+              <td class="col-score mono">36</td>
+              <td class="col-state"><span class="state skip">SKIP</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Technology · XLK · owns the 6-month tape; lost the last quarter · 50 + 3.2×(−4.6) + 0.6×1.6 = 36.24 → 36</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">10</td>
+              <td class="col-sector">Consumer Discretionary <span class="mono dim">XLY</span></td>
+              <td class="col-score mono">35</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Consumer Discretionary · XLY · vs50d missing this week; location term = 0 · 50 + 3.2×(−4.8) = 34.64 → 35</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">11</td>
+              <td class="col-sector">Utilities <span class="mono dim">XLU</span></td>
+              <td class="col-score mono">31</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Utilities · XLU · laggard · no short: board is healthy (8/11 above 50d) · 50 + 3.2×(−5.2) + 0.6×(−4.4) = 30.72 → 31</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote">CHANGE is — because this is the first stored day. XLP and XLY vs50d were not in the health table this week — location term = 0, not invented. Tap a row on mobile to expand. Rotation Score (0–100): COMING SOON — the field is reserved; we do not invent a second score.</p>
+    </section>
+
+    <section class="wrap section" id="changed">
+      <div class="section-head">
+        <h2>What changed</h2>
+        <p class="asof">First snapshot</p>
+      </div>
+      <p class="intro">This is the first stored day — Friday 28 Aug 2026 close. There is no prior snapshot to compare, so we do not print arrows or Improving / Stable / Deteriorating.</p>
+    </section>
+
     <section class="wrap hero" id="capture">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="kicker">11 SPDR SECTORS · VS SPY · UPDATED FRIDAY CLOSE</p>
-          <h1>KNOW WHERE THE MONEY IS MOVING</h1>
-
-          <div class="result-block">
-            <p class="result-rank">#1</p>
-            <p class="result-name">HEALTH CARE</p>
-            <p class="result-score"><span class="mono">XLV</span> <strong class="mono">95/100</strong></p>
-            <p class="result-rs mono">+13.1 pp 13-week RS vs SPY</p>
-          </div>
-
-          <p class="lede">Most traders start by choosing a stock. Sector Selector starts one layer higher — by finding where relative strength is already concentrating.</p>
-
-          <ul class="benefits">
-            <li>
-              <span class="benefit-k">MONTHLY PLAN</span>
-              <span>The current research card: sector, structure, entry, exit, invalidation.</span>
-            </li>
-            <li>
-              <span class="benefit-k">FRIDAY MAP</span>
-              <span>Who leads and who is skipping, recut every Friday close.</span>
-            </li>
-            <li>
-              <span class="benefit-k">FOUNDING ACCESS</span>
-              <span>Founding 1,000 keep the weekly list free.</span>
-            </li>
-          </ul>
-
+          <p class="kicker">THIS MONTH'S FREE RESEARCH</p>
+          <h2 class="capture-heading">The current research card</h2>
+          <p class="lede">Founding 1,000 keep the weekly list free. Email is the product door. Simulated research. Not advice.</p>
           <form class="capture" id="hero-form" action="https://app.kit.com/forms/9861437/subscriptions" method="post">
             <input type="text" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
             <h2 class="form-title">UNLOCK THIS MONTH'S TOP-RANKED SETUP</h2>
@@ -188,7 +318,7 @@
           <dl class="brief-dl">
             <div><dt>Sector score</dt><dd class="mono">95 / 100</dd></div>
             <div><dt>Relative strength</dt><dd>+13.1 pp 13w vs SPY</dd></div>
-            <div><dt>Location</dt><dd class="mono">+4.5% vs 50d · +10.5% vs 200d</dd></div>
+            <div><dt>Location</dt><dd>+4.5% vs 50d · +10.5% vs 200d</dd></div>
           </dl>
         </article>
         <article class="unlock-setup">
@@ -199,200 +329,6 @@
           <p class="setup-jump"><a href="#research-card">Read the research card →</a> · <a href="#paths">New or experienced →</a></p>
         </article>
       </div>
-    </section>
-
-    <section class="wrap section" id="framework">
-      <div class="section-head">
-        <h2>The framework</h2>
-        <p class="asof">MARKET → STRUCTURE → SECTOR → STOCK → TRADE</p>
-      </div>
-      <p class="intro">Most products start at the stock. Sector Selector specializes in the sector layer — where relative strength is already concentrating — before a name or a strike is chosen.</p>
-      <ol class="falls">
-        <li>
-          <span class="fall-n mono">01</span>
-          <span class="fall-name">Market</span>
-          <span class="fall-why">Regime first</span>
-        </li>
-        <li>
-          <span class="fall-n mono">02</span>
-          <span class="fall-name">Structure</span>
-          <span class="fall-why">Positioning, not control</span>
-        </li>
-        <li class="on">
-          <span class="fall-n mono">03</span>
-          <span class="fall-name">Sector</span>
-          <span class="fall-why">Sector Selector</span>
-        </li>
-        <li>
-          <span class="fall-n mono">04</span>
-          <span class="fall-name">Stock</span>
-          <span class="fall-why">After the sector</span>
-        </li>
-        <li>
-          <span class="fall-n mono">05</span>
-          <span class="fall-name">Trade</span>
-          <span class="fall-why">Defined-risk only</span>
-        </li>
-      </ol>
-    </section>
-
-    <section class="wrap section" id="map">
-      <div class="section-head">
-        <h2>Sector map</h2>
-        <p class="asof mono">As of Friday 28 Aug 2026 close · price-only</p>
-      </div>
-      <p class="intro">Same eleven names every week. Score is a published formula, not a vibe. Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is confirmed — not a new ticket (rule is top two). Materials is a YTD beat that is not 13-week leadership.</p>
-
-      <div class="board-wrap">
-        <table class="board">
-          <thead>
-            <tr>
-              <th class="col-rank">Rank</th>
-              <th class="col-sector">Sector</th>
-              <th class="col-etf">ETF</th>
-              <th class="col-score">Score</th>
-              <th class="col-rs">13W RS</th>
-              <th class="col-loc">Location</th>
-              <th class="col-state">State</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">01</td>
-              <td class="col-sector">Health Care</td>
-              <td class="col-etf mono">XLV</td>
-              <td class="col-score mono">95</td>
-              <td class="col-rs mono">+13.1 pp</td>
-              <td class="col-loc mono">+4.5% vs 50d</td>
-              <td class="col-state"><span class="state leader">LEADER</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Health Care · +13.1 pp 13-week RS vs SPY · +4.5% vs 50d · 50 + 3.2×13.1 + 0.6×4.5 = 94.62 → 95</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">02</td>
-              <td class="col-sector">Financials</td>
-              <td class="col-etf mono">XLF</td>
-              <td class="col-score mono">87</td>
-              <td class="col-rs mono">+11.1 pp</td>
-              <td class="col-loc mono">+2.9% vs 50d</td>
-              <td class="col-state"><span class="state leader">LEADER</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Financials · +11.1 pp 13-week RS vs SPY · +2.9% vs 50d · 50 + 3.2×11.1 + 0.6×2.9 = 87.26 → 87</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">03</td>
-              <td class="col-sector">Energy</td>
-              <td class="col-etf mono">XLE</td>
-              <td class="col-score mono">87</td>
-              <td class="col-rs mono">+10.2 pp</td>
-              <td class="col-loc mono">+7.8% vs 50d</td>
-              <td class="col-state"><span class="state confirmed">CONFIRMED</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Energy · HOLD · +10.2 pp 13-week RS vs SPY · +7.8% vs 50d · confirmed, not a new ticket · 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">04</td>
-              <td class="col-sector">Materials</td>
-              <td class="col-etf mono">XLB</td>
-              <td class="col-score mono">59</td>
-              <td class="col-rs mono">+2.4 pp</td>
-              <td class="col-loc mono">+2.8% vs 50d</td>
-              <td class="col-state"><span class="state skip">SKIP</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Materials · YTD beat, not 13-week leadership · 50 + 3.2×2.4 + 0.6×2.8 = 59.36 → 59</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">05</td>
-              <td class="col-sector">Consumer Staples</td>
-              <td class="col-etf mono">XLP</td>
-              <td class="col-score mono">56</td>
-              <td class="col-rs mono">+1.8 pp</td>
-              <td class="col-loc mono">—</td>
-              <td class="col-state"><span class="state neutral">NEUTRAL</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Consumer Staples · vs50d missing this week; location term = 0 · 50 + 3.2×1.8 = 55.76 → 56</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">06</td>
-              <td class="col-sector">Industrials</td>
-              <td class="col-etf mono">XLI</td>
-              <td class="col-score mono">50</td>
-              <td class="col-rs mono">+0.6 pp</td>
-              <td class="col-loc mono">−2.6% vs 50d</td>
-              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Industrials · below 50d, above 200d · 50 + 3.2×0.6 + 0.6×(−2.6) = 50.36 → 50</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">07</td>
-              <td class="col-sector">Real Estate</td>
-              <td class="col-etf mono">XLRE</td>
-              <td class="col-score mono">49</td>
-              <td class="col-rs mono">0.0 pp</td>
-              <td class="col-loc mono">−0.9% vs 50d</td>
-              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Real Estate · 50 + 3.2×0.0 + 0.6×(−0.9) = 49.46 → 49</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">08</td>
-              <td class="col-sector">Communication Services</td>
-              <td class="col-etf mono">XLC</td>
-              <td class="col-score mono">39</td>
-              <td class="col-rs mono">−4.0 pp</td>
-              <td class="col-loc mono">+2.6% vs 50d</td>
-              <td class="col-state"><span class="state watch">WATCH</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Communication Services · 13w still lags; location recovering above 50d · 50 + 3.2×(−4.0) + 0.6×2.6 = 38.76 → 39</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">09</td>
-              <td class="col-sector">Technology</td>
-              <td class="col-etf mono">XLK</td>
-              <td class="col-score mono">36</td>
-              <td class="col-rs mono">−4.6 pp</td>
-              <td class="col-loc mono">+1.6% vs 50d</td>
-              <td class="col-state"><span class="state skip">SKIP</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Technology · owns the 6-month tape; lost the last quarter · 50 + 3.2×(−4.6) + 0.6×1.6 = 36.24 → 36</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">10</td>
-              <td class="col-sector">Consumer Discretionary</td>
-              <td class="col-etf mono">XLY</td>
-              <td class="col-score mono">35</td>
-              <td class="col-rs mono">−4.8 pp</td>
-              <td class="col-loc mono">—</td>
-              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Consumer Discretionary · vs50d missing this week; location term = 0 · 50 + 3.2×(−4.8) = 34.64 → 35</td></tr>
-            <tr class="board-row" tabindex="0">
-              <td class="col-rank mono">11</td>
-              <td class="col-sector">Utilities</td>
-              <td class="col-etf mono">XLU</td>
-              <td class="col-score mono">31</td>
-              <td class="col-rs mono">−5.2 pp</td>
-              <td class="col-loc mono">−4.4% vs 50d</td>
-              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
-            </tr>
-            <tr class="board-detail"><td colspan="7">Utilities · laggard · no short: board is healthy (8/11 above 50d) · 50 + 3.2×(−5.2) + 0.6×(−4.4) = 30.72 → 31</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="footnote">XLP and XLY vs50d were not in the health table this week — location term = 0, not invented. Tap a row on mobile to expand.</p>
-    </section>
-
-    <section class="wrap section" id="method">
-      <div class="section-head">
-        <h2>No black box score</h2>
-        <p class="asof">Published formula · Friday close</p>
-      </div>
-      <p class="intro">The score is arithmetic. We do not print a 92 when the formula says otherwise.</p>
-      <p class="formula mono">score = clip(round(50 + 3.2×rs13w + 0.6×vs50d), 0, 100)</p>
-      <details class="method-more">
-        <summary>Worked example · XLV</summary>
-        <p class="mono">50 + (3.2 × 13.1) + (0.6 × 4.5) = 94.62 → 95</p>
-        <p>rs13w = closelook.net 63-session excess vs SPY, percentage points, price-only. vs50d = distance to 50-day SMA, thetrading.tools sector-health, same close. XLE: 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87.</p>
-      </details>
-    </section>
-
-    <section class="wrap section" id="why">
-      <div class="section-head">
-        <h2>Why sectors first?</h2>
-        <p class="asof">Market → Sector → Stock</p>
-      </div>
-      <p class="intro">A stock sits inside a sector. If the sector is not leading, the name is swimming upstream. Rank the 11 SPDRs first. Then look inside the leader. Then structure the trade.</p>
     </section>
 
     <section class="wrap section" id="research-card">
@@ -465,6 +401,102 @@
           </div>
         </article>
       </div>
+    </section>
+
+    <section class="wrap section" id="why">
+      <div class="section-head">
+        <h2>Why sectors first?</h2>
+        <p class="asof">Most traders start at the wrong end</p>
+      </div>
+      <p class="intro">MACRO → MARKET → SECTOR → STOCK → OPTION. A stock sits inside a sector. If the sector is a headwind, the name is swimming upstream. Rank the 11 SPDRs first. Then look inside the leader. Then structure the trade. This is not a free trading course.</p>
+      <p><a class="ghost-btn" href="why-sectors/">READ WHY SECTORS →</a></p>
+    </section>
+
+    <section class="wrap section" id="framework">
+      <div class="section-head">
+        <h2>The framework</h2>
+        <p class="asof">MARKET → STRUCTURE → SECTOR → STOCK → TRADE</p>
+      </div>
+      <p class="intro">Most products start at the stock. Sector Selector specializes in the sector layer — where relative strength is already concentrating — before a name or a strike is chosen.</p>
+      <ol class="falls">
+        <li>
+          <span class="fall-n mono">01</span>
+          <span class="fall-name">Market</span>
+          <span class="fall-why">Regime first</span>
+        </li>
+        <li>
+          <span class="fall-n mono">02</span>
+          <span class="fall-name">Structure</span>
+          <span class="fall-why">Positioning, not control</span>
+        </li>
+        <li class="on">
+          <span class="fall-n mono">03</span>
+          <span class="fall-name">Sector</span>
+          <span class="fall-why">Sector Selector</span>
+        </li>
+        <li>
+          <span class="fall-n mono">04</span>
+          <span class="fall-name">Stock</span>
+          <span class="fall-why">After the sector</span>
+        </li>
+        <li>
+          <span class="fall-n mono">05</span>
+          <span class="fall-name">Trade</span>
+          <span class="fall-why">Defined-risk only</span>
+        </li>
+      </ol>
+    </section>
+
+    <section class="wrap section" id="method">
+      <div class="section-head">
+        <h2>No black box score</h2>
+        <p class="asof">Published formula · Friday close</p>
+      </div>
+      <p class="intro">The V1 Sector Score is arithmetic. We do not print a 92 when the formula says otherwise. It ranks the Friday-close board. It is not a validated 30–60 day forecast. The 30–60 day outlook is the defined-risk structure horizon (30–60 DTE), not a claim that 13-week relative strength predicts the next month.</p>
+      <p class="formula mono">score = clip(round(50 + 3.2×rs13w + 0.6×vs50d), 0, 100)</p>
+      <p class="intro">Rotation Score (0–100): COMING SOON. The field is reserved. We do not invent a second score, and we do not relabel 13-week RS as a Rotation Score.</p>
+      <details class="method-more">
+        <summary>Worked example · XLV</summary>
+        <p class="mono">50 + (3.2 × 13.1) + (0.6 × 4.5) = 94.62 → 95</p>
+        <p>rs13w = closelook.net 63-session excess vs SPY, percentage points, price-only. vs50d = distance to 50-day SMA, thetrading.tools sector-health, same close. XLE: 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87.</p>
+      </details>
+    </section>
+
+    <section class="wrap section" id="history-link">
+      <div class="section-head">
+        <h2>Historical rankings</h2>
+        <p class="asof">Append-only · first date 28 Aug 2026</p>
+      </div>
+      <p class="intro">The public board is now stored as dated JSON. This is the first snapshot. Week and month compares will unlock when a second date is published.</p>
+      <p><a class="ghost-btn" href="rankings/">OPEN THE RANKINGS DATABASE →</a></p>
+    </section>
+
+    <section class="wrap section" id="pro-teaser">
+      <div class="section-head">
+        <h2>80+ research · prototype</h2>
+        <p class="asof">Not a live signal</p>
+      </div>
+      <p class="sim-banner demo-stamp">DEMO / SAMPLE — NOT A LIVE SIGNAL</p>
+      <p class="intro">When the V1 Sector Score crosses 80, Pro is where the homework is supposed to live. That product is a prototype. Billing is not enabled. 80+ is a research threshold, not a win rate.</p>
+      <article class="setup-card eighty-teaser">
+        <p class="dl-label">Free teaser</p>
+        <p class="eighty-badge">80+</p>
+        <dl class="locked-dl">
+          <div><dt>Sector</dt><dd>Health Care</dd></div>
+          <div><dt>Score</dt><dd class="mono mint">95</dd></div>
+          <div><dt>Direction</dt><dd>Bullish</dd></div>
+          <div><dt>Ticker</dt><dd class="redact">████</dd></div>
+          <div><dt>Strategy</dt><dd class="redact">████</dd></div>
+          <div><dt>Expiration</dt><dd class="redact">████</dd></div>
+          <div><dt>Strikes</dt><dd class="redact">████</dd></div>
+          <div><dt>Entry</dt><dd class="redact">████</dd></div>
+        </dl>
+        <details class="eighty-meaning">
+          <summary>What does 80+ mean?</summary>
+          <p>80+ is a high-conviction research threshold on the V1 Sector Score. It is not an 80% win rate and not an 80% probability of profit.</p>
+        </details>
+        <a class="cta-btn" href="pro/">UNLOCK THE 80+ OPPORTUNITY →</a>
+      </article>
     </section>
 
     <section class="wrap section" id="blotter">
@@ -564,6 +596,9 @@
       <a class="cta-btn" href="#capture">UNLOCK THIS MONTH'S PLAN →</a>
       <p class="secondary-links">
         <a href="#map">VIEW THE SECTOR MAP →</a>
+        <a href="rankings/">HISTORICAL RANKINGS →</a>
+        <a href="why-sectors/">WHY SECTORS →</a>
+        <a href="pro/">PRO PROTOTYPE →</a>
         <a href="research/">READ THE RESEARCH →</a>
         <a href="track-record/">VIEW TRACK RECORD →</a>
         <a href="#method">LEARN THE FRAMEWORK →</a>
@@ -599,6 +634,10 @@
       <span class="mono">sectorselector.ai · 28 Aug 2026 close</span>
     </div>
   </footer>
+
+  <div class="sticky-cta" id="sticky-cta">
+    <a class="cta-btn" id="sticky-cta-btn" href="#capture">UNLOCK THIS MONTH'S #1 SETUP →</a>
+  </div>
 
   <script src="app.js"></script>
 </body>

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sectorselector.ai/data/eighty-plus/schema.json",
+  "title": "80+ research history",
+  "description": "Append-only. Never rewrite a prior entry. Demo rows stay kind=demo and live=false. 80+ is a V1 Sector Score threshold, not a win rate and not a probability of profit.",
+  "type": "object",
+  "required": ["schemaVersion", "appendOnly", "threshold", "entries"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "appendOnly": { "type": "boolean", "const": true },
+    "threshold": {
+      "type": "object",
+      "properties": {
+        "score": { "type": "integer", "const": 80 },
+        "on": { "type": "string", "const": "v1-sector-score" },
+        "disclaimer": { "type": "string" }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "live", "label", "asOf", "sector", "score"],
+        "properties": {
+          "id": { "type": "string" },
+          "kind": { "type": "string", "enum": ["demo", "live"] },
+          "live": { "type": "boolean" },
+          "label": { "type": "string" },
+          "asOf": { "type": "string" },
+          "asOfLabel": { "type": "string" },
+          "sector": { "type": "string" },
+          "ticker": { "type": ["string", "null"] },
+          "score": { "type": ["integer", "null"] },
+          "scoreKind": { "type": "string" },
+          "rotationScore": { "type": ["number", "null"] },
+          "direction": { "type": ["string", "null"] },
+          "underlying": { "type": ["string", "null"] },
+          "strategy": { "type": ["string", "null"] },
+          "expiration": { "type": ["string", "null"] },
+          "strikes": { "type": ["string", "null"] },
+          "maxDebit": { "type": ["number", "null"] },
+          "maxRisk": { "type": ["number", "null"] },
+          "management": { "type": ["string", "null"] },
+          "invalidation": { "type": ["string", "null"] },
+          "catalyst": { "type": ["string", "null"] },
+          "horizon": { "type": ["string", "null"] },
+          "why80": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "awaiting": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

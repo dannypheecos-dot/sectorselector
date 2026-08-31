@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "writePolicy": "append-only: add a new YYYY-MM-DD.json and list it here. NEVER overwrite a prior date file.",
+  "current": "2026-08-28",
+  "currentLabel": "Friday 28 Aug 2026 close",
+  "dates": [
+    {
+      "date": "2026-08-28",
+      "label": "Friday 28 Aug 2026 close",
+      "file": "2026-08-28.json"
+    }
+  ],
+  "ranges": {
+    "CURRENT": { "ready": true },
+    "1W": { "ready": false, "reason": "No prior snapshot yet." },
+    "1M": { "ready": false, "reason": "No prior snapshot yet." },
+    "3M": { "ready": false, "reason": "No prior snapshot yet." },
+    "CUSTOM": { "ready": false, "reason": "Only 2026-08-28 is stored. Custom compare needs two dates." }
+  }
+}

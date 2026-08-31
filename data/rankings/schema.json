@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sectorselector.ai/data/rankings/schema.json",
+  "title": "Sector Selector daily ranking snapshot",
+  "description": "Append-only Friday-close (or later daily) board. NEVER overwrite a prior YYYY-MM-DD.json. V1 Sector Score is the public formula. Rotation Score is reserved — do not invent values.",
+  "type": "object",
+  "required": ["schemaVersion", "modelVersion", "date", "asOfLabel", "immutable", "formula", "sectors"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "modelVersion": {
+      "type": "string",
+      "description": "Scoring model id. v1-sector-score is the public clip/round formula."
+    },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "asOfLabel": { "type": "string" },
+    "immutable": { "type": "boolean", "const": true },
+    "formula": {
+      "type": "object",
+      "required": ["id", "expression"],
+      "properties": {
+        "id": { "type": "string" },
+        "expression": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "rotationScore": {
+      "type": "object",
+      "description": "Architecture only. status must stay COMING SOON until a validated model ships. Never copy rs13w into this field.",
+      "properties": {
+        "status": { "type": "string", "const": "COMING SOON" },
+        "scale": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "sectors": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "required": ["rank", "ticker", "name", "score", "status", "rs13w"],
+        "properties": {
+          "rank": { "type": "integer", "minimum": 1, "maximum": 11 },
+          "ticker": { "type": "string" },
+          "name": { "type": "string" },
+          "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "raw": { "type": ["number", "null"] },
+          "status": { "type": "string" },
+          "rs13w": { "type": "number", "description": "13-week excess vs SPY, percentage points, price-only." },
+          "vs50d": { "type": ["number", "null"], "description": "Percent distance to 50-day SMA. null + vs50dMissing means location term = 0." },
+          "vs50dMissing": { "type": "boolean" },
+          "vs200d": { "type": ["number", "null"], "description": "Percent distance to 200-day SMA. Architected for later; not in the V1 formula." },
+          "rotationScore": { "type": ["number", "null"], "description": "Must be null while Rotation Score is COMING SOON." },
+          "change": { "type": ["integer", "null"], "description": "Rank delta vs a prior snapshot. null on the first stored day — never invent arrows." },
+          "trend": { "type": ["string", "null"], "description": "Improving | Stable | Deteriorating. Only when two dates exist." },
+          "hold": { "type": "boolean", "description": "Confirmed hold — not a new ticket." },
+          "note": { "type": "string" }
+        }
+      }
+    }
+  }
+}
