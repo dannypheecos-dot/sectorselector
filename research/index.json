@@ -1,8 +1,14 @@
 {
-  "asOf": "2026-08-28",
+  "asOf": "2026-08-30",
   "desk": "Cos Analyst",
   "model": "X is the tease. Saveable notes live here. Not every post becomes an article.",
   "articles": [
+    {
+      "slug": "hormuz-monday.html",
+      "date": "2026-08-30",
+      "title": "Hormuz is kinetic again. That is not a Monday ticket.",
+      "dek": "Sunday 30 Aug ~5:00 PM PT: NQ ~29,320, WTI ~$84.59. US strike on Larak Island. Friday map unchanged. Not a ticket. Simulated."
+    },
     {
       "slug": "spy-opex-rolloff.html",
       "date": "2026-08-28",
