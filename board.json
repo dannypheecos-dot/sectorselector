@@ -199,7 +199,7 @@
   ],
   "blotter": {
     "badge": "SIMULATED RESULTS — NOT LIVE MONEY — NOT ADVICE",
-    "caption": "Healthcare is #1 on 13-week RS and location. Structure is a 30–60 DTE debit call spread. Premium is the Monday open snapshot — not printed, not invented.",
+    "caption": "Healthcare is #1 on 13-week RS and location. XLV Oct 16 170/175 debit call spread. Limit debit $2.43 or better (mid $2.26). SIMULATED RESEARCH. OPEN — watching, not a simulated fill. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026.",
     "ledger": "blotter.json",
     "tickets": [
       {
@@ -208,15 +208,26 @@
         "ticker": "XLV",
         "name": "Health Care",
         "structure": "Debit call spread, 30–60 DTE",
-        "geometry": "Long ATM-ish call / short call ~3–5% OTM. Width 2–4. Illustrative geometry, not a quote.",
-        "debit": null,
-        "debitLabel": "Not published — Monday open snapshot. We do not invent premiums.",
-        "maxLoss": "The debit paid",
-        "dte": "30–60",
+        "geometry": "BUY 170 Call / SELL 175 Call. Width $5.00. Oct 16, 2026 (46 DTE).",
+        "expiration": "Oct 16, 2026",
+        "longStrike": 170,
+        "shortStrike": 175,
+        "width": 5.00,
+        "debit": 2.43,
+        "debitMid": 2.26,
+        "debitLabel": "$2.43 or better",
+        "maxRisk": 243,
+        "maxValue": 500,
+        "maxProfit": 257,
+        "maxLoss": "$243 / 1-lot",
+        "dte": 46,
         "status": "open",
         "result": null,
         "resultLabel": "—",
-        "notes": "Monday open snapshot for strikes. We do not invent premiums. Invalidation: drops out of top 3 on 13w RS vs SPY."
+        "snapshot": "2026-08-31 13:26 ET",
+        "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43",
+        "source": "TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026",
+        "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Invalidation: drops out of top 3 on 13w RS vs SPY. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
       }
     ]
   }

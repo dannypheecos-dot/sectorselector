@@ -774,10 +774,10 @@ body.unlocked .trade-card { display: none; }
 }
 .blotter th,
 .blotter td {
-  padding: 0.7rem 0.75rem;
+  padding: 0.65rem 0.5rem;
   text-align: left;
   border-bottom: 1px solid var(--line);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 .blotter th {
   font-family: var(--mono);
@@ -794,6 +794,16 @@ body.unlocked .trade-card { display: none; }
 .status-closed { color: var(--off); font-family: var(--mono); }
 .status-skip { color: var(--muted); font-family: var(--mono); letter-spacing: 0.08em; }
 .debit-pending { color: var(--muted); }
+.blotter .mono { white-space: nowrap; }
+
+.broker-line {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--off);
+  letter-spacing: 0.01em;
+  margin: 0.65rem 0 0;
+  overflow-wrap: anywhere;
+}
 
 .sim-mini {
   font-family: var(--mono);
