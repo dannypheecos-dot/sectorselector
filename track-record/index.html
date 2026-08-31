@@ -68,7 +68,7 @@
       <p class="kicker">Live testing · not a win-rate ad</p>
       <h1>Simulated trade history</h1>
       <p class="intro" id="record-disclosure">SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. Losers stay on the table. Weeks with no setup publish as no ticket.</p>
-      <p class="lede">Institutional traders often call this a trade blotter. Public paper blotter of Sector Selector Plays. Ticker, structure, and status are on the table. Strikes stay unpublished until a Monday open snapshot. We do not invent premiums, P&amp;L, or a win rate.</p>
+      <p class="lede">Institutional traders often call this a trade blotter. Public paper blotter of Sector Selector Plays. Ticker, structure, expiration, strikes, and the published limit are on the table. Future unpublished Mondays stay blank until order details publish Monday after open. We do not invent premiums, P&amp;L, or a win rate.</p>
       <ul class="record-rules">
         <li>SIMULATED RESULTS NOT LIVE MONEY.</li>
         <li>No advertised win rate until 20 closed paper tickets.</li>
@@ -96,7 +96,7 @@
         <h2>Simulated trade history</h2>
         <p class="asof" id="record-asof">Paper blotter · dated · losers stay</p>
       </div>
-      <p class="intro">Rows load from the public ledger. Later Monday-open fills update the file — this page is not rewritten by hand. If debit is null, the cell says Monday open snapshot. Simulated. Not advice.</p>
+      <p class="intro">Rows load from the public ledger. Later Monday-open cards update the file — this page is not rewritten by hand. If debit is null, the cell says ORDER DETAILS PUBLISH MONDAY AFTER OPEN. Simulated. Not advice.</p>
       <div class="blotter-wrap">
         <table class="blotter">
           <thead>
@@ -104,10 +104,13 @@
               <th>Date</th>
               <th>ETF</th>
               <th>Structure</th>
+              <th>Expiration</th>
+              <th>Long</th>
+              <th>Short</th>
+              <th>Entry Debit</th>
               <th>Status</th>
-              <th>Entry</th>
               <th>Exit</th>
-              <th>Result</th>
+              <th>P&amp;L</th>
             </tr>
           </thead>
           <tbody id="track-blotter-body">
@@ -115,15 +118,18 @@
               <td class="mono">2026-08-30</td>
               <td class="mono">XLV</td>
               <td>Debit call spread, 30–60 DTE</td>
+              <td class="mono">Oct 16, 2026</td>
+              <td class="mono">170</td>
+              <td class="mono">175</td>
+              <td class="mono">$2.43</td>
               <td><span class="status-open">OPEN</span></td>
-              <td class="debit-pending">Monday open snapshot</td>
               <td>—</td>
               <td><span class="sim-mini">SIMULATED</span> —</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="footnote" id="record-notes">Debit not published — Monday open snapshot. We do not invent premiums. No P&amp;L on an open ticket. Strikes are not printed.</p>
+      <p class="footnote" id="record-notes">XLV Oct 16 170/175. Limit $2.43 or better (mid $2.26). OPEN — watching, not a simulated fill. No P&amp;L on an open ticket. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026. SIMULATED RESEARCH.</p>
     </section>
 
     <section class="wrap section page-cta" id="capture">

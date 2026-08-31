@@ -106,12 +106,30 @@
     return status === "no-ticket" || t.type === "no-ticket";
   }
 
+  function moneyDebit(value) {
+    var n = typeof value === "number" ? value : Number(value);
+    if (isNaN(n)) return String(value);
+    return "$" + n.toFixed(2);
+  }
+
   function entryDisplay(t) {
     if (isNoTicket(t)) return "—";
     if (t.debit == null || t.debit === "") {
-      return t.debitLabel || "Monday open snapshot";
+      return t.debitLabel || "ORDER DETAILS PUBLISH MONDAY AFTER OPEN";
     }
-    return String(t.debit);
+    return moneyDebit(t.debit);
+  }
+
+  function expirationDisplay(t) {
+    if (isNoTicket(t)) return "—";
+    return t.expiration || t.expirationLabel || "—";
+  }
+
+  function strikeDisplay(t, key) {
+    if (isNoTicket(t)) return "—";
+    var v = t[key];
+    if (v == null || v === "") return "—";
+    return String(v);
   }
 
   function exitDisplay(t) {
@@ -120,8 +138,13 @@
   }
 
   function resultDisplay(t) {
+    if (String(t.status || "").toLowerCase() === "open") return "—";
     if (t.result == null || t.result === "") return "—";
     return String(t.result);
+  }
+
+  function isDebitPending(t) {
+    return !isNoTicket(t) && (t.debit == null || t.debit === "");
   }
 
   function addCell(tr, text, className) {
@@ -151,6 +174,25 @@
     tr.appendChild(td);
   }
 
+  function fillBlotterRow(tr, t, opts) {
+    var redactTicker = opts && opts.redactTicker;
+    var ticker = isNoTicket(t) ? "—" : (redactTicker ? publicTicker(t) : (t.ticker || "—"));
+    var structure = isNoTicket(t) ? (t.structure || "No ticket") : (t.structure || "—");
+    addCell(tr, t.date || "—", "mono");
+    var tickerTd = addCell(tr, ticker, "mono");
+    if (redactTicker && !isUnlocked() && !isNoTicket(t)) {
+      tickerTd.className = "redact blotter-ticker mono";
+    }
+    addCell(tr, structure);
+    addCell(tr, expirationDisplay(t), "mono");
+    addCell(tr, strikeDisplay(t, "longStrike"), "mono");
+    addCell(tr, strikeDisplay(t, "shortStrike"), "mono");
+    addCell(tr, entryDisplay(t), isDebitPending(t) ? "debit-pending" : "mono");
+    addStatusCell(tr, t.status);
+    addCell(tr, exitDisplay(t));
+    addResultCell(tr, resultDisplay(t));
+  }
+
   function renderHomeBlotter(tickets) {
     var body = $("blotter-body");
     if (!body || !tickets || !tickets.length) return;
@@ -158,18 +200,7 @@
     body.textContent = "";
     tickets.forEach(function (t) {
       var tr = document.createElement("tr");
-      var ticker = isNoTicket(t) ? "—" : publicTicker(t);
-      var structure = isNoTicket(t) ? (t.structure || "No ticket") : (t.structure || "—");
-      addCell(tr, t.date || "—", "mono");
-      var tickerTd = addCell(tr, ticker, "mono");
-      if (!isUnlocked() && !isNoTicket(t)) {
-        tickerTd.className = "redact blotter-ticker mono";
-      }
-      addCell(tr, structure);
-      addStatusCell(tr, t.status);
-      addCell(tr, entryDisplay(t));
-      addCell(tr, exitDisplay(t));
-      addResultCell(tr, resultDisplay(t));
+      fillBlotterRow(tr, t, { redactTicker: true });
       body.appendChild(tr);
     });
   }
@@ -181,7 +212,7 @@
     if (!tickets || !tickets.length) {
       var empty = document.createElement("tr");
       var td = document.createElement("td");
-      td.colSpan = 7;
+      td.colSpan = 10;
       td.textContent = "No tickets published.";
       empty.appendChild(td);
       body.appendChild(empty);
@@ -189,15 +220,7 @@
     }
     tickets.forEach(function (t) {
       var tr = document.createElement("tr");
-      var noTicket = isNoTicket(t);
-      addCell(tr, t.date || "—", "mono");
-      addCell(tr, noTicket ? "—" : (t.ticker || "—"), "mono");
-      addCell(tr, noTicket ? (t.structure || "No ticket") : (t.structure || "—"));
-      addStatusCell(tr, t.status);
-      var entry = entryDisplay(t);
-      addCell(tr, entry, entry === "Monday open snapshot" ? "debit-pending" : "");
-      addCell(tr, exitDisplay(t));
-      addResultCell(tr, resultDisplay(t));
+      fillBlotterRow(tr, t, { redactTicker: false });
       body.appendChild(tr);
     });
   }
@@ -268,17 +291,22 @@
               date: "2026-08-30",
               ticker: "XLV",
               structure: "Debit call spread, 30–60 DTE",
+              expiration: "Oct 16, 2026",
+              longStrike: 170,
+              shortStrike: 175,
               status: "open",
-              debit: null,
+              debit: 2.43,
+              debitMid: 2.26,
+              debitLabel: "$2.43 or better",
               result: null,
-              notes: "Monday open snapshot for strikes. We do not invent premiums."
+              notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Invalidation: drops out of top 3 on 13w RS vs SPY."
             }
           ]);
           renderRecordStats({
-            asOfLabel: "30 Aug 2026",
+            asOfLabel: "31 Aug 2026",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open", notes: "Monday open snapshot for strikes. We do not invent premiums." }]
+            tickets: [{ status: "open", notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Invalidation: drops out of top 3 on 13w RS vs SPY." }]
           });
         }
       });

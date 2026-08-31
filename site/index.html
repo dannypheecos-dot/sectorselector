@@ -235,7 +235,7 @@
             <p class="emailed">This also just emailed you.</p>
             <div class="card-row">
               <p class="dl-label">Entry</p>
-              <p>Debit call spread, 30–60 DTE. Long ATM-ish call, short call ~3–5% OTM, width 2–4. Strikes = Monday open snapshot. We do not invent premiums.</p>
+              <p>XLV Oct 16, 2026 (46 DTE) 170/175 debit call spread. Published limit debit $2.43 or better (mid $2.26). Do not chase above $2.43. BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43. SIMULATED RESEARCH. OPEN — watching, not a simulated fill. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026.</p>
             </div>
             <div class="card-row">
               <p class="dl-label">Exit</p>
@@ -245,7 +245,7 @@
               <p class="dl-label">Invalidation</p>
               <p>Drops out of the top 3 on 13-week RS vs SPY.</p>
             </div>
-            <p class="max">Max loss = the debit paid. Simulated. Not advice.</p>
+            <p class="max">Max risk $243 / 1-lot. Max value $500. Max profit $257. SIMULATED RESEARCH.</p>
           </div>
 
           <form class="capture gate-form" id="gate-form" action="https://app.kit.com/forms/9861437/subscriptions" method="post">
@@ -270,16 +270,21 @@
         <h2>Published research</h2>
         <p class="asof">Paper blotter · every idea, dated · losers stay</p>
       </div>
-      <p class="intro">Open tickets show structure, not a mark. Closed rows appear only after a real paper close. No win rate until twenty closed tickets. Simulated. Not advice.</p>
+      <p class="intro">Open tickets show the published limit, not a fill or a mark. Closed rows appear only after a real paper close. No win rate until twenty closed tickets. Simulated. Not advice.</p>
       <div class="blotter-wrap">
         <table class="blotter">
           <thead>
             <tr>
               <th>Date</th>
-              <th>Ticker</th>
+              <th>ETF</th>
               <th>Structure</th>
+              <th>Expiration</th>
+              <th>Long</th>
+              <th>Short</th>
+              <th>Entry Debit</th>
               <th>Status</th>
-              <th>Result</th>
+              <th>Exit</th>
+              <th>P&amp;L</th>
             </tr>
           </thead>
           <tbody id="blotter-body">
@@ -287,13 +292,18 @@
               <td>2026-08-30</td>
               <td>XLV</td>
               <td>Debit call spread, 30–60 DTE</td>
+              <td>Oct 16, 2026</td>
+              <td>170</td>
+              <td>175</td>
+              <td>$2.43</td>
               <td><span class="status-open">OPEN</span></td>
+              <td>—</td>
               <td>—</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="footnote">Debit not published — Monday open snapshot. We do not invent premiums. No P&amp;L on an open ticket.</p>
+      <p class="footnote">XLV Oct 16 170/175. Limit $2.43 or better (mid $2.26). OPEN — watching, not a simulated fill. No P&amp;L on an open ticket. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026. SIMULATED RESEARCH.</p>
     </section>
 
     <section class="wrap section" id="rule">

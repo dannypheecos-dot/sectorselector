@@ -770,6 +770,7 @@ body.unlocked .trade-card { display: none; }
 }
 .blotter {
   width: 100%;
+  min-width: 68rem;
   border-collapse: collapse;
 }
 .blotter th,
@@ -793,7 +794,16 @@ body.unlocked .trade-card { display: none; }
 .status-open { color: var(--mint); font-family: var(--mono); letter-spacing: 0.08em; }
 .status-closed { color: var(--off); font-family: var(--mono); }
 .status-skip { color: var(--muted); font-family: var(--mono); letter-spacing: 0.08em; }
-.debit-pending { color: var(--muted); }
+.debit-pending { color: var(--muted); max-width: 14rem; }
+
+.broker-line {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--off);
+  letter-spacing: 0.01em;
+  margin: 0.65rem 0 0;
+  overflow-wrap: anywhere;
+}
 
 .sim-mini {
   font-family: var(--mono);
