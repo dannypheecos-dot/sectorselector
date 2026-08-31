@@ -1054,6 +1054,19 @@ body.unlocked .trade-card { display: none; }
   font-size: 0.92rem;
 }
 
+.note-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 0.85rem;
+  margin: 1.15rem 0 0;
+}
+.note-cta .cta-btn,
+.note-cta .ghost-btn {
+  width: auto;
+  margin: 0;
+}
+
 .page-cta { padding-top: 0.4rem; }
 .ss-banner { display: none; }
 
