@@ -1,21 +1,11 @@
-/* Sector Selector — formsubmit capture + unlock + chrome. */
+/* Sector Selector — Kit capture + unlock + chrome. */
 (function () {
   "use strict";
 
-  var POST_URL = "https://formsubmit.co/ajax/2ae01d62a7a0f6637dfe47cc1c673d1c";
-  var SUBJECT = "Sector Selector monthly list";
   var UNLOCK_KEY = "sectorselector.v2.unlocked";
 
   function $(id) {
     return document.getElementById(id);
-  }
-
-  function validEmail(s) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
-  }
-
-  function validPhone(s) {
-    return String(s || "").replace(/\D/g, "").length >= 7;
   }
 
   function setMsg(el, kind, text) {
@@ -29,16 +19,8 @@
     return v || fallback;
   }
 
-  function siteRoot() {
-    return dataAttr("data-root", "./");
-  }
-
   function blotterPath() {
     return dataAttr("data-blotter", "blotter.json");
-  }
-
-  function homeThanksUrl() {
-    return siteRoot() + "?thanks=1#trade";
   }
 
   var blotterTickets = null;
@@ -86,86 +68,16 @@
     return q.get("thanks") === "1";
   }
 
-  function payload(form, email, phone, source) {
-    var body = new FormData();
-    body.append("email", email);
-    body.append("phone", phone);
-    body.append("_subject", SUBJECT);
-    body.append("_captcha", "false");
-    body.append("_template", "table");
-    body.append("source", source || "sectorselector.ai");
-    var auto = form && form.querySelector("input[name='_autoresponse']");
-    if (auto && auto.value) body.append("_autoresponse", auto.value);
-    return body;
-  }
-
-  function send(form, email, phone, source) {
-    return fetch(POST_URL, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: payload(form, email, phone, source)
-    }).then(function (res) {
-      if (!res.ok) throw new Error("formsubmit " + res.status);
-      return res.json().catch(function () {
-        return { success: true };
-      });
-    });
-  }
-
-  function afterSubmit() {
-    persistUnlock();
-    var trade = $("trade");
-    if (trade) {
-      revealTrade();
-      if (window.location.hash !== "#trade") {
-        trade.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-      return;
-    }
-    window.location.href = homeThanksUrl();
-  }
-
-  function bind(form, emailInput, msg) {
-    if (!form || !emailInput) return;
+  function bindHoneypot(form) {
+    if (!form) return;
     form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var email = (emailInput.value || "").trim();
-      var phoneInput = form.querySelector("input[name='phone']");
-      var phone = phoneInput ? (phoneInput.value || "").trim() : "";
       var honey = form.querySelector(".honey");
-      if (honey && honey.value) return;
-      if (!validEmail(email)) {
-        setMsg(msg, "err", "Need a real email.");
-        emailInput.focus();
-        return;
-      }
-      if (!validPhone(phone)) {
-        setMsg(msg, "err", "Need a real mobile number.");
-        if (phoneInput) phoneInput.focus();
-        return;
-      }
-      var btn = form.querySelector("button[type='submit']");
-      if (btn) btn.disabled = true;
-      setMsg(msg, "", "Sending…");
-      var source = (form.querySelector("input[name='source']") || {}).value || "sectorselector.ai";
-      send(form, email, phone, source)
-        .then(function () {
-          afterSubmit();
-        })
-        .catch(function () {
-          if (btn) btn.disabled = false;
-          setMsg(msg, "err", "Could not reach the list host. Trying the backup post…");
-          form.submit();
-        });
+      if (honey && honey.value) e.preventDefault();
     });
   }
 
   function bindAllCaptures() {
-    document.querySelectorAll("form.capture").forEach(function (form) {
-      var email = form.querySelector("input[name='email']");
-      var msgId = form.id ? form.id.replace(/-form$/, "-msg") : "";
-      bind(form, email, msgId ? $(msgId) : null);
-    });
+    document.querySelectorAll("form.capture").forEach(bindHoneypot);
   }
 
   function statusClass(status) {
