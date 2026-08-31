@@ -1,0 +1,12 @@
+{
+  "prototype": true,
+  "billingEnabled": false,
+  "priceMonthly": 97,
+  "currency": "USD",
+  "headline": "WHEN THE SCORE CROSSES 80, WE DO THE HOMEWORK.",
+  "note": "Configurable price constant only. Do not enable Stripe, checkout charges, or a member paywall. Cancellation and risk copy are inert on this prototype.",
+  "checkout": {
+    "mode": "mock",
+    "canTakeMoney": false
+  }
+}

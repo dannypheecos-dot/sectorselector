@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Historical rankings — Sector Selector</title>
+  <meta name="description" content="Append-only 11-sector rankings database. Current snapshot as of Friday 28 Aug 2026 close. Simulated research, not advice.">
+  <meta name="theme-color" content="#101214">
+  <meta property="og:title" content="CURRENT SECTOR RANKINGS — historical database">
+  <meta property="og:description" content="All 11 SPDR sectors. First stored day: Friday 28 Aug 2026 close. No invented history.">
+  <meta property="og:url" content="https://sectorselector.ai/rankings/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
+  <meta property="og:image:alt" content="CURRENT SECTOR RANKINGS — Sector Selector">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CURRENT SECTOR RANKINGS — historical database">
+  <meta name="twitter:description" content="All 11 SPDR sectors. First stored day: Friday 28 Aug 2026 close. No invented history.">
+  <meta name="twitter:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
+  <link rel="icon" href="../brand/fox-mark-arrow.png" type="image/png">
+  <link rel="apple-touch-icon" href="../brand/fox-mark-arrow.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="rankings" data-root="../">
+  <a class="skip" href="#board">Skip to rankings</a>
+
+  <header class="mast">
+    <div class="wrap mast-bar">
+      <a class="wordmark" href="../" aria-label="Sector Selector — A CosAnalyst Research Project">
+        <svg class="mast-compass" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="29" fill="#121514" stroke="#7cffb2" stroke-width="2"/>
+          <circle cx="32" cy="32" r="18" fill="none" stroke="#7cffb2" stroke-opacity="0.35" stroke-width="1"/>
+          <path fill="#7cffb2" d="M32 5l3.2 16.2-3.2-1.6-3.2 1.6z"/>
+          <path fill="#7cffb2" d="M32 59l-3.2-16.2 3.2 1.6 3.2-1.6z"/>
+          <path fill="#7cffb2" d="M59 32l-16.2 3.2 1.6-3.2-1.6-3.2z"/>
+          <path fill="#7cffb2" d="M5 32l16.2-3.2-1.6 3.2 1.6 3.2z"/>
+          <path fill="#e8ebe9" d="M32 16l7 16-7-2.2L25 32z"/>
+          <path fill="#3a4340" d="M32 48l-7-16 7 2.2L39 32z"/>
+          <circle cx="32" cy="32" r="3.2" fill="#7cffb2"/>
+        </svg>
+        <span class="mast-copy">
+          <span class="mast-name"><span class="mast-sector">SECTOR</span> SELECTOR</span>
+          <span class="mast-sub">A CosAnalyst Research Project</span>
+        </span>
+      </a>
+      <div class="mast-tools">
+        <span class="sim-pill">
+          <button type="button" class="sim-pill-btn" aria-describedby="sim-tip-rankings">SIMULATED RESEARCH ⓘ</button>
+          <span class="sim-tip" id="sim-tip-rankings" role="tooltip">Setups are tracked on paper using published rules. No real-money performance is claimed.</span>
+        </span>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
+      <nav class="mast-nav" id="site-nav" aria-label="Primary">
+        <a href="./" aria-current="page">Rankings</a>
+        <a href="../why-sectors/">Why</a>
+        <a href="../research/">Research</a>
+        <a href="../track-record/">Track Record</a>
+        <a href="../pro/">Pro</a>
+        <a href="../#capture" class="nav-cta">Get the Plan</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap page-hero" id="top">
+      <p class="kicker">SECTOR SELECTOR / 30–60 DAY OUTLOOK</p>
+      <h1>CURRENT SECTOR RANKINGS</h1>
+      <p class="lede">Historical database of the 11 SPDR sectors. Snapshots are append-only JSON. We do not invent a prior week to fill the range controls.</p>
+      <p class="asof mono">As of Friday 28 Aug 2026 close</p>
+    </section>
+
+    <section class="wrap section" id="board">
+      <div class="section-head">
+        <h2>All 11 sectors</h2>
+        <p class="asof">V1 Sector Score · Rotation Score COMING SOON</p>
+      </div>
+      <div class="range-bar" role="group" aria-label="History range">
+        <button type="button" data-range="CURRENT" aria-pressed="true">CURRENT</button>
+        <button type="button" data-range="1W" disabled aria-disabled="true" title="No prior snapshot yet.">1W</button>
+        <button type="button" data-range="1M" disabled aria-disabled="true" title="No prior snapshot yet.">1M</button>
+        <button type="button" data-range="3M" disabled aria-disabled="true" title="No prior snapshot yet.">3M</button>
+        <button type="button" data-range="CUSTOM" disabled aria-disabled="true" title="Custom compare needs two stored dates.">CUSTOM</button>
+      </div>
+      <p class="range-note" id="rankings-range-note">First snapshot. Improving / Stable / Deteriorating will appear when a second date is stored.</p>
+
+      <div class="board-wrap">
+        <table class="board">
+          <thead>
+            <tr>
+              <th class="col-rank">Rank</th>
+              <th class="col-sector">Sector</th>
+              <th class="col-score">Score</th>
+              <th class="col-state">Status</th>
+              <th class="col-chg">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">01</td>
+              <td class="col-sector">Health Care <span class="mono dim">XLV</span></td>
+              <td class="col-score mono">95</td>
+              <td class="col-state"><span class="state leader">LEADER</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Health Care · XLV · rs13w +13.1 · vs50d +4.5 · vs200d +10.5 · 50 + 3.2×13.1 + 0.6×4.5 = 94.62 → 95 · Rotation Score COMING SOON</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">02</td>
+              <td class="col-sector">Financials <span class="mono dim">XLF</span></td>
+              <td class="col-score mono">87</td>
+              <td class="col-state"><span class="state leader">LEADER</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Financials · XLF · rs13w +11.1 · vs50d +2.9 · 50 + 3.2×11.1 + 0.6×2.9 = 87.26 → 87</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">03</td>
+              <td class="col-sector">Energy <span class="mono dim">XLE</span></td>
+              <td class="col-score mono">87</td>
+              <td class="col-state"><span class="state confirmed">CONFIRMED</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Energy · XLE · CONFIRMED hold — not a new ticket · rs13w +10.2 · vs50d +7.8 · 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">04</td>
+              <td class="col-sector">Materials <span class="mono dim">XLB</span></td>
+              <td class="col-score mono">59</td>
+              <td class="col-state"><span class="state skip">SKIP</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Materials · XLB · rs13w +2.4 · vs50d +2.8 · 50 + 3.2×2.4 + 0.6×2.8 = 59.36 → 59</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">05</td>
+              <td class="col-sector">Consumer Staples <span class="mono dim">XLP</span></td>
+              <td class="col-score mono">56</td>
+              <td class="col-state"><span class="state neutral">NEUTRAL</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Consumer Staples · XLP · rs13w +1.8 · vs50d missing → location term 0 · 50 + 3.2×1.8 = 55.76 → 56</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">06</td>
+              <td class="col-sector">Industrials <span class="mono dim">XLI</span></td>
+              <td class="col-score mono">50</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Industrials · XLI · rs13w +0.6 · vs50d −2.6 · 50 + 3.2×0.6 + 0.6×(−2.6) = 50.36 → 50</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">07</td>
+              <td class="col-sector">Real Estate <span class="mono dim">XLRE</span></td>
+              <td class="col-score mono">49</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Real Estate · XLRE · rs13w 0.0 · vs50d −0.9 · 50 + 3.2×0.0 + 0.6×(−0.9) = 49.46 → 49</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">08</td>
+              <td class="col-sector">Communication Services <span class="mono dim">XLC</span></td>
+              <td class="col-score mono">39</td>
+              <td class="col-state"><span class="state watch">WATCH</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Communication Services · XLC · rs13w −4.0 · vs50d +2.6 · 50 + 3.2×(−4.0) + 0.6×2.6 = 38.76 → 39</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">09</td>
+              <td class="col-sector">Technology <span class="mono dim">XLK</span></td>
+              <td class="col-score mono">36</td>
+              <td class="col-state"><span class="state skip">SKIP</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Technology · XLK · rs13w −4.6 · vs50d +1.6 · 50 + 3.2×(−4.6) + 0.6×1.6 = 36.24 → 36</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">10</td>
+              <td class="col-sector">Consumer Discretionary <span class="mono dim">XLY</span></td>
+              <td class="col-score mono">35</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Consumer Discretionary · XLY · rs13w −4.8 · vs50d missing → location term 0 · 50 + 3.2×(−4.8) = 34.64 → 35</td></tr>
+            <tr class="board-row" tabindex="0">
+              <td class="col-rank mono">11</td>
+              <td class="col-sector">Utilities <span class="mono dim">XLU</span></td>
+              <td class="col-score mono">31</td>
+              <td class="col-state"><span class="state weakening">WEAKENING</span></td>
+              <td class="col-chg chg-none">—</td>
+            </tr>
+            <tr class="board-detail"><td colspan="5">Utilities · XLU · rs13w −5.2 · vs50d −4.4 · 50 + 3.2×(−5.2) + 0.6×(−4.4) = 30.72 → 31</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote">Stored at <span class="mono">data/rankings/2026-08-28.json</span>. That file is immutable. A later date gets a new file. V1 Sector Score is the public formula. Rotation Score is architected and empty. 13-week RS is a ranking input, not a validated 30–60 day forecast.</p>
+    </section>
+
+    <section class="wrap section" id="method">
+      <div class="section-head">
+        <h2>How the score is made</h2>
+        <p class="asof">Transparent · Friday close</p>
+      </div>
+      <p class="formula mono">score = clip(round(50 + 3.2×rs13w + 0.6×vs50d), 0, 100)</p>
+      <p class="intro">Missing vs50d (XLP, XLY this week) uses location term 0 — not an invented print. Improving / Stable / Deteriorating is withheld until two dates exist.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div>
+        <h2>Research disclosure</h2>
+        <p>Sector Selector / sectorselector.ai is a CosAnalyst research project and a publisher of market education and simulated research. CosAnalyst is an AI-assisted research desk. We are not a registered investment adviser, broker-dealer, or commodity trading advisor. Nothing on this site or in our emails is personalized financial advice or an offer to buy or sell any security or option.</p>
+      </div>
+      <div>
+        <h2>Risk</h2>
+        <p>Trading and options involve substantial risk of loss. Options can lose 100% of a debit. Past relative strength is not a forecast. Consult a licensed professional for your situation before putting real money at risk.</p>
+      </div>
+      <div>
+        <h2>Simulation</h2>
+        <p>Setups are tracked on paper using published rules. No real-money performance is claimed. Simulated results omit fills, slippage, and the experience of real loss.</p>
+      </div>
+    </div>
+    <div class="wrap colophon">
+      <span>SECTOR SELECTOR / A CosAnalyst Research Project</span>
+      <span class="mono">sectorselector.ai · rankings</span>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "appendOnly": true,
+  "writePolicy": "Push a new entry. NEVER rewrite, delete, or relabel a prior row.",
+  "threshold": {
+    "score": 80,
+    "on": "v1-sector-score",
+    "disclaimer": "80+ is a high-conviction research threshold on the V1 Sector Score. It is not an 80% win rate and not an 80% probability of profit."
+  },
+  "rotationScore": {
+    "status": "COMING SOON",
+    "note": "Do not invent a Rotation Score. Field stays null."
+  },
+  "entries": [
+    {
+      "id": "demo-2026-08-28-sample",
+      "kind": "demo",
+      "live": false,
+      "label": "DEMO / SAMPLE — NOT A LIVE SIGNAL",
+      "asOf": "2026-08-28",
+      "asOfLabel": "Friday 28 Aug 2026 close",
+      "sector": "Health Care",
+      "ticker": "XLV",
+      "score": 95,
+      "scoreKind": "v1-sector-score",
+      "rotationScore": null,
+      "direction": "Bullish",
+      "underlying": null,
+      "strategy": "Debit call spread",
+      "expiration": "Oct 16, 2026",
+      "strikes": "170/175",
+      "maxDebit": 2.43,
+      "maxRisk": 243,
+      "management": null,
+      "invalidation": "Drops out of the top 3 on 13-week relative strength vs SPY.",
+      "catalyst": null,
+      "horizon": "30–60 DTE",
+      "why80": "V1 Sector Score 95 is at or above 80. That is a high-conviction research threshold, not a win rate and not a probability of profit. This row is a labeled sample, not a live Pro signal.",
+      "timestamp": "Friday 28 Aug 2026 close",
+      "simulated": true,
+      "status": "DEMO",
+      "awaiting": ["rotationScore", "underlying", "management", "catalyst"]
+    }
+  ]
+}
