@@ -5,45 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Track Record — Sector Selector paper blotter</title>
   <meta name="description" content="Public paper blotter of Sector Selector Plays. Simulated results, not live money. No advertised win rate until 20 closed paper tickets. Publisher, not advice.">
-  <meta name="theme-color" content="#07090b">
+  <meta name="theme-color" content="#101214">
   <meta property="og:title" content="Track Record — paper blotter, not a win-rate ad.">
   <meta property="og:description" content="SIMULATED RESULTS NOT LIVE MONEY. Every Sector Selector play, dated. Losers stay. No win rate until 20 closed paper tickets.">
   <meta property="og:url" content="https://sectorselector.ai/track-record/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
+  <meta property="og:image:alt" content="Track Record — paper blotter, not a win-rate ad.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Track Record — paper blotter, not a win-rate ad.">
+  <meta name="twitter:description" content="SIMULATED RESULTS NOT LIVE MONEY. Every Sector Selector play, dated. Losers stay. No win rate until 20 closed paper tickets.">
+  <meta name="twitter:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
   <link rel="icon" href="../brand/fox-mark-arrow.png" type="image/png">
   <link rel="apple-touch-icon" href="../brand/fox-mark-arrow.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body data-page="track-record" data-root="../" data-blotter="../blotter.json">
   <a class="skip" href="#ledger">Skip to the blotter</a>
 
-  <header class="wrap mast">
-    <div class="mast-brand">
-      <a class="wordmark" href="../" aria-label="Sector Selector"><img class="mast-lockup" src="../brand/sector-selector-banner.png" width="1600" height="667" alt="Sector Selector — A CosAnalyst Research Project"></a>
-      <span class="sim-pill">Simulated</span>
+  <header class="mast">
+    <div class="wrap mast-bar">
+      <a class="wordmark" href="../" aria-label="Sector Selector — A CosAnalyst Research Project">
+        <img class="mast-lockup" src="../brand/sector-selector-banner.png" width="1600" height="667" alt="Sector Selector — A CosAnalyst Research Project">
+      </a>
+      <div class="mast-tools">
+        <span class="sim-pill">
+          <button type="button" class="sim-pill-btn" aria-describedby="sim-tip-track-record">SIMULATED RESEARCH</button>
+          <span class="sim-tip" id="sim-tip-track-record" role="tooltip">Setups are tracked on paper using published rules. No real-money performance is claimed.</span>
+        </span>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
+      <nav class="mast-nav" id="site-nav" aria-label="Primary">
+        <a href="../#map">Map</a>
+        <a href="../#method">Method</a>
+        <a href="../research/">Research</a>
+        <a href="./" aria-current="page">Track Record</a>
+        <a href="../#capture" class="nav-cta">Get the Plan</a>
+      </nav>
     </div>
-    <nav class="mast-meta" aria-label="Primary">
-      <a href="../#map">Map</a>
-      <a href="../#waterfall">Waterfall</a>
-      <a href="../research/">Research</a>
-      <a href="./" aria-current="page">Track Record</a>
-      <a class="mast-soon" href="../coming-soon/">Coming Soon</a>
-      <a class="mast-list" href="../#capture">List</a>
-    </nav>
   </header>
 
   <main>
-    <p class="wrap page-banner">Simulated research. Publisher, not an adviser. Not financial advice. Cos Analyst is an AI research desk.</p>
 
     <section class="wrap page-hero" id="top">
       <p class="kicker">Live testing · not a win-rate ad</p>
-      <h1>Track record<span class="caret" aria-hidden="true"></span></h1>
-      <p class="sim-banner" id="record-disclosure">SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. Losers stay on the table. Weeks with no setup publish as no ticket.</p>
-      <p class="lede">Public paper blotter of Sector Selector Plays. Ticker, structure, and status are on the table. Strikes stay unpublished until a Monday open snapshot. We do not invent premiums, P&amp;L, or a win rate.</p>
+      <h1>Simulated trade history</h1>
+      <p class="intro" id="record-disclosure">SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. Losers stay on the table. Weeks with no setup publish as no ticket.</p>
+      <p class="lede">Institutional traders often call this a trade blotter. Public paper blotter of Sector Selector Plays. Ticker, structure, and status are on the table. Strikes stay unpublished until a Monday open snapshot. We do not invent premiums, P&amp;L, or a win rate.</p>
       <ul class="record-rules">
         <li>SIMULATED RESULTS NOT LIVE MONEY.</li>
         <li>No advertised win rate until 20 closed paper tickets.</li>
@@ -77,21 +88,23 @@
           <thead>
             <tr>
               <th>Date</th>
-              <th>Ticker</th>
+              <th>ETF</th>
               <th>Structure</th>
               <th>Status</th>
-              <th>Debit</th>
+              <th>Entry</th>
+              <th>Exit</th>
               <th>Result</th>
             </tr>
           </thead>
           <tbody id="track-blotter-body">
             <tr>
-              <td>2026-08-30</td>
-              <td>XLV</td>
+              <td class="mono">2026-08-30</td>
+              <td class="mono">XLV</td>
               <td>Debit call spread, 30–60 DTE</td>
               <td><span class="status-open">OPEN</span></td>
               <td class="debit-pending">Monday open snapshot</td>
               <td>—</td>
+              <td><span class="sim-mini">SIMULATED</span> —</td>
             </tr>
           </tbody>
         </table>
@@ -118,32 +131,51 @@ EXIT: First of — drops out of the top 3 on Friday 13-week RS rank; time stop a
 
 INVALIDATION: Drops out of the top 3 on 13-week relative strength vs SPY.
 
-Friday-close emails follow with the 11-sector map. We may text later about product webinars — no texts today. Cos Analyst is an AI research desk. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
+Friday-close emails follow with the 11-sector map. We may text you about related training. CosAnalyst is an AI-assisted research desk. Not personalized financial advice. Options can expire worthless. Unsubscribe anytime.">
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="source" value="sectorselector.ai / track-record">
-        <p class="hook">Email + phone. We send this month’s plan.</p>
+        <h2 class="form-title">UNLOCK THIS MONTH'S TOP-RANKED SETUP</h2>
+        <p class="form-support">Get the current research card and every Friday-close sector map.</p>
         <label for="record-email">Email</label>
         <label for="record-phone">Mobile number</label>
         <div class="capture-row">
-          <input id="record-email" name="email" type="email" autocomplete="email" required placeholder="your email">
-          <input id="record-phone" name="phone" type="tel" autocomplete="tel" required placeholder="your mobile">
-          <button type="submit">SEND ME THIS MONTH’S PLAN ›</button>
+          <input id="record-email" name="email" type="email" autocomplete="email" required placeholder="Email">
+          <input id="record-phone" name="phone" type="tel" autocomplete="tel" required placeholder="Mobile">
+          <button type="submit">UNLOCK THIS MONTH'S PLAN →</button>
         </div>
-        <p class="form-disclaimer">Not financial advice. Sector Selector is a publisher, not an adviser. Cos Analyst is an AI research desk. Options can expire worthless. Consult a licensed professional before risking capital.</p>
+        <p class="form-fine">Monthly research by email. We may text you about related training. Unsubscribe anytime. Full legal elsewhere.</p>
         <p class="ps">P.S. Founding 1,000 keep the list free. This is live testing, not a scoreboard.</p>
       </form>
       <p class="wait-msg" id="record-msg" role="status" aria-live="polite"></p>
     </section>
   </main>
 
-  <footer class="wrap foot">
-    <p>Sector Selector / sectorselector.ai is a publisher of market education and simulated research. Cos Analyst is an AI research desk. We are not a registered investment adviser, broker-dealer, or commodity trading advisor. Nothing on this site or in our emails is personalized financial advice or an offer to buy or sell any security or option.</p>
-    <p>Trading and options involve substantial risk of loss. You can lose 100% of a debit. Past relative strength is not a forecast. Simulated results omit fills, slippage, and the experience of real loss. Do your own work. Consult a licensed adviser for your situation before putting real money at risk.</p>
-    <p>By submitting your email and mobile number you agree to receive the monthly list and related research by email. We may text later about product webinars. Unsubscribe anytime.</p>
-    <p>This track record is a paper blotter. SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.</p>
-    <div class="colophon">
-      <span>Sector Selector · Cos Analyst</span>
-      <span>sectorselector.ai · paper blotter</span>
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div>
+        <h2>Research disclosure</h2>
+        <p>Sector Selector / sectorselector.ai is a CosAnalyst research project and a publisher of market education and simulated research. CosAnalyst is an AI-assisted research desk. We are not a registered investment adviser, broker-dealer, or commodity trading advisor. Nothing on this site or in our emails is personalized financial advice or an offer to buy or sell any security or option.</p>
+      </div>
+      <div>
+        <h2>Risk</h2>
+        <p>Trading and options involve substantial risk of loss. Options can lose 100% of a debit. Past relative strength is not a forecast. Consult a licensed professional for your situation before putting real money at risk.</p>
+      </div>
+      <div>
+        <h2>Simulation</h2>
+        <p>Setups are tracked on paper using published rules. No real-money performance is claimed. Simulated results omit fills, slippage, and the experience of real loss.</p>
+      </div>
+      <div>
+        <h2>Method</h2>
+        <p>Price-only series (dividends excluded) unless a total-return figure is labelled as such. Official SPDR tables lag to month-end. This map uses Friday session closes from closelook.net and thetrading.tools.</p>
+      </div>
+      <div>
+        <h2>Email and SMS</h2>
+        <p>By submitting your email and mobile number you agree to receive the monthly list and related research by email. We may text you about related training. Unsubscribe anytime.</p>
+      </div>
+    </div>
+    <div class="wrap colophon">
+      <span>SECTOR SELECTOR / A CosAnalyst Research Project</span>
+      <span class="mono">sectorselector.ai · paper blotter</span>
     </div>
   </footer>
 

@@ -1,4 +1,4 @@
-/* Sector Selector v2 — formsubmit capture + on-page thank-you / unlock. */
+/* Sector Selector — formsubmit capture + unlock + chrome. */
 (function () {
   "use strict";
 
@@ -61,12 +61,12 @@
     setMsg(
       $("hero-msg"),
       "ok",
-      "Your Sector Selector is unlocked. The full sector report is in your inbox. Simulated. Not advice."
+      "Your Sector Selector is unlocked. The full sector report is in your inbox. Simulated research. Not advice."
     );
     setMsg(
       $("gate-msg"),
       "ok",
-      "Unlocked. The full sector report is in your inbox. Simulated. Not advice."
+      "Unlocked. The full sector report is in your inbox. Simulated research. Not advice."
     );
     if (blotterTickets) renderHomeBlotter(blotterTickets);
     else unlockStaticBlotter();
@@ -194,12 +194,17 @@
     return status === "no-ticket" || t.type === "no-ticket";
   }
 
-  function debitDisplay(t) {
+  function entryDisplay(t) {
     if (isNoTicket(t)) return "—";
     if (t.debit == null || t.debit === "") {
       return t.debitLabel || "Monday open snapshot";
     }
     return String(t.debit);
+  }
+
+  function exitDisplay(t) {
+    if (t.exit == null || t.exit === "") return "—";
+    return String(t.exit);
   }
 
   function resultDisplay(t) {
@@ -224,6 +229,16 @@
     tr.appendChild(td);
   }
 
+  function addResultCell(tr, text) {
+    var td = document.createElement("td");
+    var label = document.createElement("span");
+    label.className = "sim-mini";
+    label.textContent = "SIMULATED";
+    td.appendChild(label);
+    td.appendChild(document.createTextNode(" " + text));
+    tr.appendChild(td);
+  }
+
   function renderHomeBlotter(tickets) {
     var body = $("blotter-body");
     if (!body || !tickets || !tickets.length) return;
@@ -233,14 +248,16 @@
       var tr = document.createElement("tr");
       var ticker = isNoTicket(t) ? "—" : publicTicker(t);
       var structure = isNoTicket(t) ? (t.structure || "No ticket") : (t.structure || "—");
-      addCell(tr, t.date || "—");
-      var tickerTd = addCell(tr, ticker);
+      addCell(tr, t.date || "—", "mono");
+      var tickerTd = addCell(tr, ticker, "mono");
       if (!isUnlocked() && !isNoTicket(t)) {
-        tickerTd.className = "redact blotter-ticker";
+        tickerTd.className = "redact blotter-ticker mono";
       }
       addCell(tr, structure);
       addStatusCell(tr, t.status);
-      addCell(tr, resultDisplay(t));
+      addCell(tr, entryDisplay(t));
+      addCell(tr, exitDisplay(t));
+      addResultCell(tr, resultDisplay(t));
       body.appendChild(tr);
     });
   }
@@ -252,7 +269,7 @@
     if (!tickets || !tickets.length) {
       var empty = document.createElement("tr");
       var td = document.createElement("td");
-      td.colSpan = 6;
+      td.colSpan = 7;
       td.textContent = "No tickets published.";
       empty.appendChild(td);
       body.appendChild(empty);
@@ -261,13 +278,14 @@
     tickets.forEach(function (t) {
       var tr = document.createElement("tr");
       var noTicket = isNoTicket(t);
-      addCell(tr, t.date || "—");
-      addCell(tr, noTicket ? "—" : (t.ticker || "—"));
+      addCell(tr, t.date || "—", "mono");
+      addCell(tr, noTicket ? "—" : (t.ticker || "—"), "mono");
       addCell(tr, noTicket ? (t.structure || "No ticket") : (t.structure || "—"));
       addStatusCell(tr, t.status);
-      var debit = debitDisplay(t);
-      addCell(tr, debit, debit === "Monday open snapshot" ? "debit-pending" : "");
-      addCell(tr, resultDisplay(t));
+      var entry = entryDisplay(t);
+      addCell(tr, entry, entry === "Monday open snapshot" ? "debit-pending" : "");
+      addCell(tr, exitDisplay(t));
+      addResultCell(tr, resultDisplay(t));
       body.appendChild(tr);
     });
   }
@@ -332,7 +350,6 @@
         if (track) renderRecordStats(data || {});
       })
       .catch(function () {
-        /* static row in HTML is the fallback; ticker stays redacted until unlock */
         if (track) {
           renderTrackBlotter([
             {
@@ -363,12 +380,45 @@
       var open = panel.hidden;
       panel.hidden = !open;
       btn.setAttribute("aria-expanded", open ? "true" : "false");
-      btn.textContent = open ? "HIDE FULL SETUP ↑" : "VIEW FULL SETUP →";
+      btn.textContent = open ? "HIDE FULL RESEARCH ↑" : "VIEW THE FULL RESEARCH →";
+    });
+  }
+
+  function bindNav() {
+    var btn = $("nav-toggle");
+    var nav = $("site-nav");
+    if (!btn || !nav) return;
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+      document.body.classList.toggle("nav-open", !open);
+    });
+    nav.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        btn.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
+      });
+    });
+  }
+
+  function bindBoard() {
+    document.querySelectorAll(".board-row").forEach(function (row) {
+      row.addEventListener("click", function () {
+        row.classList.toggle("is-open");
+      });
+      row.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          row.classList.toggle("is-open");
+        }
+      });
     });
   }
 
   bindAllCaptures();
   bindFullSetup();
+  bindNav();
+  bindBoard();
   loadBlotter();
 
   if ($("trade") && alreadyUnlocked()) {
