@@ -644,6 +644,22 @@ body.unlocked .trade-card { display: none; }
 .falls li.next .fall-n { color: var(--amber); }
 
 /* map */
+.week-map-card {
+  margin: 0 0 1.25rem;
+}
+.week-map-card img {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #101214;
+}
+.essay .week-map-card img,
+.page-hero .week-map-card img {
+  max-width: 40rem;
+}
+
 .board-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
