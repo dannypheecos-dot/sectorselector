@@ -510,10 +510,53 @@
       .catch(function () {});
   }
 
+  /* Research posts: <time class="stamp-et" datetime="2026-09-01T16:15:00-04:00" data-et></time>
+     Date-only datetime="2026-08-31" renders without a clock. America/New_York. Label ET. Never PT. */
+  var ET_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function formatEtDateOnly(raw) {
+    var m = String(raw || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return "";
+    return ET_MONTHS[+m[2] - 1] + " " + Number(m[3]) + ", " + m[1] + " · ET";
+  }
+
+  function formatEtClock(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).formatToParts(d);
+    var get = function (type) {
+      var hit = parts.filter(function (p) { return p.type === type; })[0];
+      return hit ? hit.value : "";
+    };
+    return get("month") + " " + get("day") + ", " + get("year") + ", " + get("hour") + ":" + get("minute") + " " + get("dayPeriod") + " ET";
+  }
+
+  function bindEtStamps() {
+    document.querySelectorAll("time[data-et][datetime]").forEach(function (el) {
+      var raw = el.getAttribute("datetime") || "";
+      var approx = el.hasAttribute("data-et-approx");
+      var text = /T\d{2}:\d{2}/.test(raw) ? formatEtClock(raw) : formatEtDateOnly(raw);
+      if (!text) return;
+      if (approx && /T\d{2}:\d{2}/.test(raw)) {
+        text = text.replace(/, (\d{1,2}:\d{2})/, ", ~$1");
+      }
+      el.textContent = text;
+    });
+  }
+
   bindAllCaptures();
   bindFullSetup();
   bindNav();
   bindBoard();
+  bindEtStamps();
   loadBlotter();
   loadOdteBlotter();
 

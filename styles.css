@@ -1078,6 +1078,19 @@ body.unlocked .trade-card { display: none; }
 }
 .byline strong { color: var(--off); font-weight: 600; }
 
+/* Research / blog: America/New_York clock near the hed. Label ET. Date-only if no hour. */
+.stamp-et,
+time.stamp-et {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mint);
+  font-weight: 500;
+}
+.byline .stamp-et { color: var(--mint); }
+.desk-date .stamp-et { color: inherit; }
+
 .essay { max-width: 40rem; }
 .essay h1 {
   font-family: var(--display);
