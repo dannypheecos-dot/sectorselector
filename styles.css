@@ -1235,6 +1235,7 @@ time.stamp-et {
   font-weight: 500;
 }
 .essay .note-table td { color: var(--off); }
+.essay .note-table td.wrap { white-space: normal; }
 .essay .note-table .col-score { color: var(--mint); }
 .essay .note-table .num { text-align: right; font-family: var(--mono); }
 .chg-up { color: var(--mint); }

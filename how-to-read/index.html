@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>How to read the board — Sector Selector</title>
+  <meta name="description" content="How to read the Friday 11-sector map: formula, states, ticket rule, and this week’s scores. As of Friday 28 Aug 2026 cash close. Simulated research, not advice.">
+  <meta name="theme-color" content="#101214">
+  <meta property="og:title" content="How to read the board">
+  <meta property="og:description" content="Score is arithmetic. Eleven SPDRs vs SPY. Friday recut. Mon–Thu is color, not a new rank. Simulated. Not advice.">
+  <meta property="og:url" content="https://sectorselector.ai/how-to-read/">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
+  <meta property="og:image:alt" content="How to read the board — Sector Selector">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to read the board">
+  <meta name="twitter:description" content="Score is arithmetic. Eleven SPDRs vs SPY. Friday recut. Mon–Thu is color, not a new rank. Simulated. Not advice.">
+  <meta name="twitter:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
+  <link rel="canonical" href="https://sectorselector.ai/how-to-read/">
+  <link rel="icon" href="../brand/fox-mark-arrow.png" type="image/png">
+  <link rel="apple-touch-icon" href="../brand/fox-mark-arrow.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="how-to-read" data-root="../">
+  <a class="skip" href="#essay">Skip to how to read</a>
+
+  <header class="mast">
+    <div class="wrap mast-bar">
+      <a class="wordmark" href="../" aria-label="Sector Selector — A CosAnalyst Research Project">
+        <svg class="mast-compass" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true" focusable="false">
+          <circle cx="32" cy="32" r="29" fill="#121514" stroke="#7cffb2" stroke-width="2"/>
+          <circle cx="32" cy="32" r="18" fill="none" stroke="#7cffb2" stroke-opacity="0.35" stroke-width="1"/>
+          <path fill="#7cffb2" d="M32 5l3.2 16.2-3.2-1.6-3.2 1.6z"/>
+          <path fill="#7cffb2" d="M32 59l-3.2-16.2 3.2 1.6 3.2-1.6z"/>
+          <path fill="#7cffb2" d="M59 32l-16.2 3.2 1.6-3.2-1.6-3.2z"/>
+          <path fill="#7cffb2" d="M5 32l16.2-3.2-1.6 3.2 1.6 3.2z"/>
+          <path fill="#e8ebe9" d="M32 16l7 16-7-2.2L25 32z"/>
+          <path fill="#3a4340" d="M32 48l-7-16 7 2.2L39 32z"/>
+          <circle cx="32" cy="32" r="3.2" fill="#7cffb2"/>
+        </svg>
+        <span class="mast-copy">
+          <span class="mast-name"><span class="mast-sector">SECTOR</span> SELECTOR</span>
+          <span class="mast-sub">A CosAnalyst Research Project</span>
+        </span>
+      </a>
+      <div class="mast-tools">
+        <span class="sim-pill">
+          <button type="button" class="sim-pill-btn" aria-describedby="sim-tip-how">SIMULATED RESEARCH ⓘ</button>
+          <span class="sim-tip" id="sim-tip-how" role="tooltip">Setups are tracked on paper using published rules. No real-money performance is claimed.</span>
+        </span>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      </div>
+      <nav class="mast-nav" id="site-nav" aria-label="Primary">
+        <a href="../#map">Map</a>
+        <a href="./" aria-current="page">How to read</a>
+        <a href="../research/">Research</a>
+        <a href="../track-record/">Track Record</a>
+        <a href="../odte-challenge/">0DTE Challenge</a>
+        <a href="../#capture" class="nav-cta">Get the Plan</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="wrap page-hero essay" id="essay">
+      <p class="kicker">How to read · Friday map</p>
+      <h1>How to read the board</h1>
+      <p class="byline">
+        <img src="../brand/fox-mark-arrow.png" width="25" height="25" alt="">
+        <strong>CosAnalyst</strong>
+        <span>research desk</span>
+        <time class="stamp-et" datetime="2026-09-01" data-et>Sep 1, 2026 · ET</time>
+      </p>
+      <p class="lede">The score is arithmetic. Eleven SPDR sectors versus SPY. Same names every week. We recut Friday. Monday through Thursday is color on that rank — not a new map.</p>
+      <p class="footnote">Published Tuesday 1 Sep 2026. Map as of Friday 28 Aug 2026 cash close. A CosAnalyst Research Project. SIMULATED RESEARCH. Not advice.</p>
+
+      <h2>The formula</h2>
+      <p>No black box. We do not print a 92 when the formula says otherwise.</p>
+      <p class="formula mono">score = clip(round(50 + 3.2×rs13w + 0.6×vs50d), 0, 100)</p>
+      <p>rs13w is closelook.net 63-session excess vs SPY, percentage points, price-only. vs50d is percent distance to the 50-day SMA (thetrading.tools sector-health, same close). Missing vs50d uses 0 and is footnoted — not invented.</p>
+      <p>Worked example · XLV:</p>
+      <p class="formula mono">50 + (3.2 × 13.1) + (0.6 × 4.5) = 94.62 → 95</p>
+
+      <h2>States</h2>
+      <p>Each row carries a state. The state is how to read the rank — not a second score.</p>
+      <div class="board-wrap">
+        <table class="note-table">
+          <caption class="visually-hidden">Board states</caption>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="state leader">LEADER</span></td>
+              <td class="wrap">Top of the map. Ticket candidates live here. This week: XLV, XLF.</td>
+            </tr>
+            <tr>
+              <td><span class="state confirmed">HOLD</span></td>
+              <td class="wrap">Confirmed leadership. Not a new ticket. Rule is top two. This week: XLE #3.</td>
+            </tr>
+            <tr>
+              <td><span class="state skip">SKIP</span></td>
+              <td class="wrap">Not a ticket. Rank, location, or both fail the rule. This week: XLB, XLK.</td>
+            </tr>
+            <tr>
+              <td><span class="state neutral">NEUTRAL</span></td>
+              <td class="wrap">Neither leading nor skipping hard. This week: XLP.</td>
+            </tr>
+            <tr>
+              <td><span class="state weakening">WEAKENING</span></td>
+              <td class="wrap">Losing the quarter, the location, or both. Not a short from a healthy board.</td>
+            </tr>
+            <tr>
+              <td><span class="state watch">WATCH</span></td>
+              <td class="wrap">13-week still lags; location is recovering. Not a ticket. This week: XLC.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Ticket rule</h2>
+      <p>Every Friday close, rank the 11 SPDR sector ETFs by 13-week return minus SPY’s. Longs: top one or two only. Location must clear the 50-day <em>and</em> the 200-day. Rank says yes and the MAs say no → skip.</p>
+      <p>A #3 that still leads can be a HOLD. It is not a Sunday rewrite and not a new ticket. This week that is Energy.</p>
+
+      <h2>Friday recut vs Mon–Thu color</h2>
+      <p>The map recuts on Friday cash close. Monday through Thursday prints are color on the existing Friday rank. We do not invent a midweek score. We do not recut the 11-sector map midweek. If the tape sticks, we re-rank Friday.</p>
+
+      <h2>This week’s map</h2>
+      <p>As of Friday 28 Aug 2026 cash close. Price-only. Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is HOLD — not a new ticket. Technology is a skip. We do not show XLK as a leader.</p>
+      <div class="board-wrap">
+        <table class="note-table">
+          <caption class="visually-hidden">Friday 28 Aug 2026 sector map</caption>
+          <thead>
+            <tr>
+              <th colspan="5">CURRENT SECTOR RANKINGS · Friday 28 Aug 2026 close</th>
+            </tr>
+            <tr>
+              <th>Rank</th>
+              <th>Sector</th>
+              <th>ETF</th>
+              <th class="num">Score</th>
+              <th>State</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">01</td>
+              <td>Health Care</td>
+              <td class="mono">XLV</td>
+              <td class="num col-score">95</td>
+              <td><span class="state leader">LEADER</span></td>
+            </tr>
+            <tr>
+              <td class="mono">02</td>
+              <td>Financials</td>
+              <td class="mono">XLF</td>
+              <td class="num col-score">87</td>
+              <td><span class="state leader">LEADER</span></td>
+            </tr>
+            <tr>
+              <td class="mono">03</td>
+              <td>Energy</td>
+              <td class="mono">XLE</td>
+              <td class="num col-score">87</td>
+              <td><span class="state confirmed">HOLD</span></td>
+            </tr>
+            <tr>
+              <td class="mono">04</td>
+              <td>Materials</td>
+              <td class="mono">XLB</td>
+              <td class="num col-score">59</td>
+              <td><span class="state skip">SKIP</span></td>
+            </tr>
+            <tr>
+              <td class="mono">05</td>
+              <td>Consumer Staples</td>
+              <td class="mono">XLP</td>
+              <td class="num col-score">56</td>
+              <td><span class="state neutral">NEUTRAL</span></td>
+            </tr>
+            <tr>
+              <td class="mono">06</td>
+              <td>Industrials</td>
+              <td class="mono">XLI</td>
+              <td class="num col-score">50</td>
+              <td><span class="state weakening">WEAKENING</span></td>
+            </tr>
+            <tr>
+              <td class="mono">07</td>
+              <td>Real Estate</td>
+              <td class="mono">XLRE</td>
+              <td class="num col-score">49</td>
+              <td><span class="state weakening">WEAKENING</span></td>
+            </tr>
+            <tr>
+              <td class="mono">08</td>
+              <td>Communication Services</td>
+              <td class="mono">XLC</td>
+              <td class="num col-score">39</td>
+              <td><span class="state watch">WATCH</span></td>
+            </tr>
+            <tr>
+              <td class="mono">09</td>
+              <td>Technology</td>
+              <td class="mono">XLK</td>
+              <td class="num col-score">36</td>
+              <td><span class="state skip">SKIP</span></td>
+            </tr>
+            <tr>
+              <td class="mono">10</td>
+              <td>Consumer Discretionary</td>
+              <td class="mono">XLY</td>
+              <td class="num col-score">35</td>
+              <td><span class="state weakening">WEAKENING</span></td>
+            </tr>
+            <tr>
+              <td class="mono">11</td>
+              <td>Utilities</td>
+              <td class="mono">XLU</td>
+              <td class="num col-score">31</td>
+              <td><span class="state weakening">WEAKENING</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>XLP and XLY vs50d were not in the health table this week — location term = 0, not invented. Utilities is the laggard. No short: the board is healthy (8/11 above 50d).</p>
+
+      <h2>Tuesday color — not a recut</h2>
+      <p>Tuesday 1 Sep 2026 cash versus Monday 31 Aug close. Color is the day. The Friday scores above did not move.</p>
+      <div class="board-wrap">
+        <table class="note-table">
+          <caption class="visually-hidden">Tuesday 1 Sep cash color</caption>
+          <thead>
+            <tr>
+              <th colspan="4">Tuesday 1 Sep cash % · not a recut</th>
+            </tr>
+            <tr>
+              <th>ETF</th>
+              <th class="num">Cash %</th>
+              <th>Note</th>
+              <th>Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">XLE</td>
+              <td class="num chg-up">+1.27%</td>
+              <td class="wrap">Through 64.70</td>
+              <td>color</td>
+            </tr>
+            <tr>
+              <td class="mono">XLK</td>
+              <td class="num chg-dn">−1.53%</td>
+              <td class="wrap">Paid</td>
+              <td>color</td>
+            </tr>
+            <tr>
+              <td class="mono">XLY</td>
+              <td class="num chg-dn">−1.72%</td>
+              <td class="wrap">Paid</td>
+              <td>color</td>
+            </tr>
+            <tr>
+              <td class="mono">XLI</td>
+              <td class="num chg-dn">−1.37%</td>
+              <td class="wrap">Paid</td>
+              <td>color</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Energy through 64.70 is color, not a rotation. XLK remains a skip on the Friday map. We re-rank Friday if oil sticks.</p>
+
+      <h2>Next</h2>
+      <p>The map is the intelligence. The monthly list is the product door. This page is how to read the board — not a ticket.</p>
+      <p class="note-cta">
+        <a class="cta-btn" href="../#capture">UNLOCK THIS MONTH'S PLAN →</a>
+        <a class="ghost-btn" href="../#map">VIEW THE SECTOR MAP →</a>
+        <a class="ghost-btn" href="../research/no-recut-after-the-vol/">READ THIS WEEK’S NOTE →</a>
+      </p>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-grid">
+      <div>
+        <h2>Research disclosure</h2>
+        <p>Sector Selector / sectorselector.ai is a CosAnalyst research project and a publisher of market education and simulated research. CosAnalyst is an AI-assisted research desk. We are not a registered investment adviser, broker-dealer, or commodity trading advisor. Nothing on this site or in our emails is personalized financial advice or an offer to buy or sell any security or option.</p>
+      </div>
+      <div>
+        <h2>Risk</h2>
+        <p>Trading and options involve substantial risk of loss. Options can lose 100% of a debit. Past relative strength is not a forecast. Consult a licensed professional for your situation before putting real money at risk.</p>
+      </div>
+      <div>
+        <h2>Simulation</h2>
+        <p>Setups are tracked on paper using published rules. No real-money performance is claimed. Simulated results omit fills, slippage, and the experience of real loss.</p>
+      </div>
+      <div>
+        <h2>Method</h2>
+        <p>Price-only series (dividends excluded) unless a total-return figure is labelled as such. Official SPDR tables lag to month-end. This map uses Friday session closes from closelook.net and thetrading.tools.</p>
+      </div>
+    </div>
+    <div class="wrap colophon">
+      <span>SECTOR SELECTOR / A CosAnalyst Research Project</span>
+      <span class="mono">sectorselector.ai · how to read · 28 Aug 2026 close</span>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+</body>
+</html>
