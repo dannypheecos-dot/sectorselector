@@ -27,7 +27,7 @@
       "spot": 170.57,
       "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43",
       "source": "TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026",
-      "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Invalidation: drops out of top 3 on 13w RS vs SPY. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
+      "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Exits are dated on the card. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
     }
   ]
 }

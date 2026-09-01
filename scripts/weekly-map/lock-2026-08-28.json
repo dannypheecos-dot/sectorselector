@@ -1,0 +1,17 @@
+{
+  "asOf": "2026-08-28",
+  "asOfLabel": "Friday 28 Aug 2026 close",
+  "rows": [
+    {"ticker": "XLV", "rank": 1, "score": 95, "state": "LEADER"},
+    {"ticker": "XLF", "rank": 2, "score": 87, "state": "LEADER"},
+    {"ticker": "XLE", "rank": 3, "score": 87, "state": "HOLD"},
+    {"ticker": "XLB", "rank": 4, "score": 59, "state": "SKIP"},
+    {"ticker": "XLP", "rank": 5, "score": 56, "state": "NEUTRAL"},
+    {"ticker": "XLI", "rank": 6, "score": 50, "state": "WEAKENING"},
+    {"ticker": "XLRE", "rank": 7, "score": 49, "state": "WEAKENING"},
+    {"ticker": "XLC", "rank": 8, "score": 39, "state": "WATCH"},
+    {"ticker": "XLK", "rank": 9, "score": 36, "state": "SKIP"},
+    {"ticker": "XLY", "rank": 10, "score": 35, "state": "WEAKENING"},
+    {"ticker": "XLU", "rank": 11, "score": 31, "state": "WEAKENING"}
+  ]
+}

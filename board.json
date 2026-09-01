@@ -1,8 +1,6 @@
 {
   "asOf": "2026-08-28",
   "asOfLabel": "Friday 28 Aug 2026 close",
-  "formula": "clip(round(50 + 3.2*rs13w + 0.6*vs50d), 0, 100)",
-  "formulaNote": "rs13w is closelook.net 63-session excess vs SPY (price-only, pp). vs50d is percent distance to the 50-day SMA (thetrading.tools sector-health, same close). Missing vs50d (XLP, XLY) uses 0 and is footnoted — not invented. Scores are the formula, not mockup numbers.",
   "source": "thetrading.tools + closelook.net, price-only",
   "sortDefault": "score",
   "sortDir": "desc",
@@ -19,10 +17,8 @@
       "regime": "STRONG",
       "rank": 1,
       "score": 95,
-      "raw": 94.62,
       "flag": "LEADER",
-      "role": "ticket",
-      "note": "This week's ticket. 50 + 3.2×13.1 + 0.6×4.5 = 94.62 → 95."
+      "role": "ticket"
     },
     {
       "ticker": "XLF",
@@ -36,10 +32,8 @@
       "regime": "STRONG",
       "rank": 2,
       "score": 87,
-      "raw": 87.26,
       "flag": "LEADER",
-      "role": "ticket",
-      "note": "Top two. Same structure family. 50 + 3.2×11.1 + 0.6×2.9 = 87.26 → 87."
+      "role": "ticket"
     },
     {
       "ticker": "XLE",
@@ -53,10 +47,8 @@
       "regime": "STRONG",
       "rank": 3,
       "score": 87,
-      "raw": 87.32,
-      "flag": "LEADER",
-      "role": "hold",
-      "note": "Confirmed leader. Not a new ticket — rule is top two. 50 + 3.2×10.2 + 0.6×7.8 = 87.32 → 87."
+      "flag": "HOLD",
+      "role": "not a ticket"
     },
     {
       "ticker": "XLB",
@@ -70,10 +62,8 @@
       "regime": "STRONG",
       "rank": 4,
       "score": 59,
-      "raw": 59.36,
       "flag": "SKIP",
-      "role": "skip",
-      "note": "Skip. YTD beat, not 13-week leadership. 50 + 3.2×2.4 + 0.6×2.8 = 59.36 → 59."
+      "role": "not a ticket"
     },
     {
       "ticker": "XLP",
@@ -84,14 +74,12 @@
       "rs6m": -17.22,
       "vs50": null,
       "vs200": null,
-      "vs50Missing": true,
+      "locationUnavailable": true,
       "regime": null,
       "rank": 5,
       "score": 56,
-      "raw": 55.76,
       "flag": "NEUTRAL",
-      "role": null,
-      "note": "vs50d missing this week; location term = 0. 50 + 3.2×1.8 + 0 = 55.76 → 56."
+      "role": "not a ticket"
     },
     {
       "ticker": "XLI",
@@ -105,10 +93,8 @@
       "regime": "WEAKENING",
       "rank": 6,
       "score": 50,
-      "raw": 50.36,
       "flag": "WEAKENING",
-      "role": null,
-      "note": "Below 50d, above 200d. Mixed location. 50 + 3.2×0.6 + 0.6×(−2.6) = 50.36 → 50."
+      "role": "not a ticket"
     },
     {
       "ticker": "XLRE",
@@ -122,10 +108,8 @@
       "regime": "WEAKENING",
       "rank": 7,
       "score": 49,
-      "raw": 49.46,
       "flag": "WEAKENING",
-      "role": null,
-      "note": "50 + 3.2×0.0 + 0.6×(−0.9) = 49.46 → 49."
+      "role": "not a ticket"
     },
     {
       "ticker": "XLC",
@@ -139,10 +123,8 @@
       "regime": "RECOVERY",
       "rank": 8,
       "score": 39,
-      "raw": 38.76,
-      "flag": "ROTATION WATCH",
-      "role": null,
-      "note": "13w still lags; location recovering above 50d. Not a ticket. 50 + 3.2×(−4.0) + 0.6×2.6 = 38.76 → 39."
+      "flag": "WATCH",
+      "role": "not a ticket"
     },
     {
       "ticker": "XLK",
@@ -156,10 +138,8 @@
       "regime": "STRONG",
       "rank": 9,
       "score": 36,
-      "raw": 36.24,
       "flag": "SKIP",
-      "role": "skip",
-      "note": "Owns the 6-month tape; lost the last quarter. No ticket. 50 + 3.2×(−4.6) + 0.6×1.6 = 36.24 → 36."
+      "role": "not a ticket"
     },
     {
       "ticker": "XLY",
@@ -170,14 +150,12 @@
       "rs6m": -11.85,
       "vs50": null,
       "vs200": null,
-      "vs50Missing": true,
+      "locationUnavailable": true,
       "regime": null,
       "rank": 10,
       "score": 35,
-      "raw": 34.64,
       "flag": "WEAKENING",
-      "role": null,
-      "note": "vs50d missing this week; location term = 0. 50 + 3.2×(−4.8) + 0 = 34.64 → 35."
+      "role": "not a ticket"
     },
     {
       "ticker": "XLU",
@@ -191,10 +169,8 @@
       "regime": "WEAK",
       "rank": 11,
       "score": 31,
-      "raw": 30.72,
       "flag": "WEAKENING",
-      "role": "skip",
-      "note": "Laggard. No short: board is healthy (8/11 above 50d). 50 + 3.2×(−5.2) + 0.6×(−4.4) = 30.72 → 31."
+      "role": "not a ticket"
     }
   ],
   "blotter": {
@@ -227,7 +203,7 @@
         "snapshot": "2026-08-31 13:26 ET",
         "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43",
         "source": "TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026",
-        "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Invalidation: drops out of top 3 on 13w RS vs SPY. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
+        "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Exits are dated on the card. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
       }
     ]
   }

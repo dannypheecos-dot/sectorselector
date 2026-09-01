@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>How to read the board — Sector Selector</title>
-  <meta name="description" content="How to read the Friday 11-sector map: formula, states, ticket rule, and this week’s scores. As of Friday 28 Aug 2026 cash close. Simulated research, not advice.">
+  <meta name="description" content="How to read the Friday 11-sector map: the Sector Selector Score, states, ticket rule, and this week’s scores. As of Friday 28 Aug 2026 cash close. Simulated research, not advice.">
   <meta name="theme-color" content="#101214">
   <meta property="og:title" content="How to read the board">
-  <meta property="og:description" content="Score is arithmetic. Eleven SPDRs vs SPY. Friday recut. Mon–Thu is color, not a new rank. Simulated. Not advice.">
+  <meta property="og:description" content="Eleven SPDRs vs SPY. Friday close map. Weekday notes do not rewrite the rank. Simulated. Not advice.">
   <meta property="og:url" content="https://sectorselector.ai/how-to-read/">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://sectorselector.ai/brand/this-weeks-map.png">
@@ -17,7 +17,7 @@
   <meta property="og:image:height" content="1350">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How to read the board">
-  <meta name="twitter:description" content="Score is arithmetic. Eleven SPDRs vs SPY. Friday recut. Mon–Thu is color, not a new rank. Simulated. Not advice.">
+  <meta name="twitter:description" content="Eleven SPDRs vs SPY. Friday close map. Weekday notes do not rewrite the rank. Simulated. Not advice.">
   <meta name="twitter:image" content="https://sectorselector.ai/brand/this-weeks-map.png">
   <meta name="twitter:image:alt" content="This week’s map — Friday 28 Aug 2026 close. XLV 95 LEADER, XLF 87 LEADER, XLE 87 HOLD.">
   <link rel="canonical" href="https://sectorselector.ai/how-to-read/">
@@ -78,15 +78,11 @@
         <span>research desk</span>
         <time class="stamp-et" datetime="2026-09-01" data-et>Sep 1, 2026 · ET</time>
       </p>
-      <p class="lede">The score is arithmetic. Eleven SPDR sectors versus SPY. Same names every week. We recut Friday. Monday through Thursday is color on that rank — not a new map.</p>
+      <p class="lede">Eleven SPDR sectors versus SPY. Same names every week. The map is set Friday. Monday through Thursday explains the tape on that rank — not a new map.</p>
       <p class="footnote">Published Tuesday 1 Sep 2026. Map as of Friday 28 Aug 2026 cash close. A CosAnalyst Research Project. SIMULATED RESEARCH. Not advice.</p>
 
-      <h2>The formula</h2>
-      <p>No black box. We do not print a 92 when the formula says otherwise.</p>
-      <p class="formula mono">score = clip(round(50 + 3.2×rs13w + 0.6×vs50d), 0, 100)</p>
-      <p>rs13w is closelook.net 63-session excess vs SPY, percentage points, price-only. vs50d is percent distance to the 50-day SMA (thetrading.tools sector-health, same close). Missing vs50d uses 0 and is footnoted — not invented.</p>
-      <p>Worked example · XLV:</p>
-      <p class="formula mono">50 + (3.2 × 13.1) + (0.6 × 4.5) = 94.62 → 95</p>
+      <h2>The Sector Selector Score</h2>
+      <p>The Sector Selector Score is a rules-based 0–100 measure of sector leadership. It compares each major U.S. sector with the broad market and evaluates relative strength, trend health, and price location. Higher scores indicate stronger confirmed leadership; lower scores indicate lagging or weakening conditions. The model is recalculated after Friday’s close, while weekday updates explain changes without rewriting the weekly map.</p>
 
       <h2>States</h2>
       <p>Each row carries a state. The state is how to read the rank — not a second score.</p>
@@ -106,7 +102,7 @@
             </tr>
             <tr>
               <td><span class="state confirmed">HOLD</span></td>
-              <td class="wrap">Confirmed leadership. Not a new ticket. Rule is top two. This week: XLE #3.</td>
+              <td class="wrap">Confirmed leadership. Not a new ticket. This week: Energy.</td>
             </tr>
             <tr>
               <td><span class="state skip">SKIP</span></td>
@@ -129,11 +125,11 @@
       </div>
 
       <h2>Ticket rule</h2>
-      <p>Every Friday close, rank the 11 SPDR sector ETFs by 13-week return minus SPY’s. Longs: top one or two only. Location must clear the 50-day <em>and</em> the 200-day. Rank says yes and the MAs say no → skip.</p>
-      <p>A #3 that still leads can be a HOLD. It is not a Sunday rewrite and not a new ticket. This week that is Energy.</p>
+      <p>Defined-risk tickets sit on Friday-map leadership. Location can still skip a high score. Skip is first-class. Weekday tape does not rewrite the weekly map.</p>
+      <p>A name that still leads can be a HOLD. It is not a Sunday rewrite and not a new ticket. This week that is Energy.</p>
 
-      <h2>Friday recut vs Mon–Thu color</h2>
-      <p>The map recuts on Friday cash close. Monday through Thursday prints are color on the existing Friday rank. We do not invent a midweek score. We do not recut the 11-sector map midweek. If the tape sticks, we re-rank Friday.</p>
+      <h2>Friday map vs weekday tape</h2>
+      <p>The map is set on Friday cash close. Monday through Thursday notes explain the tape on that rank. We do not invent a midweek score. If the tape sticks, we re-rank Friday.</p>
 
       <h2>This week’s map</h2>
       <p>As of Friday 28 Aug 2026 cash close. Price-only. Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is HOLD — not a new ticket. Technology is a skip. We do not show XLK as a leader.</p>
@@ -236,16 +232,16 @@
           </tbody>
         </table>
       </div>
-      <p>XLP and XLY vs50d were not in the health table this week — location term = 0, not invented. Utilities is the laggard. No short: the board is healthy (8/11 above 50d).</p>
+      <p>XLP and XLY: the location input was unavailable that week. We did not invent it. Utilities is the laggard.</p>
 
-      <h2>Tuesday color — not a recut</h2>
-      <p>Tuesday 1 Sep 2026 cash versus Monday 31 Aug close. Color is the day. The Friday scores above did not move.</p>
+      <h2>Tuesday cash — Friday ranks hold</h2>
+      <p>Tuesday 1 Sep 2026 cash versus Monday 31 Aug close. The Friday scores above did not move.</p>
       <div class="board-wrap">
         <table class="note-table">
           <caption class="visually-hidden">Tuesday 1 Sep cash color</caption>
           <thead>
             <tr>
-              <th colspan="4">Tuesday 1 Sep cash % · not a recut</th>
+              <th colspan="4">Tuesday 1 Sep cash % · Friday ranks hold</th>
             </tr>
             <tr>
               <th>ETF</th>
@@ -282,7 +278,7 @@
           </tbody>
         </table>
       </div>
-      <p>Energy through 64.70 is color, not a rotation. XLK remains a skip on the Friday map. We re-rank Friday if oil sticks.</p>
+      <p>Energy through 64.70 is Tuesday’s tape. XLK remains a skip on the Friday map. We re-rank Friday if oil sticks.</p>
 
       <h2>Next</h2>
       <p>The map is the intelligence. The monthly list is the product door. This page is how to read the board — not a ticket.</p>
