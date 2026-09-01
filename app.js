@@ -355,11 +355,210 @@
     });
   }
 
+  function odtePath() {
+    return dataAttr("data-odte-blotter", "odte-blotter.json");
+  }
+
+  function moneyPremium(value) {
+    if (value == null || value === "") return "—";
+    var n = typeof value === "number" ? value : Number(value);
+    if (isNaN(n)) return String(value);
+    return "$" + n.toFixed(2);
+  }
+
+  function addOdteStatus(tr, status) {
+    var td = document.createElement("td");
+    var span = document.createElement("span");
+    var s = String(status || "").toLowerCase();
+    span.className = "status-badge " + (s === "closed" ? "status-closed" : statusClass(status) || "status-open");
+    span.textContent = s === "closed" ? "CLOSED" : s === "open" ? "OPEN" : String(status || "—").toUpperCase();
+    td.appendChild(span);
+    tr.appendChild(td);
+  }
+
+  function renderOdteRow(tr, t) {
+    var open = String(t.status || "").toLowerCase() === "open";
+    addCell(tr, t.date || "—", "mono");
+    addCell(tr, t.underlying || "—", "mono");
+    addCell(tr, t.contract || t.contractDetail || "—");
+    addCell(tr, t.side || "—", "mono");
+    addCell(tr, moneyPremium(t.entry), "mono");
+    addCell(tr, open || t.exit == null || t.exit === "" ? "—" : moneyPremium(t.exit), "mono");
+    addOdteStatus(tr, t.status);
+    addResultCell(tr, open || t.pnl == null || t.pnl === "" ? "—" : moneyPremium(t.pnl));
+  }
+
+  function fillOdteDl(dl, rows) {
+    if (!dl) return;
+    dl.textContent = "";
+    rows.forEach(function (row) {
+      var wrap = document.createElement("div");
+      var dt = document.createElement("dt");
+      var dd = document.createElement("dd");
+      dt.textContent = row[0];
+      dd.className = "mono";
+      dd.textContent = row[1];
+      wrap.appendChild(dt);
+      wrap.appendChild(dd);
+      dl.appendChild(wrap);
+    });
+  }
+
+  function renderOdteOpenCard(trades) {
+    var card = $("odte-open-card");
+    var empty = $("odte-no-open");
+    if (!card) return;
+    var openTrades = (trades || []).filter(function (t) {
+      return String(t.status || "").toLowerCase() === "open";
+    });
+    if (!openTrades.length) {
+      card.hidden = true;
+      if (empty) empty.hidden = false;
+      return;
+    }
+    card.hidden = false;
+    if (empty) empty.hidden = true;
+    var t = openTrades[0];
+    var contract = $("odte-open-contract");
+    var side = $("odte-open-side");
+    var notes = $("odte-open-notes");
+    if (contract) {
+      contract.textContent = (t.underlying ? t.underlying + " · " : "") + (t.contract || t.contractDetail || "—");
+    }
+    if (side) {
+      side.textContent = (t.side || "BTO") + " @ " + moneyPremium(t.entry);
+    }
+    fillOdteDl($("odte-open-dl"), [
+      ["Entry", moneyPremium(t.entry)],
+      ["Entry as-of", t.entryAsOf || "—"],
+      ["Target", t.targetLabel || (t.target != null ? "100%+ = " + moneyPremium(t.target) : "—")],
+      ["Hard latest", t.hardLatest || "4:15 PM ET expiry"],
+      ["Spot at entry", t.spotAtEntry != null ? String(t.spotAtEntry) : "—"],
+      ["P&L", "—"]
+    ]);
+    if (notes) notes.textContent = t.notes || "";
+  }
+
+  function renderOdteStats(data) {
+    var trades = (data && data.trades) || [];
+    var open = 0;
+    var closed = 0;
+    trades.forEach(function (t) {
+      var s = String(t.status || "").toLowerCase();
+      if (s === "open") open += 1;
+      else if (s === "closed") closed += 1;
+    });
+    var openEl = $("odte-stat-open");
+    var closedEl = $("odte-stat-closed");
+    var rateEl = $("odte-stat-rate");
+    if (openEl) openEl.textContent = String(open);
+    if (closedEl) closedEl.textContent = String(closed);
+    if (rateEl) {
+      rateEl.textContent = closed < 1
+        ? "Not published — no closed tickets"
+        : "See closed rows. We do not invent a headline win rate.";
+    }
+    var asof = $("odte-asof");
+    if (asof && data && data.asOfLabel) asof.textContent = "As of " + data.asOfLabel + " · paper log";
+    var disc = $("odte-disclosure");
+    if (disc && data && data.disclosure) disc.textContent = data.disclosure;
+    var notes = $("odte-notes");
+    if (notes) {
+      var lines = trades
+        .filter(function (t) { return t.notes || t.spotAtEntry != null; })
+        .map(function (t) {
+          var spot = t.spotAtEntry != null ? "Spot at entry " + t.spotAtEntry + ". " : "";
+          return (t.date || "") + " · " + spot + (t.notes || "");
+        });
+      if (lines.length) notes.textContent = lines.join(" ") + " SIMULATED RESEARCH.";
+    }
+  }
+
+  function renderOdteBlotter(trades) {
+    var body = $("odte-blotter-body");
+    if (!body) return;
+    body.textContent = "";
+    if (!trades || !trades.length) {
+      var empty = document.createElement("tr");
+      var td = document.createElement("td");
+      td.colSpan = 8;
+      td.textContent = "No 0DTE paper tickets published.";
+      empty.appendChild(td);
+      body.appendChild(empty);
+      return;
+    }
+    trades.forEach(function (t) {
+      var tr = document.createElement("tr");
+      renderOdteRow(tr, t);
+      body.appendChild(tr);
+    });
+  }
+
+  function loadOdteBlotter() {
+    if (!$("odte-blotter-body")) return;
+    fetch(odtePath(), { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("odte blotter " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        var trades = (data && data.trades) || [];
+        renderOdteBlotter(trades);
+        renderOdteOpenCard(trades);
+        renderOdteStats(data || {});
+      })
+      .catch(function () {});
+  }
+
+  /* Research posts: <time class="stamp-et" datetime="2026-09-01T16:15:00-04:00" data-et></time>
+     Date-only datetime="2026-08-31" renders without a clock. America/New_York. Label ET. Never PT. */
+  var ET_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function formatEtDateOnly(raw) {
+    var m = String(raw || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return "";
+    return ET_MONTHS[+m[2] - 1] + " " + Number(m[3]) + ", " + m[1] + " · ET";
+  }
+
+  function formatEtClock(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).formatToParts(d);
+    var get = function (type) {
+      var hit = parts.filter(function (p) { return p.type === type; })[0];
+      return hit ? hit.value : "";
+    };
+    return get("month") + " " + get("day") + ", " + get("year") + ", " + get("hour") + ":" + get("minute") + " " + get("dayPeriod") + " ET";
+  }
+
+  function bindEtStamps() {
+    document.querySelectorAll("time[data-et][datetime]").forEach(function (el) {
+      var raw = el.getAttribute("datetime") || "";
+      var approx = el.hasAttribute("data-et-approx");
+      var text = /T\d{2}:\d{2}/.test(raw) ? formatEtClock(raw) : formatEtDateOnly(raw);
+      if (!text) return;
+      if (approx && /T\d{2}:\d{2}/.test(raw)) {
+        text = text.replace(/, (\d{1,2}:\d{2})/, ", ~$1");
+      }
+      el.textContent = text;
+    });
+  }
+
   bindAllCaptures();
   bindFullSetup();
   bindNav();
   bindBoard();
+  bindEtStamps();
   loadBlotter();
+  loadOdteBlotter();
 
   if ($("trade") && alreadyUnlocked()) {
     persistUnlock();

@@ -1,35 +1,47 @@
 {
   "asOf": "2026-08-31",
+  "timezone": "America/New_York",
+  "stampLabel": "ET",
   "desk": "Sector Selector",
   "model": "Product notes on the Friday map. Not a magazine. Unlock this month’s plan or see the current map.",
   "articles": [
     {
       "slug": "the-print-was-zero.html",
       "date": "2026-08-31",
+      "datetime": "2026-08-31",
+      "stamp": "Aug 31, 2026 · ET",
       "title": "The $4.243 Billion Print Was $0. The 10Y Is 4.75 — Tied, Not a New High.",
       "dek": "QQQ cash close 716.76. Final net GEX +68.20M. Official 10Y CMT 4.75 — tied Jul 31, not a new high. Midday −$222M card expired. Simulated. Not a ticket."
     },
     {
       "slug": "larak-jordan.html",
       "date": "2026-08-31",
+      "datetime": "2026-08-31",
+      "stamp": "Aug 31, 2026 · ET",
       "title": "Larak, then Jordan. Vol is still asleep.",
       "dek": "Sunday 30 Aug 2026 night / Monday 31 Aug dawn. First US strike in a month. IRGC named the reply. Jordan counted intercepts. VIX did not care."
     },
     {
       "slug": "hormuz-monday.html",
       "date": "2026-08-30",
+      "datetime": "2026-08-30T20:00:00-04:00",
+      "stamp": "Aug 30, 2026, ~8:00 PM ET",
       "title": "Hormuz is kinetic again. That is not a Monday ticket.",
-      "dek": "Sunday 30 Aug ~5:00 PM PT: NQ ~29,320, WTI ~$84.59. US strike on Larak Island. Friday map unchanged. Not a ticket. Simulated."
+      "dek": "Sunday 30 Aug ~8:00 PM ET: NQ ~29,320, WTI ~$84.59. US strike on Larak Island. Friday map unchanged. Not a ticket. Simulated."
     },
     {
       "slug": "spy-opex-rolloff.html",
       "date": "2026-08-28",
+      "datetime": "2026-08-28",
+      "stamp": "Aug 28, 2026 · ET",
       "title": "SPY weekly OPEX: gamma negative at Friday’s close",
       "dek": "Independent EOD book flipped +$4.78B Thursday to −$0.93B Friday. Delta sign is not agreed across books. Cos does not print G-D+. Simulated. Not a ticket."
     },
     {
       "slug": "regime-robustness.html",
       "date": "2026-08-28",
+      "datetime": "2026-08-28",
+      "stamp": "Aug 28, 2026 · ET",
       "title": "Most signals fail one regime. Health Care still leads.",
       "dek": "XLV 95/100 as of Friday 28 Aug 2026 close. Same published map. Not a live performance book."
     }
