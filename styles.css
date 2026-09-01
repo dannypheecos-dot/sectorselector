@@ -793,6 +793,36 @@ body.unlocked .trade-card { display: none; }
 .status-open { color: var(--mint); font-family: var(--mono); letter-spacing: 0.08em; }
 .status-closed { color: var(--off); font-family: var(--mono); }
 .status-skip { color: var(--muted); font-family: var(--mono); letter-spacing: 0.08em; }
+.status-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.16rem 0.42rem;
+  border: 1px solid currentColor;
+  line-height: 1.2;
+}
+.status-badge.status-open {
+  color: var(--mint);
+  background: var(--mint-dim);
+  border-color: var(--mint-line);
+}
+.status-badge.status-closed {
+  color: var(--off);
+  background: var(--bg-3);
+  border-color: var(--line-2);
+}
+
+.odte-ticket {
+  border: 1px solid var(--mint-line);
+  background: var(--bg-2);
+  padding: 1.1rem 1.15rem;
+}
+.odte-ticket .dl-label { margin-bottom: 0.35rem; }
+.odte-ticket-status { margin: 0 0 0.45rem; }
+.odte-ticket-side { margin: 0 0 0.75rem; color: var(--off); }
+.odte-empty { color: var(--muted); }
 .debit-pending { color: var(--muted); }
 .blotter .mono { white-space: nowrap; }
 

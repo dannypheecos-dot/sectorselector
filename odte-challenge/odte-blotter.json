@@ -1,0 +1,29 @@
+{
+  "asOf": "2026-09-01",
+  "asOfLabel": "1 Sep 2026",
+  "windowStart": "2026-09-01",
+  "windowEnd": "2026-10-01",
+  "publisher": "Sector Selector / A CosAnalyst Research Project",
+  "disclosure": "SIMULATED RESEARCH. Paper log of index-ETF 0DTE/1DTE tickets. No real-money performance is claimed. Not advice. Open rows show Status OPEN and no P&L. We do not invent premiums. No win rate until closed tickets exist.",
+  "closedNeededForWinRate": 1,
+  "trades": [
+    {
+      "id": "2026-09-01-qqq-707p",
+      "date": "2026-09-01",
+      "underlying": "QQQ",
+      "contract": "Sep 2 2026 707 Put",
+      "contractDetail": "QQQ 707P exp 2026-09-02",
+      "side": "BTO 1",
+      "entry": 2.20,
+      "entryAsOf": "2026-09-01 ~4:15 PM ET",
+      "exit": null,
+      "status": "open",
+      "pnl": null,
+      "target": 4.40,
+      "targetLabel": "100%+ = $4.40",
+      "hardLatest": "2026-09-02 4:15 PM ET",
+      "spotAtEntry": 707.76,
+      "notes": "just-OTM put vs 707.76; Sep 2 GEX snapshot negative gamma, HVL 717, P1 700, C1 725. BOOK FACT · NOT A LIVE TICKET."
+    }
+  ]
+}
