@@ -299,14 +299,14 @@
               debitMid: 2.26,
               debitLabel: "$2.43 or better",
               result: null,
-              notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Invalidation: drops out of top 3 on 13w RS vs SPY."
+              notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Exits are dated on the card."
             }
           ]);
           renderRecordStats({
             asOfLabel: "31 Aug 2026",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open", notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Invalidation: drops out of top 3 on 13w RS vs SPY." }]
+            tickets: [{ status: "open", notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Exits are dated on the card." }]
           });
         }
       });

@@ -3,7 +3,7 @@
   "title": "This week’s map",
   "subtitle": "As of Friday 28 Aug 2026 cash close. Price-only. Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is HOLD — not a new ticket. Technology is a skip. We do not show XLK as a leader.",
   "tableKicker": "CURRENT SECTOR RANKINGS · FRIDAY 28 AUG 2026 CLOSE",
-  "footer": "XLP and XLY vs50d were not in the health table this week — location term = 0, not invented. Utilities is the laggard. No short: the board is healthy (8/11 above 50d).",
+  "footer": "XLP and XLY: the location input was unavailable that week. We did not invent it. Utilities is the laggard.",
   "output": "brand/this-weeks-map.png",
   "width": 1080,
   "height": 1350,
