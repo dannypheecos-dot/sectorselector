@@ -1,11 +1,16 @@
 {
   "asOf": "2026-09-01",
-  "asOfLabel": "1 Sep 2026",
+  "asOfLabel": "Sep 1, 2026, 4:15 PM ET",
   "windowStart": "2026-09-01",
   "windowEnd": "2026-10-01",
   "publisher": "Sector Selector / A CosAnalyst Research Project",
   "disclosure": "SIMULATED RESEARCH. Paper log of index-ETF 0DTE/1DTE tickets. No real-money performance is claimed. Not advice. Open rows show Status OPEN and no P&L. We do not invent premiums. No win rate until closed tickets exist.",
   "closedNeededForWinRate": 1,
+  "cardRules": [
+    "On every OPEN or CLOSE, update this public card in the same commit/ship. Status must match the ledger within minutes, not next day.",
+    "Every ticket shows a visible opened/alerted timestamp in America/New_York, labeled ET. Not PT. Not ISO-only.",
+    "Every ticket has an underlying tape target for the same day or next day. Option 100%+ premium is a second line, not a substitute."
+  ],
   "trades": [
     {
       "id": "2026-09-01-qqq-707p",
@@ -15,15 +20,23 @@
       "contractDetail": "QQQ 707P exp 2026-09-02",
       "side": "BTO 1",
       "entry": 2.20,
-      "entryAsOf": "2026-09-01 ~4:15 PM ET",
+      "openedAlerted": "Sep 1, 2026, 4:15 PM ET",
+      "openedAlertedAt": "2026-09-01T16:15:00-04:00",
+      "entryAsOf": "Sep 1, 2026, 4:15 PM ET",
       "exit": null,
       "status": "open",
       "pnl": null,
+      "underlyingTarget": 700,
+      "underlyingTargetLabel": "QQQ $700",
+      "underlyingTargetHorizon": "same/next session, Sep 2 0DTE",
+      "underlyingTargetNote": "P1 700 from the Sep 2 GEX snapshot (put wall), not a round-number example. Snapshot as-of Sep 1, 2026, 4:13 PM ET. Spot 707.76. HVL 717. C1 725.",
+      "optionTarget": 4.40,
+      "optionTargetLabel": "$4.40 (100%+)",
       "target": 4.40,
-      "targetLabel": "100%+ = $4.40",
-      "hardLatest": "2026-09-02 4:15 PM ET",
+      "targetLabel": "$4.40 (100%+)",
+      "hardLatest": "Sep 2, 2026, 4:15 PM ET",
       "spotAtEntry": 707.76,
-      "notes": "just-OTM put vs 707.76; Sep 2 GEX snapshot negative gamma, HVL 717, P1 700, C1 725. BOOK FACT · NOT A LIVE TICKET."
+      "notes": "just-OTM put vs 707.76. Tape target is P1 700 from the Sep 2 GEX snapshot, not a round-number example. Snapshot as-of Sep 1, 2026, 4:13 PM ET. Negative gamma, HVL 717, C1 725. BOOK FACT · NOT A LIVE TICKET."
     }
   ]
 }

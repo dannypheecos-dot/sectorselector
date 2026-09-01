@@ -422,21 +422,39 @@
     var contract = $("odte-open-contract");
     var side = $("odte-open-side");
     var notes = $("odte-open-notes");
+    var badge = $("odte-open-badge");
+    var alerted = $("odte-open-alerted");
+    var tape = $("odte-open-tape");
+    var option = $("odte-open-option");
+    var openedLabel = t.openedAlerted || t.entryAsOf || "—";
+    var tapeLabel = t.underlyingTargetLabel || (t.underlying && t.underlyingTarget != null ? t.underlying + " $" + t.underlyingTarget : "—");
+    var optionLabel = t.optionTargetLabel || t.targetLabel || (t.optionTarget != null ? moneyPremium(t.optionTarget) + " (100%+)" : "—");
+    if (badge) {
+      badge.className = "status-badge status-open";
+      badge.textContent = "OPEN";
+    }
     if (contract) {
       contract.textContent = (t.underlying ? t.underlying + " · " : "") + (t.contract || t.contractDetail || "—");
     }
     if (side) {
       side.textContent = (t.side || "BTO") + " @ " + moneyPremium(t.entry);
     }
+    if (alerted) {
+      if (t.openedAlertedAt) alerted.setAttribute("datetime", t.openedAlertedAt);
+      alerted.textContent = openedLabel;
+    }
+    if (tape) tape.textContent = tapeLabel.indexOf("target") === -1 ? tapeLabel.replace(/^QQQ /, "QQQ target ") : tapeLabel;
+    if (option) option.textContent = optionLabel.indexOf("Option") === 0 ? optionLabel : "Option target " + optionLabel;
     fillOdteDl($("odte-open-dl"), [
       ["Entry", moneyPremium(t.entry)],
-      ["Entry as-of", t.entryAsOf || "—"],
-      ["Target", t.targetLabel || (t.target != null ? "100%+ = " + moneyPremium(t.target) : "—")],
-      ["Hard latest", t.hardLatest || "4:15 PM ET expiry"],
+      ["Opened/alerted", openedLabel],
+      ["Underlying target", tapeLabel],
+      ["Option target", optionLabel],
+      ["Hard latest", t.hardLatest || "Sep 2, 2026, 4:15 PM ET"],
       ["Spot at entry", t.spotAtEntry != null ? String(t.spotAtEntry) : "—"],
       ["P&L", "—"]
     ]);
-    if (notes) notes.textContent = t.notes || "";
+    if (notes) notes.textContent = t.underlyingTargetNote || t.notes || "";
   }
 
   function renderOdteStats(data) {
