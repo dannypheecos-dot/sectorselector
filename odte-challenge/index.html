@@ -7,14 +7,14 @@
   <meta name="description" content="30-day paper log of index-ETF 0DTE/1DTE tickets. Simulated research, not live money. No win rate until closed tickets exist. Sector Selector / A CosAnalyst Research Project.">
   <meta name="theme-color" content="#101214">
   <meta property="og:title" content="0DTE Challenge — paper log, not a live book.">
-  <meta property="og:description" content="SIMULATED RESEARCH. QQQ/SPY/IWM 0DTE/1DTE paper tickets. Target 100%+ winners. No real-money performance. Not advice.">
+  <meta property="og:description" content="SIMULATED RESEARCH. QQQ/SPY/IWM 0DTE/1DTE paper tickets. Target is a ticker price. No real-money performance. Not advice.">
   <meta property="og:url" content="https://sectorselector.ai/odte-challenge/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
   <meta property="og:image:alt" content="0DTE Challenge — Sector Selector paper log">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="0DTE Challenge — paper log, not a live book.">
-  <meta name="twitter:description" content="SIMULATED RESEARCH. QQQ/SPY/IWM 0DTE/1DTE paper tickets. Target 100%+ winners. No real-money performance. Not advice.">
+  <meta name="twitter:description" content="SIMULATED RESEARCH. QQQ/SPY/IWM 0DTE/1DTE paper tickets. Target is a ticker price. No real-money performance. Not advice.">
   <meta name="twitter:image" content="https://sectorselector.ai/brand/sector-selector-banner.png">
   <link rel="icon" href="../brand/fox-mark-arrow.png" type="image/png">
   <link rel="apple-touch-icon" href="../brand/fox-mark-arrow.png">
@@ -71,11 +71,12 @@
       <h1>0DTE Challenge</h1>
       <p class="intro" id="odte-disclosure">Index-ETF 0DTE/1DTE paper log. Separate from the XLV sector-swing Track Record. Open rows show Status OPEN and no P&amp;L. We do not invent premiums. No win rate until closed tickets exist.</p>
       <p class="lede">Publisher: Sector Selector / A CosAnalyst Research Project. This is a public paper book, not a live ticket desk and not the monthly sector plan.</p>
-      <ul class="record-rules">
+      <ul class="record-rules" id="odte-card-rules">
         <li>Index ETF 0DTE/1DTE only (QQQ / SPY / IWM).</li>
-        <li>Target <strong>100%+ winners</strong> (bigger % is better). May close any time GEX/tape pays; 4:15 PM ET expiry is the latest, not the plan.</li>
-        <li>Log every trade. Minimum one trade per day in the window. Open rows stay OPEN with no P&amp;L.</li>
-        <li>Never invent premiums. BOOK FACT · NOT A LIVE TICKET.</li>
+        <li>The <strong>TARGET is a ticker PRICE</strong> — same day or next day. That price is the only win-condition number. Not a percent. Not an option premium.</li>
+        <li>On every OPEN or CLOSE, this public card updates in the same ship. Status matches the ledger within minutes, not next day.</li>
+        <li>Every ticket shows opened/alerted time in <strong>ET</strong>. May close any time GEX/tape pays; 4:15 PM ET expiry is the latest, not the plan.</li>
+        <li>Log every trade. Minimum one trade per day in the window. Open rows stay OPEN with no P&amp;L. Never invent premiums.</li>
       </ul>
       <div class="stat-strip" aria-label="0DTE paper log counts">
         <div class="stat">
@@ -96,23 +97,26 @@
     <section class="wrap section" id="open-ticket">
       <div class="section-head">
         <h2>Open paper ticket</h2>
-        <p class="asof" id="odte-asof">As of 1 Sep 2026 · paper log</p>
+        <p class="asof" id="odte-asof">As of Sep 1, 2026, 4:15 PM ET · paper log</p>
       </div>
       <article class="odte-ticket" id="odte-open-card">
         <p class="dl-label">Live on the book</p>
-        <p class="odte-ticket-status"><span class="status-badge status-open">OPEN</span></p>
+        <p class="odte-ticket-status"><span class="status-badge status-open" id="odte-open-badge">OPEN</span></p>
         <p class="cash mono" id="odte-open-contract">QQQ · Sep 2 2026 707 Put</p>
         <p class="odte-ticket-side mono" id="odte-open-side">BTO 1 @ $2.20</p>
+        <p class="odte-alerted">Opened/alerted <time class="stamp-et" id="odte-open-alerted" datetime="2026-09-01T16:15:00-04:00" data-et>Sep 1, 2026, 4:15 PM ET</time></p>
+        <p class="odte-tape-target mono" id="odte-open-tape">Target QQQ $700</p>
+        <p class="odte-option-target" id="odte-open-option" hidden></p>
         <dl class="brief-dl" id="odte-open-dl">
+          <div><dt>Target</dt><dd class="mono">QQQ $700</dd></div>
           <div><dt>Entry</dt><dd class="mono">$2.20</dd></div>
-          <div><dt>Entry as-of</dt><dd class="mono">2026-09-01 ~4:15 PM ET</dd></div>
-          <div><dt>Target</dt><dd class="mono">100%+ = $4.40</dd></div>
-          <div><dt>Hard latest</dt><dd class="mono">2026-09-02 4:15 PM ET</dd></div>
+          <div><dt>Opened/alerted</dt><dd class="mono">Sep 1, 2026, 4:15 PM ET</dd></div>
+          <div><dt>Hard latest</dt><dd class="mono">Sep 2, 2026, 4:15 PM ET</dd></div>
           <div><dt>Spot at entry</dt><dd class="mono">707.76</dd></div>
           <div><dt>P&amp;L</dt><dd class="mono">—</dd></div>
         </dl>
         <p class="book-fact">BOOK FACT · NOT A LIVE TICKET</p>
-        <p class="footnote" id="odte-open-notes">just-OTM put vs 707.76; Sep 2 GEX snapshot negative gamma, HVL 717, P1 700, C1 725. BOOK FACT · NOT A LIVE TICKET.</p>
+        <p class="footnote" id="odte-open-notes">Target is QQQ $700 — P1 / put wall from the Sep 2 GEX snapshot. If 700 breaks: 694 put shelf is a stretch, not the target. Invalidation: HVL 717 reclaim. Structure is BTO 1 Sep 2 707 Put at $2.20. BOOK FACT · NOT A LIVE TICKET.</p>
       </article>
       <p class="odte-empty" id="odte-no-open" hidden>No open 0DTE paper tickets.</p>
     </section>
@@ -151,7 +155,7 @@
           </tbody>
         </table>
       </div>
-      <p class="footnote" id="odte-notes">Spot at entry 707.76. just-OTM put vs 707.76; Sep 2 GEX snapshot negative gamma, HVL 717, P1 700, C1 725. BOOK FACT · NOT A LIVE TICKET. SIMULATED RESEARCH.</p>
+      <p class="footnote" id="odte-notes">Target is QQQ $700 — P1 / put wall from the Sep 2 GEX snapshot. If 700 breaks: 694 put shelf is a stretch, not the target. Invalidation: HVL 717 reclaim. Structure is BTO 1 Sep 2 707 Put at $2.20. BOOK FACT · NOT A LIVE TICKET. SIMULATED RESEARCH.</p>
     </section>
 
     <section class="wrap section page-cta" id="capture">

@@ -1,11 +1,16 @@
 {
   "asOf": "2026-09-01",
-  "asOfLabel": "1 Sep 2026",
+  "asOfLabel": "Sep 1, 2026, 4:15 PM ET",
   "windowStart": "2026-09-01",
   "windowEnd": "2026-10-01",
   "publisher": "Sector Selector / A CosAnalyst Research Project",
-  "disclosure": "SIMULATED RESEARCH. Paper log of index-ETF 0DTE/1DTE tickets. No real-money performance is claimed. Not advice. Open rows show Status OPEN and no P&L. We do not invent premiums. No win rate until closed tickets exist.",
+  "disclosure": "SIMULATED RESEARCH. Paper log of index-ETF 0DTE/1DTE tickets. No real-money performance is claimed. Not advice. Open rows show Status OPEN and no P&L. We do not invent premiums. No win rate until closed tickets exist. The TARGET is a ticker price, not a percentage gain and not an option premium.",
   "closedNeededForWinRate": 1,
+  "cardRules": [
+    "On every OPEN or CLOSE, update this public card in the same commit/ship. Status must match the ledger within minutes, not next day.",
+    "Every ticket shows a visible opened/alerted timestamp in America/New_York, labeled ET. Not PT. Not ISO-only.",
+    "The TARGET is a ticker PRICE for the same day or next day. It is the only win-condition number. Not a percentage gain. Not an option premium."
+  ],
   "trades": [
     {
       "id": "2026-09-01-qqq-707p",
@@ -15,15 +20,24 @@
       "contractDetail": "QQQ 707P exp 2026-09-02",
       "side": "BTO 1",
       "entry": 2.20,
-      "entryAsOf": "2026-09-01 ~4:15 PM ET",
+      "openedAlerted": "Sep 1, 2026, 4:15 PM ET",
+      "openedAlertedAt": "2026-09-01T16:15:00-04:00",
+      "entryAsOf": "Sep 1, 2026, 4:15 PM ET",
       "exit": null,
       "status": "open",
       "pnl": null,
-      "target": 4.40,
-      "targetLabel": "100%+ = $4.40",
-      "hardLatest": "2026-09-02 4:15 PM ET",
+      "target": 700,
+      "targetLabel": "QQQ $700",
+      "underlyingTarget": 700,
+      "underlyingTargetLabel": "QQQ $700",
+      "underlyingTargetHorizon": "same/next session, Sep 2 0DTE",
+      "stretch": 694,
+      "stretchNote": "If 700 breaks: 694 (put shelf) is a stretch, not the target.",
+      "invalidation": 717,
+      "invalidationNote": "Invalidation: HVL 717 reclaim.",
+      "hardLatest": "Sep 2, 2026, 4:15 PM ET",
       "spotAtEntry": 707.76,
-      "notes": "just-OTM put vs 707.76; Sep 2 GEX snapshot negative gamma, HVL 717, P1 700, C1 725. BOOK FACT · NOT A LIVE TICKET."
+      "notes": "Target is QQQ $700 — P1 / put wall from the Sep 2 GEX snapshot, not a percent and not an option premium. Snapshot as-of Sep 1, 2026, 4:13 PM ET. Spot 707.76. HVL 717. C1 725. If 700 breaks: 694 put shelf is a stretch, not the target. Invalidation: HVL 717 reclaim. Structure is BTO 1 Sep 2 707 Put at $2.20. BOOK FACT · NOT A LIVE TICKET."
     }
   ]
 }

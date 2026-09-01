@@ -821,7 +821,22 @@ body.unlocked .trade-card { display: none; }
 }
 .odte-ticket .dl-label { margin-bottom: 0.35rem; }
 .odte-ticket-status { margin: 0 0 0.45rem; }
-.odte-ticket-side { margin: 0 0 0.75rem; color: var(--off); }
+.odte-ticket-side { margin: 0 0 0.35rem; color: var(--off); }
+.odte-alerted {
+  margin: 0 0 0.45rem;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.odte-alerted .stamp-et { font-size: 0.78rem; }
+.odte-tape-target {
+  margin: 0 0 0.15rem;
+  color: var(--mint);
+  font-size: 1.05rem;
+}
+.odte-option-target {
+  margin: 0 0 0.75rem;
+  color: var(--off);
+}
 .odte-empty { color: var(--muted); }
 .debit-pending { color: var(--muted); }
 .blotter .mono { white-space: nowrap; }
