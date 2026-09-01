@@ -1,10 +1,18 @@
 {
-  "asOf": "2026-08-31",
+  "asOf": "2026-09-01",
   "timezone": "America/New_York",
   "stampLabel": "ET",
   "desk": "Sector Selector",
   "model": "Product notes on the Friday map. Not a magazine. Unlock this month’s plan or see the current map.",
   "articles": [
+    {
+      "slug": "no-recut-after-the-vol.html",
+      "date": "2026-09-01",
+      "datetime": "2026-09-01",
+      "stamp": "Sep 1, 2026 · ET",
+      "title": "No Recut After the Vol. XLV Still Leads.",
+      "dek": "The Friday map is still the map: Health Care 95 #1, Financials 87, Energy 87 HOLD #3. Tuesday cash paid XLK / XLY / XLI and collected in XLE, XLU, and XLV. Simulated. Not a ticket."
+    },
     {
       "slug": "the-print-was-zero.html",
       "date": "2026-08-31",
