@@ -69,7 +69,9 @@
     "compliance": null,
     "complianceLabel": "N/A",
     "verifiedDataStatus": "NOT ENOUGH VERIFIED DATA",
-    "caption": "Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED. Trade Zero’s overnight indication is excluded. Rules-based managed record begins after Trade Zero. Model balance $9,840 includes the approved pre-rule baseline −$160 only."
+    "caption": "Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED. Trade Zero’s charted +28.6% is a traded-price high, not a verified executable bid, and does not increment verified +25%. Overnight ~$4.00–$4.40 is not a peak. Rules-based managed record begins after Trade Zero. Model balance $9,840 includes the approved pre-rule baseline −$160 only.",
+    "chartedPlus25": 1,
+    "chartedOpportunityRate": "1 / 1 executed · CHARTED, not verified"
   },
   "lessons": [
     {
@@ -336,46 +338,54 @@
       ],
       "hardLatest": "Sep 2, 2026, 4:15 PM ET",
       "thesis": "1DTE put against QQQ 700 (GEX P1) with hard invalidation at HVL 717. Overnight carry into expiration. Not a same-day 0DTE entry.",
-      "commentary": "Pre-rule baseline. Rules — including the profit-protection ladder — were adopted after this ticket’s open (LESSON 01, 12:35 PM ET). Official P&L is −$160 (−72.7%). Overnight indicated +100% / $4.40 is UNAUDITED and was not harvested. Cash open $2.54 is user-stated, not a close. Model cash includes this −$160 once ($9,840). Excluded from rules-based trade count, win rate, compliance, expectancy, and profit factor.",
+      "commentary": "Pre-rule baseline. Rules — including the profit-protection ladder — were adopted after this ticket’s open (LESSON 01, 12:35 PM ET). Official managed P&L is −$160 (−72.7%). Charted peak after alert is +28.6% from the $2.83 9:30 AM ET traded-price high vs $2.20 — CHARTED, not a verified executable bid. Overnight indicated +100% / $4.40 is UNAUDITED, occurred while options were closed, and is not the peak. Cash open $2.54 is user-stated, not a close. Model cash includes this −$160 once ($9,840). Excluded from rules-based trade count, win rate, compliance, expectancy, and profit factor.",
       "notes": "SIMULATED. CLOSED — LOSS @ $0.60 vs $2.20. Official P&L −$160 / −72.7%. Overnight MFE +100% / $4.40 UNAUDITED — not harvested. Cash open $2.54 user-stated (+$0.34 / ~+15%) — not official P&L. Compliance: N/A — RULES ADOPTED AFTERWARD. Unique id counted once. Not a live blotter. Not the sector-swing book.",
-      "opportunityIdentified": "UNVERIFIED",
+      "opportunityIdentified": "YES",
       "referenceEntry": 2.2,
       "referenceEntryVerified": false,
-      "referenceEntryNote": "Published desk fill $2.20. Not a verified executable ASK tape after the alert. Do not use as the Peak Opportunity denominator until historical quote history is attached.",
+      "referenceEntryNote": "Published desk fill / alert reference $2.20. Not a verified executable ASK tape. Charted peak uses this $2.20 as the published reference entry.",
       "peakExecutableBid": null,
       "peakBidAt": null,
       "peakOpportunityPct": null,
       "peakOpportunityLabel": "AWAITING VERIFIED QUOTE DATA",
       "peakVerification": "UNAVAILABLE — INSUFFICIENT DATA",
-      "quoteSource": null,
+      "quoteSource": "TradingView Superchart 1m traded OHLC (not NBBO)",
       "measurementStart": "2026-09-01T16:15:00-04:00",
       "measurementEnd": null,
       "maeBeforePeak": null,
-      "timeToPeak": null,
+      "timeToPeak": "Overnight carry into the 9:30 AM ET cash-open minute (charted high)",
       "peakVsManagedInvalidation": null,
-      "peakDay": null,
+      "peakDay": "Later day — Sep 2 expiration session",
       "indicativePeak": {
         "low": 4.0,
         "high": 4.4,
         "status": "INDICATIVE — NOT EXECUTABLE",
         "excludedFromOfficial": true,
-        "note": "Overnight indication approximately $4.00–$4.40. Not executable while the options market was closed. Not peakExecutableBid. INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS."
+        "notUsedAsPeak": true,
+        "note": "Overnight indication approximately $4.00–$4.40 occurred before the public alert / while the options market was closed. Not peakExecutableBid. Not the charted peak. Charted peak is the $2.83 traded-price high at 9:30 AM ET."
       },
       "cashOpenOfficialOpportunity": false,
       "signalQuality": {
-        "opportunityIdentified": "UNVERIFIED",
+        "opportunityIdentified": "YES",
+        "opportunityIdentifiedKind": "CHARTED",
+        "opportunityIdentifiedQualifier": "CHARTED — traded-price high, not a verified executable bid",
         "referenceEntry": 2.2,
         "peakExecutableBid": null,
         "peakBidAt": null,
         "peakOpportunityPct": null,
         "peakOpportunityLabel": "AWAITING VERIFIED QUOTE DATA",
         "verification": "UNAVAILABLE — INSUFFICIENT DATA",
+        "chartedPeakPct": 28.6,
+        "chartedHigh": 2.83,
+        "chartedVerification": "TRADINGVIEW TRADED-PRICE HIGH — NOT A VERIFIED EXECUTABLE BID",
         "maeBeforePeak": null,
-        "timeToPeak": null
+        "timeToPeak": "Overnight carry into the 9:30 AM ET cash-open minute (charted high)",
+        "peakDay": "Later day — Sep 2 expiration session"
       },
       "allOrNothingOutcome": {
         "notional": 1000,
         "terminalExitAt": "2026-09-02T12:25:00-04:00",
+        "terminalExitLabel": "Sep 2, 2026, ~12:25 PM ET last known exit — no invented cutoff bid",
         "terminalValue": 0.6,
         "terminalPct": -72.7,
         "dollarOutcome": null,
@@ -391,7 +401,7 @@
         "status": "INDICATIVE / UNAVAILABLE",
         "excludedFromOfficial": true,
         "label": "Hypothetical $1,000 fixed-notional research model. Not the model-account position size and not realized performance.",
-        "note": "Uses the actual $0.60 terminal as last known exit without a verified cutoff bid. Do not invent a 4:00 PM bid. Do not feed into official all-or-nothing aggregates."
+        "note": "Uses the actual $0.60 terminal as last known exit without a verified cutoff bid. Do not invent a 4:00 PM bid. Do not treat the $2.83 charted high as an all-or-nothing exit. Do not feed into official all-or-nothing aggregates."
       },
       "managedExecution": {
         "modelPositionSize": "1 contract",
@@ -406,6 +416,44 @@
         "excludedFromRulesBased": true,
         "excludedFromManagedStrategyStats": true,
         "includedInModelCashAsPreRuleBaseline": true
+      },
+      "opportunityIdentifiedKind": "CHARTED",
+      "opportunityIdentifiedQualifier": "CHARTED — traded-price high, not a verified executable bid",
+      "chartedPeak": {
+        "pct": 28.6,
+        "high": 2.83,
+        "referenceEntry": 2.2,
+        "formula": "($2.83 − $2.20) ÷ $2.20 × 100 = +28.6%",
+        "at": "2026-09-02T09:30:00-04:00",
+        "atLabel": "Sep 2, 2026, 9:30 AM ET",
+        "label": "+28.6%",
+        "verification": "TRADINGVIEW TRADED-PRICE HIGH — NOT A VERIFIED EXECUTABLE BID",
+        "excludedFromOfficialPeak": true,
+        "excludedFromVerifiedPlus25": true,
+        "ohlc": {
+          "open": 2.18,
+          "high": 2.83,
+          "low": 2.12,
+          "close": 2.45
+        },
+        "note": "The contract recorded a $2.83 traded-price high during the 9:30 AM ET one-minute candle, approximately 28.6% above the $2.20 reference entry. This establishes a charted opportunity above the challenge’s +25% threshold, but it does not prove that the entire position could have been sold at that price."
+      },
+      "evidence": {
+        "path": "evidence/trade-zero-qqq-707p-2026-09-02-0930-1m.png",
+        "platform": "TradingView",
+        "contract": "QQQ Sep 2, 2026 $707 put",
+        "timeframe": "One minute",
+        "candleTime": "Sep 2, 2026, 9:30 AM ET",
+        "candleTimeAt": "2026-09-02T09:30:00-04:00",
+        "ohlc": {
+          "open": 2.18,
+          "high": 2.83,
+          "low": 2.12,
+          "close": 2.45
+        },
+        "evidenceLevel": "Charted traded-price data",
+        "executableBidVerification": "Unavailable",
+        "quoteSource": "TradingView Superchart 1m traded OHLC (not NBBO)"
       }
     },
     {
@@ -472,7 +520,7 @@
     "historicalNbbo": "AWAITING VERIFIED QUOTE DATA",
     "quoteProvider": null,
     "fullTapeFromAlertToCutoff": false,
-    "note": "Reliable full historical NBBO bid/ask with size from alert timestamp through the product cutoff is not wired. Candle highs, last-trade highs, ask highs, midpoints, theoretical marks, intrinsic value, unsupported prints, and overnight closed-market indications are rejected for official Peak Opportunity."
+    "note": "Reliable full historical NBBO bid/ask with size from alert timestamp through the product cutoff is not wired. Candle highs, last-trade highs, ask highs, midpoints, theoretical marks, intrinsic value, unsupported prints, overnight closed-market indications, and TradingView Superchart traded OHLC are rejected for official Peak Opportunity. Trade Zero’s $2.83 09:30 ET 1-minute high is CHARTED only."
   },
   "productHours": {
     "underlyings": [
@@ -501,7 +549,7 @@
   "methodology": {
     "peakOpportunityPct": "(highest verified executable bid after referenceEntry − referenceEntry) ÷ referenceEntry × 100",
     "referenceEntry": "First verifiable executable ASK after the timestamped public alert, inside preferred entry range, at or below maximum entry, before alert expiration/invalidation, with enough displayed size for the model position.",
-    "opportunityIdentifiedYes": "Contract reaches at least +25% from verified referenceEntry on a verifiable executable BID after the public alert.",
+    "opportunityIdentifiedYes": "Public card YES may be CHARTED (traded-price high ≥ +25% from reference entry) or VERIFIED EXECUTABLE. Official verified YES / verified +25% counts require a verifiable executable BID after a verified referenceEntry. Never collapse charted YES into verified YES.",
     "officialPeakVerification": [
       "VERIFIED NBBO",
       "BROKER QUOTE VERIFIED"
@@ -514,10 +562,13 @@
       "theoretical option value",
       "intrinsic as an executable sale",
       "unsupported isolated print",
-      "overnight theoretical mark while options market closed"
+      "overnight theoretical mark while options market closed",
+      "TradingView Superchart traded OHLC",
+      "traded-price high"
     ],
     "captureRate": "managed realized profit ÷ maximum verified opportunity profit — only when Peak Opportunity is positive AND managed profit is positive AND both use verified executable data.",
-    "managedBalance": "startingCash + unique-id managed P&L (including approved pre-rule baseline). Peak and all-or-nothing dollars never enter."
+    "managedBalance": "startingCash + unique-id managed P&L (including approved pre-rule baseline). Peak and all-or-nothing dollars never enter.",
+    "chartedPeakPct": "(charted traded-price high after alert − reference entry) ÷ reference entry × 100. Not an executable bid. Excluded from official Peak aggregates."
   },
   "expandedRecord": {
     "avgVerifiedPeakPct": null,
@@ -531,6 +582,8 @@
     "managedLosses": 0,
     "opportunityCaptureRate": null,
     "odteVs1dte": null,
-    "status": "NOT ENOUGH VERIFIED DATA"
+    "status": "NOT ENOUGH VERIFIED DATA",
+    "chartedPlus25": 1,
+    "chartedOpportunityRate": "1 / 1 executed · CHARTED, not verified"
   }
 }

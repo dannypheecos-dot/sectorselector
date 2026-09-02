@@ -432,7 +432,7 @@
     "VERIFIED NBBO": true,
     "BROKER QUOTE VERIFIED": true
   };
-  var ODTE_REJECTED_PEAK = /candle|last-trade|last trade|ask high|midpoint|theoretical|intrinsic|unsupported|overnight/;
+  var ODTE_REJECTED_PEAK = /candle|last-trade|last trade|ask high|midpoint|theoretical|intrinsic|unsupported|overnight|tradingview|traded-price|traded ohlc|superchart/;
 
   function odtePeakIsOfficial(verification) {
     return !!(verification && ODTE_PEAK_OFFICIAL[String(verification)]);
@@ -491,6 +491,60 @@
     var peak = odtePeakOpportunity(t);
     if (!peak.official || peak.pct == null) return "UNVERIFIED";
     return peak.pct >= 25 ? "YES" : "NO";
+  }
+
+  function odteIdentifiedKind(t) {
+    return (t && (t.opportunityIdentifiedKind || (t.signalQuality && t.signalQuality.opportunityIdentifiedKind))) || "";
+  }
+
+  function odteIdentifiedLabel(t) {
+    var id = odteOpportunityIdentified(t);
+    var kind = odteIdentifiedKind(t);
+    if (id === "YES" && String(kind).toUpperCase() === "CHARTED") return "YES · CHARTED";
+    if (id === "YES" && String(kind).toUpperCase() === "VERIFIED") return "YES · VERIFIED";
+    return id;
+  }
+
+  function odteIsVerifiedIdentifiedYes(t) {
+    /* Official YES counts require verified executable +25%. Charted YES never enters. */
+    if (String(odteIdentifiedKind(t)).toUpperCase() === "CHARTED") return false;
+    var peak = odtePeakOpportunity(t);
+    return !!(peak.official && peak.pct != null && peak.pct >= 25);
+  }
+
+  function odteChartedPeak(t) {
+    var c = t && t.chartedPeak;
+    if (!c || c.pct == null) return null;
+    if (c.excludedFromOfficialPeak === false) return null;
+    return {
+      pct: Number(c.pct),
+      label: c.label || ((Number(c.pct) >= 0 ? "+" : "") + Number(c.pct).toFixed(1) + "%"),
+      verification: c.verification || "TRADINGVIEW TRADED-PRICE HIGH — NOT A VERIFIED EXECUTABLE BID",
+      note: c.note || "",
+      at: c.atLabel || c.at || "",
+      high: c.high
+    };
+  }
+
+  function odteIsChartedPlus25(t) {
+    var c = odteChartedPeak(t);
+    return !!(c && c.pct >= 25);
+  }
+
+  function odteEvidenceHtml(t) {
+    var ev = t && t.evidence;
+    if (!ev || !ev.path) return "";
+    var ohlc = ev.ohlc || {};
+    return "<figure class=\"odte-evidence\">" +
+      "<img src=\"" + ev.path + "\" alt=\"TradingView one-minute chart of QQQ Sep 2, 2026 $707 put, 9:30 AM ET candle\">" +
+      "<figcaption>" +
+      "<span class=\"mono\">" + (ev.platform || "TradingView") + " · " + (ev.timeframe || "One minute") + " · " + (ev.candleTime || "") + "</span>" +
+      "<span>Contract: " + (ev.contract || t.contract || "") + "</span>" +
+      "<span>OHLC: $" + ohlc.open + " / $" + ohlc.high + " / $" + ohlc.low + " / $" + ohlc.close + "</span>" +
+      "<span>Evidence level: " + (ev.evidenceLevel || "Charted traded-price data") + "</span>" +
+      "<span>Executable-bid verification: " + (ev.executableBidVerification || "Unavailable") + "</span>" +
+      "<span>quoteSource: " + (ev.quoteSource || "") + "</span>" +
+      "</figcaption></figure>";
   }
 
   function odteManagedCash(data) {
@@ -624,6 +678,10 @@
     }).length;
     var officialPeaks = trades.map(odtePeakOpportunity).filter(function (p) { return p.official && p.pct != null; });
     var plus25 = officialPeaks.filter(function (p) { return p.pct >= 25; }).length;
+    var verifiedYes = trades.filter(odteIsVerifiedIdentifiedYes).length;
+    void verifiedYes;
+    var chartedPlus = trades.filter(odteIsChartedPlus25).length;
+    var chartedExecuted = trades.filter(function (t) { return odteIsExecuted(t) && t.chartedPeak; }).length;
     var median = null;
     if (officialPeaks.length) {
       var sorted = officialPeaks.map(function (p) { return p.pct; }).sort(function (a, b) { return a - b; });
@@ -662,6 +720,12 @@
     odteSetText("odte-p-nq", String(published && published.noQualifyingEntryDays != null ? published.noQualifyingEntryDays : noEntryDays));
     var comp = published && (published.complianceLabel || published.compliance);
     odteSetText("odte-p-comp", comp == null || comp === "" ? "N/A" : String(comp));
+    var chartedLabel = published && published.chartedPlus25 != null ? String(published.chartedPlus25) : String(chartedPlus);
+    odteSetText("odte-p-charted", chartedLabel);
+    var chartedRate = published && published.chartedOpportunityRate
+      ? published.chartedOpportunityRate
+      : (chartedExecuted ? (chartedPlus + " / " + chartedExecuted + " executed · CHARTED, not verified") : "—");
+    odteSetText("odte-p-charted-rate", chartedRate);
     var caption = (published && published.caption) || "Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED.";
     odteSetText("odte-progress-caption", caption);
     var pending = "NOT ENOUGH VERIFIED DATA";
@@ -673,6 +737,7 @@
     odteSetText("odte-x-wl", (expanded && expanded.managedWins != null ? expanded.managedWins : wins) + " / " + (expanded && expanded.managedLosses != null ? expanded.managedLosses : losses));
     odteSetText("odte-x-cap", "—");
     odteSetText("odte-x-dte", pending);
+    odteSetText("odte-x-charted", chartedRate);
     var asof = $("odte-asof");
     if (asof && data && data.asOfAt) {
       asof.innerHTML = 'Last updated <time class="stamp-et" datetime="' + data.asOfAt + '"' + (data.asOfApprox ? " data-et data-et-approx" : " data-et") + ">" + (data.asOfLabel || "") + "</time>";
@@ -689,7 +754,8 @@
     root.textContent = "";
     rows.forEach(function (t) {
       var peak = odtePeakOpportunity(t);
-      var identified = odteOpportunityIdentified(t);
+      var identified = odteIdentifiedLabel(t);
+      var charted = odteChartedPeak(t);
       var managed = t.managedExecution || {};
       var managedDollar = managed.dollarResult != null ? managed.dollarResult : t.pnl;
       var art = document.createElement("article");
@@ -718,7 +784,13 @@
       });
       var peakLine = document.createElement("p");
       peakLine.className = "odte-peak-line";
-      peakLine.textContent = "PEAK OPPORTUNITY AFTER ALERT: " + (peak.official && peak.pct != null ? peak.label : peak.label);
+      peakLine.textContent = "PEAK OPPORTUNITY AFTER ALERT: " + peak.label;
+      var chartedLine = null;
+      if (charted) {
+        chartedLine = document.createElement("p");
+        chartedLine.className = "odte-charted-line";
+        chartedLine.textContent = "CHARTED PEAK AFTER ALERT: " + charted.label;
+      }
       var detailsId = "odte-result-details-" + (t.id || "row");
       var btn = document.createElement("button");
       btn.type = "button";
@@ -735,19 +807,26 @@
       panel.innerHTML =
         "<section><h3>Signal quality</h3><dl class=\"odte-card-grid\">" +
         "<div><dt>Opportunity identified</dt><dd>" + identified + "</dd></div>" +
+        "<div><dt>Qualifier</dt><dd>" + (t.opportunityIdentifiedQualifier || sig.opportunityIdentifiedQualifier || "—") + "</dd></div>" +
         "<div><dt>Reference entry</dt><dd>" + (t.referenceEntryNote || moneyPremium(t.referenceEntry)) + "</dd></div>" +
-        "<div><dt>Peak executable bid</dt><dd>" + (t.peakExecutableBid == null ? (peak.label) : moneyPremium(t.peakExecutableBid)) + "</dd></div>" +
-        "<div><dt>Peak time</dt><dd>" + (t.peakBidAt || sig.peakBidAt || "—") + "</dd></div>" +
-        "<div><dt>Peak Opportunity</dt><dd>" + peak.label + "</dd></div>" +
-        "<div><dt>Verification</dt><dd>" + (t.peakVerification || "UNAVAILABLE — INSUFFICIENT DATA") + "</dd></div>" +
-        "<div><dt>MAE before peak</dt><dd>" + (t.maeBeforePeak != null ? String(t.maeBeforePeak) : "—") + "</dd></div>" +
-        "<div><dt>Time to peak</dt><dd>" + (t.timeToPeak || "—") + "</dd></div></dl>" +
+        "<div><dt>Peak executable bid</dt><dd>" + (t.peakExecutableBid == null ? peak.label : moneyPremium(t.peakExecutableBid)) + "</dd></div>" +
+        "<div><dt>Official Peak Opportunity</dt><dd>" + peak.label + "</dd></div>" +
+        "<div><dt>Official verification</dt><dd>" + (t.peakVerification || "UNAVAILABLE — INSUFFICIENT DATA") + "</dd></div>" +
+        "<div><dt>Charted peak after alert</dt><dd>" + (charted ? charted.label : "—") + "</dd></div>" +
+        "<div><dt>Charted high / time</dt><dd>" + (charted && charted.high != null ? ("$" + Number(charted.high).toFixed(2) + (charted.at ? " · " + charted.at : "")) : "—") + "</dd></div>" +
+        "<div><dt>Charted verification</dt><dd>" + (charted ? charted.verification : "—") + "</dd></div>" +
+        "<div><dt>MAE before peak</dt><dd>" + (t.maeBeforePeak != null ? String(t.maeBeforePeak) : (sig.maeBeforePeak != null ? String(sig.maeBeforePeak) : "—")) + "</dd></div>" +
+        "<div><dt>Time to peak</dt><dd>" + (t.timeToPeak || sig.timeToPeak || "—") + "</dd></div>" +
+        "<div><dt>Peak vs managed invalidation</dt><dd>" + (t.peakVsManagedInvalidation || "—") + "</dd></div>" +
+        "<div><dt>Peak day</dt><dd>" + (t.peakDay || sig.peakDay || "—") + "</dd></div></dl>" +
+        (charted && charted.note ? "<p class=\"odte-charted-disc\">" + charted.note + "</p>" : "") +
         (t.indicativePeak && t.indicativePeak.note ? "<p>" + t.indicativePeak.note + "</p>" : "") +
+        odteEvidenceHtml(t) +
         "</section><section><h3>All-or-nothing research model</h3>" +
         "<p>Hypothetical $1,000 fixed-notional research model. Not the model-account position size and not realized performance.</p>" +
         "<dl class=\"odte-card-grid\">" +
         "<div><dt>Notional</dt><dd>$1,000</dd></div>" +
-        "<div><dt>Terminal exit time</dt><dd>" + (aon.terminalExitAt || "—") + "</dd></div>" +
+        "<div><dt>Terminal exit time</dt><dd>" + (aon.terminalExitLabel || aon.terminalExitAt || "—") + "</dd></div>" +
         "<div><dt>Terminal value</dt><dd>" + (aon.terminalValue != null ? moneyPremium(aon.terminalValue) + (aon.status ? " · " + aon.status : "") : (aon.status || "—")) + "</dd></div>" +
         "<div><dt>% outcome</dt><dd>" + (aon.terminalPct != null ? aon.terminalPct + "%" : "—") + "</dd></div>" +
         "<div><dt>$ outcome</dt><dd>" + (aon.excludedFromOfficial ? "Not entered in official AON totals" : (aon.dollarOutcome != null ? odteMoneyInt(aon.dollarOutcome) : "—")) + "</dd></div>" +
@@ -767,6 +846,7 @@
       art.appendChild(h);
       art.appendChild(mini);
       art.appendChild(peakLine);
+      if (chartedLine) art.appendChild(chartedLine);
       art.appendChild(btn);
       art.appendChild(panel);
       root.appendChild(art);
@@ -981,6 +1061,13 @@
     document.querySelectorAll(".odte-details-btn").forEach(function (btn) {
       if (btn.getAttribute("data-odte-bound") === "1") return;
       btn.setAttribute("data-odte-bound", "1");
+      if (!btn.getAttribute("data-closed-label")) {
+        btn.setAttribute("data-closed-label", btn.textContent || "VIEW DETAILS");
+      }
+      if (!btn.getAttribute("data-open-label")) {
+        var closed = btn.getAttribute("data-closed-label") || "";
+        btn.setAttribute("data-open-label", /FULL/i.test(closed) ? "HIDE FULL TRADE DETAILS" : "HIDE DETAILS");
+      }
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("aria-controls");
         var panel = id ? document.getElementById(id) : null;
@@ -988,7 +1075,7 @@
         var open = panel.hidden;
         panel.hidden = !open;
         btn.setAttribute("aria-expanded", open ? "true" : "false");
-        btn.textContent = open ? "HIDE FULL TRADE DETAILS" : "VIEW FULL TRADE DETAILS";
+        btn.textContent = open ? btn.getAttribute("data-open-label") : btn.getAttribute("data-closed-label");
       });
     });
   }

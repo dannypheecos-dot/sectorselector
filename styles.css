@@ -1563,12 +1563,58 @@ body[data-page="odte-challenge"] .mast {
 }
 
 .odte-peak-line {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.35rem;
   font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--mint);
+}
+
+.odte-charted-line {
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--off);
+}
+
+.odte-charted-disc {
+  margin: 0.75rem 0 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  color: var(--off);
+  font-size: 0.92rem;
+}
+
+.odte-charted-strip {
+  margin: 0 0 0.85rem;
+}
+
+@media (min-width: 720px) {
+  .odte-charted-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+.odte-evidence {
+  margin: 0.85rem 0 0;
+}
+
+.odte-evidence img {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #101214;
+}
+
+.odte-evidence figcaption {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .odte-three > section {
