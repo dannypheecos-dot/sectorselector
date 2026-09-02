@@ -551,9 +551,17 @@
           var steps = t.statusPath.map(function (s) {
             return (s.status || "") + " (" + (s.atLabel || "") + ")";
           }).join(" → ");
-          return "Status path for " + (t.id || t.date) + ": " + steps + ".";
+          var extra = "";
+          if (t.exit != null && t.entry != null) {
+            extra += " Official close $" + Number(t.exit).toFixed(2) + " vs $" + Number(t.entry).toFixed(2);
+            if (t.pnlLabel) extra += ", " + t.pnlLabel;
+            extra += ".";
+          }
+          if (t.mfeLabel) extra += " MFE " + t.mfeLabel + ".";
+          if (t.cashOpenLabel) extra += " Cash open " + t.cashOpenLabel + " — not official P&L.";
+          return "Status path for " + (t.id || t.date) + ": " + steps + "." + extra;
         });
-      if (paths.length) notes.textContent = paths.join(" ") + " Prior OPEN remains on the timeline. SIMULATED RESEARCH.";
+      if (paths.length) notes.textContent = paths.join(" ") + " Prior OPEN, HOLD, and CLOSE fills remain. SIMULATED RESEARCH.";
     }
   }
 
