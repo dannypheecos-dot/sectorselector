@@ -178,7 +178,7 @@
         <div><dt>Charted +25% opportunities</dt><dd id="odte-p-charted">1</dd></div>
         <div><dt>Charted Opportunity Rate</dt><dd id="odte-p-charted-rate">1 / 1 executed · CHARTED, not verified</dd></div>
       </dl>
-      <p class="odte-strip-caption" id="odte-progress-caption">Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED. Trade Zero’s charted +28.6% is a traded-price high, not a verified executable bid, and does not increment verified +25%. Overnight ~$4.00–$4.40 is not a peak. Rules-based managed record begins after Trade Zero. Model balance $9,840 includes the approved pre-rule baseline −$160 only.</p>
+      <p class="odte-strip-caption" id="odte-progress-caption">Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED. Trade Zero’s official peak is NOT PRESERVED — insufficient historical quote evidence; the bid/NBBO was not captured before expiration. Charted +28.6% is a traded-price high, not a verified executable bid, and does not increment verified +25%. Overnight ~$4.00–$4.40 is not a peak. Rules-based managed record begins after Trade Zero. Model balance $9,840 includes the approved pre-rule baseline −$160 only.</p>
       <p class="odte-peak-disc" id="odte-peak-disc">Peak Opportunity After Alert is the largest verifiable executable gain that became available after the timestamped alert and before the contract’s trading window ended. It is not realized profit and does not mean anyone captured the full move.</p>
       <details class="odte-expanded-record" id="odte-expanded-record">
         <summary>Expanded record (not official until verified quotes)</summary>
@@ -218,17 +218,17 @@
         <h2>Recent Results</h2>
         <p class="asof">Unique trade ids · one count each</p>
       </div>
-      <p class="intro">Collapsed cards show Opportunity Identified, Peak Opportunity, and Managed Result. A CHARTED YES is a traded-price high, not a verified executable bid. All-or-Nothing dollars stay in the details. Peak Opportunity is not realized profit.</p>
+      <p class="intro">Collapsed cards show Opportunity Identified, Peak Opportunity, and Managed Result. A CHARTED YES is a traded-price high, not a verified executable bid. All-or-Nothing dollars stay in the details. Peak Opportunity is not realized profit. AWAITING VERIFIED QUOTE DATA is only while the contract is still live and still quoted. After expiration with no preserved bid tape, Official Peak is NOT PRESERVED — insufficient historical quote evidence. That is a protocol miss, not a pending lookup.</p>
       <div id="odte-results">
         <article class="odte-result" data-trade-id="2026-09-01-qqq-707p">
           <p class="odte-result-date mono">2026-09-01</p>
           <h3>QQQ Sep 2 2026 707 put</h3>
           <dl class="odte-result-mini">
             <div><dt>Opportunity identified</dt><dd>YES · CHARTED</dd></div>
-            <div><dt>Peak Opportunity</dt><dd>AWAITING VERIFIED QUOTE DATA</dd></div>
+            <div><dt>Peak Opportunity</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
             <div><dt>Managed Result</dt><dd>−$160</dd></div>
           </dl>
-          <p class="odte-peak-line">PEAK OPPORTUNITY AFTER ALERT: AWAITING VERIFIED QUOTE DATA</p>
+          <p class="odte-peak-line">PEAK OPPORTUNITY AFTER ALERT: NOT PRESERVED — insufficient historical quote evidence</p>
           <p class="odte-charted-line">CHARTED PEAK AFTER ALERT: +28.6%</p>
           <button type="button" class="ghost-btn odte-details-btn" aria-expanded="false" aria-controls="odte-result-details-2026-09-01-qqq-707p">VIEW DETAILS</button>
           <div class="odte-details odte-three" id="odte-result-details-2026-09-01-qqq-707p" hidden>
@@ -238,9 +238,9 @@
                 <div><dt>Opportunity identified</dt><dd>YES · CHARTED</dd></div>
                 <div><dt>Qualifier</dt><dd>CHARTED — traded-price high, not a verified executable bid</dd></div>
                 <div><dt>Reference entry</dt><dd>$2.20 published alert / desk fill — not a verified ASK tape</dd></div>
-                <div><dt>Peak executable bid</dt><dd>AWAITING VERIFIED QUOTE DATA</dd></div>
-                <div><dt>Official Peak Opportunity</dt><dd>AWAITING VERIFIED QUOTE DATA</dd></div>
-                <div><dt>Official verification</dt><dd>UNAVAILABLE — INSUFFICIENT DATA</dd></div>
+                <div><dt>Peak executable bid</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
+                <div><dt>Official Peak Opportunity</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
+                <div><dt>Official verification</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
                 <div><dt>Charted peak after alert</dt><dd>+28.6%</dd></div>
                 <div><dt>Charted high / time</dt><dd>$2.83 · Sep 2, 2026, 9:30 AM ET</dd></div>
                 <div><dt>Charted verification</dt><dd>TRADINGVIEW TRADED-PRICE HIGH — NOT A VERIFIED EXECUTABLE BID</dd></div>
@@ -249,8 +249,8 @@
                 <div><dt>Peak vs managed invalidation</dt><dd>—</dd></div>
                 <div><dt>Peak day</dt><dd>Later day — Sep 2 expiration session</dd></div>
               </dl>
-              <p class="odte-charted-disc">The contract recorded a $2.83 traded-price high during the 9:30 AM ET one-minute candle, approximately 28.6% above the $2.20 reference entry. This establishes a charted opportunity above the challenge’s +25% threshold, but it does not prove that the entire position could have been sold at that price.</p>
-              <p>Overnight indication approximately $4.00–$4.40 occurred before the public alert / while the options market was closed. Not peakExecutableBid. Not the charted peak.</p>
+              <p class="odte-charted-disc">The contract recorded a $2.83 traded-price high during the 9:30 AM ET one-minute candle, approximately 28.6% above the $2.20 reference entry. This establishes a charted opportunity above the challenge’s +25% threshold, but it does not prove that the entire position could have been sold at that price. On-chart 2.59 is a later local peak label — not the session high, not the charted peak, not a verified bid, not the managed result. On-chart 1.61 is a local trough, not a peak.</p>
+              <p>Overnight indication approximately $4.00–$4.40 occurred before the public alert / while the options market was closed. Not peakExecutableBid. Not the charted peak. The bid/NBBO was not captured before this 0DTE expired, so Official Peak cannot be verified later.</p>
               <figure class="odte-evidence">
                 <img src="evidence/trade-zero-qqq-707p-2026-09-02-0930-1m.png" alt="TradingView one-minute chart of QQQ Sep 2, 2026 $707 put, 9:30 AM ET candle">
                 <figcaption>
@@ -258,7 +258,7 @@
                   <span>Contract: QQQ Sep 2, 2026 $707 put</span>
                   <span>OHLC: $2.18 / $2.83 / $2.12 / $2.45</span>
                   <span>Evidence level: Charted traded-price data</span>
-                  <span>Executable-bid verification: Unavailable</span>
+                  <span>Executable-bid verification: NOT PRESERVED — insufficient historical quote evidence</span>
                   <span>quoteSource: TradingView Superchart 1m traded OHLC (not NBBO)</span>
                 </figcaption>
               </figure>
@@ -322,6 +322,27 @@
           <p>0DTE and 1DTE are labeled on every card. SPY, QQQ, and IWM are ETF options, not cash-settled index options — verify the eligible trading time for the exact product (typically 4:15 PM ET on regular sessions for these three). A 1DTE carry is one trade, one P&amp;L, two calendar cards.</p>
         </li>
       </ol>
+      <div class="odte-protocol" id="evidence-protocol">
+        <p class="odte-board-kicker">Desk rule · every ticket</p>
+        <h3>Preserve the tape before the chain disappears</h3>
+        <p>AWAITING VERIFIED QUOTE DATA is only while the contract is still live and still quoted. After the 0DTE leaves the chain, there is no later lookup.</p>
+        <p>Before the contract disappears from the normal TradingView workflow — typical SPY/QQQ/IWM ETF-option cutoff 4:15 PM ET; verify the product, do not assume — open the exact contract and keep three separate records:</p>
+        <ol class="odte-plain">
+          <li>
+            <h3>CHARTED PEAK</h3>
+            <p>Highest traded price after the public alert / reference entry and before cutoff. Superchart 1m OHLC high, timestamped screenshot. Not an executable bid.</p>
+          </li>
+          <li>
+            <h3>VERIFIED EXECUTABLE PEAK</h3>
+            <p>Highest executable bid / NBBO / broker-verified price with preserved quote evidence — chain bid and size, timestamped. If the chain is gone, mark NOT PRESERVED — insufficient historical quote evidence. Never invent a bid.</p>
+          </li>
+          <li>
+            <h3>MANAGED RESULT</h3>
+            <p>The actual result from the published management rules. Never the peak.</p>
+          </li>
+        </ol>
+        <p>These three never mix. Missing bid evidence on an expired contract is a protocol miss, not a pending lookup.</p>
+      </div>
     </section>
 
     <section class="wrap section" id="timeline">
@@ -438,7 +459,7 @@
           <p><strong>Opportunity Capture Rate</strong> = managed realized profit ÷ maximum verified opportunity profit, shown only when Peak Opportunity is positive, managed profit is positive, and both use verified executable data. Capturing 100% of the intraday max is not a realistic standard.</p>
 
           <h3>End-of-window processing</h3>
-          <p>The desk does not tick every second. After the contract’s eligible window ends, retrieve full timestamped quote history and compute referenceEntry, peakExecutableBid, peakBidAt, peakOpportunityPct, MAE, time to peak, final executable bid, terminal all-or-nothing, modeled execution, capture rate, and verification status. A single 12:30 PM check, a five-minute-before-close check, or a closing snapshot cannot establish the highest intraday opportunity. If full historical bid/ask is unavailable, do not claim a verified maximum. Historical NBBO is currently AWAITING VERIFIED QUOTE DATA.</p>
+          <p>The desk does not tick every second. After the window, compute the record from preserved evidence — not from a single 12:30 PM check, a five-minute-before-close check, or a closing snapshot. AWAITING VERIFIED QUOTE DATA is only while the contract is still quoted. If the chain is gone and the bid tape was not kept, Official Peak is NOT PRESERVED — insufficient historical quote evidence. That is a protocol miss, not a later lookup. See <a href="#evidence-protocol">Preserve the tape before the chain disappears</a>.</p>
 
           <h3>How fills and marks work</h3>
           <p>Official managed P&amp;L uses the documented fill. Desk-indicated marks are labeled UNAUDITED and are not official returns. We do not invent an OPRA bid/ask. Commissions and slippage are not modeled unless a row says they are. SPY, QQQ, and IWM are ETF options (physically settled), not cash-settled index options.</p>
@@ -532,7 +553,7 @@
             <div><dt>Exit</dt><dd>$0.60 · Sep 2, ~12:25 PM ET</dd></div>
             <div><dt>Managed historical result</dt><dd>−$160</dd></div>
             <div><dt>Opportunity identified</dt><dd>YES · CHARTED</dd></div>
-            <div><dt>Official Peak Opportunity</dt><dd>UNVERIFIED — AWAITING VERIFIED QUOTE DATA</dd></div>
+            <div><dt>Official Peak Opportunity</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
             <div><dt>Charted peak after alert</dt><dd>+28.6% · $2.83 traded-price high</dd></div>
             <div><dt>Indicative overnight</dt><dd>~$4.00–$4.40 — not the peak; excluded</dd></div>
           </dl>
@@ -542,9 +563,9 @@
               <div><dt>Opportunity identified</dt><dd>YES · CHARTED</dd></div>
               <div><dt>Qualifier</dt><dd>CHARTED — traded-price high, not a verified executable bid</dd></div>
               <div><dt>Reference entry</dt><dd>$2.20 published alert / desk fill — not a verified ASK tape</dd></div>
-              <div><dt>Peak executable bid</dt><dd>AWAITING VERIFIED QUOTE DATA</dd></div>
-              <div><dt>Official Peak Opportunity</dt><dd>AWAITING VERIFIED QUOTE DATA</dd></div>
-              <div><dt>Official verification</dt><dd>UNAVAILABLE — INSUFFICIENT DATA</dd></div>
+              <div><dt>Peak executable bid</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
+              <div><dt>Official Peak Opportunity</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
+              <div><dt>Official verification</dt><dd>NOT PRESERVED — insufficient historical quote evidence</dd></div>
               <div><dt>Charted peak after alert</dt><dd>+28.6%</dd></div>
               <div><dt>Charted high / time</dt><dd>$2.83 · Sep 2, 2026, 9:30 AM ET</dd></div>
               <div><dt>Charted verification</dt><dd>TRADINGVIEW TRADED-PRICE HIGH — NOT A VERIFIED EXECUTABLE BID</dd></div>
@@ -553,8 +574,8 @@
               <div><dt>Peak vs managed invalidation</dt><dd>—</dd></div>
               <div><dt>Peak day</dt><dd>Later day — Sep 2 expiration session</dd></div>
             </dl>
-            <p class="odte-charted-disc">The contract recorded a $2.83 traded-price high during the 9:30 AM ET one-minute candle, approximately 28.6% above the $2.20 reference entry. This establishes a charted opportunity above the challenge’s +25% threshold, but it does not prove that the entire position could have been sold at that price.</p>
-            <p>Do not classify $2.54 as an official positive opportunity. Do not use overnight $4.00–$4.40 as peakExecutableBid or as the charted peak.</p>
+            <p class="odte-charted-disc">The contract recorded a $2.83 traded-price high during the 9:30 AM ET one-minute candle, approximately 28.6% above the $2.20 reference entry. This establishes a charted opportunity above the challenge’s +25% threshold, but it does not prove that the entire position could have been sold at that price. On-chart 2.59 is a later local peak label — not the session high, not the charted peak, not a verified bid, not the managed result. On-chart 1.61 is a local trough, not a peak.</p>
+            <p>Do not classify $2.54 as an official positive opportunity. Do not use overnight $4.00–$4.40 as peakExecutableBid or as the charted peak. The bid/NBBO was not captured before this 0DTE expired, so Official Peak cannot be verified later.</p>
             <figure class="odte-evidence">
               <img src="evidence/trade-zero-qqq-707p-2026-09-02-0930-1m.png" alt="TradingView one-minute chart of QQQ Sep 2, 2026 $707 put, 9:30 AM ET candle">
               <figcaption>
@@ -562,7 +583,7 @@
                 <span>Contract: QQQ Sep 2, 2026 $707 put</span>
                 <span>OHLC: $2.18 / $2.83 / $2.12 / $2.45</span>
                 <span>Evidence level: Charted traded-price data</span>
-                <span>Executable-bid verification: Unavailable</span>
+                <span>Executable-bid verification: NOT PRESERVED — insufficient historical quote evidence</span>
                 <span>quoteSource: TradingView Superchart 1m traded OHLC (not NBBO)</span>
               </figcaption>
             </figure>
@@ -596,9 +617,9 @@
           <h4>Thesis</h4>
           <p>1DTE put against QQQ 700 (GEX P1) with hard invalidation at HVL 717. Overnight carry into expiration. Not a same-day 0DTE entry. QQQ is an ETF option, not a cash-settled index option.</p>
           <h4>Commentary</h4>
-          <p>Rules — including the profit-protection ladder — were adopted after this ticket’s open (LESSON 01, 12:35 PM ET). Managed historical result −$160. Charted peak after alert is +28.6% from the $2.83 9:30 AM ET traded-price high vs $2.20 — CHARTED, not a verified executable bid. Overnight indication is not the peak. Cash open $2.54 is user-stated, not a close.</p>
+          <p>Rules — including the profit-protection ladder — were adopted after this ticket’s open (LESSON 01, 12:35 PM ET). Managed historical result −$160. Charted peak after alert is +28.6% from the $2.83 9:30 AM ET traded-price high vs $2.20 — CHARTED, not a verified executable bid. Official Peak is NOT PRESERVED — insufficient historical quote evidence. Overnight indication is not the peak. Cash open $2.54 is user-stated, not a close. On-chart 2.59 is a later local label, not used.</p>
           <h4>Bid / ask history</h4>
-          <p>Official paper exit $0.60 from the desk lock. Charted 9:30 AM ET 1-minute OHLC $2.18 / $2.83 / $2.12 / $2.45 from TradingView Superchart traded prices — not NBBO. Cash open $2.54 user-stated, not an OPRA verify. Overnight indication ~$4.00–$4.40 UNAUDITED, occurred while options were closed, and is not the peak. Historical NBBO: AWAITING VERIFIED QUOTE DATA.</p>
+          <p>Official paper exit $0.60 from the desk lock. Charted 9:30 AM ET 1-minute OHLC $2.18 / $2.83 / $2.12 / $2.45 from TradingView Superchart traded prices — not NBBO. Cash open $2.54 user-stated, not an OPRA verify. Overnight indication ~$4.00–$4.40 UNAUDITED, occurred while options were closed, and is not the peak. Historical NBBO: NOT PRESERVED — insufficient historical quote evidence. The bid tape was not captured before the contract left the chain, so it cannot be verified later.</p>
           <h4>GEX snapshot</h4>
           <p>At the cut: 707 HVL reclaim held ~2h; GEX flipped positive; 700 thesis cancelled. Entry snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M).</p>
           <h4>Math</h4>

@@ -442,10 +442,25 @@
     return ODTE_REJECTED_PEAK.test(String(kind || "").toLowerCase());
   }
 
+  function odteNotPreservedPeak(kind) {
+    return /not preserved|insufficient historical/i.test(String(kind || ""));
+  }
+
+  /* AWAITING is only for a live, still-quoted contract.
+     After expiration with no tape, visitor copy is NOT PRESERVED. */
+  function odteVisitorPeakLabel(t) {
+    if (t && t.peakOpportunityLabel) return t.peakOpportunityLabel;
+    var verification = t && (t.peakVerification || (t.signalQuality && t.signalQuality.verification));
+    if (odteNotPreservedPeak(verification)) {
+      return "NOT PRESERVED — insufficient historical quote evidence";
+    }
+    return "AWAITING VERIFIED QUOTE DATA";
+  }
+
   function odtePeakOpportunity(t) {
     var out = {
       pct: null,
-      label: "AWAITING VERIFIED QUOTE DATA",
+      label: odteVisitorPeakLabel(t),
       official: false
     };
     if (!t) return out;
@@ -453,21 +468,27 @@
     var verification = t.peakVerification || (t.signalQuality && t.signalQuality.verification);
     var source = t.quoteSource || t.peakSource || "";
     if (t.indicativePeak && t.indicativePeak.excludedFromOfficial) {
-      out.label = t.peakOpportunityLabel || "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS";
+      out.label = t.peakOpportunityLabel || (odteNotPreservedPeak(verification)
+        ? "NOT PRESERVED — insufficient historical quote evidence"
+        : "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS");
       return out;
     }
     if (odteRejectPeakSource(source) || odteRejectPeakSource(verification)) {
-      out.label = "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS";
+      out.label = t.peakOpportunityLabel || (odteNotPreservedPeak(verification)
+        ? "NOT PRESERVED — insufficient historical quote evidence"
+        : "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS");
       return out;
     }
     if (!t.referenceEntryVerified) {
-      out.label = t.peakOpportunityLabel || "AWAITING VERIFIED QUOTE DATA";
+      out.label = odteVisitorPeakLabel(t);
       return out;
     }
     if (t.peakExecutableBid == null || t.referenceEntry == null) {
-      out.label = verification === "UNAVAILABLE — INSUFFICIENT DATA"
-        ? "UNAVAILABLE — INSUFFICIENT DATA"
-        : "AWAITING VERIFIED QUOTE DATA";
+      out.label = odteNotPreservedPeak(verification)
+        ? "NOT PRESERVED — insufficient historical quote evidence"
+        : (verification === "UNAVAILABLE — INSUFFICIENT DATA"
+          ? "UNAVAILABLE — INSUFFICIENT DATA"
+          : "AWAITING VERIFIED QUOTE DATA");
       return out;
     }
     if (!odtePeakIsOfficial(verification)) {
