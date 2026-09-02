@@ -26,7 +26,7 @@
     "copy": "The AI is monitoring SPY, QQQ, and IWM. No setup currently meets the published entry and risk standards.",
     "underlying": "SPY / QQQ / IWM",
     "contract": "None — no qualifying entry",
-    "dteLabel": "—",
+    "dteLabel": "0DTE",
     "preferredEntryRange": "—",
     "maxEntry": "PASS — no chase",
     "actionable": "Watching — not actionable",

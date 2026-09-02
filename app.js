@@ -559,11 +559,13 @@
       var h = document.createElement("h3");
       h.textContent = t.contract || t.id;
       var p = document.createElement("p");
-      p.textContent = (t.entry != null ? "Entry " + moneyPremium(t.entry) : "") +
-        (t.cashOpen != null ? " · cash open " + moneyPremium(t.cashOpen) : "") +
-        (t.mfeLabel ? " · MFE " + t.mfeLabel : "") +
-        (t.exit != null ? " · exit " + moneyPremium(t.exit) : "") +
-        (t.pnlLabel ? " · P&L " + t.pnlLabel : "") + ".";
+      var bits = [];
+      if (t.entry != null) bits.push("Entry " + moneyPremium(t.entry));
+      if (t.cashOpen != null) bits.push("cash open " + moneyPremium(t.cashOpen));
+      if (t.mfe != null) bits.push("MFE ~" + moneyPremium(t.mfe) + " UNAUDITED");
+      if (t.exit != null) bits.push("exit " + moneyPremium(t.exit));
+      if (t.pnlLabel) bits.push("P&L " + t.pnlLabel);
+      p.textContent = bits.join(" · ") + (t.carriedOvernight ? ". Carried overnight. Realized on the exit date only." : ".");
       var linkP = document.createElement("p");
       var a = document.createElement("a");
       a.href = "#journal-" + (t.id || "");
@@ -715,7 +717,7 @@
       dateSpan.textContent = meta.label || date;
       var recSpan = document.createElement("span");
       recSpan.className = "odte-day-rec";
-      recSpan.textContent = meta.officialLabel || meta.officialRecord || "DAILY RECORD";
+      recSpan.textContent = meta.officialRecord || meta.officialLabel || "DAILY RECORD";
       btn.appendChild(dateSpan);
       btn.appendChild(recSpan);
       h3.appendChild(btn);
