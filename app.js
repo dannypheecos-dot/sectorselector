@@ -830,7 +830,7 @@
         "<div><dt>Opportunity identified</dt><dd>" + identified + "</dd></div>" +
         "<div><dt>Qualifier</dt><dd>" + (t.opportunityIdentifiedQualifier || sig.opportunityIdentifiedQualifier || "—") + "</dd></div>" +
         "<div><dt>Reference entry</dt><dd>" + (t.referenceEntryNote || moneyPremium(t.referenceEntry)) + "</dd></div>" +
-        "<div><dt>Peak executable bid</dt><dd>" + (t.peakExecutableBid == null ? peak.label : moneyPremium(t.peakExecutableBid)) + "</dd></div>" +
+        "<div><dt>Verified executable bid</dt><dd>" + (t.peakExecutableBid == null ? peak.label : moneyPremium(t.peakExecutableBid)) + "</dd></div>" +
         "<div><dt>Official Peak Opportunity</dt><dd>" + peak.label + "</dd></div>" +
         "<div><dt>Official verification</dt><dd>" + (t.peakVerification || "UNAVAILABLE — INSUFFICIENT DATA") + "</dd></div>" +
         "<div><dt>Charted peak after alert</dt><dd>" + (charted ? charted.label : "—") + "</dd></div>" +

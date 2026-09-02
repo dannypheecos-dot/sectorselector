@@ -363,7 +363,7 @@
         "status": "INDICATIVE — NOT EXECUTABLE",
         "excludedFromOfficial": true,
         "notUsedAsPeak": true,
-        "note": "Overnight indication approximately $4.00–$4.40 occurred before the public alert / while the options market was closed. Not peakExecutableBid. Not the charted peak. Charted peak is the $2.83 traded-price high at 9:30 AM ET."
+        "note": "Overnight indication approximately $4.00–$4.40 occurred before the public alert / while the options market was closed. Not a verified executable bid. Not the charted peak. Charted peak is the $2.83 traded-price high at 9:30 AM ET."
       },
       "cashOpenOfficialOpportunity": false,
       "signalQuality": {
