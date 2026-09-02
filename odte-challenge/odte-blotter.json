@@ -1,7 +1,7 @@
 {
   "asOf": "2026-09-02",
-  "asOfLabel": "Sep 2, 2026, ~10:03 AM ET",
-  "asOfAt": "2026-09-02T10:03:00-04:00",
+  "asOfLabel": "Sep 2, 2026, ~12:35 PM ET",
+  "asOfAt": "2026-09-02T12:35:00-04:00",
   "asOfApprox": true,
   "windowStart": "2026-09-01",
   "windowEnd": "2026-10-01",
@@ -14,7 +14,7 @@
   "closedNeededForWinRate": 1,
   "officialTodayId": "2026-09-01-qqq-707p",
   "scoreboards": {
-    "note": "Live and simulated books are never mixed. Same-day 0DTE is never mixed with overnight-managed-on-expiration. One official candidate (QQQ overnight). Same-day IWM is a documented NO TRADE, not a second official card. Do not compute win rate, profit factor, or max DD from one open paper trade.",
+    "note": "Live and simulated books are never mixed. Same-day 0DTE is never mixed with overnight-managed-on-expiration. Overnight paper QQQ 707P is CLOSED — LOSS. Official close $0.60 vs $2.20 (−$160). Overnight MFE +100% / $4.40 UNAUDITED. Cash open $2.54 user-stated. Same-day IWM is a documented NO TRADE. Same-day official slot is still hunting — no second fill. Live boards stay empty. This card is not a live Schwab blotter.",
     "live": {
       "label": "LIVE",
       "sameDay": {
@@ -70,15 +70,18 @@
         "documentedCandidates": "1",
         "executed": "1",
         "noTradeDays": "0",
-        "wins": "—",
-        "losses": "—",
-        "winRate": "—",
-        "netContractReturn": "open",
+        "wins": "0",
+        "losses": "1",
+        "winRate": "0%",
+        "netContractReturn": "−$160",
         "avgWinner": "—",
-        "avgLoser": "—",
-        "profitFactor": "—",
-        "maxDD": "—",
-        "ruleComplianceRate": "open"
+        "avgLoser": "−$160",
+        "profitFactor": "0",
+        "maxDD": "−$160",
+        "ruleComplianceRate": "miss",
+        "strategy": "PASS — 707 HVL reclaim held / GEX flipped positive; 700 cancelled; closed $0.60",
+        "execution": "FAIL — 1-lot held through overnight indicated +100% / $4.40 into a $2.54 cash open and then into $0.60. Not harvested.",
+        "executionNote": "Profit-taking ladder was published after this ticket’s open. This ticket is logged as a miss. Future 1-lots must follow the published ladder. Cash open $2.54 is user-stated, not an OPRA verify. Official P&L remains −$160."
       }
     }
   },
@@ -103,6 +106,30 @@
       "summary": "Bookmap QQQ ~707.06, overnight low ~703.60, offers 708/709/709.60/711, bids 706/705/700. Classified PROTECTED RUNNER. Invalidation tightened to 711 (hard 717). Premium floor $2.75. Indicated ~$4.00 unaudited."
     },
     {
+      "id": "2026-09-02-0930-execution-mfe",
+      "at": "2026-09-02T09:30:00-04:00",
+      "atLabel": "Sep 2, 2026, ~9:30 AM ET",
+      "approx": true,
+      "loggedAt": "2026-09-02T12:28:00-04:00",
+      "loggedAtLabel": "Sep 2, 2026, ~12:28 PM ET",
+      "sourceClock": "overnight indicated high; logged 9:28 AM PT desk lock",
+      "action": "MFE / OVERNIGHT",
+      "tradeId": "2026-09-01-qqq-707p",
+      "summary": "Overnight indicated +100% (~$4.40 = 2× $2.20 fill) UNAUDITED, not harvested. No OPRA bid/ask captured; do not treat as an official print. Prior indicated ~$4.00 remains unaudited. Official P&L is still the later $0.60 close (−$160). EXECUTION MISS. Logged later; this line does not rewrite ENTER, HOLD, or CLOSE fills. Cash-open print is a separate stamp."
+    },
+    {
+      "id": "2026-09-02-0930-cash-open-254",
+      "at": "2026-09-02T09:30:00-04:00",
+      "atLabel": "Sep 2, 2026, ~9:30 AM ET",
+      "approx": true,
+      "loggedAt": "2026-09-02T12:35:00-04:00",
+      "loggedAtLabel": "Sep 2, 2026, ~12:35 PM ET",
+      "sourceClock": "cash open $2.54 user-stated; logged after the cut",
+      "action": "CASH OPEN / MARK",
+      "tradeId": "2026-09-01-qqq-707p",
+      "summary": "QQQ Sep 2 707P cash open $2.54 user-stated. Fill $2.20 → $2.54 is +$0.34 / ~+15%. Already a giveback from overnight indicated +100% / ~$4.40 MFE (still UNAUDITED — no OPRA). Not an OPRA verify. Official CLOSE remains $0.60 vs $2.20 (−$1.60 / −$160). This line does not rewrite ENTER, HOLD, CLOSE, or official P&L."
+    },
+    {
       "id": "2026-09-02-1003-hold-update",
       "at": "2026-09-02T10:03:00-04:00",
       "atLabel": "Sep 2, 2026, ~10:03 AM ET",
@@ -121,6 +148,16 @@
       "action": "NO TRADE",
       "tradeId": "2026-09-02-iwm-no-trade",
       "summary": "IWM same-day 0DTE is watch / no-entry. Not an official candidate. No 292P or 293C fill. Spot ~292.5. GEX snapshot: 0DTE net +16.7M positive gamma, pin 291–293, C1 293, HVL/P1 290. Capital preserved."
+    },
+    {
+      "id": "2026-09-02-1225-close",
+      "at": "2026-09-02T12:25:00-04:00",
+      "atLabel": "Sep 2, 2026, ~12:25 PM ET",
+      "approx": true,
+      "sourceClock": "9:25 AM PT desk lock",
+      "action": "CLOSE",
+      "tradeId": "2026-09-01-qqq-707p",
+      "summary": "QQQ Sep 2 707P SIMULATED/PAPER 1x CLOSED @ $0.60 vs fill $2.20. Official P&L −$1.60 / share (−$160 / contract). 707 HVL reclaim held ~2h; GEX flipped positive; 700 thesis cancelled. QQQ ~708.86 at the cut. CLOSED — LOSS. Not a live blotter."
     }
   ],
   "trades": [
@@ -136,9 +173,11 @@
       "openedAlertedAt": "2026-09-01T16:15:00-04:00",
       "alertedAtEntry": true,
       "entryAsOf": "Sep 1, 2026, ~4:15 PM ET",
-      "exit": null,
-      "status": "open",
-      "statusLabel": "OPEN — PROTECTED RUNNER",
+      "exit": 0.60,
+      "exitAt": "2026-09-02T12:25:00-04:00",
+      "exitLabel": "Sep 2, 2026, ~12:25 PM ET",
+      "status": "closed",
+      "statusLabel": "CLOSED — LOSS",
       "statusPath": [
         {
           "at": "2026-09-01T16:15:00-04:00",
@@ -149,6 +188,11 @@
           "at": "2026-09-02T09:29:00-04:00",
           "atLabel": "Sep 2, 2026, ~9:29 AM ET",
           "status": "OPEN — PROTECTED RUNNER"
+        },
+        {
+          "at": "2026-09-02T12:25:00-04:00",
+          "atLabel": "Sep 2, 2026, ~12:25 PM ET",
+          "status": "CLOSED — LOSS"
         }
       ],
       "label": "SIMULATED/PAPER",
@@ -156,16 +200,22 @@
       "book": "overnight",
       "bookLabel": "OVERNIGHT POSITION MANAGED ON EXPIRATION DAY",
       "bookNote": "Not a same-day 0DTE entry. Entered near the Sep 1 close; managed on Sep 2 expiration.",
-      "pnl": null,
-      "openPnlLine": "Indicated ~$4.00 pending executable bid.",
+      "pnl": -160,
+      "pnlPerShare": -1.60,
+      "pnlLabel": "−$160 / contract",
+      "openPnlLine": null,
       "indicatedMark": 4.00,
       "indicatedMarkLabel": "~$4.00",
-      "indicatedMarkStatus": "UNAUDITED / not an executable bid",
+      "indicatedMarkStatus": "UNAUDITED / not an executable bid — superseded by official close $0.60",
+      "cashOpen": 2.54,
+      "cashOpenLabel": "$2.54 user-stated",
+      "cashOpenNote": "Sep 2 ~9:30 AM ET cash open. User-stated. Not an OPRA verify. Fill $2.20 → $2.54 is +$0.34 / ~+15%. Giveback from overnight MFE.",
+      "cashOpenStatus": "UNAUDITED / user-stated — not official P&L",
       "officialReturnPct": null,
       "bidAsk": null,
-      "bidAskLabel": "PENDING OPRA VERIFY",
+      "bidAskLabel": "Official paper exit $0.60",
       "contractsEntered": 1,
-      "contractsRemaining": 1,
+      "contractsRemaining": 0,
       "target": 700,
       "targetLabel": "QQQ $700",
       "underlyingTarget": 700,
@@ -183,15 +233,21 @@
       "premiumFloor": 2.75,
       "premiumFloorNote": "Do not let $2.20 go red. ~$2.75 min protect after +50%.",
       "target1": "+50% classify (already past; classified PROTECTED RUNNER)",
-      "mfe": null,
-      "mae": null,
-      "lastUpdated": "Sep 2, 2026, ~10:03 AM ET",
-      "lastUpdatedAt": "2026-09-02T10:03:00-04:00",
-      "lastUpdatedPt": "7:03 AM PT",
-      "marketDataSource": "TradingView OPRA pending; Bookmap QQQ 6:29 PT for tape; indicated ~$4.00 is user-supplied, not an executable bid",
-      "gexDataSource": "GEX snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M)",
+      "mfe": 4.40,
+      "mfeLabel": "+100% / $4.40 overnight UNAUDITED · cash open $2.54 user-stated",
+      "mfeNote": "User-stated overnight indicated high. No OPRA bid/ask captured. Not official P&L. Not a +$220 win. Cash open was $2.54, not $4.40.",
+      "mae": 0.60,
+      "maeLabel": "$0.60 official close",
+      "executionMiss": true,
+      "lastUpdated": "Sep 2, 2026, ~12:35 PM ET",
+      "lastUpdatedAt": "2026-09-02T12:35:00-04:00",
+      "lastUpdatedPt": "9:35 AM PT",
+      "marketDataSource": "Official paper exit $0.60 from desk lock. Cash open $2.54 user-stated, not an OPRA verify. Overnight MFE +100% / $4.40 UNAUDITED. Prior indicated ~$4.00 was user-supplied and never an executable bid.",
+      "gexDataSource": "GEX snapshot at the cut: 707 HVL reclaim held ~2h; GEX flipped positive; 700 thesis cancelled. Entry snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M)",
       "spotAtEntry": 707.76,
-      "cancelRule": "700 cancels if GEX flips positive / HVL reclaimed and holds.",
+      "spotAtExit": 708.86,
+      "closeReason": "707 HVL reclaim held (~2h) with GEX flipped positive; 700 thesis cancelled. QQQ ~708.86 at the cut.",
+      "cancelRule": "700 cancelled: GEX flipped positive / HVL reclaimed and held.",
       "timePlan": [
         "10:00 ET review",
         "11:30 ET reassess",
@@ -200,7 +256,7 @@
         "4:15 PM ET latest"
       ],
       "hardLatest": "Sep 2, 2026, 4:15 PM ET",
-      "notes": "SIMULATED/PAPER. Not live Schwab. Not The Leap. Not the XLV sector-swing book. Overnight position managed on expiration day. Indicated ~$4.00 is user-supplied and not an official +81.8% print. MFE/MAE unknown until a verified bid series exists. IWM same-day is a separate NO TRADE row, not a second official card."
+      "notes": "SIMULATED/PAPER. CLOSED — LOSS @ $0.60 vs $2.20. Official P&L −$160 / contract. Overnight MFE +100% / $4.40 UNAUDITED — not harvested. Cash open $2.54 user-stated (+$0.34 / ~+15%) — not official P&L. Execution miss: held the 1-lot through the overnight gift into a $2.54 open and then into $0.60. Prior indicated ~$4.00 remains unaudited. Ladder rules were published after this ticket’s open. Not a live blotter. Not The Leap. Not the XLV sector-swing book."
     },
     {
       "id": "2026-09-02-iwm-no-trade",
