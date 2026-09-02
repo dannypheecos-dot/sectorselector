@@ -1465,6 +1465,67 @@ body[data-page="odte-challenge"] .page-hero {
   border-color: var(--mint-line);
 }
 
+.odte-ticket-closed {
+  border-color: var(--line-2);
+}
+
+.odte-pnl-loss {
+  border-color: rgba(184, 92, 92, 0.45);
+  color: var(--off);
+}
+
+.odte-hunt {
+  border-style: dashed;
+  border-color: var(--mint-line);
+}
+
+.odte-exec {
+  margin: 1.35rem 0 0;
+}
+
+.odte-exec h3 {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  color: var(--off);
+  margin: 0;
+}
+
+.odte-exec-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 760px) {
+  .odte-exec-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.odte-exec-card {
+  background: var(--bg-2);
+  border: 1px solid var(--mint-line);
+  padding: 0.95rem 1rem 1.05rem;
+}
+
+.odte-exec-fail {
+  border-color: rgba(184, 92, 92, 0.5);
+}
+
+.odte-exec-card h4 {
+  font-family: var(--display);
+  margin: 0 0 0.4rem;
+  color: var(--off);
+}
+
+.odte-exec-card p,
+.odte-exec-note {
+  margin: 0;
+  color: var(--text);
+}
+
+.odte-exec-note {
+  margin: 0.85rem 0 0;
+  max-width: 46rem;
+}
+
 .odte-ticket-top {
   display: flex;
   flex-wrap: wrap;

@@ -79,6 +79,7 @@
       </div>
       <nav class="odte-jump" aria-label="On this page">
         <a href="#scoreboard">Scoreboard</a>
+        <a href="#execution">Strategy vs execution</a>
         <a href="#today">Today</a>
         <a href="#timeline">Timeline</a>
         <a href="#rules">Rules</a>
@@ -93,9 +94,9 @@
     <section class="wrap section" id="scoreboard">
       <div class="section-head">
         <h2>Headline scoreboard</h2>
-        <p class="asof" id="odte-asof">As of Sep 2, 2026, ~10:03 AM ET</p>
+        <p class="asof" id="odte-asof">As of Sep 2, 2026, ~12:28 PM ET</p>
       </div>
-      <p class="intro">Two books. Never mixed. Live stays live. Simulated/paper stays paper. Same-day 0DTE stays separate from overnight positions managed on expiration day. This is day 2 of a 30-day window. One official candidate (QQQ overnight). Same-day IWM is a documented NO TRADE, not a second official card. Do not read a win rate, profit factor, or max drawdown into one open paper trade.</p>
+      <p class="intro">Two books. Never mixed. Live stays live. Simulated/paper stays paper. Same-day 0DTE stays separate from overnight positions managed on expiration day. Overnight paper QQQ 707P is a closed loss. Win rate 0% is the honest number. An indicated +100% at the cash open was not harvested — that is an execution miss, not a hidden win. Same-day IWM is a documented NO TRADE. The same-day official slot is still hunting — no second fill.</p>
       <div class="odte-boards" id="odte-scoreboards">
 
         <article class="odte-board odte-board-live">
@@ -145,7 +146,7 @@
         <article class="odte-board odte-board-sim">
           <p class="odte-board-kicker">Book B · never mixed</p>
           <h3>Simulated / paper</h3>
-          <p class="odte-board-note">One paper overnight. Same-day IWM is a NO TRADE, not a fill. Most rates stay “—” or “open” until a close exists.</p>
+          <p class="odte-board-note">One paper overnight, closed at a loss. The loss stays. Same-day IWM is a NO TRADE, not a fill.</p>
           <div class="odte-board-split">
             <div class="odte-book">
               <h4>Same-day 0DTE</h4>
@@ -171,76 +172,94 @@
                 <div><dt>Documented candidates</dt><dd data-metric="documentedCandidates">1</dd></div>
                 <div><dt>Executed</dt><dd data-metric="executed">1</dd></div>
                 <div><dt>No-trade days</dt><dd data-metric="noTradeDays">0</dd></div>
-                <div><dt>Wins</dt><dd data-metric="wins">—</dd></div>
-                <div><dt>Losses</dt><dd data-metric="losses">—</dd></div>
-                <div><dt>Win rate</dt><dd data-metric="winRate">—</dd></div>
-                <div><dt>Net contract return</dt><dd data-metric="netContractReturn">open</dd></div>
+                <div><dt>Wins</dt><dd data-metric="wins">0</dd></div>
+                <div><dt>Losses</dt><dd data-metric="losses">1</dd></div>
+                <div><dt>Win rate</dt><dd data-metric="winRate">0%</dd></div>
+                <div><dt>Net contract return</dt><dd data-metric="netContractReturn">−$160</dd></div>
                 <div><dt>Avg winner</dt><dd data-metric="avgWinner">—</dd></div>
-                <div><dt>Avg loser</dt><dd data-metric="avgLoser">—</dd></div>
-                <div><dt>Profit factor</dt><dd data-metric="profitFactor">—</dd></div>
-                <div><dt>Max DD</dt><dd data-metric="maxDD">—</dd></div>
-                <div><dt>Rule-compliance rate</dt><dd data-metric="ruleComplianceRate">open</dd></div>
+                <div><dt>Avg loser</dt><dd data-metric="avgLoser">−$160</dd></div>
+                <div><dt>Profit factor</dt><dd data-metric="profitFactor">0</dd></div>
+                <div><dt>Max DD</dt><dd data-metric="maxDD">−$160</dd></div>
+                <div><dt>Rule-compliance rate</dt><dd data-metric="ruleComplianceRate">miss</dd></div>
               </dl>
             </div>
           </div>
         </article>
 
       </div>
+
+      <div class="odte-exec" id="execution">
+        <div class="section-head">
+          <h3>Strategy vs execution — this ticket</h3>
+          <p class="asof">Not an excuse that erases the miss</p>
+        </div>
+        <div class="odte-exec-grid">
+          <article class="odte-exec-card">
+            <p class="odte-board-kicker">Strategy</p>
+            <h4>PASS — kill followed</h4>
+            <p>707 HVL reclaim held ~2h and GEX flipped positive. 700 thesis cancelled. Official close <strong>$0.60</strong> vs $2.20 is the strategy outcome. That loss stays.</p>
+          </article>
+          <article class="odte-exec-card odte-exec-fail">
+            <p class="odte-board-kicker">Execution quality</p>
+            <h4>FAIL — ladder miss</h4>
+            <p>A 1-lot was held through an indicated +100% gift (~$4.40 harvest = 2× $2.20) at/into the Sep 2 cash open. Not harvested. Official P&amp;L is still −$160, not +$220.</p>
+          </article>
+        </div>
+        <p class="odte-exec-note">Rule-compliance on this ticket: <strong>miss</strong>. The profit-taking ladder, 1-lot +50% realize-or-protected-runner rule, and +100% harvest rule were not on this page until after this ticket’s open. They are on the page now. We do not claim the desk “didn’t know.” The framework arrived late relative to this ticket. Future 1-lots must follow the published ladder. Compliance is mandatory going forward.</p>
+      </div>
     </section>
 
     <section class="wrap section" id="today">
       <div class="section-head">
         <h2>Today’s official trade</h2>
-        <p class="asof">Last updated <time class="stamp-et" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time> · 7:03 AM PT</p>
+        <p class="asof">Last updated <time class="stamp-et" datetime="2026-09-02T12:28:00-04:00" data-et data-et-approx>Sep 2, 2026, ~12:28 PM ET</time> · 9:28 AM PT</p>
       </div>
-      <p class="intro">The only official card on the book is yesterday’s overnight QQQ 707 put, managed on expiration. IWM same-day 0DTE is a timestamped NO TRADE — watch / no-entry. We did not invent a 292P or 293C fill.</p>
+      <p class="intro">Overnight official card is CLOSED — LOSS. Same-day official slot is still available — hunt in progress. IWM remains a timestamped NO TRADE. We did not invent a second fill.</p>
 
-      <article class="odte-ticket" id="odte-open-card">
+      <article class="odte-ticket odte-ticket-closed" id="odte-open-card">
         <div class="odte-ticket-top">
-          <span class="status-badge status-protected" id="odte-open-badge">OPEN — PROTECTED RUNNER</span>
+          <span class="status-badge status-closed" id="odte-open-badge">CLOSED — LOSS</span>
           <span class="odte-label odte-label-sim" id="odte-open-label">SIMULATED/PAPER</span>
         </div>
         <p class="odte-ticket-contract" id="odte-open-contract">QQQ Sep 2 2026 707 put</p>
         <p class="odte-book-flag" id="odte-open-book">Overnight position managed on expiration day — not a same-day 0DTE entry</p>
-        <p class="odte-status-path" id="odte-status-path">Status path (append-only): <span class="mono">OPEN</span> on <time class="stamp-et" datetime="2026-09-01T16:15:00-04:00" data-et>Sep 1, 2026, 4:15 PM ET</time> → <span class="mono">OPEN — PROTECTED RUNNER</span> on <time class="stamp-et" datetime="2026-09-02T09:29:00-04:00" data-et data-et-approx>Sep 2, 2026, ~9:29 AM ET</time>. Prior OPEN is not erased.</p>
+        <p class="odte-status-path" id="odte-status-path">Status path (append-only): <span class="mono">OPEN</span> on <time class="stamp-et" datetime="2026-09-01T16:15:00-04:00" data-et>Sep 1, 2026, 4:15 PM ET</time> → <span class="mono">OPEN — PROTECTED RUNNER</span> on <time class="stamp-et" datetime="2026-09-02T09:29:00-04:00" data-et data-et-approx>Sep 2, 2026, ~9:29 AM ET</time> → <span class="mono">CLOSED — LOSS</span> on <time class="stamp-et" datetime="2026-09-02T12:25:00-04:00" data-et data-et-approx>Sep 2, 2026, ~12:25 PM ET</time>. Prior OPEN and HOLD lines are not erased.</p>
 
         <dl class="odte-card-grid" id="odte-open-dl">
           <div><dt>Underlying</dt><dd>QQQ</dd></div>
-          <div><dt>Contract</dt><dd>QQQ Sep 2 2026 707 put (expiring today)</dd></div>
+          <div><dt>Contract</dt><dd>QQQ Sep 2 2026 707 put</dd></div>
           <div><dt>Label</dt><dd class="warn">SIMULATED/PAPER</dd></div>
           <div><dt>Same-day vs overnight</dt><dd>Overnight, managed on expiration</dd></div>
           <div><dt>Entry</dt><dd>2026-09-01 ~4:15 PM ET · fill $2.20</dd></div>
-          <div><dt>Contracts</dt><dd>1 remaining / 1 entered</dd></div>
-          <div><dt>Executable bid/ask</dt><dd class="warn">PENDING OPRA VERIFY</dd></div>
-          <div><dt>Indicated mark</dt><dd class="warn">~$4.00 user-supplied — UNAUDITED / not an executable bid</dd></div>
+          <div><dt>Exit</dt><dd>2026-09-02 ~12:25 PM ET · $0.60</dd></div>
+          <div><dt>Contracts</dt><dd>0 remaining / 1 entered</dd></div>
+          <div><dt>Official P&amp;L</dt><dd>−$1.60 / share · −$160 / contract</dd></div>
+          <div><dt>Close reason</dt><dd>707 HVL reclaim held ~2h · GEX flipped positive · 700 cancelled</dd></div>
+          <div><dt>Spot at cut</dt><dd>QQQ ~708.86</dd></div>
+          <div><dt>Indicated mark (prior)</dt><dd class="warn">~$4.00 was user-supplied — not the official exit</dd></div>
           <div><dt>Initial invalidation</dt><dd>GEX HVL 717</dd></div>
-          <div><dt>Current invalidation</dt><dd>Tape 711 · hard GEX 717 · today’s 0DTE HVL reclaim 707 if it holds</dd></div>
-          <div><dt>Initial premium-risk</dt><dd>~25–35% of $2.20 (backstop)</dd></div>
-          <div><dt>Profit-protection</dt><dd>Do not let $2.20 go red · ~$2.75 min after +50%</dd></div>
-          <div><dt>Target 1</dt><dd>+50% classify — already past; PROTECTED RUNNER</dd></div>
-          <div><dt>Primary GEX target</dt><dd>QQQ $700 (GEX P1 — underlying price, not option %)</dd></div>
+          <div><dt>Invalidation at cut</dt><dd>Tape 711 · hard GEX 717 · 0DTE HVL reclaim 707 held</dd></div>
+          <div><dt>Primary GEX target</dt><dd>QQQ $700 (GEX P1) — cancelled</dd></div>
           <div><dt>Stretch</dt><dd>None published</dd></div>
-          <div><dt>MFE / MAE</dt><dd>— / —</dd></div>
-          <div><dt>Alert</dt><dd>Alerted at entry</dd></div>
-          <div><dt>Last updated</dt><dd>Sep 2, 2026, ~10:03 AM ET (7:03 AM PT)</dd></div>
-          <div class="odte-span"><dt>Market-data source</dt><dd>TradingView OPRA pending; Bookmap QQQ 6:29 PT for tape; indicated ~$4.00 is user-supplied, not an executable bid</dd></div>
-          <div class="odte-span"><dt>GEX-data source</dt><dd>GEX snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M)</dd></div>
+          <div><dt>MFE</dt><dd class="warn">+100% / $4.40 UNAUDITED at cash open — not harvested</dd></div>
+          <div><dt>MAE</dt><dd>$0.60 official close</dd></div>
+          <div><dt>Alert</dt><dd>Alerted at entry · close logged at the cut</dd></div>
+          <div><dt>Last updated</dt><dd>Sep 2, 2026, ~12:28 PM ET (9:28 AM PT)</dd></div>
+          <div class="odte-span"><dt>Market-data source</dt><dd>Official paper exit $0.60 from the desk lock. Prior indicated ~$4.00 was user-supplied and never an executable bid.</dd></div>
+          <div class="odte-span"><dt>GEX-data source</dt><dd>GEX snapshot at the cut: 707 HVL reclaim held ~2h; GEX flipped positive. Entry snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M)</dd></div>
         </dl>
 
-        <p class="odte-pnl-line" id="odte-open-pnl">Open P&amp;L: Indicated ~$4.00 pending executable bid. User-supplied. Not an official +81.8% print. No official return until a verified bid/ask exists.</p>
-        <p class="odte-tape-target" id="odte-open-tape">Primary target: QQQ $700 (GEX P1). 700 cancels if GEX flips positive / HVL reclaimed and holds.</p>
-
-        <p class="dl-label">Expiration-day clock (ET)</p>
-        <ol class="odte-checkpoints" id="odte-time-plan">
-          <li><span class="when">10:00 ET</span><span class="what">Review</span></li>
-          <li><span class="when">11:30 ET</span><span class="what">Reassess</span></li>
-          <li><span class="when">2:00 PM ET</span><span class="what">Needs an active exit plan</span></li>
-          <li><span class="when">3:30 PM ET</span><span class="what">Default flatten</span></li>
-          <li><span class="when">4:15 PM ET</span><span class="what">Latest</span></li>
-        </ol>
-        <p class="footnote" id="odte-open-notes">At +75% or more, a 1-lot cannot be an unprotected hold. Underlying invalidation is primary; the premium backstop is secondary. BOOK FACT · NOT A LIVE TICKET.</p>
+        <p class="odte-pnl-line odte-pnl-loss" id="odte-open-pnl">Official P&amp;L: −$1.60 per share = −$160 per contract. SIMULATED/PAPER. Loss stays. Indicated +100% / $4.40 at the cash open is UNAUDITED and was not harvested — not a +$220 win.</p>
+        <p class="odte-tape-target" id="odte-open-tape">700 thesis cancelled. 707 HVL reclaim held and GEX flipped positive. QQQ ~708.86 at the cut.</p>
+        <p class="footnote" id="odte-open-notes">This is the paper challenge card. It is not mixed with any live book. BOOK FACT · NOT A LIVE TICKET.</p>
       </article>
       <p class="odte-empty" id="odte-no-open" hidden>No official 0DTE candidate on the book.</p>
+
+      <aside class="odte-watch odte-hunt" id="odte-sameday-hunt" aria-label="Same-day official slot">
+        <p class="odte-watch-kicker">Same-day official slot · hunting</p>
+        <p class="odte-watch-title"><span class="status-badge status-skip">NO FILL YET</span> Hunt in progress</p>
+        <p>Overnight is closed. The same-day official slot is still available. No second fill has been taken. We will not invent one to occupy the row.</p>
+      </aside>
 
       <aside class="odte-watch" id="odte-iwm-watch" aria-label="Same-day IWM watch">
         <p class="odte-watch-kicker">Same-day watch · not an official card</p>
@@ -267,6 +286,11 @@
           <p>Bookmap QQQ ~707.06, overnight low ~703.60, offers 708/709/709.60/711, bids 706/705/700. Classified PROTECTED RUNNER. Invalidation tightened to 711 (hard 717). Premium floor $2.75. Indicated ~$4.00 unaudited. Source clock: 6:29 AM PT Bookmap.</p>
         </li>
         <li>
+          <p class="odte-tl-action">EXECUTION / MFE</p>
+          <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T09:30:00-04:00" data-et data-et-approx>Sep 2, 2026, ~9:30 AM ET</time>
+          <p>Indicated +100% (~$4.40 = 2× $2.20 fill) available at/into the Sep 2 cash open. Harvest target not taken. UNAUDITED — no OPRA bid/ask captured. Prior indicated ~$4.00 remains unaudited. Official P&amp;L is the later $0.60 close (−$160), not +$220. EXECUTION MISS. Logged later at ~12:28 PM ET (9:28 AM PT). This line does not rewrite ENTER, HOLD, or CLOSE fills.</p>
+        </li>
+        <li>
           <p class="odte-tl-action">HOLD/UPDATE</p>
           <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time>
           <p>Desk lock on the official OPEN. Invalidation: tape 711 / hard GEX 717 / today’s 0DTE HVL reclaim 707 if it holds. Floor: do not let $2.20 go red; ~$2.75 min protect after +50%. Cancel 700 if GEX flips positive / HVL reclaimed and holds. Time: 2:00 PM ET needs an active exit plan; 3:30 PM ET default flatten; 4:15 PM ET latest. Indicated ~$4.00 remains user-supplied, not an executable bid. Source clock: 7:03 AM PT desk lock.</p>
@@ -275,6 +299,11 @@
           <p class="odte-tl-action">NO TRADE</p>
           <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time>
           <p>IWM same-day 0DTE is watch / no-entry. Not an official candidate. No 292P or 293C fill. Spot ~292.5. GEX snapshot: 0DTE net +16.7M positive gamma, pin 291–293, C1 293, HVL/P1 290. Capital preserved. Source clock: 7:03 AM PT desk lock.</p>
+        </li>
+        <li>
+          <p class="odte-tl-action">CLOSE</p>
+          <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T12:25:00-04:00" data-et data-et-approx>Sep 2, 2026, ~12:25 PM ET</time>
+          <p>QQQ Sep 2 707P SIMULATED/PAPER 1x CLOSED @ $0.60 vs fill $2.20. Official P&amp;L −$1.60 / share (−$160 / contract). 707 HVL reclaim held ~2h; GEX flipped positive; 700 thesis cancelled. QQQ ~708.86 at the cut. CLOSED — LOSS. Not a live blotter. Source clock: 9:25 AM PT desk lock.</p>
         </li>
       </ol>
     </section>
@@ -419,6 +448,8 @@
               <th>Exit</th>
               <th>Status</th>
               <th>P&amp;L</th>
+              <th>MFE</th>
+              <th>MAE</th>
               <th>Alerted</th>
             </tr>
           </thead>
@@ -430,10 +461,12 @@
               <td>QQQ Sep 2 2026 707 put</td>
               <td><span class="sim-mini">SIMULATED/PAPER</span></td>
               <td class="mono">$2.20</td>
-              <td class="mono">1 / 1</td>
-              <td>—</td>
-              <td><span class="status-badge status-protected">OPEN — PROTECTED RUNNER</span></td>
-              <td>open · indicated mark unaudited</td>
+              <td class="mono">0 / 1</td>
+              <td class="mono">$0.60</td>
+              <td><span class="status-badge status-closed">CLOSED — LOSS</span></td>
+              <td>−$160 / contract</td>
+              <td>+100% / $4.40 UNAUDITED</td>
+              <td class="mono">$0.60 close</td>
               <td class="mono">Sep 1, 4:15 PM ET</td>
             </tr>
             <tr>
@@ -447,12 +480,14 @@
               <td>—</td>
               <td><span class="status-badge status-skip">NO TRADE</span></td>
               <td>capital preserved</td>
+              <td>—</td>
+              <td>—</td>
               <td class="mono">Sep 2, ~10:03 AM ET</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="footnote" id="odte-notes">Status path for 2026-09-01-qqq-707p: OPEN (Sep 1, 4:15 PM ET) → OPEN — PROTECTED RUNNER (Sep 2, ~9:29 AM ET). IWM 2026-09-02 is NO TRADE — not an official candidate. Prior OPEN remains on the timeline. SIMULATED RESEARCH.</p>
+      <p class="footnote" id="odte-notes">Status path for 2026-09-01-qqq-707p: OPEN (Sep 1, 4:15 PM ET) → OPEN — PROTECTED RUNNER (Sep 2, ~9:29 AM ET) → CLOSED — LOSS (Sep 2, ~12:25 PM ET) @ $0.60 vs $2.20, −$160 / contract. MFE +100% / $4.40 UNAUDITED at cash open — not harvested; not official P&amp;L. IWM 2026-09-02 is NO TRADE. Prior OPEN, HOLD, and CLOSE fills remain. SIMULATED RESEARCH.</p>
     </section>
 
     <section class="wrap section" id="method">
@@ -471,10 +506,13 @@
         <p>A row is paper unless it says LIVE. This challenge, including the QQQ 707 put, is SIMULATED/PAPER. It is not a live Schwab ticket, not The Leap, and not the XLV sector-swing Track Record. Headline boards never mix the two books. Same-day 0DTE never shares a headline with overnight-managed-on-expiration.</p>
 
         <h3>How fills and marks work</h3>
-        <p>Official P&amp;L uses an executable bid/ask when one exists. If the bid/ask is pending, the card says so. Desk-indicated marks are labeled UNAUDITED and are not official returns. We do not invent premiums, MFE, or MAE. This ticket’s MFE/MAE stays an em dash until a verified bid series exists. Commissions and slippage are not modeled unless a row says they are.</p>
+        <p>Official P&amp;L uses the documented fill. Desk-indicated marks are labeled UNAUDITED and are not official returns. We do not invent an OPRA bid/ask. This ticket’s official exit is $0.60. User-stated MFE +100% / $4.40 at the cash open is UNAUDITED and is not official P&amp;L. Prior indicated ~$4.00 remains unaudited. Commissions and slippage are not modeled unless a row says they are.</p>
 
         <h3>How P&amp;L is reported</h3>
-        <p>Returns are per-contract, not portfolio. An open ticket shows no official P&amp;L. Win rate, average winner, average loser, profit factor, and max drawdown are not computed from a single open trade. Those cells stay “—” or “open” until closed outcomes exist.</p>
+        <p>Returns are per-contract, not portfolio. Closed paper overnight: −$160. Win rate 0%. An indicated gift that was not harvested is logged as MFE and as an execution miss. It does not rewrite official P&amp;L into a win.</p>
+
+        <h3>Strategy vs execution</h3>
+        <p>Strategy is why a ticket is cut or held: GEX destination, HVL reclaim, tape invalidation. Execution is whether the published profit ladder was followed. On this 707 put, strategy passed (707 reclaim / positive GEX kill → $0.60 close). Execution failed (1-lot held through indicated +100%). The ladder, the 1-lot +50% realize-or-protected-runner rule, and the +100% harvest rule were not on this page until after this ticket opened. That is logged. It is not a claim that the desk “didn’t know.” Future 1-lots must follow the published ladder. Compliance is mandatory going forward.</p>
 
         <h3>How time is recorded</h3>
         <p>Decision stamps are America/New_York, labeled ET. A PT source clock may appear as a note (Bookmap, a GEX snapshot) but the public stamp is ET. Alerts are labeled before or after the fill. This 707 put was alerted at entry.</p>

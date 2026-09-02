@@ -387,7 +387,7 @@
     var s = String(t.status || "").toLowerCase();
     var label = odteStatusLabel(t);
     if (label.indexOf("PROTECTED") !== -1) return "status-badge status-protected";
-    if (s === "closed") return "status-badge status-closed";
+    if (label.indexOf("LOSS") !== -1 || s === "closed") return "status-badge status-closed";
     if (s === "open") return "status-badge status-open";
     if (s === "no-trade" || s === "no-ticket") return "status-badge status-skip";
     return "status-badge";
@@ -405,7 +405,10 @@
       if (t.openPnlLine) return "open · indicated mark unaudited";
       return "open";
     }
+    if (t.pnlLabel) return t.pnlLabel;
     if (t.pnl == null || t.pnl === "") return "—";
+    var n = typeof t.pnl === "number" ? t.pnl : Number(t.pnl);
+    if (!isNaN(n) && n < 0) return "−$" + Math.abs(n).toFixed(0 === n % 1 ? 0 : 2);
     return moneyPremium(t.pnl);
   }
 
@@ -446,6 +449,8 @@
     addCell(tr, open || t.exit == null || t.exit === "" ? "—" : moneyPremium(t.exit), "mono");
     addOdteStatus(tr, t);
     addCell(tr, odtePnlCell(t));
+    addCell(tr, noTrade ? "—" : (t.mfeLabel || "—"));
+    addCell(tr, noTrade ? "—" : (t.maeLabel || "—"), "mono");
     addCell(tr, t.openedAlerted || t.entryAsOf || "—", "mono");
   }
 
@@ -559,7 +564,7 @@
     if (!trades || !trades.length) {
       var empty = document.createElement("tr");
       var td = document.createElement("td");
-      td.colSpan = 11;
+      td.colSpan = 13;
       td.textContent = "No 0DTE tickets published.";
       empty.appendChild(td);
       body.appendChild(empty);
