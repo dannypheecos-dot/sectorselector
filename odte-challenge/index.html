@@ -93,9 +93,9 @@
     <section class="wrap section" id="scoreboard">
       <div class="section-head">
         <h2>Headline scoreboard</h2>
-        <p class="asof" id="odte-asof">As of Sep 2, 2026, ~9:53 AM ET</p>
+        <p class="asof" id="odte-asof">As of Sep 2, 2026, ~10:03 AM ET</p>
       </div>
-      <p class="intro">Two books. Never mixed. Live stays live. Simulated/paper stays paper. Same-day 0DTE stays separate from overnight positions managed on expiration day. This is day 2 of a 30-day window. One official candidate. Do not read a win rate, profit factor, or max drawdown into one open paper trade.</p>
+      <p class="intro">Two books. Never mixed. Live stays live. Simulated/paper stays paper. Same-day 0DTE stays separate from overnight positions managed on expiration day. This is day 2 of a 30-day window. One official candidate (QQQ overnight). Same-day IWM is a documented NO TRADE, not a second official card. Do not read a win rate, profit factor, or max drawdown into one open paper trade.</p>
       <div class="odte-boards" id="odte-scoreboards">
 
         <article class="odte-board odte-board-live">
@@ -145,15 +145,15 @@
         <article class="odte-board odte-board-sim">
           <p class="odte-board-kicker">Book B · never mixed</p>
           <h3>Simulated / paper</h3>
-          <p class="odte-board-note">One paper overnight. Most rates stay “—” or “open” until a close exists.</p>
+          <p class="odte-board-note">One paper overnight. Same-day IWM is a NO TRADE, not a fill. Most rates stay “—” or “open” until a close exists.</p>
           <div class="odte-board-split">
             <div class="odte-book">
               <h4>Same-day 0DTE</h4>
-              <p class="odte-empty-book">No same-day 0DTE fill yet. No invented IWM ticket.</p>
+              <p class="odte-empty-book">No same-day fill. IWM logged as NO TRADE. Not an official candidate.</p>
               <dl class="odte-metrics" data-odte-board="simulated.sameDay">
                 <div><dt>Documented candidates</dt><dd data-metric="documentedCandidates">0</dd></div>
                 <div><dt>Executed</dt><dd data-metric="executed">0</dd></div>
-                <div><dt>No-trade days</dt><dd data-metric="noTradeDays">0</dd></div>
+                <div><dt>No-trade days</dt><dd data-metric="noTradeDays">1</dd></div>
                 <div><dt>Wins</dt><dd data-metric="wins">—</dd></div>
                 <div><dt>Losses</dt><dd data-metric="losses">—</dd></div>
                 <div><dt>Win rate</dt><dd data-metric="winRate">—</dd></div>
@@ -191,9 +191,9 @@
     <section class="wrap section" id="today">
       <div class="section-head">
         <h2>Today’s official trade</h2>
-        <p class="asof">Last updated <time class="stamp-et" datetime="2026-09-02T09:53:00-04:00" data-et data-et-approx>Sep 2, 2026, ~9:53 AM ET</time> · 6:53 AM PT</p>
+        <p class="asof">Last updated <time class="stamp-et" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time> · 7:03 AM PT</p>
       </div>
-      <p class="intro">The official candidate on the book today is yesterday’s overnight, managed on expiration. There is no official same-day IWM fill. We do not invent one to satisfy a daily slot.</p>
+      <p class="intro">The only official card on the book is yesterday’s overnight QQQ 707 put, managed on expiration. IWM same-day 0DTE is a timestamped NO TRADE — watch / no-entry. We did not invent a 292P or 293C fill.</p>
 
       <article class="odte-ticket" id="odte-open-card">
         <div class="odte-ticket-top">
@@ -212,35 +212,41 @@
           <div><dt>Entry</dt><dd>2026-09-01 ~4:15 PM ET · fill $2.20</dd></div>
           <div><dt>Contracts</dt><dd>1 remaining / 1 entered</dd></div>
           <div><dt>Executable bid/ask</dt><dd class="warn">PENDING OPRA VERIFY</dd></div>
-          <div><dt>Indicated mark</dt><dd class="warn">~$4.00 UNAUDITED — not an executable bid</dd></div>
+          <div><dt>Indicated mark</dt><dd class="warn">~$4.00 user-supplied — UNAUDITED / not an executable bid</dd></div>
           <div><dt>Initial invalidation</dt><dd>GEX HVL 717</dd></div>
-          <div><dt>Current invalidation</dt><dd>711 (Bookmap offer wall ~9:29 AM ET) · hard kill 717</dd></div>
+          <div><dt>Current invalidation</dt><dd>Tape 711 · hard GEX 717 · today’s 0DTE HVL reclaim 707 if it holds</dd></div>
           <div><dt>Initial premium-risk</dt><dd>~25–35% of $2.20 (backstop)</dd></div>
-          <div><dt>Profit-protection</dt><dd>Premium floor $2.75 (~+25%)</dd></div>
+          <div><dt>Profit-protection</dt><dd>Do not let $2.20 go red · ~$2.75 min after +50%</dd></div>
           <div><dt>Target 1</dt><dd>+50% classify — already past; PROTECTED RUNNER</dd></div>
-          <div><dt>Primary GEX target</dt><dd>QQQ $700 (underlying price, not option %)</dd></div>
+          <div><dt>Primary GEX target</dt><dd>QQQ $700 (GEX P1 — underlying price, not option %)</dd></div>
           <div><dt>Stretch</dt><dd>None published</dd></div>
           <div><dt>MFE / MAE</dt><dd>— / —</dd></div>
           <div><dt>Alert</dt><dd>Alerted at entry</dd></div>
-          <div><dt>Last updated</dt><dd>Sep 2, 2026, ~9:53 AM ET (6:53 AM PT)</dd></div>
-          <div class="odte-span"><dt>Market-data source</dt><dd>TradingView OPRA pending; Bookmap QQQ 6:29 PT for tape; indicated $4 from the desk</dd></div>
+          <div><dt>Last updated</dt><dd>Sep 2, 2026, ~10:03 AM ET (7:03 AM PT)</dd></div>
+          <div class="odte-span"><dt>Market-data source</dt><dd>TradingView OPRA pending; Bookmap QQQ 6:29 PT for tape; indicated ~$4.00 is user-supplied, not an executable bid</dd></div>
           <div class="odte-span"><dt>GEX-data source</dt><dd>GEX snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M)</dd></div>
         </dl>
 
-        <p class="odte-pnl-line" id="odte-open-pnl">Open P&amp;L: Indicated ~$4.00 pending executable bid. Not an official +81.8% print. No official return until a verified bid/ask exists.</p>
-        <p class="odte-tape-target" id="odte-open-tape">Primary target: QQQ $700. 700 cancels if QQQ accepts 711 or HVL 717 reclaims.</p>
+        <p class="odte-pnl-line" id="odte-open-pnl">Open P&amp;L: Indicated ~$4.00 pending executable bid. User-supplied. Not an official +81.8% print. No official return until a verified bid/ask exists.</p>
+        <p class="odte-tape-target" id="odte-open-tape">Primary target: QQQ $700 (GEX P1). 700 cancels if GEX flips positive / HVL reclaimed and holds.</p>
 
         <p class="dl-label">Expiration-day clock (ET)</p>
         <ol class="odte-checkpoints" id="odte-time-plan">
           <li><span class="when">10:00 ET</span><span class="what">Review</span></li>
           <li><span class="when">11:30 ET</span><span class="what">Reassess</span></li>
-          <li><span class="when">2:00 PM ET</span><span class="what">Remaining contract needs an active exit plan</span></li>
-          <li><span class="when">3:30 ET</span><span class="what">Flatten unless a documented late-session plan exists</span></li>
-          <li><span class="when">4:15 ET</span><span class="what">Hard expiry backstop only — not the working plan</span></li>
+          <li><span class="when">2:00 PM ET</span><span class="what">Needs an active exit plan</span></li>
+          <li><span class="when">3:30 PM ET</span><span class="what">Default flatten</span></li>
+          <li><span class="when">4:15 PM ET</span><span class="what">Latest</span></li>
         </ol>
         <p class="footnote" id="odte-open-notes">At +75% or more, a 1-lot cannot be an unprotected hold. Underlying invalidation is primary; the premium backstop is secondary. BOOK FACT · NOT A LIVE TICKET.</p>
       </article>
       <p class="odte-empty" id="odte-no-open" hidden>No official 0DTE candidate on the book.</p>
+
+      <aside class="odte-watch" id="odte-iwm-watch" aria-label="Same-day IWM watch">
+        <p class="odte-watch-kicker">Same-day watch · not an official card</p>
+        <p class="odte-watch-title"><span class="status-badge status-skip">NO TRADE</span> IWM 0DTE</p>
+        <p>Watch / no-entry. Capital preserved. No 292P or 293C fill. Spot ~292.5. GEX snapshot: 0DTE net +16.7M positive gamma, pin 291–293, C1 293, HVL/P1 290. Logged <time class="stamp-et" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time> (7:03 AM PT).</p>
+      </aside>
     </section>
 
     <section class="wrap section" id="timeline">
@@ -260,6 +266,16 @@
           <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T09:29:00-04:00" data-et data-et-approx>Sep 2, 2026, ~9:29 AM ET</time>
           <p>Bookmap QQQ ~707.06, overnight low ~703.60, offers 708/709/709.60/711, bids 706/705/700. Classified PROTECTED RUNNER. Invalidation tightened to 711 (hard 717). Premium floor $2.75. Indicated ~$4.00 unaudited. Source clock: 6:29 AM PT Bookmap.</p>
         </li>
+        <li>
+          <p class="odte-tl-action">HOLD/UPDATE</p>
+          <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time>
+          <p>Desk lock on the official OPEN. Invalidation: tape 711 / hard GEX 717 / today’s 0DTE HVL reclaim 707 if it holds. Floor: do not let $2.20 go red; ~$2.75 min protect after +50%. Cancel 700 if GEX flips positive / HVL reclaimed and holds. Time: 2:00 PM ET needs an active exit plan; 3:30 PM ET default flatten; 4:15 PM ET latest. Indicated ~$4.00 remains user-supplied, not an executable bid. Source clock: 7:03 AM PT desk lock.</p>
+        </li>
+        <li>
+          <p class="odte-tl-action">NO TRADE</p>
+          <time class="stamp-et odte-tl-stamp" datetime="2026-09-02T10:03:00-04:00" data-et data-et-approx>Sep 2, 2026, ~10:03 AM ET</time>
+          <p>IWM same-day 0DTE is watch / no-entry. Not an official candidate. No 292P or 293C fill. Spot ~292.5. GEX snapshot: 0DTE net +16.7M positive gamma, pin 291–293, C1 293, HVL/P1 290. Capital preserved. Source clock: 7:03 AM PT desk lock.</p>
+        </li>
       </ol>
     </section>
 
@@ -275,7 +291,7 @@
         </li>
         <li>
           <h3>One official candidate per market day</h3>
-          <p>Official means the documented candidate that day — executed or not. If nothing qualifies, the day is logged as NO QUALIFYING ENTRY — CAPITAL PRESERVED. We do not force a simulated fill to satisfy the slot. A failed candidate is documented. There is no official IWM fill as of this update.</p>
+          <p>Official means the documented candidate that day — executed or not. If nothing qualifies, the day is logged as NO QUALIFYING ENTRY — CAPITAL PRESERVED. We do not force a simulated fill to satisfy the slot. A failed or watch-only name is documented as NO TRADE, not as a second official card. Sep 2 IWM is that row.</p>
         </li>
         <li>
           <h3>No entry on a GEX target alone</h3>
@@ -420,10 +436,23 @@
               <td>open · indicated mark unaudited</td>
               <td class="mono">Sep 1, 4:15 PM ET</td>
             </tr>
+            <tr>
+              <td class="mono">2026-09-02</td>
+              <td>Same-day 0DTE</td>
+              <td class="mono">IWM</td>
+              <td>No fill — watch / no-entry</td>
+              <td><span class="sim-mini">SIMULATED/PAPER</span></td>
+              <td class="mono">—</td>
+              <td class="mono">—</td>
+              <td>—</td>
+              <td><span class="status-badge status-skip">NO TRADE</span></td>
+              <td>capital preserved</td>
+              <td class="mono">Sep 2, ~10:03 AM ET</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <p class="footnote" id="odte-notes">Status path for 2026-09-01-qqq-707p: OPEN (Sep 1, 4:15 PM ET) → OPEN — PROTECTED RUNNER (Sep 2, ~9:29 AM ET). Prior OPEN remains on the timeline. SIMULATED RESEARCH.</p>
+      <p class="footnote" id="odte-notes">Status path for 2026-09-01-qqq-707p: OPEN (Sep 1, 4:15 PM ET) → OPEN — PROTECTED RUNNER (Sep 2, ~9:29 AM ET). IWM 2026-09-02 is NO TRADE — not an official candidate. Prior OPEN remains on the timeline. SIMULATED RESEARCH.</p>
     </section>
 
     <section class="wrap section" id="method">
@@ -436,7 +465,7 @@
         <p>A 30-day public audit trail of index-ETF 0DTE and next-session tickets. One official candidate is documented every market day from 1 Sep 2026 through 1 Oct 2026. The page is a ledger, not a gallery of winning screenshots.</p>
 
         <h3>How a candidate is selected</h3>
-        <p>Eligible tape is SPY, QQQ, or IWM. A GEX snapshot may publish a destination on the ticker — a price, not an option-premium percent. Entry still requires a qualifying tape. No GEX-only entries. If the tape does not qualify, the day is NO QUALIFYING ENTRY — CAPITAL PRESERVED. We document the failed candidate. We do not invent a fill so the calendar looks busy.</p>
+        <p>Eligible tape is SPY, QQQ, or IWM. A GEX snapshot may publish a destination on the ticker — a price, not an option-premium percent. Entry still requires a qualifying tape. No GEX-only entries. If the tape does not qualify, the day is NO QUALIFYING ENTRY — CAPITAL PRESERVED. We document the watch as a NO TRADE row. We do not invent a fill so the calendar looks busy. Sep 2 IWM is that case — not a second official card.</p>
 
         <h3>How LIVE and SIMULATED stay split</h3>
         <p>A row is paper unless it says LIVE. This challenge, including the QQQ 707 put, is SIMULATED/PAPER. It is not a live Schwab ticket, not The Leap, and not the XLV sector-swing Track Record. Headline boards never mix the two books. Same-day 0DTE never shares a headline with overnight-managed-on-expiration.</p>

@@ -389,10 +389,17 @@
     if (label.indexOf("PROTECTED") !== -1) return "status-badge status-protected";
     if (s === "closed") return "status-badge status-closed";
     if (s === "open") return "status-badge status-open";
+    if (s === "no-trade" || s === "no-ticket") return "status-badge status-skip";
     return "status-badge";
   }
 
+  function odteIsNoTrade(t) {
+    var s = String(t.status || "").toLowerCase();
+    return s === "no-trade" || s === "no-ticket" || t.officialCandidate === false;
+  }
+
   function odtePnlCell(t) {
+    if (odteIsNoTrade(t)) return "capital preserved";
     var open = String(t.status || "").toLowerCase() === "open";
     if (open) {
       if (t.openPnlLine) return "open · indicated mark unaudited";
@@ -422,16 +429,19 @@
   }
 
   function renderOdteRow(tr, t) {
-    var open = String(t.status || "").toLowerCase() === "open";
-    var size = (t.contractsRemaining != null && t.contractsEntered != null)
-      ? String(t.contractsRemaining) + " / " + String(t.contractsEntered)
-      : (t.side || "—");
+    var noTrade = odteIsNoTrade(t);
+    var open = !noTrade && String(t.status || "").toLowerCase() === "open";
+    var size = noTrade
+      ? "—"
+      : (t.contractsRemaining != null && t.contractsEntered != null
+        ? String(t.contractsRemaining) + " / " + String(t.contractsEntered)
+        : (t.side || "—"));
     addCell(tr, t.date || "—", "mono");
     addCell(tr, odteBookLabel(t));
     addCell(tr, t.underlying || "—", "mono");
-    addCell(tr, t.contract || t.contractDetail || "—");
+    addCell(tr, noTrade ? (t.contract || "No fill — watch / no-entry") : (t.contract || t.contractDetail || "—"));
     addOdteLabelCell(tr, t);
-    addCell(tr, moneyPremium(t.entry), "mono");
+    addCell(tr, noTrade ? "—" : moneyPremium(t.entry), "mono");
     addCell(tr, size, "mono");
     addCell(tr, open || t.exit == null || t.exit === "" ? "—" : moneyPremium(t.exit), "mono");
     addOdteStatus(tr, t);

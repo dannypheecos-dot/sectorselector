@@ -1,7 +1,7 @@
 {
   "asOf": "2026-09-02",
-  "asOfLabel": "Sep 2, 2026, ~9:53 AM ET",
-  "asOfAt": "2026-09-02T09:53:00-04:00",
+  "asOfLabel": "Sep 2, 2026, ~10:03 AM ET",
+  "asOfAt": "2026-09-02T10:03:00-04:00",
   "asOfApprox": true,
   "windowStart": "2026-09-01",
   "windowEnd": "2026-10-01",
@@ -14,7 +14,7 @@
   "closedNeededForWinRate": 1,
   "officialTodayId": "2026-09-01-qqq-707p",
   "scoreboards": {
-    "note": "Live and simulated books are never mixed. Same-day 0DTE is never mixed with overnight-managed-on-expiration. One official candidate so far. Do not compute win rate, profit factor, or max DD from one open paper trade.",
+    "note": "Live and simulated books are never mixed. Same-day 0DTE is never mixed with overnight-managed-on-expiration. One official candidate (QQQ overnight). Same-day IWM is a documented NO TRADE, not a second official card. Do not compute win rate, profit factor, or max DD from one open paper trade.",
     "live": {
       "label": "LIVE",
       "sameDay": {
@@ -54,7 +54,7 @@
         "book": "Same-day 0DTE",
         "documentedCandidates": "0",
         "executed": "0",
-        "noTradeDays": "0",
+        "noTradeDays": "1",
         "wins": "—",
         "losses": "—",
         "winRate": "—",
@@ -101,6 +101,26 @@
       "action": "HOLD/PROTECT",
       "tradeId": "2026-09-01-qqq-707p",
       "summary": "Bookmap QQQ ~707.06, overnight low ~703.60, offers 708/709/709.60/711, bids 706/705/700. Classified PROTECTED RUNNER. Invalidation tightened to 711 (hard 717). Premium floor $2.75. Indicated ~$4.00 unaudited."
+    },
+    {
+      "id": "2026-09-02-1003-hold-update",
+      "at": "2026-09-02T10:03:00-04:00",
+      "atLabel": "Sep 2, 2026, ~10:03 AM ET",
+      "approx": true,
+      "sourceClock": "7:03 AM PT desk lock",
+      "action": "HOLD/UPDATE",
+      "tradeId": "2026-09-01-qqq-707p",
+      "summary": "Desk lock on the official OPEN. Invalidation: tape 711 / hard GEX 717 / today’s 0DTE HVL reclaim 707 if it holds. Floor: do not let $2.20 go red; ~$2.75 min protect after +50%. Cancel 700 if GEX flips positive / HVL reclaimed and holds. Time: 2:00 PM ET needs an active exit plan; 3:30 PM ET default flatten; 4:15 PM ET latest. Indicated ~$4.00 remains user-supplied, not an executable bid."
+    },
+    {
+      "id": "2026-09-02-1003-iwm-no-trade",
+      "at": "2026-09-02T10:03:00-04:00",
+      "atLabel": "Sep 2, 2026, ~10:03 AM ET",
+      "approx": true,
+      "sourceClock": "7:03 AM PT desk lock",
+      "action": "NO TRADE",
+      "tradeId": "2026-09-02-iwm-no-trade",
+      "summary": "IWM same-day 0DTE is watch / no-entry. Not an official candidate. No 292P or 293C fill. Spot ~292.5. GEX snapshot: 0DTE net +16.7M positive gamma, pin 291–293, C1 293, HVL/P1 290. Capital preserved."
     }
   ],
   "trades": [
@@ -156,30 +176,59 @@
       "invalidationInitial": 717,
       "invalidationInitialNote": "GEX HVL 717",
       "invalidationCurrent": 711,
-      "invalidationCurrentNote": "Bookmap offer wall 2026-09-02 ~6:29 PT / 9:29 AM ET",
+      "invalidationCurrentNote": "Tape 711 / hard GEX 717 / today’s 0DTE HVL reclaim 707 if it holds",
       "invalidationHard": 717,
+      "invalidationHvlReclaim": 707,
       "premiumRiskInitial": "~25–35% of $2.20 (backstop); underlying invalidation is primary",
       "premiumFloor": 2.75,
-      "premiumFloorNote": "~+25%",
+      "premiumFloorNote": "Do not let $2.20 go red. ~$2.75 min protect after +50%.",
       "target1": "+50% classify (already past; classified PROTECTED RUNNER)",
       "mfe": null,
       "mae": null,
-      "lastUpdated": "Sep 2, 2026, ~9:53 AM ET",
-      "lastUpdatedAt": "2026-09-02T09:53:00-04:00",
-      "lastUpdatedPt": "6:53 AM PT",
-      "marketDataSource": "TradingView OPRA pending; Bookmap QQQ 6:29 PT for tape; indicated $4 from the desk",
+      "lastUpdated": "Sep 2, 2026, ~10:03 AM ET",
+      "lastUpdatedAt": "2026-09-02T10:03:00-04:00",
+      "lastUpdatedPt": "7:03 AM PT",
+      "marketDataSource": "TradingView OPRA pending; Bookmap QQQ 6:29 PT for tape; indicated ~$4.00 is user-supplied, not an executable bid",
       "gexDataSource": "GEX snapshot 2026-09-01 ~1:13 PT (QQQ 707.76, HVL 717, P1 700, C1 725, net GEX −86.5M)",
       "spotAtEntry": 707.76,
-      "cancelRule": "700 cancels if QQQ accepts 711 or HVL 717 reclaims.",
+      "cancelRule": "700 cancels if GEX flips positive / HVL reclaimed and holds.",
       "timePlan": [
         "10:00 ET review",
         "11:30 ET reassess",
         "2:00 PM ET remaining contract needs an active exit plan",
-        "3:30 ET flatten unless a documented late-session plan",
-        "4:15 ET hard expiry backstop only"
+        "3:30 PM ET default flatten",
+        "4:15 PM ET latest"
       ],
       "hardLatest": "Sep 2, 2026, 4:15 PM ET",
-      "notes": "SIMULATED/PAPER. Not live Schwab. Not The Leap. Not the XLV sector-swing book. Overnight position managed on expiration day. Indicated ~$4.00 is unaudited and not an official +81.8% print. MFE/MAE unknown until a verified bid series exists."
+      "notes": "SIMULATED/PAPER. Not live Schwab. Not The Leap. Not the XLV sector-swing book. Overnight position managed on expiration day. Indicated ~$4.00 is user-supplied and not an official +81.8% print. MFE/MAE unknown until a verified bid series exists. IWM same-day is a separate NO TRADE row, not a second official card."
+    },
+    {
+      "id": "2026-09-02-iwm-no-trade",
+      "date": "2026-09-02",
+      "underlying": "IWM",
+      "contract": "No fill — watch / no-entry",
+      "contractDetail": null,
+      "side": null,
+      "entry": null,
+      "openedAlerted": "Sep 2, 2026, ~10:03 AM ET",
+      "openedAlertedAt": "2026-09-02T10:03:00-04:00",
+      "alertedAtEntry": false,
+      "entryAsOf": "Sep 2, 2026, ~10:03 AM ET",
+      "exit": null,
+      "status": "no-trade",
+      "statusLabel": "NO TRADE",
+      "officialCandidate": false,
+      "label": "SIMULATED/PAPER",
+      "live": false,
+      "book": "same-day",
+      "bookLabel": "Same-day 0DTE",
+      "bookNote": "Watch / no-entry. Not an official candidate fill. Capital preserved.",
+      "pnl": null,
+      "contractsEntered": 0,
+      "contractsRemaining": 0,
+      "spotAtWatch": 292.5,
+      "gexDataSource": "GEX snapshot · 0DTE net +16.7M positive gamma, pin 291–293, C1 293, HVL/P1 290",
+      "notes": "IWM same-day 0DTE is NO TRADE. Spot ~292.5. No 292P or 293C fill was taken. Watch only."
     }
   ]
 }

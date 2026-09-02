@@ -1502,6 +1502,44 @@ body[data-page="odte-challenge"] .page-hero {
   border-color: var(--mint-line);
 }
 
+.status-badge.status-skip {
+  color: var(--muted);
+  background: var(--bg-3);
+  border-color: var(--line-2);
+}
+
+.odte-watch {
+  margin: 1rem 0 0;
+  padding: 0.95rem 1rem 1.05rem;
+  border: 1px dashed var(--line-2);
+  background: var(--bg-2);
+}
+
+.odte-watch-kicker {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.4rem;
+}
+
+.odte-watch-title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--off);
+  margin: 0 0 0.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.6rem;
+}
+
+.odte-watch p:last-child {
+  margin: 0;
+  color: var(--text);
+}
+
 .odte-ticket-contract {
   font-family: var(--mono);
   font-size: clamp(1.15rem, 3vw, 1.45rem);
