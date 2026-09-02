@@ -14,10 +14,15 @@
   "premise": "Can an AI research desk improve its 0DTE execution over 30 market days?",
   "simLine": "SIMULATED RESEARCH — NOT LIVE TRADING",
   "disclosure": "This is an educational research challenge. One simulated book. Not live trading. No cherry-picking, deleted losses, invented fills, or retroactive entries.",
-  "ledgerNote": "Append-only public ledger. Corrections are appended. Prior OPEN status is not erased. Official P&L uses executable bid/ask when present. Indicated marks stay labeled. Counters iterate trades[] by unique id. Rules-based stats exclude pre-rule-baseline tickets. Trade Zero is counted once.",
+  "ledgerNote": "Append-only public ledger. Corrections are appended. Prior OPEN status is not erased. Three performance types never mix: Peak Opportunity After Alert, All-or-Nothing Research Outcome, and Managed Execution Outcome. Only Managed Execution Outcomes (plus approved pre-rule baseline P&L) change modelCash. Counters iterate trades[] by unique id. Trade Zero is counted once.",
   "closedNeededForWinRate": 1,
   "heroStatus": "SETUP WATCHING",
-  "heroStatusOptions": ["TRADE ACTIVE", "SETUP WATCHING", "NO QUALIFYING ENTRY", "TRADE CLOSED"],
+  "heroStatusOptions": [
+    "TRADE ACTIVE",
+    "SETUP WATCHING",
+    "NO QUALIFYING ENTRY",
+    "TRADE CLOSED"
+  ],
   "officialTodayId": "2026-09-02-official-no-entry",
   "today": {
     "id": "2026-09-02-official-no-entry",
@@ -35,27 +40,36 @@
     "positionSize": "0 contracts · no debit",
     "plannedStopLoss": "—",
     "maxCapitalAtRisk": "$0 — no premium deployed",
-    "alertExpiration": "Session hunt open until 4:15 PM ET",
+    "alertExpiration": "Verify the ETF-option cutoff for the exact product. SPY/QQQ/IWM typically remain eligible until 4:15 PM ET on regular sessions — they are ETF options, not cash-settled index options.",
     "lastUpdated": "Sep 2, 2026, ~1:25 PM ET",
     "lastUpdatedAt": "2026-09-02T13:25:00-04:00",
     "lastUpdatedPtNote": "10:25 AM PT source clock",
-    "candidatesMonitored": ["SPY", "QQQ", "IWM"],
+    "candidatesMonitored": [
+      "SPY",
+      "QQQ",
+      "IWM"
+    ],
     "whyNoneQualified": "Index tape sitting in a positive-GEX pin. IWM 290 not broken. No chase into the 2:00 PM ET Beige Book print or leftover Sep 2 707 puts.",
     "sameDayPnl": 0,
     "officialRecord": "NO QUALIFYING ENTRY — CAPITAL PRESERVED",
-    "observation": "Capital stays in cash until a published entry and risk standard is met. Same-day slot P&L is $0. Carry-in of Trade Zero is a separate overnight ticket, not a second official candidate."
+    "observation": "Capital stays in cash until a published entry and risk standard is met. Same-day slot P&L is $0. Carry-in of Trade Zero is a separate overnight ticket, not a second official candidate.",
+    "sessionNote": "Session still open until the verified product cutoff. Same-day official record remains NO QUALIFYING ENTRY unless a qualifying fill is logged."
   },
   "progress": {
     "day": 2,
     "days": 30,
-    "rulesBasedCompleted": 0,
-    "wins": 0,
-    "losses": 0,
-    "rulesBasedNetPnl": null,
+    "qualifiedAlerts": 0,
+    "verifiedPlus25": null,
+    "verifiedPlus25Label": "NOT ENOUGH VERIFIED DATA",
+    "medianVerifiedPeakPct": null,
+    "medianVerifiedPeakLabel": "NOT ENOUGH VERIFIED DATA",
     "modelBalance": 9840,
+    "managedNetPnlRulesBased": null,
+    "noQualifyingEntryDays": 1,
     "compliance": null,
-    "winRate": "Not enough data",
-    "caption": "Rules-based record begins after Trade Zero. Win rate: Not enough data."
+    "complianceLabel": "N/A",
+    "verifiedDataStatus": "NOT ENOUGH VERIFIED DATA",
+    "caption": "Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED. Trade Zero’s overnight indication is excluded. Rules-based managed record begins after Trade Zero. Model balance $9,840 includes the approved pre-rule baseline −$160 only."
   },
   "lessons": [
     {
@@ -77,7 +91,9 @@
       "officialLabel": "OPEN — CARRIED OVERNIGHT",
       "sameDayPnl": null,
       "sameDayPnlNote": "No realized P&L on the entry date. Realized P&L posts on the exit date only.",
-      "tradeIds": ["2026-09-01-qqq-707p"],
+      "tradeIds": [
+        "2026-09-01-qqq-707p"
+      ],
       "carryOutId": "2026-09-01-qqq-707p",
       "isToday": false
     },
@@ -87,10 +103,16 @@
       "officialRecord": "NO QUALIFYING ENTRY — CAPITAL PRESERVED",
       "officialLabel": "WATCHING — NO ENTRY",
       "sameDayPnl": 0,
-      "candidatesMonitored": ["SPY", "QQQ", "IWM"],
+      "candidatesMonitored": [
+        "SPY",
+        "QQQ",
+        "IWM"
+      ],
       "whyNoneQualified": "Positive GEX pin on the indexes. IWM 290 not broken. No chase into Beige Book or leftover 707 puts.",
       "observation": "One official same-day record: no qualifying entry. IWM was a watch only — officialCandidate false, not a second official candidate.",
-      "tradeIds": ["2026-09-02-official-no-entry"],
+      "tradeIds": [
+        "2026-09-02-official-no-entry"
+      ],
       "carryInId": "2026-09-01-qqq-707p",
       "carryInLabel": "CARRY-IN FROM SEP 1",
       "carryInPnl": -160,
@@ -218,16 +240,16 @@
       "contract": "QQQ Sep 2 2026 707 put",
       "contractDetail": "QQQ 707P exp 2026-09-02",
       "side": "BTO 1",
-      "entry": 2.20,
+      "entry": 2.2,
       "openedAlerted": "Sep 1, 2026, ~4:15 PM ET",
       "openedAlertedAt": "2026-09-01T16:15:00-04:00",
       "alertedAtEntry": true,
       "entryAsOf": "Sep 1, 2026, ~4:15 PM ET",
-      "exit": 0.60,
+      "exit": 0.6,
       "exitAt": "2026-09-02T12:25:00-04:00",
       "exitLabel": "Sep 2, 2026, ~12:25 PM ET",
       "status": "closed",
-      "statusLabel": "CLOSED — LOSS",
+      "statusLabel": "PRE-RULE BASELINE — TRADE ZERO",
       "entryCardStatus": "OPEN — CARRIED OVERNIGHT",
       "exitCardStatus": "CARRY-IN FROM SEP 1",
       "statusPath": [
@@ -253,11 +275,11 @@
       "bookLabel": "1DTE · carried overnight",
       "bookNote": "One trade object. One executed count. One P&L. Entered near the Sep 1 close; realized on Sep 2 expiration. Not a same-day 0DTE entry.",
       "pnl": -160,
-      "pnlPerShare": -1.60,
+      "pnlPerShare": -1.6,
       "pnlPct": -72.7,
       "pnlLabel": "−$160 / −72.7%",
       "openPnlLine": null,
-      "indicatedMark": 4.00,
+      "indicatedMark": 4.0,
       "indicatedMarkLabel": "~$4.00",
       "indicatedMarkStatus": "UNAUDITED / not an executable bid — superseded by official close $0.60",
       "cashOpen": 2.54,
@@ -291,10 +313,10 @@
       "invalidationHvlReclaim": 707,
       "premiumFloor": 2.75,
       "premiumFloorNote": "Published after the open. Forward-only.",
-      "mfe": 4.40,
+      "mfe": 4.4,
       "mfeLabel": "+100% / $4.40 overnight UNAUDITED · cash open $2.54 user-stated",
       "mfeNote": "User-stated overnight indicated high. No OPRA bid/ask captured. Not official P&L. Not a +$220 result. Cash open was $2.54, not $4.40.",
-      "mae": 0.60,
+      "mae": 0.6,
       "maeLabel": "$0.60 official close",
       "lastUpdated": "Sep 2, 2026, ~12:35 PM ET",
       "lastUpdatedAt": "2026-09-02T12:35:00-04:00",
@@ -315,7 +337,76 @@
       "hardLatest": "Sep 2, 2026, 4:15 PM ET",
       "thesis": "1DTE put against QQQ 700 (GEX P1) with hard invalidation at HVL 717. Overnight carry into expiration. Not a same-day 0DTE entry.",
       "commentary": "Pre-rule baseline. Rules — including the profit-protection ladder — were adopted after this ticket’s open (LESSON 01, 12:35 PM ET). Official P&L is −$160 (−72.7%). Overnight indicated +100% / $4.40 is UNAUDITED and was not harvested. Cash open $2.54 is user-stated, not a close. Model cash includes this −$160 once ($9,840). Excluded from rules-based trade count, win rate, compliance, expectancy, and profit factor.",
-      "notes": "SIMULATED. CLOSED — LOSS @ $0.60 vs $2.20. Official P&L −$160 / −72.7%. Overnight MFE +100% / $4.40 UNAUDITED — not harvested. Cash open $2.54 user-stated (+$0.34 / ~+15%) — not official P&L. Compliance: N/A — RULES ADOPTED AFTERWARD. Unique id counted once. Not a live blotter. Not the sector-swing book."
+      "notes": "SIMULATED. CLOSED — LOSS @ $0.60 vs $2.20. Official P&L −$160 / −72.7%. Overnight MFE +100% / $4.40 UNAUDITED — not harvested. Cash open $2.54 user-stated (+$0.34 / ~+15%) — not official P&L. Compliance: N/A — RULES ADOPTED AFTERWARD. Unique id counted once. Not a live blotter. Not the sector-swing book.",
+      "opportunityIdentified": "UNVERIFIED",
+      "referenceEntry": 2.2,
+      "referenceEntryVerified": false,
+      "referenceEntryNote": "Published desk fill $2.20. Not a verified executable ASK tape after the alert. Do not use as the Peak Opportunity denominator until historical quote history is attached.",
+      "peakExecutableBid": null,
+      "peakBidAt": null,
+      "peakOpportunityPct": null,
+      "peakOpportunityLabel": "AWAITING VERIFIED QUOTE DATA",
+      "peakVerification": "UNAVAILABLE — INSUFFICIENT DATA",
+      "quoteSource": null,
+      "measurementStart": "2026-09-01T16:15:00-04:00",
+      "measurementEnd": null,
+      "maeBeforePeak": null,
+      "timeToPeak": null,
+      "peakVsManagedInvalidation": null,
+      "peakDay": null,
+      "indicativePeak": {
+        "low": 4.0,
+        "high": 4.4,
+        "status": "INDICATIVE — NOT EXECUTABLE",
+        "excludedFromOfficial": true,
+        "note": "Overnight indication approximately $4.00–$4.40. Not executable while the options market was closed. Not peakExecutableBid. INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS."
+      },
+      "cashOpenOfficialOpportunity": false,
+      "signalQuality": {
+        "opportunityIdentified": "UNVERIFIED",
+        "referenceEntry": 2.2,
+        "peakExecutableBid": null,
+        "peakBidAt": null,
+        "peakOpportunityPct": null,
+        "peakOpportunityLabel": "AWAITING VERIFIED QUOTE DATA",
+        "verification": "UNAVAILABLE — INSUFFICIENT DATA",
+        "maeBeforePeak": null,
+        "timeToPeak": null
+      },
+      "allOrNothingOutcome": {
+        "notional": 1000,
+        "terminalExitAt": "2026-09-02T12:25:00-04:00",
+        "terminalValue": 0.6,
+        "terminalPct": -72.7,
+        "dollarOutcome": null,
+        "maxPossibleLoss": 1000,
+        "lowestDuringHold": 0.6,
+        "highestVerifiedExecutableBid": null,
+        "levelsAvailable": {
+          "plus25": null,
+          "plus50": null,
+          "plus100": null,
+          "plus200": null
+        },
+        "status": "INDICATIVE / UNAVAILABLE",
+        "excludedFromOfficial": true,
+        "label": "Hypothetical $1,000 fixed-notional research model. Not the model-account position size and not realized performance.",
+        "note": "Uses the actual $0.60 terminal as last known exit without a verified cutoff bid. Do not invent a 4:00 PM bid. Do not feed into official all-or-nothing aggregates."
+      },
+      "managedExecution": {
+        "modelPositionSize": "1 contract",
+        "plannedStopLoss": "N/A — rules adopted afterward",
+        "maxCapitalAtRisk": 220,
+        "scales": "N/A — pre-rule baseline",
+        "modeledExit": 0.6,
+        "pctResult": -72.7,
+        "dollarResult": -160,
+        "ruleCompliance": "N/A — RULES ADOPTED AFTERWARD",
+        "opportunityCaptureRate": null,
+        "excludedFromRulesBased": true,
+        "excludedFromManagedStrategyStats": true,
+        "includedInModelCashAsPreRuleBaseline": true
+      }
     },
     {
       "id": "2026-09-02-official-no-entry",
@@ -351,10 +442,95 @@
       "modelPositionSize": "0",
       "plannedStopLoss": "—",
       "maxCapitalAtRisk": "$0 — no premium deployed",
-      "candidatesMonitored": ["SPY", "QQQ", "IWM"],
+      "candidatesMonitored": [
+        "SPY",
+        "QQQ",
+        "IWM"
+      ],
       "whyNoneQualified": "Positive GEX pin; IWM 290 not broken; no chase into Beige Book / 707 puts.",
       "gexDataSource": "GEX snapshot · index tape in a positive-gamma pin. IWM 0DTE net +16.7M, pin 291–293, HVL/P1 290.",
-      "notes": "Official same-day record for Sep 2. Daily P&L $0 for the same-day slot. Carry-in of Trade Zero is separate and already counted once."
+      "notes": "Official same-day record for Sep 2. Daily P&L $0 for the same-day slot. Carry-in of Trade Zero is separate and already counted once.",
+      "opportunityIdentified": "NO",
+      "referenceEntry": null,
+      "peakExecutableBid": null,
+      "peakOpportunityPct": null,
+      "peakOpportunityLabel": "—",
+      "peakVerification": "UNAVAILABLE — INSUFFICIENT DATA",
+      "managedExecution": {
+        "dollarResult": 0,
+        "excludedFromRulesBased": false,
+        "note": "Official daily record. Not an executed trade. $0 same-day slot. Does not change modelCash."
+      },
+      "allOrNothingOutcome": {
+        "notional": 1000,
+        "excludedFromOfficial": true,
+        "note": "No qualifying fill. All-or-nothing does not fire."
+      }
     }
-  ]
+  ],
+  "dataAvailability": {
+    "historicalNbbo": "AWAITING VERIFIED QUOTE DATA",
+    "quoteProvider": null,
+    "fullTapeFromAlertToCutoff": false,
+    "note": "Reliable full historical NBBO bid/ask with size from alert timestamp through the product cutoff is not wired. Candle highs, last-trade highs, ask highs, midpoints, theoretical marks, intrinsic value, unsupported prints, and overnight closed-market indications are rejected for official Peak Opportunity."
+  },
+  "productHours": {
+    "underlyings": [
+      "SPY",
+      "QQQ",
+      "IWM"
+    ],
+    "productClass": "ETF options — physically settled, not cash-settled index options",
+    "typicalRegularSessionCutoffEt": "16:15",
+    "doNotAssumeUniversalCutoff": true,
+    "note": "SPY, QQQ, and IWM ETF options typically remain eligible until 4:15 PM ET on regular sessions. Verify the exact product. Do not assume 4:15 PM ET for every option. A single midday or close snapshot cannot establish Peak Opportunity."
+  },
+  "allOrNothing": {
+    "name": "allOrNothingResearch",
+    "label": "Hypothetical $1,000 fixed-notional research model. Not the model-account position size and not realized performance.",
+    "notionalPerQualifiedAlert": 1000,
+    "mutatesModelCash": false,
+    "officialTotal": null,
+    "officialTotalLabel": "NOT ENOUGH VERIFIED DATA",
+    "indicativeExcludedIds": [
+      "2026-09-01-qqq-707p"
+    ],
+    "maxLossPerAlert": 1000,
+    "note": "Terminal exit is the last verifiable executable bid before the product cutoff, or the correctly defined expiration/settlement value. Never a cherry-picked favorable time. Zero terminal value = −$1,000. Never added to modelCash."
+  },
+  "methodology": {
+    "peakOpportunityPct": "(highest verified executable bid after referenceEntry − referenceEntry) ÷ referenceEntry × 100",
+    "referenceEntry": "First verifiable executable ASK after the timestamped public alert, inside preferred entry range, at or below maximum entry, before alert expiration/invalidation, with enough displayed size for the model position.",
+    "opportunityIdentifiedYes": "Contract reaches at least +25% from verified referenceEntry on a verifiable executable BID after the public alert.",
+    "officialPeakVerification": [
+      "VERIFIED NBBO",
+      "BROKER QUOTE VERIFIED"
+    ],
+    "rejectedPeakSources": [
+      "candle high",
+      "last-trade high",
+      "ask high",
+      "midpoint high",
+      "theoretical option value",
+      "intrinsic as an executable sale",
+      "unsupported isolated print",
+      "overnight theoretical mark while options market closed"
+    ],
+    "captureRate": "managed realized profit ÷ maximum verified opportunity profit — only when Peak Opportunity is positive AND managed profit is positive AND both use verified executable data.",
+    "managedBalance": "startingCash + unique-id managed P&L (including approved pre-rule baseline). Peak and all-or-nothing dollars never enter."
+  },
+  "expandedRecord": {
+    "avgVerifiedPeakPct": null,
+    "pctReached50": null,
+    "pctReached100": null,
+    "pctReached200": null,
+    "avgMaeBeforePeak": null,
+    "medianTimeToPeak": null,
+    "aonOfficialTotal": null,
+    "managedWins": 0,
+    "managedLosses": 0,
+    "opportunityCaptureRate": null,
+    "odteVs1dte": null,
+    "status": "NOT ENOUGH VERIFIED DATA"
+  }
 }

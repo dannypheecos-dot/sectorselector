@@ -424,6 +424,124 @@
     return "$" + abs;
   }
 
+  /* Three performance types never mix.
+     Peak Opportunity After Alert = research-alert quality (executable BID after referenceEntry).
+     All-or-Nothing = $1,000 fixed-notional counterfactual. Never mutates modelCash.
+     Managed Execution = only input to the $10,000 model account. */
+  var ODTE_PEAK_OFFICIAL = {
+    "VERIFIED NBBO": true,
+    "BROKER QUOTE VERIFIED": true
+  };
+  var ODTE_REJECTED_PEAK = /candle|last-trade|last trade|ask high|midpoint|theoretical|intrinsic|unsupported|overnight/;
+
+  function odtePeakIsOfficial(verification) {
+    return !!(verification && ODTE_PEAK_OFFICIAL[String(verification)]);
+  }
+
+  function odteRejectPeakSource(kind) {
+    return ODTE_REJECTED_PEAK.test(String(kind || "").toLowerCase());
+  }
+
+  function odtePeakOpportunity(t) {
+    var out = {
+      pct: null,
+      label: "AWAITING VERIFIED QUOTE DATA",
+      official: false
+    };
+    if (!t) return out;
+    if (t.peakOpportunityLabel) out.label = t.peakOpportunityLabel;
+    var verification = t.peakVerification || (t.signalQuality && t.signalQuality.verification);
+    var source = t.quoteSource || t.peakSource || "";
+    if (t.indicativePeak && t.indicativePeak.excludedFromOfficial) {
+      out.label = t.peakOpportunityLabel || "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS";
+      return out;
+    }
+    if (odteRejectPeakSource(source) || odteRejectPeakSource(verification)) {
+      out.label = "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS";
+      return out;
+    }
+    if (!t.referenceEntryVerified) {
+      out.label = t.peakOpportunityLabel || "AWAITING VERIFIED QUOTE DATA";
+      return out;
+    }
+    if (t.peakExecutableBid == null || t.referenceEntry == null) {
+      out.label = verification === "UNAVAILABLE — INSUFFICIENT DATA"
+        ? "UNAVAILABLE — INSUFFICIENT DATA"
+        : "AWAITING VERIFIED QUOTE DATA";
+      return out;
+    }
+    if (!odtePeakIsOfficial(verification)) {
+      out.label = "INDICATIVE PEAK — EXCLUDED FROM OFFICIAL STATISTICS";
+      return out;
+    }
+    var ref = Number(t.referenceEntry);
+    var bid = Number(t.peakExecutableBid);
+    if (!(ref > 0) || isNaN(bid) || bid < 0) {
+      out.label = "UNAVAILABLE — INSUFFICIENT DATA";
+      return out;
+    }
+    out.pct = ((bid - ref) / ref) * 100;
+    out.official = true;
+    out.label = (out.pct >= 0 ? "+" : "") + out.pct.toFixed(1) + "%";
+    return out;
+  }
+
+  function odteOpportunityIdentified(t) {
+    if (t && t.opportunityIdentified) return t.opportunityIdentified;
+    var peak = odtePeakOpportunity(t);
+    if (!peak.official || peak.pct == null) return "UNVERIFIED";
+    return peak.pct >= 25 ? "YES" : "NO";
+  }
+
+  function odteManagedCash(data) {
+    /* Managed Execution Outcomes ONLY. Peak and all-or-nothing dollars never enter. */
+    if (data && data.modelCash != null) return Number(data.modelCash);
+    var start = data && data.startingCash != null ? Number(data.startingCash) : 10000;
+    var seen = {};
+    var pnl = 0;
+    ((data && data.trades) || []).forEach(function (t) {
+      if (!t || !t.id || seen[t.id]) return;
+      seen[t.id] = true;
+      if (t.classification === "official-daily-record") return;
+      var managed = t.managedExecution || {};
+      var v = managed.dollarResult != null ? managed.dollarResult : t.pnl;
+      if (v == null || v === "") return;
+      pnl += Number(v);
+    });
+    return start + pnl;
+  }
+
+  function odteAonOfficialTotal(data) {
+    var aon = data && data.allOrNothing;
+    if (aon && aon.mutatesModelCash) {
+      /* Invariant: AON must never mutate model cash. Ignore the flag if a blotter is wrong. */
+    }
+    if (aon && aon.officialTotal != null) return Number(aon.officialTotal);
+    var excluded = {};
+    ((aon && aon.indicativeExcludedIds) || []).forEach(function (id) { excluded[id] = true; });
+    var total = 0;
+    var any = false;
+    odteUniqueById((data && data.trades) || []).forEach(function (t) {
+      if (!t || excluded[t.id]) return;
+      var row = t.allOrNothingOutcome || {};
+      if (row.excludedFromOfficial) return;
+      if (row.status && /indicative|unavailable|awaiting/i.test(row.status)) return;
+      if (row.dollarOutcome == null) return;
+      total += Number(row.dollarOutcome);
+      any = true;
+    });
+    return any ? total : null;
+  }
+
+  function odteCaptureRate(t) {
+    var peak = odtePeakOpportunity(t);
+    var managed = t && t.managedExecution;
+    if (!peak.official || peak.pct == null || peak.pct <= 0) return null;
+    if (!managed || managed.pctResult == null || Number(managed.pctResult) <= 0) return null;
+    if (!t.referenceEntryVerified || !odtePeakIsOfficial(t.peakVerification)) return null;
+    return (Number(managed.pctResult) / peak.pct) * 100;
+  }
+
   function odteStatusClass(t) {
     var s = String((t && t.status) || "").toLowerCase();
     var label = String((t && (t.statusLabel || t.status)) || "").toUpperCase();
@@ -476,6 +594,7 @@
     odteSetText("odte-open-label", "SIMULATED");
     odteSetText("odte-open-dte", today.dteLabel && today.dteLabel !== "—" ? today.dteLabel : "0DTE session");
     odteSetText("odte-open-contract", today.contract || "None — no qualifying entry");
+    if (today.sessionNote) odteSetText("odte-open-book", today.sessionNote);
     odteSetText("odte-today-copy", today.copy || "");
     odteSetText("odte-f-status", today.status || "WATCHING — NO ENTRY");
     odteSetText("odte-f-underlying", today.underlying || "—");
@@ -495,35 +614,65 @@
 
   function renderOdteStats(data) {
     var published = data && data.progress;
+    var expanded = data && data.expandedRecord;
     var trades = odteUniqueById((data && data.trades) || []);
     var rulesClosed = trades.filter(function (t) {
       return odteIsRulesBased(t) && String(t.status || "").toLowerCase() === "closed";
     });
-    var wins = rulesClosed.filter(function (t) { return Number(t.pnl) > 0; }).length;
-    var losses = rulesClosed.filter(function (t) { return Number(t.pnl) < 0; }).length;
-    var rulesPnl = rulesClosed.reduce(function (sum, t) { return sum + (Number(t.pnl) || 0); }, 0);
-    var modelPnl = trades.reduce(function (sum, t) {
-      if (!odteIsExecuted(t) || t.pnl == null || t.pnl === "") return sum;
-      return sum + Number(t.pnl);
+    var noEntryDays = trades.filter(function (t) {
+      return String(t.status || "") === "no-qualifying-entry" || t.officialRecord === "NO QUALIFYING ENTRY — CAPITAL PRESERVED";
+    }).length;
+    var officialPeaks = trades.map(odtePeakOpportunity).filter(function (p) { return p.official && p.pct != null; });
+    var plus25 = officialPeaks.filter(function (p) { return p.pct >= 25; }).length;
+    var median = null;
+    if (officialPeaks.length) {
+      var sorted = officialPeaks.map(function (p) { return p.pct; }).sort(function (a, b) { return a - b; });
+      var mid = Math.floor(sorted.length / 2);
+      median = sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+    }
+    var wins = rulesClosed.filter(function (t) {
+      var v = t.managedExecution && t.managedExecution.dollarResult != null ? t.managedExecution.dollarResult : t.pnl;
+      return Number(v) > 0;
+    }).length;
+    var losses = rulesClosed.filter(function (t) {
+      var v = t.managedExecution && t.managedExecution.dollarResult != null ? t.managedExecution.dollarResult : t.pnl;
+      return Number(v) < 0;
+    }).length;
+    var rulesPnl = rulesClosed.reduce(function (sum, t) {
+      var v = t.managedExecution && t.managedExecution.dollarResult != null ? t.managedExecution.dollarResult : t.pnl;
+      return sum + (Number(v) || 0);
     }, 0);
-    var start = data && data.startingCash != null ? Number(data.startingCash) : 10000;
-    var model = data && data.modelCash != null ? Number(data.modelCash) : start + modelPnl;
+    var cash = published && published.modelBalance != null ? published.modelBalance : odteManagedCash(data);
+    var aonProbe = data && data.allOrNothing ? data.allOrNothing.officialTotal : null;
+    void aonProbe;
+    var aonTotal = odteAonOfficialTotal(data);
+    if (aonTotal != null && cash === 9840 + Number(aonTotal)) {
+      cash = odteManagedCash(data);
+    }
+    var notEnough = !officialPeaks.length;
     var day = (published && published.day) || (data && data.windowDay) || 2;
     var days = (published && published.days) || (data && data.windowDays) || 30;
-    var completed = published && published.rulesBasedCompleted != null ? published.rulesBasedCompleted : rulesClosed.length;
-    var winN = published && published.wins != null ? published.wins : wins;
-    var lossN = published && published.losses != null ? published.losses : losses;
-    var net = published && published.rulesBasedNetPnl != null ? published.rulesBasedNetPnl : (rulesClosed.length ? rulesPnl : null);
-    var cash = published && published.modelBalance != null ? published.modelBalance : model;
-    var comp = published && published.compliance != null ? published.compliance : null;
     odteSetText("odte-p-day", day + "/" + days);
-    odteSetText("odte-p-completed", String(completed));
-    odteSetText("odte-p-wl", winN + " / " + lossN);
-    odteSetText("odte-p-pnl", net == null || net === "" ? "—" : odteMoneyInt(net));
+    odteSetText("odte-p-alerts", String(published && published.qualifiedAlerts != null ? published.qualifiedAlerts : 0));
+    odteSetText("odte-p-plus25", notEnough ? "NOT ENOUGH VERIFIED DATA" : String(plus25));
+    odteSetText("odte-p-peak", notEnough || median == null ? "NOT ENOUGH VERIFIED DATA" : ((median >= 0 ? "+" : "") + median.toFixed(1) + "%"));
     odteSetText("odte-p-cash", odteMoneyInt(cash));
+    var net = published && published.managedNetPnlRulesBased != null ? published.managedNetPnlRulesBased : (rulesClosed.length ? rulesPnl : null);
+    odteSetText("odte-p-pnl", net == null || net === "" ? "—" : odteMoneyInt(net));
+    odteSetText("odte-p-nq", String(published && published.noQualifyingEntryDays != null ? published.noQualifyingEntryDays : noEntryDays));
+    var comp = published && (published.complianceLabel || published.compliance);
     odteSetText("odte-p-comp", comp == null || comp === "" ? "N/A" : String(comp));
-    var caption = (published && published.caption) || "Rules-based record begins after Trade Zero. Win rate: Not enough data.";
+    var caption = (published && published.caption) || "Official Peak Opportunity statistics require VERIFIED NBBO or BROKER QUOTE VERIFIED.";
     odteSetText("odte-progress-caption", caption);
+    var pending = "NOT ENOUGH VERIFIED DATA";
+    odteSetText("odte-x-avgpeak", (expanded && expanded.avgVerifiedPeakPct != null) ? String(expanded.avgVerifiedPeakPct) : pending);
+    odteSetText("odte-x-rungs", pending);
+    odteSetText("odte-x-mae", pending);
+    odteSetText("odte-x-ttp", pending);
+    odteSetText("odte-x-aon", aonTotal == null ? pending : odteMoneyInt(aonTotal));
+    odteSetText("odte-x-wl", (expanded && expanded.managedWins != null ? expanded.managedWins : wins) + " / " + (expanded && expanded.managedLosses != null ? expanded.managedLosses : losses));
+    odteSetText("odte-x-cap", "—");
+    odteSetText("odte-x-dte", pending);
     var asof = $("odte-asof");
     if (asof && data && data.asOfAt) {
       asof.innerHTML = 'Last updated <time class="stamp-et" datetime="' + data.asOfAt + '"' + (data.asOfApprox ? " data-et data-et-approx" : " data-et") + ">" + (data.asOfLabel || "") + "</time>";
@@ -539,42 +688,87 @@
     }
     root.textContent = "";
     rows.forEach(function (t) {
+      var peak = odtePeakOpportunity(t);
+      var identified = odteOpportunityIdentified(t);
+      var managed = t.managedExecution || {};
+      var managedDollar = managed.dollarResult != null ? managed.dollarResult : t.pnl;
       var art = document.createElement("article");
       art.className = "odte-result";
       art.setAttribute("data-trade-id", t.id || "");
-      var top = document.createElement("div");
-      top.className = "odte-ticket-top";
-      var badge = document.createElement("span");
-      badge.className = odteStatusClass(t);
-      badge.textContent = t.statusLabel || "CLOSED";
-      var dte = document.createElement("span");
-      dte.className = "odte-dte";
-      dte.textContent = t.dteLabel || "—";
-      var comp = document.createElement("span");
-      comp.className = "odte-label odte-label-sim";
-      comp.textContent = t.complianceLabel || "SIMULATED";
-      top.appendChild(badge);
-      top.appendChild(dte);
-      top.appendChild(comp);
+      var dateP = document.createElement("p");
+      dateP.className = "odte-result-date mono";
+      dateP.textContent = t.entryDate || t.date || "—";
       var h = document.createElement("h3");
       h.textContent = t.contract || t.id;
-      var p = document.createElement("p");
-      var bits = [];
-      if (t.entry != null) bits.push("Entry " + moneyPremium(t.entry));
-      if (t.cashOpen != null) bits.push("cash open " + moneyPremium(t.cashOpen));
-      if (t.mfe != null) bits.push("MFE ~" + moneyPremium(t.mfe) + " UNAUDITED");
-      if (t.exit != null) bits.push("exit " + moneyPremium(t.exit));
-      if (t.pnlLabel) bits.push("P&L " + t.pnlLabel);
-      p.textContent = bits.join(" · ") + (t.carriedOvernight ? ". Carried overnight. Realized on the exit date only." : ".");
-      var linkP = document.createElement("p");
-      var a = document.createElement("a");
-      a.href = "#journal-" + (t.id || "");
-      a.textContent = "Open journal";
-      linkP.appendChild(a);
-      art.appendChild(top);
+      var mini = document.createElement("dl");
+      mini.className = "odte-result-mini";
+      [
+        ["Opportunity identified", identified],
+        ["Peak Opportunity", peak.label],
+        ["Managed Result", managedDollar == null ? "—" : odteMoneyInt(managedDollar)]
+      ].forEach(function (pair) {
+        var row = document.createElement("div");
+        var dt = document.createElement("dt");
+        dt.textContent = pair[0];
+        var dd = document.createElement("dd");
+        dd.textContent = pair[1];
+        row.appendChild(dt);
+        row.appendChild(dd);
+        mini.appendChild(row);
+      });
+      var peakLine = document.createElement("p");
+      peakLine.className = "odte-peak-line";
+      peakLine.textContent = "PEAK OPPORTUNITY AFTER ALERT: " + (peak.official && peak.pct != null ? peak.label : peak.label);
+      var detailsId = "odte-result-details-" + (t.id || "row");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "ghost-btn odte-details-btn";
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-controls", detailsId);
+      btn.textContent = "VIEW DETAILS";
+      var panel = document.createElement("div");
+      panel.className = "odte-details odte-three";
+      panel.id = detailsId;
+      panel.hidden = true;
+      var aon = t.allOrNothingOutcome || {};
+      var sig = t.signalQuality || {};
+      panel.innerHTML =
+        "<section><h3>Signal quality</h3><dl class=\"odte-card-grid\">" +
+        "<div><dt>Opportunity identified</dt><dd>" + identified + "</dd></div>" +
+        "<div><dt>Reference entry</dt><dd>" + (t.referenceEntryNote || moneyPremium(t.referenceEntry)) + "</dd></div>" +
+        "<div><dt>Peak executable bid</dt><dd>" + (t.peakExecutableBid == null ? (peak.label) : moneyPremium(t.peakExecutableBid)) + "</dd></div>" +
+        "<div><dt>Peak time</dt><dd>" + (t.peakBidAt || sig.peakBidAt || "—") + "</dd></div>" +
+        "<div><dt>Peak Opportunity</dt><dd>" + peak.label + "</dd></div>" +
+        "<div><dt>Verification</dt><dd>" + (t.peakVerification || "UNAVAILABLE — INSUFFICIENT DATA") + "</dd></div>" +
+        "<div><dt>MAE before peak</dt><dd>" + (t.maeBeforePeak != null ? String(t.maeBeforePeak) : "—") + "</dd></div>" +
+        "<div><dt>Time to peak</dt><dd>" + (t.timeToPeak || "—") + "</dd></div></dl>" +
+        (t.indicativePeak && t.indicativePeak.note ? "<p>" + t.indicativePeak.note + "</p>" : "") +
+        "</section><section><h3>All-or-nothing research model</h3>" +
+        "<p>Hypothetical $1,000 fixed-notional research model. Not the model-account position size and not realized performance.</p>" +
+        "<dl class=\"odte-card-grid\">" +
+        "<div><dt>Notional</dt><dd>$1,000</dd></div>" +
+        "<div><dt>Terminal exit time</dt><dd>" + (aon.terminalExitAt || "—") + "</dd></div>" +
+        "<div><dt>Terminal value</dt><dd>" + (aon.terminalValue != null ? moneyPremium(aon.terminalValue) + (aon.status ? " · " + aon.status : "") : (aon.status || "—")) + "</dd></div>" +
+        "<div><dt>% outcome</dt><dd>" + (aon.terminalPct != null ? aon.terminalPct + "%" : "—") + "</dd></div>" +
+        "<div><dt>$ outcome</dt><dd>" + (aon.excludedFromOfficial ? "Not entered in official AON totals" : (aon.dollarOutcome != null ? odteMoneyInt(aon.dollarOutcome) : "—")) + "</dd></div>" +
+        "<div><dt>Max possible loss</dt><dd>$1,000</dd></div></dl></section>" +
+        "<section><h3>Managed execution model</h3><dl class=\"odte-card-grid\">" +
+        "<div><dt>Model position size</dt><dd>" + (managed.modelPositionSize || t.modelPositionSize || "—") + "</dd></div>" +
+        "<div><dt>Planned stop-loss amount</dt><dd>" + (managed.plannedStopLoss || t.plannedStopLoss || "—") + "</dd></div>" +
+        "<div><dt>Maximum capital at risk</dt><dd>" + (t.maxCapitalAtRisk || "—") + "</dd></div>" +
+        "<div><dt>Scales</dt><dd>" + (managed.scales || "—") + "</dd></div>" +
+        "<div><dt>Modeled exit</dt><dd>" + (managed.modeledExit != null ? moneyPremium(managed.modeledExit) : "—") + "</dd></div>" +
+        "<div><dt>% result</dt><dd>" + (managed.pctResult != null ? managed.pctResult + "%" : "—") + "</dd></div>" +
+        "<div><dt>$ result</dt><dd>" + (managedDollar == null ? "—" : odteMoneyInt(managedDollar)) + "</dd></div>" +
+        "<div><dt>Rule compliance</dt><dd>" + (managed.ruleCompliance || t.complianceLabel || "—") + "</dd></div>" +
+        "<div><dt>Opportunity Capture Rate</dt><dd>" + (odteCaptureRate(t) != null ? odteCaptureRate(t).toFixed(0) + "%" : "—") + "</dd></div></dl>" +
+        "<p><a href=\"#journal-" + (t.id || "") + "\">Open journal</a></p></section>";
+      art.appendChild(dateP);
       art.appendChild(h);
-      art.appendChild(p);
-      art.appendChild(linkP);
+      art.appendChild(mini);
+      art.appendChild(peakLine);
+      art.appendChild(btn);
+      art.appendChild(panel);
       root.appendChild(art);
     });
   }

@@ -1483,7 +1483,7 @@ body[data-page="odte-challenge"] .mast {
 }
 
 @media (min-width: 1100px) {
-  .odte-strip { grid-template-columns: repeat(6, 1fr); }
+  .odte-strip { grid-template-columns: repeat(4, 1fr); }
 }
 
 .odte-strip > div {
@@ -1508,9 +1508,79 @@ body[data-page="odte-challenge"] .mast {
 }
 
 .odte-strip-caption {
-  margin: 0;
+  margin: 0 0 0.85rem;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.odte-peak-disc {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--mint-line);
+  background: var(--mint-dim);
+  color: var(--off);
+  font-size: 0.92rem;
+}
+
+.odte-expanded-record {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 0.85rem 1rem 1rem;
+}
+
+.odte-expanded-record summary {
+  cursor: pointer;
+  font-family: var(--display);
+  font-weight: 650;
+  color: var(--off);
+}
+
+.odte-result-date {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.odte-result-mini {
+  margin: 0 0 0.65rem;
+}
+
+.odte-result-mini > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.odte-result-mini dt { color: var(--muted); }
+.odte-result-mini dd {
+  margin: 0;
+  font-family: var(--mono);
+  color: var(--off);
+  text-align: right;
+}
+
+.odte-peak-line {
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mint);
+}
+
+.odte-three > section {
+  margin: 0 0 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.odte-three > section:last-of-type {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .odte-badge {
