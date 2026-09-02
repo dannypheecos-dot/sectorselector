@@ -1318,51 +1318,135 @@ time.stamp-et {
 }
 
 /* 0DTE Challenge — public audit trail */
-body[data-page="odte-challenge"] .page-hero h1 {
-  max-width: 16ch;
-  font-size: clamp(1.85rem, 7vw, 3.05rem);
+body[data-page="odte-challenge"] {
+  padding-top: 0;
 }
 
-body[data-page="odte-challenge"] .page-hero {
-  padding-bottom: 2.2rem;
+body[data-page="odte-challenge"] .mast {
+  position: sticky;
+  top: 0;
 }
 
-.odte-promise {
-  margin: 0 0 1rem;
+.odte-sticky {
+  position: sticky;
+  top: 4.35rem;
+  z-index: 18;
+  background: rgba(16, 18, 20, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+
+.odte-sticky-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+  padding: 0.45rem 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--off);
+}
+
+.odte-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: min(100svh, 46rem);
+  display: flex;
+  align-items: flex-end;
+  padding: 2.4rem 0 2.2rem;
+  border-bottom: 1px solid var(--line);
+  background-color: #0a0c0d;
+  background-image: url("brand/odte-hero.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+}
+
+.odte-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(10, 12, 13, 0.92) 0%, rgba(10, 12, 13, 0.78) 42%, rgba(10, 12, 13, 0.28) 100%);
+  pointer-events: none;
+}
+
+.odte-hero-copy {
+  position: relative;
+  z-index: 1;
   max-width: 38rem;
-  color: var(--off);
-  font-size: 1.08rem;
+  padding-bottom: 0.4rem;
 }
 
-.odte-promise p { margin: 0 0 0.35rem; }
-.odte-promise p:last-child { margin-bottom: 0; }
+.odte-hero-compass {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0 1rem;
+}
 
-.odte-disclosure-box {
+.odte-hero h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.85rem, 7vw, 3.05rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--off);
+  margin: 0 0 0.75rem;
+  max-width: 16ch;
+}
+
+.odte-premise {
+  margin: 0 0 1rem;
+  max-width: 34rem;
+  color: var(--off);
+  font-size: 1.12rem;
+}
+
+.odte-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.7rem;
   margin: 0 0 1.15rem;
-  padding: 0.85rem 0.95rem;
-  border: 1px solid var(--line-2);
-  background: var(--bg-2);
-  max-width: 46rem;
 }
 
-.odte-disclosure-box p {
-  margin: 0;
-  color: var(--text);
-  font-size: 0.95rem;
+.odte-hero-day {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mint);
 }
 
-.odte-disclosure-box strong {
-  color: var(--off);
+.odte-hero-cta {
+  width: auto;
+  max-width: 22rem;
+  margin: 0 0 0.7rem;
+}
+
+.odte-hero-fine {
+  margin: 0 0 1.1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.status-badge.status-watch {
+  color: var(--amber);
+  background: var(--amber-dim);
+  border-color: rgba(240, 193, 74, 0.45);
 }
 
 .odte-jump {
-  display: flex;
-  flex-wrap: nowrap;
+  display: none;
+  flex-wrap: wrap;
   gap: 0.45rem 0.85rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 0 0 0.25rem;
-  padding-bottom: 0.2rem;
+  margin: 0;
+}
+
+@media (min-width: 860px) {
+  .odte-jump { display: flex; }
 }
 
 .odte-jump a {
@@ -1377,13 +1461,219 @@ body[data-page="odte-challenge"] .page-hero {
 
 .odte-jump a:hover { color: var(--mint); }
 
-.odte-boards {
-  display: grid;
-  gap: 0.85rem;
+.odte-dte {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mint);
+  border: 1px solid var(--mint-line);
+  padding: 0.16rem 0.42rem;
 }
 
-@media (min-width: 900px) {
-  .odte-boards { grid-template-columns: 1fr 1fr; }
+.odte-strip {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 0.75rem;
+}
+
+@media (min-width: 720px) {
+  .odte-strip { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .odte-strip { grid-template-columns: repeat(6, 1fr); }
+}
+
+.odte-strip > div {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 0.75rem 0.85rem;
+}
+
+.odte-strip dt {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.odte-strip dd {
+  margin: 0.2rem 0 0;
+  font-family: var(--mono);
+  color: var(--off);
+  font-size: 1.05rem;
+}
+
+.odte-strip-caption {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.odte-badge {
+  margin: 0 0 1.15rem;
+  max-width: 28rem;
+}
+
+.odte-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #101214;
+}
+
+.odte-lesson,
+.odte-result,
+.odte-journal,
+.odte-secondary-cta,
+.odte-rulebook {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 1rem 1.05rem 1.1rem;
+}
+
+.odte-lesson h3,
+.odte-result h3,
+.odte-journal h3,
+.odte-secondary-cta h3 {
+  font-family: var(--display);
+  margin: 0 0 0.45rem;
+  color: var(--off);
+}
+
+.odte-lesson p,
+.odte-result p { margin: 0 0 0.55rem; color: var(--text); }
+.odte-lesson p:last-child,
+.odte-result p:last-child { margin-bottom: 0; }
+
+.odte-risk-lock {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(240, 193, 74, 0.35);
+  background: var(--amber-dim);
+  color: var(--off);
+  font-size: 0.92rem;
+}
+
+.odte-details-btn {
+  margin-top: 0;
+}
+
+.odte-details {
+  margin: 0.85rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.odte-details h3,
+.odte-details h4 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--off);
+  margin: 0.85rem 0 0.35rem;
+}
+
+.odte-details h3:first-child,
+.odte-details h4:first-child { margin-top: 0; }
+
+.odte-details p { margin: 0 0 0.55rem; color: var(--text); }
+
+.odte-journal { margin-top: 1.15rem; }
+
+.odte-rulebook summary {
+  cursor: pointer;
+  font-family: var(--display);
+  font-weight: 650;
+  color: var(--off);
+  list-style: none;
+}
+
+.odte-rulebook summary::-webkit-details-marker { display: none; }
+
+.odte-rulebook summary::after {
+  content: " +";
+  color: var(--mint);
+  font-family: var(--mono);
+}
+
+.odte-rulebook[open] summary::after { content: " −"; }
+
+.odte-rulebook .odte-method { margin-top: 1rem; }
+
+.odte-archive { display: grid; gap: 0.75rem; }
+
+.odte-day {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  scroll-margin-top: 7.5rem;
+}
+
+.odte-day.is-today { border-color: var(--mint-line); }
+
+.odte-day-btn {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.odte-day-btn:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: -2px;
+}
+
+.odte-day-date {
+  font-family: var(--display);
+  font-weight: 650;
+  color: var(--off);
+}
+
+.odte-day-rec {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.odte-day-panel {
+  padding: 0 1rem 1.05rem;
+  border-top: 1px solid var(--line);
+}
+
+.odte-day-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.85rem 0 0.55rem;
+}
+
+.odte-carry {
+  margin: 0.75rem 0 1rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px dashed var(--line-2);
+}
+
+.odte-secondary-cta {
+  margin-top: 1.6rem;
+}
+
+.odte-ticket-watch {
+  border-color: rgba(240, 193, 74, 0.4);
 }
 
 .odte-board {
@@ -1819,4 +2109,13 @@ body[data-page="odte-challenge"] .page-hero {
   .odte-card-grid > div { flex-direction: column; gap: 0.15rem; }
   .odte-card-grid dd { text-align: left; }
   .odte-checkpoints li { grid-template-columns: 1fr; gap: 0.1rem; }
+  .odte-hero {
+    min-height: calc(100svh - 7.2rem);
+    align-items: center;
+    background-position: 78% center;
+  }
+  .odte-hero::before {
+    background: linear-gradient(180deg, rgba(10, 12, 13, 0.88) 0%, rgba(10, 12, 13, 0.82) 55%, rgba(10, 12, 13, 0.55) 100%);
+  }
+  .odte-sticky-row { font-size: 0.6rem; }
 }

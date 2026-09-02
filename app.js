@@ -366,121 +366,244 @@
     return "$" + n.toFixed(2);
   }
 
-  function odteBookLabel(t) {
-    var book = String(t.book || "").toLowerCase();
-    if (book === "overnight") return "Overnight, managed on expiration";
-    if (book === "same-day" || book === "sameday") return "Same-day 0DTE";
-    if (t.bookLabel) return t.bookLabel;
-    return t.book || "—";
+  function odteIsChallengePage() {
+    return document.body && document.body.getAttribute("data-page") === "odte-challenge";
   }
 
-  function odteStatusLabel(t) {
-    if (t.statusLabel) return t.statusLabel;
+  function odteUniqueById(rows) {
+    var seen = {};
+    var out = [];
+    (rows || []).forEach(function (row) {
+      var id = row && row.id;
+      if (!id || seen[id]) return;
+      seen[id] = true;
+      out.push(row);
+    });
+    return out;
+  }
+
+  function odteIsRulesBased(t) {
+    if (!t) return false;
+    if (t.rulesBased === false) return false;
+    if (String(t.classification || "") === "pre-rule-baseline") return false;
+    if (String(t.classification || "") === "official-daily-record") return false;
+    return true;
+  }
+
+  function odteIsExecuted(t) {
+    if (!t) return false;
+    if (t.officialCandidate === false) return false;
+    if (String(t.classification || "") === "official-daily-record") return false;
     var s = String(t.status || "").toLowerCase();
-    if (s === "open") return "OPEN";
-    if (s === "closed") return "CLOSED";
-    if (s === "no-trade" || s === "no-ticket") return "NO QUALIFYING ENTRY";
-    return String(t.status || "—").toUpperCase();
+    return s === "open" || s === "closed" || t.entry != null;
+  }
+
+  function odteEtDate(iso) {
+    if (!iso) return "";
+    var fallback = String(iso).match(/^(\d{4}-\d{2}-\d{2})/);
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return fallback ? fallback[1] : "";
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/New_York",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(d);
+    var get = function (type) {
+      var hit = parts.filter(function (p) { return p.type === type; })[0];
+      return hit ? hit.value : "";
+    };
+    return get("year") + "-" + get("month") + "-" + get("day");
+  }
+
+  function odteMoneyInt(n) {
+    var v = typeof n === "number" ? n : Number(n);
+    if (isNaN(v)) return "—";
+    var abs = Math.abs(v).toLocaleString("en-US");
+    if (v < 0) return "−$" + abs;
+    return "$" + abs;
   }
 
   function odteStatusClass(t) {
-    var s = String(t.status || "").toLowerCase();
-    var label = odteStatusLabel(t);
+    var s = String((t && t.status) || "").toLowerCase();
+    var label = String((t && (t.statusLabel || t.status)) || "").toUpperCase();
+    if (label.indexOf("WATCH") !== -1 || label.indexOf("NO ENTRY") !== -1 || label.indexOf("NO QUALIFYING") !== -1) {
+      return "status-badge status-watch";
+    }
     if (label.indexOf("PROTECTED") !== -1) return "status-badge status-protected";
     if (label.indexOf("LOSS") !== -1 || s === "closed") return "status-badge status-closed";
-    if (s === "open") return "status-badge status-open";
+    if (s === "open" || label.indexOf("ACTIVE") !== -1) return "status-badge status-open";
     if (s === "no-trade" || s === "no-ticket") return "status-badge status-skip";
     return "status-badge";
   }
 
-  function odteIsNoTrade(t) {
-    var s = String(t.status || "").toLowerCase();
-    return s === "no-trade" || s === "no-ticket" || t.officialCandidate === false;
+  function odteSetText(id, text) {
+    var el = $(id);
+    if (el && text != null) el.textContent = text;
   }
 
-  function odtePnlCell(t) {
-    if (odteIsNoTrade(t)) return "capital preserved";
-    var open = String(t.status || "").toLowerCase() === "open";
-    if (open) {
-      if (t.openPnlLine) return "open · indicated mark unaudited";
-      return "open";
+  function renderOdteHero(data) {
+    var day = (data && data.windowDay) || 2;
+    var days = (data && data.windowDays) || 30;
+    var status = (data && (data.heroStatus || (data.today && data.today.heroStatus))) || "SETUP WATCHING";
+    var asOf = data && data.asOfLabel ? data.asOfLabel.replace(/^.*,\s*/, "") : "~1:25 PM ET";
+    odteSetText("odte-hero-day", "Day " + day + "/" + days);
+    odteSetText("odte-sticky-day", "DAY " + day + "/" + days);
+    var heroStatus = $("odte-hero-status");
+    if (heroStatus) {
+      heroStatus.className = "status-badge status-watch";
+      heroStatus.textContent = status;
     }
-    if (t.pnlLabel) return t.pnlLabel;
-    if (t.pnl == null || t.pnl === "") return "—";
-    var n = typeof t.pnl === "number" ? t.pnl : Number(t.pnl);
-    if (!isNaN(n) && n < 0) return "−$" + Math.abs(n).toFixed(0 === n % 1 ? 0 : 2);
-    return moneyPremium(t.pnl);
+    odteSetText("odte-sticky-status", status);
+    odteSetText("odte-sticky-update", "LAST UPDATE " + asOf);
   }
 
-  function addOdteStatus(tr, t) {
-    var td = document.createElement("td");
-    var span = document.createElement("span");
-    span.className = odteStatusClass(t);
-    span.textContent = odteStatusLabel(t);
-    td.appendChild(span);
-    tr.appendChild(td);
+  function renderOdteOpenCard(data) {
+    var card = $("odte-open-card");
+    var empty = $("odte-no-open");
+    if (!card) return;
+    var today = data && data.today;
+    if (!today) {
+      return;
+    }
+    card.hidden = false;
+    if (empty) empty.hidden = true;
+    var badge = $("odte-open-badge");
+    if (badge) {
+      badge.className = odteStatusClass({ status: today.status, statusLabel: today.status });
+      badge.textContent = today.status || "WATCHING — NO ENTRY";
+    }
+    odteSetText("odte-open-label", "SIMULATED");
+    odteSetText("odte-open-dte", today.dteLabel && today.dteLabel !== "—" ? today.dteLabel : "0DTE session");
+    odteSetText("odte-open-contract", today.contract || "None — no qualifying entry");
+    odteSetText("odte-today-copy", today.copy || "");
+    odteSetText("odte-f-status", today.status || "WATCHING — NO ENTRY");
+    odteSetText("odte-f-underlying", today.underlying || "—");
+    odteSetText("odte-f-contract", today.contract || "—");
+    odteSetText("odte-f-dte", today.dteLabel || "—");
+    odteSetText("odte-f-entry", today.preferredEntryRange || "—");
+    odteSetText("odte-f-maxentry", today.maxEntry || "—");
+    odteSetText("odte-f-actionable", today.actionable || "—");
+    odteSetText("odte-f-invalidation", today.invalidation || "—");
+    odteSetText("odte-f-target", today.primaryTarget || "—");
+    odteSetText("odte-f-size", today.positionSize || "—");
+    odteSetText("odte-f-stop", today.plannedStopLoss || "—");
+    odteSetText("odte-f-maxrisk", today.maxCapitalAtRisk || "—");
+    odteSetText("odte-f-alert", today.alertExpiration || "—");
+    odteSetText("odte-f-updated", today.lastUpdated || (data && data.asOfLabel) || "—");
   }
 
-  function addOdteLabelCell(tr, t) {
-    var td = document.createElement("td");
-    var span = document.createElement("span");
-    var live = t.live === true || String(t.label || "").toUpperCase() === "LIVE";
-    span.className = live ? "odte-label odte-label-live" : "sim-mini";
-    span.textContent = live ? "LIVE" : (t.label || "SIMULATED/PAPER");
-    td.appendChild(span);
-    tr.appendChild(td);
+  function renderOdteStats(data) {
+    var published = data && data.progress;
+    var trades = odteUniqueById((data && data.trades) || []);
+    var rulesClosed = trades.filter(function (t) {
+      return odteIsRulesBased(t) && String(t.status || "").toLowerCase() === "closed";
+    });
+    var wins = rulesClosed.filter(function (t) { return Number(t.pnl) > 0; }).length;
+    var losses = rulesClosed.filter(function (t) { return Number(t.pnl) < 0; }).length;
+    var rulesPnl = rulesClosed.reduce(function (sum, t) { return sum + (Number(t.pnl) || 0); }, 0);
+    var modelPnl = trades.reduce(function (sum, t) {
+      if (!odteIsExecuted(t) || t.pnl == null || t.pnl === "") return sum;
+      return sum + Number(t.pnl);
+    }, 0);
+    var start = data && data.startingCash != null ? Number(data.startingCash) : 10000;
+    var model = data && data.modelCash != null ? Number(data.modelCash) : start + modelPnl;
+    var day = (published && published.day) || (data && data.windowDay) || 2;
+    var days = (published && published.days) || (data && data.windowDays) || 30;
+    var completed = published && published.rulesBasedCompleted != null ? published.rulesBasedCompleted : rulesClosed.length;
+    var winN = published && published.wins != null ? published.wins : wins;
+    var lossN = published && published.losses != null ? published.losses : losses;
+    var net = published && published.rulesBasedNetPnl != null ? published.rulesBasedNetPnl : (rulesClosed.length ? rulesPnl : null);
+    var cash = published && published.modelBalance != null ? published.modelBalance : model;
+    var comp = published && published.compliance != null ? published.compliance : null;
+    odteSetText("odte-p-day", day + "/" + days);
+    odteSetText("odte-p-completed", String(completed));
+    odteSetText("odte-p-wl", winN + " / " + lossN);
+    odteSetText("odte-p-pnl", net == null || net === "" ? "—" : odteMoneyInt(net));
+    odteSetText("odte-p-cash", odteMoneyInt(cash));
+    odteSetText("odte-p-comp", comp == null || comp === "" ? "N/A" : String(comp));
+    var caption = (published && published.caption) || "Rules-based record begins after Trade Zero. Win rate: Not enough data.";
+    odteSetText("odte-progress-caption", caption);
+    var asof = $("odte-asof");
+    if (asof && data && data.asOfAt) {
+      asof.innerHTML = 'Last updated <time class="stamp-et" datetime="' + data.asOfAt + '"' + (data.asOfApprox ? " data-et data-et-approx" : " data-et") + ">" + (data.asOfLabel || "") + "</time>";
+    }
   }
 
-  function renderOdteRow(tr, t) {
-    var noTrade = odteIsNoTrade(t);
-    var open = !noTrade && String(t.status || "").toLowerCase() === "open";
-    var size = noTrade
-      ? "—"
-      : (t.contractsRemaining != null && t.contractsEntered != null
-        ? String(t.contractsRemaining) + " / " + String(t.contractsEntered)
-        : (t.side || "—"));
-    addCell(tr, t.date || "—", "mono");
-    addCell(tr, odteBookLabel(t));
-    addCell(tr, t.underlying || "—", "mono");
-    addCell(tr, noTrade ? (t.contract || "No fill — watch / no-entry") : (t.contract || t.contractDetail || "—"));
-    addOdteLabelCell(tr, t);
-    addCell(tr, noTrade ? "—" : moneyPremium(t.entry), "mono");
-    addCell(tr, size, "mono");
-    addCell(tr, open || t.exit == null || t.exit === "" ? "—" : moneyPremium(t.exit), "mono");
-    addOdteStatus(tr, t);
-    addCell(tr, odtePnlCell(t));
-    addCell(tr, noTrade ? "—" : (t.mfeLabel || "—"));
-    addCell(tr, noTrade ? "—" : (t.maeLabel || "—"), "mono");
-    addCell(tr, t.openedAlerted || t.entryAsOf || "—", "mono");
-  }
-
-  function publishedMetric(block, key) {
-    if (!block || block[key] == null || block[key] === "") return "—";
-    return String(block[key]);
-  }
-
-  function renderOdteScoreboards(boards) {
-    if (!boards) return;
-    document.querySelectorAll("[data-odte-board]").forEach(function (dl) {
-      var path = (dl.getAttribute("data-odte-board") || "").split(".");
-      var block = boards;
-      path.forEach(function (key) {
-        block = block && block[key];
-      });
-      if (!block) return;
-      dl.querySelectorAll("[data-metric]").forEach(function (dd) {
-        var key = dd.getAttribute("data-metric");
-        dd.textContent = publishedMetric(block, key);
-      });
+  function renderOdteBlotter(trades) {
+    var root = $("odte-results");
+    if (!root) return;
+    var rows = odteUniqueById(trades).filter(odteIsExecuted);
+    if (!rows.length) {
+      return;
+    }
+    root.textContent = "";
+    rows.forEach(function (t) {
+      var art = document.createElement("article");
+      art.className = "odte-result";
+      art.setAttribute("data-trade-id", t.id || "");
+      var top = document.createElement("div");
+      top.className = "odte-ticket-top";
+      var badge = document.createElement("span");
+      badge.className = odteStatusClass(t);
+      badge.textContent = t.statusLabel || "CLOSED";
+      var dte = document.createElement("span");
+      dte.className = "odte-dte";
+      dte.textContent = t.dteLabel || "—";
+      var comp = document.createElement("span");
+      comp.className = "odte-label odte-label-sim";
+      comp.textContent = t.complianceLabel || "SIMULATED";
+      top.appendChild(badge);
+      top.appendChild(dte);
+      top.appendChild(comp);
+      var h = document.createElement("h3");
+      h.textContent = t.contract || t.id;
+      var p = document.createElement("p");
+      p.textContent = (t.entry != null ? "Entry " + moneyPremium(t.entry) : "") +
+        (t.cashOpen != null ? " · cash open " + moneyPremium(t.cashOpen) : "") +
+        (t.mfeLabel ? " · MFE " + t.mfeLabel : "") +
+        (t.exit != null ? " · exit " + moneyPremium(t.exit) : "") +
+        (t.pnlLabel ? " · P&L " + t.pnlLabel : "") + ".";
+      var linkP = document.createElement("p");
+      var a = document.createElement("a");
+      a.href = "#journal-" + (t.id || "");
+      a.textContent = "Open journal";
+      linkP.appendChild(a);
+      art.appendChild(top);
+      art.appendChild(h);
+      art.appendChild(p);
+      art.appendChild(linkP);
+      root.appendChild(art);
     });
   }
 
-  function renderOdteTimeline(events) {
-    var list = $("odte-timeline");
-    if (!list || !events || !events.length) return;
-    list.textContent = "";
+  function renderOdteLessons(lessons) {
+    if (!lessons || !lessons.length) return;
+  }
+
+  function odteDayMeta(data, date) {
+    var days = (data && data.days) || [];
+    var found = null;
+    days.forEach(function (d) {
+      if (d.date === date) found = d;
+    });
+    return found;
+  }
+
+  function odteTradeById(data, id) {
+    var found = null;
+    ((data && data.trades) || []).forEach(function (t) {
+      if (t.id === id) found = t;
+    });
+    return found;
+  }
+
+  function renderOdteDayEvents(events) {
+    var ol = document.createElement("ol");
+    ol.className = "odte-timeline";
     events.forEach(function (ev) {
       var li = document.createElement("li");
+      if (ev.id) li.id = ev.id;
       var action = document.createElement("p");
       action.className = "odte-tl-action";
       action.textContent = ev.action || "NOTE";
@@ -496,97 +619,192 @@
       li.appendChild(action);
       li.appendChild(stamp);
       li.appendChild(p);
-      list.appendChild(li);
+      ol.appendChild(li);
     });
+    return ol;
   }
 
-  function renderOdteOpenCard(data) {
-    var card = $("odte-open-card");
-    var empty = $("odte-no-open");
-    if (!card) return;
-    var trades = (data && data.trades) || [];
-    var officialId = data && data.officialTodayId;
-    var t = null;
-    trades.forEach(function (row) {
-      if (officialId && row.id === officialId) t = row;
-    });
-    if (!t) {
-      trades.forEach(function (row) {
-        if (!t && String(row.status || "").toLowerCase() === "open") t = row;
+  function odteSetDayOpen(btn, open) {
+    if (!btn) return;
+    var panelId = btn.getAttribute("aria-controls");
+    var panel = panelId ? document.getElementById(panelId) : null;
+    var day = btn.closest(".odte-day");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    if (panel) panel.hidden = !open;
+    if (day) day.classList.toggle("is-open", open);
+  }
+
+  function odteToggleDay(btn, forceOpen) {
+    if (!btn) return;
+    var day = btn.closest(".odte-day");
+    var isToday = day && day.getAttribute("data-odte-today") === "true";
+    var open = btn.getAttribute("aria-expanded") === "true";
+    var willOpen = forceOpen === true ? true : forceOpen === false ? false : !open;
+    if (isToday && forceOpen == null) willOpen = true;
+    if (willOpen && day && !isToday) {
+      document.querySelectorAll('.odte-day:not([data-odte-today="true"]) .odte-day-btn').forEach(function (other) {
+        if (other !== btn) odteSetDayOpen(other, false);
       });
     }
-    if (!t) {
-      card.hidden = true;
-      if (empty) empty.hidden = false;
-      return;
-    }
-    card.hidden = false;
-    if (empty) empty.hidden = true;
-    var badge = $("odte-open-badge");
-    if (badge) {
-      badge.className = odteStatusClass(t);
-      badge.textContent = odteStatusLabel(t);
-    }
-    var label = $("odte-open-label");
-    if (label) {
-      var live = t.live === true;
-      label.className = live ? "odte-label odte-label-live" : "odte-label odte-label-sim";
-      label.textContent = live ? "LIVE" : (t.label || "SIMULATED/PAPER");
-    }
-    var contract = $("odte-open-contract");
-    if (contract && t.contract) contract.textContent = t.contract;
+    odteSetDayOpen(btn, willOpen);
   }
 
-  function renderOdteStats(data) {
-    var asof = $("odte-asof");
-    if (asof && data && data.asOfLabel) {
-      asof.textContent = "As of " + data.asOfLabel;
-    }
-    var notes = $("odte-notes");
-    var trades = (data && data.trades) || [];
-    if (notes && trades.length) {
-      var paths = trades
-        .filter(function (t) { return t.statusPath && t.statusPath.length; })
-        .map(function (t) {
-          var steps = t.statusPath.map(function (s) {
-            return (s.status || "") + " (" + (s.atLabel || "") + ")";
-          }).join(" → ");
-          var extra = "";
-          if (t.exit != null && t.entry != null) {
-            extra += " Official close $" + Number(t.exit).toFixed(2) + " vs $" + Number(t.entry).toFixed(2);
-            if (t.pnlLabel) extra += ", " + t.pnlLabel;
-            extra += ".";
-          }
-          if (t.mfeLabel) extra += " MFE " + t.mfeLabel + ".";
-          if (t.cashOpenLabel) extra += " Cash open " + t.cashOpenLabel + " — not official P&L.";
-          return "Status path for " + (t.id || t.date) + ": " + steps + "." + extra;
-        });
-      if (paths.length) notes.textContent = paths.join(" ") + " Prior OPEN, HOLD, and CLOSE fills remain. SIMULATED RESEARCH.";
+  function renderOdteApplyHash() {
+    var hash = (location.hash || "").replace(/^#/, "");
+    if (!hash) return;
+    var day = document.querySelector('[data-odte-day="' + hash + '"]');
+    if (!day) return;
+    var btn = day.querySelector(".odte-day-btn");
+    odteToggleDay(btn, true);
+    if (typeof day.scrollIntoView === "function") {
+      day.scrollIntoView({ block: "start" });
     }
   }
 
-  function renderOdteBlotter(trades) {
-    var body = $("odte-blotter-body");
-    if (!body) return;
-    body.textContent = "";
-    if (!trades || !trades.length) {
-      var empty = document.createElement("tr");
-      var td = document.createElement("td");
-      td.colSpan = 13;
-      td.textContent = "No 0DTE tickets published.";
-      empty.appendChild(td);
-      body.appendChild(empty);
+  function bindOdteArchive() {
+    var root = $("odte-archive");
+    if (!root || root.getAttribute("data-odte-bound") === "1") {
+      if (root) renderOdteApplyHash();
       return;
     }
-    trades.forEach(function (t) {
-      var tr = document.createElement("tr");
-      renderOdteRow(tr, t);
-      body.appendChild(tr);
+    root.setAttribute("data-odte-bound", "1");
+    root.addEventListener("click", function (e) {
+      var btn = e.target.closest(".odte-day-btn");
+      if (!btn || !root.contains(btn)) return;
+      odteToggleDay(btn);
     });
+    window.addEventListener("hashchange", renderOdteApplyHash);
+    renderOdteApplyHash();
+  }
+
+  function renderOdteTimeline(events, data) {
+    var root = $("odte-archive");
+    if (!root) return;
+    if (!events || !events.length) return;
+    var today = (data && data.asOf) || (data && data.today && data.today.id && String(data.today.id).slice(0, 10)) || "2026-09-02";
+    var groups = {};
+    events.forEach(function (ev) {
+      var date = odteEtDate(ev.at);
+      if (!date) return;
+      if (!groups[date]) groups[date] = [];
+      groups[date].push(ev);
+    });
+    ((data && data.days) || []).forEach(function (d) {
+      if (d.date && !groups[d.date]) groups[d.date] = [];
+    });
+    var dates = Object.keys(groups).sort().reverse();
+    if (!dates.length) return;
+    root.textContent = "";
+    dates.forEach(function (date) {
+      var meta = odteDayMeta(data, date) || {};
+      var isToday = date === today || meta.isToday === true;
+      var art = document.createElement("article");
+      art.className = "odte-day" + (isToday ? " is-today is-open" : "");
+      art.id = date;
+      art.setAttribute("data-odte-day", date);
+      if (isToday) art.setAttribute("data-odte-today", "true");
+      var h3 = document.createElement("h3");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "odte-day-btn";
+      btn.id = "odte-day-btn-" + date;
+      btn.setAttribute("aria-expanded", isToday ? "true" : "false");
+      btn.setAttribute("aria-controls", "odte-day-panel-" + date);
+      var dateSpan = document.createElement("span");
+      dateSpan.className = "odte-day-date";
+      dateSpan.textContent = meta.label || date;
+      var recSpan = document.createElement("span");
+      recSpan.className = "odte-day-rec";
+      recSpan.textContent = meta.officialLabel || meta.officialRecord || "DAILY RECORD";
+      btn.appendChild(dateSpan);
+      btn.appendChild(recSpan);
+      h3.appendChild(btn);
+      var panel = document.createElement("div");
+      panel.className = "odte-day-panel";
+      panel.id = "odte-day-panel-" + date;
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-labelledby", btn.id);
+      if (!isToday) panel.hidden = true;
+      var statusP = document.createElement("p");
+      statusP.className = "odte-day-status";
+      var badge = document.createElement("span");
+      badge.className = isToday ? "status-badge status-watch" : "status-badge status-open";
+      badge.textContent = meta.officialLabel || (isToday ? "WATCHING — NO ENTRY" : "OPEN — CARRIED OVERNIGHT");
+      var dte = document.createElement("span");
+      dte.className = "odte-dte";
+      dte.textContent = isToday ? "0DTE" : "1DTE";
+      statusP.appendChild(badge);
+      statusP.appendChild(dte);
+      panel.appendChild(statusP);
+      var body = document.createElement("p");
+      if (isToday) {
+        body.textContent = "Official same-day record. Candidates monitored: " +
+          ((meta.candidatesMonitored || ["SPY", "QQQ", "IWM"]).join(", ")) +
+          ". Why none qualified: " + (meta.whyNoneQualified || "No setup met the published entry and risk standards.") +
+          " Same-day P&L $0.";
+      } else {
+        body.textContent = meta.sameDayPnlNote || "Official record: executed trade. No realized P&L on the entry date.";
+      }
+      panel.appendChild(body);
+      if (meta.carryInId) {
+        var carry = document.createElement("aside");
+        carry.className = "odte-carry";
+        var k = document.createElement("p");
+        k.className = "odte-watch-kicker";
+        k.textContent = "Carry-in · same journal";
+        var cp = document.createElement("p");
+        cp.innerHTML = '<span class="status-badge status-closed">' + (meta.carryInLabel || "CARRY-IN") +
+          "</span> Realized " + odteMoneyInt(meta.carryInPnl) + " here only. <a href=\"#journal-" + meta.carryInId + "\">Open journal</a>";
+        carry.appendChild(k);
+        carry.appendChild(cp);
+        panel.appendChild(carry);
+      }
+      if (meta.carryOutId) {
+        var carryOut = document.createElement("aside");
+        carryOut.className = "odte-carry";
+        var ck = document.createElement("p");
+        ck.className = "odte-watch-kicker";
+        ck.textContent = "Carry-out · same journal";
+        var ctp = document.createElement("p");
+        var ct = odteTradeById(data, meta.carryOutId);
+        ctp.innerHTML = (ct && ct.contract ? ct.contract : "Overnight ticket") +
+          ' entered. <a href="#journal-' + meta.carryOutId + '">Open journal</a>';
+        carryOut.appendChild(ck);
+        carryOut.appendChild(ctp);
+        panel.appendChild(carryOut);
+      }
+      panel.appendChild(renderOdteDayEvents(groups[date] || []));
+      art.appendChild(h3);
+      art.appendChild(panel);
+      root.appendChild(art);
+    });
+    bindOdteArchive();
+  }
+
+  function bindOdteDetails() {
+    document.querySelectorAll(".odte-details-btn").forEach(function (btn) {
+      if (btn.getAttribute("data-odte-bound") === "1") return;
+      btn.setAttribute("data-odte-bound", "1");
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("aria-controls");
+        var panel = id ? document.getElementById(id) : null;
+        if (!panel) return;
+        var open = panel.hidden;
+        panel.hidden = !open;
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.textContent = open ? "HIDE FULL TRADE DETAILS" : "VIEW FULL TRADE DETAILS";
+      });
+    });
+  }
+
+  function renderOdteScoreboards() {
+    /* Live/Paper four-board scoreboards removed in Phase 2. */
   }
 
   function loadOdteBlotter() {
-    if (!$("odte-blotter-body") && !$("odte-scoreboards")) return;
+    if (!odteIsChallengePage()) return;
+    bindOdteDetails();
+    bindOdteArchive();
     fetch(odtePath(), { cache: "no-store" })
       .then(function (res) {
         if (!res.ok) throw new Error("odte blotter " + res.status);
@@ -594,14 +812,19 @@
       })
       .then(function (data) {
         var trades = (data && data.trades) || [];
-        renderOdteScoreboards(data && data.scoreboards);
-        renderOdteTimeline(data && data.timeline);
-        renderOdteBlotter(trades);
+        renderOdteHero(data || {});
         renderOdteOpenCard(data || {});
         renderOdteStats(data || {});
+        renderOdteBlotter(trades);
+        renderOdteLessons(data && data.lessons);
+        renderOdteTimeline(data && data.timeline, data || {});
+        bindOdteDetails();
         bindEtStamps();
       })
-      .catch(function () {});
+      .catch(function () {
+        bindOdteDetails();
+        bindOdteArchive();
+      });
   }
 
   /* Research posts: <time class="stamp-et" datetime="2026-09-01T16:15:00-04:00" data-et></time>
