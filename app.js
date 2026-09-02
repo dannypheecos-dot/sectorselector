@@ -366,133 +366,179 @@
     return "$" + n.toFixed(2);
   }
 
-  function addOdteStatus(tr, status) {
+  function odteBookLabel(t) {
+    var book = String(t.book || "").toLowerCase();
+    if (book === "overnight") return "Overnight, managed on expiration";
+    if (book === "same-day" || book === "sameday") return "Same-day 0DTE";
+    if (t.bookLabel) return t.bookLabel;
+    return t.book || "—";
+  }
+
+  function odteStatusLabel(t) {
+    if (t.statusLabel) return t.statusLabel;
+    var s = String(t.status || "").toLowerCase();
+    if (s === "open") return "OPEN";
+    if (s === "closed") return "CLOSED";
+    if (s === "no-trade" || s === "no-ticket") return "NO QUALIFYING ENTRY";
+    return String(t.status || "—").toUpperCase();
+  }
+
+  function odteStatusClass(t) {
+    var s = String(t.status || "").toLowerCase();
+    var label = odteStatusLabel(t);
+    if (label.indexOf("PROTECTED") !== -1) return "status-badge status-protected";
+    if (s === "closed") return "status-badge status-closed";
+    if (s === "open") return "status-badge status-open";
+    return "status-badge";
+  }
+
+  function odtePnlCell(t) {
+    var open = String(t.status || "").toLowerCase() === "open";
+    if (open) {
+      if (t.openPnlLine) return "open · indicated mark unaudited";
+      return "open";
+    }
+    if (t.pnl == null || t.pnl === "") return "—";
+    return moneyPremium(t.pnl);
+  }
+
+  function addOdteStatus(tr, t) {
     var td = document.createElement("td");
     var span = document.createElement("span");
-    var s = String(status || "").toLowerCase();
-    span.className = "status-badge " + (s === "closed" ? "status-closed" : statusClass(status) || "status-open");
-    span.textContent = s === "closed" ? "CLOSED" : s === "open" ? "OPEN" : String(status || "—").toUpperCase();
+    span.className = odteStatusClass(t);
+    span.textContent = odteStatusLabel(t);
+    td.appendChild(span);
+    tr.appendChild(td);
+  }
+
+  function addOdteLabelCell(tr, t) {
+    var td = document.createElement("td");
+    var span = document.createElement("span");
+    var live = t.live === true || String(t.label || "").toUpperCase() === "LIVE";
+    span.className = live ? "odte-label odte-label-live" : "sim-mini";
+    span.textContent = live ? "LIVE" : (t.label || "SIMULATED/PAPER");
     td.appendChild(span);
     tr.appendChild(td);
   }
 
   function renderOdteRow(tr, t) {
     var open = String(t.status || "").toLowerCase() === "open";
+    var size = (t.contractsRemaining != null && t.contractsEntered != null)
+      ? String(t.contractsRemaining) + " / " + String(t.contractsEntered)
+      : (t.side || "—");
     addCell(tr, t.date || "—", "mono");
+    addCell(tr, odteBookLabel(t));
     addCell(tr, t.underlying || "—", "mono");
     addCell(tr, t.contract || t.contractDetail || "—");
-    addCell(tr, t.side || "—", "mono");
+    addOdteLabelCell(tr, t);
     addCell(tr, moneyPremium(t.entry), "mono");
+    addCell(tr, size, "mono");
     addCell(tr, open || t.exit == null || t.exit === "" ? "—" : moneyPremium(t.exit), "mono");
-    addOdteStatus(tr, t.status);
-    addResultCell(tr, open || t.pnl == null || t.pnl === "" ? "—" : moneyPremium(t.pnl));
+    addOdteStatus(tr, t);
+    addCell(tr, odtePnlCell(t));
+    addCell(tr, t.openedAlerted || t.entryAsOf || "—", "mono");
   }
 
-  function fillOdteDl(dl, rows) {
-    if (!dl) return;
-    dl.textContent = "";
-    rows.forEach(function (row) {
-      var wrap = document.createElement("div");
-      var dt = document.createElement("dt");
-      var dd = document.createElement("dd");
-      dt.textContent = row[0];
-      dd.className = "mono";
-      dd.textContent = row[1];
-      wrap.appendChild(dt);
-      wrap.appendChild(dd);
-      dl.appendChild(wrap);
+  function publishedMetric(block, key) {
+    if (!block || block[key] == null || block[key] === "") return "—";
+    return String(block[key]);
+  }
+
+  function renderOdteScoreboards(boards) {
+    if (!boards) return;
+    document.querySelectorAll("[data-odte-board]").forEach(function (dl) {
+      var path = (dl.getAttribute("data-odte-board") || "").split(".");
+      var block = boards;
+      path.forEach(function (key) {
+        block = block && block[key];
+      });
+      if (!block) return;
+      dl.querySelectorAll("[data-metric]").forEach(function (dd) {
+        var key = dd.getAttribute("data-metric");
+        dd.textContent = publishedMetric(block, key);
+      });
     });
   }
 
-  function renderOdteOpenCard(trades) {
+  function renderOdteTimeline(events) {
+    var list = $("odte-timeline");
+    if (!list || !events || !events.length) return;
+    list.textContent = "";
+    events.forEach(function (ev) {
+      var li = document.createElement("li");
+      var action = document.createElement("p");
+      action.className = "odte-tl-action";
+      action.textContent = ev.action || "NOTE";
+      var stamp = document.createElement("time");
+      stamp.className = "stamp-et odte-tl-stamp";
+      if (ev.at) stamp.setAttribute("datetime", ev.at);
+      stamp.setAttribute("data-et", "");
+      if (ev.approx) stamp.setAttribute("data-et-approx", "");
+      stamp.textContent = ev.atLabel || ev.at || "—";
+      var p = document.createElement("p");
+      var extra = ev.sourceClock ? " Source clock: " + ev.sourceClock + "." : "";
+      p.textContent = (ev.summary || "") + extra;
+      li.appendChild(action);
+      li.appendChild(stamp);
+      li.appendChild(p);
+      list.appendChild(li);
+    });
+  }
+
+  function renderOdteOpenCard(data) {
     var card = $("odte-open-card");
     var empty = $("odte-no-open");
     if (!card) return;
-    var openTrades = (trades || []).filter(function (t) {
-      return String(t.status || "").toLowerCase() === "open";
+    var trades = (data && data.trades) || [];
+    var officialId = data && data.officialTodayId;
+    var t = null;
+    trades.forEach(function (row) {
+      if (officialId && row.id === officialId) t = row;
     });
-    if (!openTrades.length) {
+    if (!t) {
+      trades.forEach(function (row) {
+        if (!t && String(row.status || "").toLowerCase() === "open") t = row;
+      });
+    }
+    if (!t) {
       card.hidden = true;
       if (empty) empty.hidden = false;
       return;
     }
     card.hidden = false;
     if (empty) empty.hidden = true;
-    var t = openTrades[0];
-    var contract = $("odte-open-contract");
-    var side = $("odte-open-side");
-    var notes = $("odte-open-notes");
     var badge = $("odte-open-badge");
-    var alerted = $("odte-open-alerted");
-    var tape = $("odte-open-tape");
-    var option = $("odte-open-option");
-    var openedLabel = t.openedAlerted || t.entryAsOf || "—";
-    var tapeLabel = t.targetLabel || t.underlyingTargetLabel || (t.underlying && (t.target != null || t.underlyingTarget != null) ? t.underlying + " $" + (t.target != null ? t.target : t.underlyingTarget) : "—");
     if (badge) {
-      badge.className = "status-badge status-open";
-      badge.textContent = "OPEN";
+      badge.className = odteStatusClass(t);
+      badge.textContent = odteStatusLabel(t);
     }
-    if (contract) {
-      contract.textContent = (t.underlying ? t.underlying + " · " : "") + (t.contract || t.contractDetail || "—");
+    var label = $("odte-open-label");
+    if (label) {
+      var live = t.live === true;
+      label.className = live ? "odte-label odte-label-live" : "odte-label odte-label-sim";
+      label.textContent = live ? "LIVE" : (t.label || "SIMULATED/PAPER");
     }
-    if (side) {
-      side.textContent = (t.side || "BTO") + " @ " + moneyPremium(t.entry);
-    }
-    if (alerted) {
-      if (t.openedAlertedAt) alerted.setAttribute("datetime", t.openedAlertedAt);
-      alerted.textContent = openedLabel;
-    }
-    if (tape) tape.textContent = tapeLabel.indexOf("Target") === 0 ? tapeLabel : "Target " + tapeLabel;
-    if (option) {
-      option.hidden = true;
-      option.textContent = "";
-    }
-    fillOdteDl($("odte-open-dl"), [
-      ["Target", tapeLabel],
-      ["Entry", moneyPremium(t.entry)],
-      ["Opened/alerted", openedLabel],
-      ["Hard latest", t.hardLatest || "Sep 2, 2026, 4:15 PM ET"],
-      ["Spot at entry", t.spotAtEntry != null ? String(t.spotAtEntry) : "—"],
-      ["P&L", "—"]
-    ]);
-    if (notes) {
-      var extra = [t.stretchNote, t.invalidationNote].filter(Boolean).join(" ");
-      notes.textContent = (t.notes || "") + (extra && (!t.notes || t.notes.indexOf(extra.slice(0, 12)) === -1) ? " " + extra : "");
-    }
+    var contract = $("odte-open-contract");
+    if (contract && t.contract) contract.textContent = t.contract;
   }
 
   function renderOdteStats(data) {
-    var trades = (data && data.trades) || [];
-    var open = 0;
-    var closed = 0;
-    trades.forEach(function (t) {
-      var s = String(t.status || "").toLowerCase();
-      if (s === "open") open += 1;
-      else if (s === "closed") closed += 1;
-    });
-    var openEl = $("odte-stat-open");
-    var closedEl = $("odte-stat-closed");
-    var rateEl = $("odte-stat-rate");
-    if (openEl) openEl.textContent = String(open);
-    if (closedEl) closedEl.textContent = String(closed);
-    if (rateEl) {
-      rateEl.textContent = closed < 1
-        ? "Not published — no closed tickets"
-        : "See closed rows. We do not invent a headline win rate.";
-    }
     var asof = $("odte-asof");
-    if (asof && data && data.asOfLabel) asof.textContent = "As of " + data.asOfLabel + " · paper log";
-    var disc = $("odte-disclosure");
-    if (disc && data && data.disclosure) disc.textContent = data.disclosure;
+    if (asof && data && data.asOfLabel) {
+      asof.textContent = "As of " + data.asOfLabel;
+    }
     var notes = $("odte-notes");
-    if (notes) {
-      var lines = trades
-        .filter(function (t) { return t.notes || t.spotAtEntry != null; })
+    var trades = (data && data.trades) || [];
+    if (notes && trades.length) {
+      var paths = trades
+        .filter(function (t) { return t.statusPath && t.statusPath.length; })
         .map(function (t) {
-          var spot = t.spotAtEntry != null ? "Spot at entry " + t.spotAtEntry + ". " : "";
-          return (t.date || "") + " · " + spot + (t.notes || "");
+          var steps = t.statusPath.map(function (s) {
+            return (s.status || "") + " (" + (s.atLabel || "") + ")";
+          }).join(" → ");
+          return "Status path for " + (t.id || t.date) + ": " + steps + ".";
         });
-      if (lines.length) notes.textContent = lines.join(" ") + " SIMULATED RESEARCH.";
+      if (paths.length) notes.textContent = paths.join(" ") + " Prior OPEN remains on the timeline. SIMULATED RESEARCH.";
     }
   }
 
@@ -503,8 +549,8 @@
     if (!trades || !trades.length) {
       var empty = document.createElement("tr");
       var td = document.createElement("td");
-      td.colSpan = 8;
-      td.textContent = "No 0DTE paper tickets published.";
+      td.colSpan = 11;
+      td.textContent = "No 0DTE tickets published.";
       empty.appendChild(td);
       body.appendChild(empty);
       return;
@@ -517,7 +563,7 @@
   }
 
   function loadOdteBlotter() {
-    if (!$("odte-blotter-body")) return;
+    if (!$("odte-blotter-body") && !$("odte-scoreboards")) return;
     fetch(odtePath(), { cache: "no-store" })
       .then(function (res) {
         if (!res.ok) throw new Error("odte blotter " + res.status);
@@ -525,9 +571,12 @@
       })
       .then(function (data) {
         var trades = (data && data.trades) || [];
+        renderOdteScoreboards(data && data.scoreboards);
+        renderOdteTimeline(data && data.timeline);
         renderOdteBlotter(trades);
-        renderOdteOpenCard(trades);
+        renderOdteOpenCard(data || {});
         renderOdteStats(data || {});
+        bindEtStamps();
       })
       .catch(function () {});
   }
