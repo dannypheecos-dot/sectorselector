@@ -114,6 +114,9 @@
 
   function entryDisplay(t) {
     if (isNoTicket(t)) return "—";
+    if (t.fill != null && t.fill !== "") {
+      return moneyDebit(t.fill) + " paper fill";
+    }
     if (t.debit == null || t.debit === "") {
       return t.debitLabel || "ORDER DETAILS PUBLISH MONDAY AFTER OPEN";
     }
@@ -144,7 +147,9 @@
   }
 
   function isDebitPending(t) {
-    return !isNoTicket(t) && (t.debit == null || t.debit === "");
+    if (isNoTicket(t)) return false;
+    if (t.fill != null && t.fill !== "") return false;
+    return t.debit == null || t.debit === "";
   }
 
   function addCell(tr, text, className) {
@@ -288,6 +293,26 @@
         if (track) {
           renderTrackBlotter([
             {
+              date: "2026-09-04",
+              ticker: "XLV",
+              structure: "Long naked CALL, 30–60 DTE",
+              expirationLabel: "30–60 DTE · confirm Monday",
+              status: "open",
+              debit: null,
+              result: null
+            },
+            {
+              date: "2026-09-04",
+              ticker: "XLV",
+              structure: "Debit call spread, 30–60 DTE",
+              expiration: "Oct 16, 2026",
+              longStrike: 170,
+              shortStrike: 175,
+              status: "open",
+              debit: null,
+              result: null
+            },
+            {
               date: "2026-08-30",
               ticker: "XLV",
               structure: "Debit call spread, 30–60 DTE",
@@ -296,17 +321,16 @@
               shortStrike: 175,
               status: "open",
               debit: 2.43,
-              debitMid: 2.26,
-              debitLabel: "$2.43 or better",
+              fill: 3.83,
               result: null,
-              notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Exits are dated on the card."
+              notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill."
             }
           ]);
           renderRecordStats({
-            asOfLabel: "31 Aug 2026",
+            asOfLabel: "Friday 4 Sep 2026 close",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open", notes: "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Exits are dated on the card." }]
+            tickets: [{ status: "open" }, { status: "open" }, { status: "open", notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill." }]
           });
         }
       });
@@ -1173,6 +1197,226 @@
     });
   }
 
+  function historyPath() {
+    return dataAttr("data-history", "data/history/index.json");
+  }
+
+  function stateClassName(flag) {
+    var key = String(flag || "").toUpperCase();
+    if (key === "LEADER") return "state leader";
+    if (key === "HOLD") return "state confirmed";
+    if (key === "SKIP") return "state skip";
+    if (key === "NEUTRAL") return "state neutral";
+    if (key === "WATCH") return "state watch";
+    if (key === "WEAKENING") return "state weakening";
+    return "state";
+  }
+
+  function signedNum(value, suffix) {
+    if (value == null || value === "") return "—";
+    var n = typeof value === "number" ? value : Number(value);
+    if (isNaN(n)) return String(value);
+    var core = (n > 0 ? "+" : n < 0 ? "−" : "") + Math.abs(n);
+    return suffix ? core + suffix : core;
+  }
+
+  function locDisplay(row) {
+    if (row && row.locationUnavailable) return "—";
+    if (!row || row.vs50 == null || row.vs50 === "") return "—";
+    return signedNum(row.vs50, "% vs 50d");
+  }
+
+  function lastDisplay(value) {
+    if (value == null || value === "") return "—";
+    var n = typeof value === "number" ? value : Number(value);
+    if (isNaN(n)) return String(value);
+    return n.toFixed(2);
+  }
+
+  function changeClass(value) {
+    var n = typeof value === "number" ? value : Number(value);
+    if (isNaN(n) || n === 0) return "col-chg mono";
+    return n > 0 ? "col-chg mono chg-up" : "col-chg mono chg-dn";
+  }
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  function renderWeekBoard(rows, opts) {
+    var showChange = opts && opts.showChange;
+    var showLast = opts && opts.showLast;
+    var wrap = el("div", "board-wrap");
+    var table = el("table", "board");
+    var cap = document.createElement("caption");
+    cap.className = "visually-hidden";
+    cap.textContent = (opts && opts.caption) || "Sector rankings";
+    table.appendChild(cap);
+    var thead = document.createElement("thead");
+    var hr = document.createElement("tr");
+    ["Rank", "Sector", "ETF"].forEach(function (label, i) {
+      var th = document.createElement("th");
+      th.scope = "col";
+      th.className = i === 0 ? "col-rank" : i === 1 ? "col-sector" : "col-etf";
+      th.textContent = label;
+      hr.appendChild(th);
+    });
+    if (showLast) {
+      var thL = document.createElement("th");
+      thL.scope = "col";
+      thL.className = "col-last";
+      thL.textContent = "Last";
+      hr.appendChild(thL);
+    }
+    ["Score", "13W RS", "Location", "State"].forEach(function (label, i) {
+      var th = document.createElement("th");
+      th.scope = "col";
+      th.className = ["col-score", "col-rs", "col-loc", "col-state"][i];
+      th.textContent = label;
+      hr.appendChild(th);
+    });
+    if (showChange) {
+      var thC = document.createElement("th");
+      thC.scope = "col";
+      thC.className = "col-chg";
+      thC.textContent = "Δ vs 28 Aug";
+      hr.appendChild(thC);
+    }
+    thead.appendChild(hr);
+    table.appendChild(thead);
+    var tbody = document.createElement("tbody");
+    (rows || []).forEach(function (row) {
+      var tr = document.createElement("tr");
+      addCell(tr, String(row.rank).padStart(2, "0"), "col-rank mono");
+      addCell(tr, row.name || "—", "col-sector");
+      addCell(tr, row.ticker || "—", "col-etf mono");
+      if (showLast) addCell(tr, lastDisplay(row.last), "col-last mono");
+      addCell(tr, row.score == null ? "—" : String(row.score), "col-score mono");
+      addCell(tr, signedNum(row.rs13w, " pp"), "col-rs mono");
+      addCell(tr, locDisplay(row), "col-loc mono");
+      var st = document.createElement("td");
+      st.className = "col-state";
+      var span = document.createElement("span");
+      span.className = stateClassName(row.flag);
+      span.textContent = row.flag || "—";
+      st.appendChild(span);
+      tr.appendChild(st);
+      if (showChange) {
+        var chg = row.changeVsPrior;
+        addCell(tr, chg == null ? "—" : signedNum(chg), changeClass(chg));
+      }
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    return wrap;
+  }
+
+  function renderSwingPacket(packet) {
+    var box = document.createElement("div");
+    if (!packet) return box;
+    box.appendChild(el("h3", null, "Swing packet"));
+    if (packet.status) box.appendChild(el("p", "asof", packet.status));
+    var grid = el("div", "packet-grid");
+    (packet.structures || []).forEach(function (s) {
+      var art = el("article", "r-card packet");
+      if (s.label) art.appendChild(el("p", "packet-kicker", s.label));
+      art.appendChild(el("h4", null, s.structure || "Structure"));
+      if (s.geometry) art.appendChild(el("p", null, s.geometry));
+      var debitText = s.debit == null || s.debit === ""
+        ? (s.debitLabel || "ORDER DETAILS PUBLISH MONDAY AFTER OPEN")
+        : moneyDebit(s.debit);
+      art.appendChild(el("p", s.debit == null || s.debit === "" ? "debit-pending" : "mono", debitText));
+      if (s.brokerTranslation) art.appendChild(el("p", "broker-line", s.brokerTranslation));
+      if (s.notes) art.appendChild(el("p", "max", s.notes));
+      else if (packet.disclosure) art.appendChild(el("p", "max", packet.disclosure));
+      grid.appendChild(art);
+    });
+    box.appendChild(grid);
+    if (packet.priorOpen && packet.priorOpen.note) {
+      box.appendChild(el("p", "footnote", (packet.priorOpen.id || "Prior open") + " · " + packet.priorOpen.note));
+    }
+    return box;
+  }
+
+  function renderHistoryCard(week, current) {
+    var art = el("article", "week-card");
+    art.id = week.asOf || "";
+    art.appendChild(el("p", "kicker", current ? "Current · Friday lock" : "Prior week · immutable"));
+    art.appendChild(el("h2", null, week.asOfLabel || week.asOf || "Friday map"));
+    if (week.headline) art.appendChild(el("p", "week-headline", week.headline));
+    if (week.story) art.appendChild(el("p", null, week.story));
+    if (week.source || week.sourceNote) {
+      art.appendChild(el("p", "footnote", [week.source, week.sourceNote].filter(Boolean).join(" ")));
+    }
+    var details = document.createElement("details");
+    if (current) details.open = true;
+    var summary = document.createElement("summary");
+    summary.textContent = "Full board and swing packet";
+    details.appendChild(summary);
+    details.appendChild(renderWeekBoard(week.rows || [], {
+      caption: (week.asOfLabel || "") + " sector rankings",
+      showChange: (week.rows || []).some(function (r) { return r.changeVsPrior != null; }),
+      showLast: (week.rows || []).some(function (r) { return r.last != null; })
+    }));
+    if (week.swingPacket) details.appendChild(renderSwingPacket(week.swingPacket));
+    art.appendChild(details);
+    return art;
+  }
+
+  function applyRankingsHash() {
+    var hash = (location.hash || "").replace(/^#/, "");
+    if (!hash) return;
+    var card = document.getElementById(hash);
+    if (!card) return;
+    var details = card.querySelector("details");
+    if (details) details.open = true;
+    if (typeof card.scrollIntoView === "function") {
+      card.scrollIntoView({ block: "start" });
+    }
+  }
+
+  function loadRankingsArchive() {
+    var root = $("rankings-archive");
+    if (!root) return;
+    window.addEventListener("hashchange", applyRankingsHash);
+    applyRankingsHash();
+    fetch(historyPath(), { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("history " + res.status);
+        return res.json();
+      })
+      .then(function (index) {
+        var weeks = (index && index.weeks) || [];
+        var base = historyPath().replace(/index\.json$/, "");
+        return Promise.all(weeks.map(function (meta) {
+          return fetch(base + meta.file, { cache: "no-store" })
+            .then(function (res) {
+              if (!res.ok) throw new Error(meta.file + " " + res.status);
+              return res.json();
+            })
+            .then(function (card) {
+              card.current = !!meta.current || meta.asOf === index.current;
+              return card;
+            });
+        }));
+      })
+      .then(function (cards) {
+        if (!cards || !cards.length) return;
+        root.textContent = "";
+        cards.forEach(function (card) {
+          root.appendChild(renderHistoryCard(card, card.current));
+        });
+        applyRankingsHash();
+      })
+      .catch(function () {
+        applyRankingsHash();
+      });
+  }
+
   bindAllCaptures();
   bindFullSetup();
   bindNav();
@@ -1180,6 +1424,7 @@
   bindEtStamps();
   loadBlotter();
   loadOdteBlotter();
+  loadRankingsArchive();
 
   if ($("trade") && alreadyUnlocked()) {
     persistUnlock();

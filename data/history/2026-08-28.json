@@ -1,0 +1,51 @@
+{
+  "asOf": "2026-08-28",
+  "asOfLabel": "Friday 28 Aug 2026 close",
+  "source": "thetrading.tools + closelook.net, price-only",
+  "headline": "Health Care / XLV / 95 · +13.1 pp 13w RS vs SPY",
+  "story": "Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is HOLD — not a new ticket. Materials is a YTD beat that is not 13-week leadership.",
+  "rows": [
+    {"ticker": "XLV", "name": "Health Care", "last": 171.16, "chg1m": 4.67, "rs13w": 13.1, "rs6m": -5.31, "vs50": 4.5, "vs200": 10.5, "regime": "STRONG", "rank": 1, "score": 95, "flag": "LEADER", "role": "ticket"},
+    {"ticker": "XLF", "name": "Financials", "last": 58.1, "chg1m": 1.93, "rs13w": 11.1, "rs6m": 0.82, "vs50": 2.9, "vs200": 8.9, "regime": "STRONG", "rank": 2, "score": 87, "flag": "LEADER", "role": "ticket"},
+    {"ticker": "XLE", "name": "Energy", "last": 62.68, "chg1m": 6.31, "rs13w": 10.2, "rs6m": -0.06, "vs50": 7.8, "vs200": 15.3, "regime": "STRONG", "rank": 3, "score": 87, "flag": "HOLD", "role": "not a ticket"},
+    {"ticker": "XLB", "name": "Materials", "last": 53.18, "chg1m": 2.98, "rs13w": 2.4, "rs6m": -12.58, "vs50": 2.8, "vs200": 6.7, "regime": "STRONG", "rank": 4, "score": 59, "flag": "SKIP", "role": "not a ticket"},
+    {"ticker": "XLP", "name": "Consumer Staples", "last": 85.45, "chg1m": -0.02, "rs13w": 1.8, "rs6m": -17.22, "vs50": null, "vs200": null, "locationUnavailable": true, "regime": null, "rank": 5, "score": 56, "flag": "NEUTRAL", "role": "not a ticket"},
+    {"ticker": "XLI", "name": "Industrials", "last": 177.14, "chg1m": -0.7, "rs13w": 0.6, "rs6m": -12.15, "vs50": -2.6, "vs200": 4.1, "regime": "WEAKENING", "rank": 6, "score": 50, "flag": "WEAKENING", "role": "not a ticket"},
+    {"ticker": "XLRE", "name": "Real Estate", "last": 44.48, "chg1m": -1.81, "rs13w": 0.0, "rs6m": -10.69, "vs50": -0.9, "vs200": 3.5, "regime": "WEAKENING", "rank": 7, "score": 49, "flag": "WEAKENING", "role": "not a ticket"},
+    {"ticker": "XLC", "name": "Communication Services", "last": 112.99, "chg1m": 6.01, "rs13w": -4.0, "rs6m": -16.44, "vs50": 2.6, "vs200": -0.9, "regime": "RECOVERY", "rank": 8, "score": 39, "flag": "WATCH", "role": "not a ticket"},
+    {"ticker": "XLK", "name": "Technology", "last": 185.69, "chg1m": 5.67, "rs13w": -4.6, "rs6m": 21.67, "vs50": 1.6, "vs200": 16.5, "regime": "STRONG", "rank": 9, "score": 36, "flag": "SKIP", "role": "not a ticket"},
+    {"ticker": "XLY", "name": "Consumer Discretionary", "last": 117.21, "chg1m": 4.29, "rs13w": -4.8, "rs6m": -11.85, "vs50": null, "vs200": null, "locationUnavailable": true, "regime": null, "rank": 10, "score": 35, "flag": "WEAKENING", "role": "not a ticket"},
+    {"ticker": "XLU", "name": "Utilities", "last": 42.73, "chg1m": -4.32, "rs13w": -5.2, "rs6m": -22.63, "vs50": -4.4, "vs200": -4.4, "regime": "WEAK", "rank": 11, "score": 31, "flag": "WEAKENING", "role": "not a ticket"}
+  ],
+  "swingPacket": {
+    "status": "Published Monday 31 Aug 2026 open card",
+    "disclosure": "SIMULATED RESEARCH. OPEN — watching, not a simulated fill.",
+    "structures": [
+      {
+        "id": "2026-08-30-xlv",
+        "label": "Moderate",
+        "kind": "debit-spread",
+        "right": "call",
+        "ticker": "XLV",
+        "name": "Health Care",
+        "structure": "Debit call spread, 30–60 DTE",
+        "geometry": "BUY 170 Call / SELL 175 Call. Width $5.00. Oct 16, 2026 (46 DTE).",
+        "expiration": "Oct 16, 2026",
+        "longStrike": 170,
+        "shortStrike": 175,
+        "width": 5.00,
+        "debit": 2.43,
+        "debitMid": 2.26,
+        "debitLabel": "$2.43 or better",
+        "maxRisk": 243,
+        "maxValue": 500,
+        "maxProfit": 257,
+        "dte": 46,
+        "status": "open",
+        "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43",
+        "source": "TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026",
+        "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Exits are dated on the card. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "asOf": "2026-08-28",
+  "title": "This week’s map",
+  "subtitle": "As of Friday 28 Aug 2026 cash close. Price-only. Leaders this quarter vs SPY: Health Care, Financials, Energy. Energy is HOLD — not a new ticket. Technology is a skip. We do not show XLK as a leader.",
+  "tableKicker": "CURRENT SECTOR RANKINGS · FRIDAY 28 AUG 2026 CLOSE",
+  "footer": "XLP and XLY: the location input was unavailable that week. We did not invent it. Utilities is the laggard.",
+  "output": "brand/this-weeks-map.png",
+  "width": 1080,
+  "height": 1350,
+  "note": "IMMUTABLE ARCHIVE of the 28 Aug render recipe. Do not overwrite. XLB and XLK state cells were blank on the shipped PNG.",
+  "rows": [
+    {"rank": "01", "sector": "Health Care", "etf": "XLV", "score": 95, "state": "LEADER"},
+    {"rank": "02", "sector": "Financials", "etf": "XLF", "score": 87, "state": "LEADER"},
+    {"rank": "03", "sector": "Energy", "etf": "XLE", "score": 87, "state": "HOLD"},
+    {"rank": "04", "sector": "Materials", "etf": "XLB", "score": 59, "state": ""},
+    {"rank": "05", "sector": "Consumer Staples", "etf": "XLP", "score": 56, "state": "NEUTRAL"},
+    {"rank": "06", "sector": "Industrials", "etf": "XLI", "score": 50, "state": "WEAKENING"},
+    {"rank": "07", "sector": "Real Estate", "etf": "XLRE", "score": 49, "state": "WEAKENING"},
+    {"rank": "08", "sector": "Communication Services", "etf": "XLC", "score": 39, "state": "WATCH"},
+    {"rank": "09", "sector": "Technology", "etf": "XLK", "score": 36, "state": ""},
+    {"rank": "10", "sector": "Consumer Discretionary", "etf": "XLY", "score": 35, "state": "WEAKENING"},
+    {"rank": "11", "sector": "Utilities", "etf": "XLU", "score": 31, "state": "WEAKENING"}
+  ]
+}
