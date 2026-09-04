@@ -756,6 +756,90 @@ body.unlocked .trade-card { display: none; }
 .r-card p { margin: 0; color: var(--text); }
 .max { margin: 0.9rem 0 0; }
 
+.packet-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.85rem 0 1rem;
+}
+@media (min-width: 800px) {
+  .packet-grid { grid-template-columns: 1fr 1fr; }
+}
+.packet {
+  border: 1px solid var(--mint-line);
+  background: var(--bg-2);
+  padding: 1rem 1.05rem;
+}
+.packet-kicker {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin: 0 0 0.35rem;
+}
+.packet h3,
+.packet h4 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  margin: 0 0 0.4rem;
+  color: var(--off);
+}
+.packet .debit-pending { margin: 0.65rem 0 0; }
+.packet .broker-line { margin: 0.65rem 0 0; }
+
+.week-archive {
+  display: grid;
+  gap: 1.25rem;
+  padding: 0 0 2rem;
+}
+.week-card {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 1.15rem 1.15rem 1.2rem;
+}
+.week-card h2 {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  margin: 0 0 0.45rem;
+  color: var(--off);
+}
+.week-headline {
+  font-family: var(--mono);
+  color: var(--mint);
+  margin: 0 0 0.65rem;
+}
+.week-card details { margin-top: 0.85rem; }
+.week-card summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--off);
+  padding: 0.35rem 0;
+}
+.week-card summary:hover { color: var(--mint); }
+.week-card .board-wrap { margin-top: 0.85rem; }
+.week-card h3 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  margin: 1.1rem 0 0.35rem;
+  color: var(--off);
+}
+
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.foot-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.foot-nav a:hover,
+.foot-nav a[aria-current="page"] { color: var(--mint); }
+
 /* paths */
 .unlock-paths {
   display: grid;
@@ -1301,7 +1385,9 @@ time.stamp-et {
   .capture-row button { min-height: 3rem; }
   .board .col-sector,
   .board .col-rs,
-  .board .col-loc { display: none; }
+  .board .col-loc,
+  .board .col-last,
+  .board .col-chg { display: none; }
   .board-row { cursor: pointer; }
   .board-row.is-open + .board-detail { display: table-row; }
   .wrap { width: min(var(--max), calc(100% - 1.4rem)); }

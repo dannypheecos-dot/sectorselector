@@ -1,9 +1,45 @@
 {
-  "asOf": "2026-08-31",
-  "asOfLabel": "31 Aug 2026",
+  "asOf": "2026-09-04",
+  "asOfLabel": "Friday 4 Sep 2026 close",
   "disclosure": "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. Weeks with no setup publish as no ticket.",
   "closedNeededForWinRate": 20,
   "tickets": [
+    {
+      "id": "2026-09-04-xlv-aggressive",
+      "date": "2026-09-04",
+      "ticker": "XLV",
+      "sector": "Health Care",
+      "structure": "Long naked CALL, 30–60 DTE",
+      "kind": "long-naked",
+      "expiration": null,
+      "expirationLabel": "30–60 DTE · confirm Monday",
+      "longStrike": null,
+      "shortStrike": null,
+      "debit": null,
+      "debitLabel": "ORDER DETAILS PUBLISH MONDAY AFTER OPEN",
+      "status": "open",
+      "result": null,
+      "brokerTranslation": "BUY TO OPEN 1 XLV [EXPIRY] [STRIKE] CALL — DEBIT LIMIT PUBLISHES MONDAY AFTER OPEN",
+      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. STRUCTURE LOCKED. Aggressive long naked call on #1 XLV. ATM near ~171. Max risk = debit. Premiums publish Monday after open from TradingView OPRA. No P&L until a debit is published. No naked shorts."
+    },
+    {
+      "id": "2026-09-04-xlv-moderate",
+      "date": "2026-09-04",
+      "ticker": "XLV",
+      "sector": "Health Care",
+      "structure": "Debit call spread, 30–60 DTE",
+      "kind": "debit-spread",
+      "expiration": "Oct 16, 2026",
+      "expirationLabel": "Oct 16, 2026 · confirm Monday",
+      "longStrike": 170,
+      "shortStrike": 175,
+      "debit": null,
+      "debitLabel": "ORDER DETAILS PUBLISH MONDAY AFTER OPEN",
+      "status": "open",
+      "result": null,
+      "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 [STRIKE] CALL / SELL TO OPEN 1 XLV OCT 16 [STRIKE] CALL — NET DEBIT PUBLISHES MONDAY AFTER OPEN",
+      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. STRUCTURE LOCKED. Moderate debit call spread. Prefer Oct 16 2026, long ~170 / short ~175 family (confirm Monday). Separate from paper id 2026-08-30-xlv. Premiums publish Monday after open. No P&L until a debit is published."
+    },
     {
       "id": "2026-08-30-xlv",
       "date": "2026-08-30",
@@ -18,6 +54,7 @@
       "debit": 2.43,
       "debitMid": 2.26,
       "debitLabel": "$2.43 or better",
+      "fill": 3.83,
       "maxRisk": 243,
       "maxValue": 500,
       "maxProfit": 257,
@@ -27,7 +64,7 @@
       "spot": 170.57,
       "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43",
       "source": "TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026",
-      "notes": "SIMULATED RESEARCH. OPEN — watching; not a simulated fill. Limit $2.43 or better; do not chase above 2.43. Mid debit $2.26. Exits are dated on the card. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
+      "notes": "SIMULATED RESEARCH. OPEN. Published limit $2.43 or better (mid $2.26). Paper fill $3.83. No second fill. No P&L on an open ticket. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
     }
   ]
 }
