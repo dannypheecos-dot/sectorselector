@@ -1,12 +1,19 @@
 {
-  "current": "2026-09-04",
+  "current": "2026-09-11",
   "weeks": [
+    {
+      "asOf": "2026-09-11",
+      "asOfLabel": "Friday 11 Sep 2026 close",
+      "file": "2026-09-11.json",
+      "headline": "Energy / XLE / 88 · +10.4 pp 13w RS vs SPY",
+      "current": true
+    },
     {
       "asOf": "2026-09-04",
       "asOfLabel": "Friday 4 Sep 2026 close",
       "file": "2026-09-04.json",
       "headline": "Health Care / XLV / 76 · +7.6 pp 13w RS vs SPY",
-      "current": true
+      "current": false
     },
     {
       "asOf": "2026-08-28",

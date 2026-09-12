@@ -1,0 +1,67 @@
+{
+  "asOf": "2026-09-11",
+  "asOfLabel": "Friday 11 Sep 2026 close",
+  "source": "Yahoo Finance daily Close (price-only). Excess vs SPY + distance to 50-day SMA.",
+  "sourceNote": "Same methodology as Fri 4 Sep lock. CHANGE compares to the published 4 Sep board.",
+  "headline": "Energy / XLE / 88 · +10.4 pp 13w RS vs SPY",
+  "story": "Energy takes the Friday crown after Health Care cooled under its 50-day. Financials hold second. Prior #1 Health Care is still third by score but fails location — SKIP for new tickets. Weakest: Utilities.",
+  "rows": [
+    {"ticker": "XLE", "name": "Energy", "last": 65.14, "rs13w": 10.4, "vs50": 8.3, "vs200": 17.9, "rank": 1, "score": 88, "flag": "LEADER", "changeVsPrior": 12},
+    {"ticker": "XLF", "name": "Financials", "last": 57.25, "rs13w": 5.2, "vs50": 0.2, "vs200": 6.8, "rank": 2, "score": 67, "flag": "LEADER", "changeVsPrior": -6},
+    {"ticker": "XLV", "name": "Health Care", "last": 165.36, "rs13w": 3.7, "vs50": -0.5, "vs200": 6.2, "rank": 3, "score": 62, "flag": "SKIP", "changeVsPrior": -14},
+    {"ticker": "XLK", "name": "Technology", "last": 187.67, "rs13w": -1.2, "vs50": 2.7, "vs200": 16.3, "rank": 4, "score": 48, "flag": "SKIP", "changeVsPrior": -2},
+    {"ticker": "XLC", "name": "Communication Services", "last": 112.6, "rs13w": -3.2, "vs50": 1.5, "vs200": -1.3, "rank": 5, "score": 41, "flag": "WATCH", "changeVsPrior": 3},
+    {"ticker": "XLB", "name": "Materials", "last": 50.95, "rs13w": -4.1, "vs50": -1.7, "vs200": 1.4, "rank": 6, "score": 36, "flag": "WEAKENING", "changeVsPrior": -12},
+    {"ticker": "XLI", "name": "Industrials", "last": 172.37, "rs13w": -5.2, "vs50": -4.4, "vs200": 0.7, "rank": 7, "score": 31, "flag": "WEAKENING", "changeVsPrior": -5},
+    {"ticker": "XLP", "name": "Consumer Staples", "last": 83.38, "rs13w": -5.8, "vs50": -1.9, "vs200": -0.1, "rank": 8, "score": 30, "flag": "WEAKENING", "changeVsPrior": -10},
+    {"ticker": "XLY", "name": "Consumer Discretionary", "last": 112.96, "rs13w": -6.5, "vs50": -2.6, "vs200": -3.4, "rank": 9, "score": 28, "flag": "WEAKENING", "changeVsPrior": -7},
+    {"ticker": "XLRE", "name": "Real Estate", "last": 43.42, "rs13w": -6.9, "vs50": -3.0, "vs200": 0.7, "rank": 10, "score": 26, "flag": "WEAKENING", "changeVsPrior": -3},
+    {"ticker": "XLU", "name": "Utilities", "last": 42.39, "rs13w": -7.4, "vs50": -4.1, "vs200": -5.0, "rank": 11, "score": 24, "flag": "WEAKENING", "changeVsPrior": -1}
+  ],
+  "swingPacket": {
+    "status": "STRUCTURE LOCKED — premiums publish Monday after open from TradingView OPRA",
+    "disclosure": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+    "priorOpen": {
+      "id": "2026-08-30-xlv",
+      "note": "Still OPEN. XLV remains top-3 by score (#3/62) but below 50d (SKIP for new tickets). Spot Fri close 165.36. Do not invent a close or a second fill."
+    },
+    "structures": [
+      {
+        "id": "2026-09-11-xle-aggressive",
+        "label": "Aggressive",
+        "kind": "long-naked",
+        "right": "call",
+        "ticker": "XLE",
+        "name": "Energy",
+        "structure": "Long naked CALL, 30–60 DTE",
+        "geometry": "ATM near ~65.14. Strike publishes Monday. Max risk = debit. No naked shorts.",
+        "expiration": null,
+        "expirationLabel": "30–60 DTE · confirm Monday",
+        "longStrike": null,
+        "shortStrike": null,
+        "debit": null,
+        "debitLabel": "ORDER DETAILS PUBLISH MONDAY AFTER OPEN",
+        "brokerTranslation": "BUY TO OPEN 1 XLE [EXPIRY] [STRIKE] CALL — DEBIT LIMIT PUBLISHES MONDAY AFTER OPEN",
+        "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Long call only. Premium is the max risk."
+      },
+      {
+        "id": "2026-09-11-xle-moderate",
+        "label": "Moderate",
+        "kind": "debit-spread",
+        "right": "call",
+        "ticker": "XLE",
+        "name": "Energy",
+        "structure": "Debit call spread, 30–60 DTE",
+        "geometry": "Prefer Oct 16 2026. Long ATM-ish / short ~3–5% OTM (confirm Monday).",
+        "expiration": "Oct 16, 2026",
+        "expirationLabel": "Oct 16, 2026 · confirm Monday",
+        "longStrike": null,
+        "shortStrike": null,
+        "debit": null,
+        "debitLabel": "ORDER DETAILS PUBLISH MONDAY AFTER OPEN",
+        "brokerTranslation": "BUY TO OPEN 1 XLE OCT 16 [STRIKE] CALL / SELL TO OPEN 1 XLE OCT 16 [STRIKE] CALL — NET DEBIT PUBLISHES MONDAY AFTER OPEN",
+        "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Separate from paper id 2026-08-30-xlv."
+      }
+    ]
+  }
+}
