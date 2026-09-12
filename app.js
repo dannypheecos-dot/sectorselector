@@ -96,7 +96,7 @@
   function unlockStaticBlotter() {
     var cells = document.querySelectorAll("#blotter-body .blotter-ticker");
     cells.forEach(function (td) {
-      td.textContent = "XLV";
+      td.textContent = td.getAttribute("data-ticker") || "XLE";
       td.classList.remove("redact");
     });
   }
@@ -293,6 +293,24 @@
         if (track) {
           renderTrackBlotter([
             {
+              date: "2026-09-11",
+              ticker: "XLE",
+              structure: "Long naked CALL, 30–60 DTE",
+              expirationLabel: "30–60 DTE · confirm Monday",
+              status: "open",
+              debit: null,
+              result: null
+            },
+            {
+              date: "2026-09-11",
+              ticker: "XLE",
+              structure: "Debit call spread, 30–60 DTE",
+              expiration: "Oct 16, 2026",
+              status: "open",
+              debit: null,
+              result: null
+            },
+            {
               date: "2026-09-04",
               ticker: "XLV",
               structure: "Long naked CALL, 30–60 DTE",
@@ -327,10 +345,10 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "Friday 4 Sep 2026 close",
+            asOfLabel: "Friday 11 Sep 2026 close",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open" }, { status: "open" }, { status: "open", notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill." }]
+            tickets: [{ status: "open" }, { status: "open" }, { status: "open" }, { status: "open" }, { status: "open", notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill." }]
           });
         }
       });
@@ -1282,7 +1300,7 @@
       var thC = document.createElement("th");
       thC.scope = "col";
       thC.className = "col-chg";
-      thC.textContent = "Δ vs 28 Aug";
+      thC.textContent = (opts && opts.changeLabel) || "Δ vs prior";
       hr.appendChild(thC);
     }
     thead.appendChild(hr);
@@ -1360,7 +1378,8 @@
     details.appendChild(renderWeekBoard(week.rows || [], {
       caption: (week.asOfLabel || "") + " sector rankings",
       showChange: (week.rows || []).some(function (r) { return r.changeVsPrior != null; }),
-      showLast: (week.rows || []).some(function (r) { return r.last != null; })
+      showLast: (week.rows || []).some(function (r) { return r.last != null; }),
+      changeLabel: week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
     }));
     if (week.swingPacket) details.appendChild(renderSwingPacket(week.swingPacket));
     art.appendChild(details);

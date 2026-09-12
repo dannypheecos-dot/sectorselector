@@ -1,0 +1,17 @@
+{
+  "asOf": "2026-09-11",
+  "asOfLabel": "Friday 11 Sep 2026 close",
+  "rows": [
+    {"ticker": "XLE", "rank": 1, "score": 88, "state": "LEADER"},
+    {"ticker": "XLF", "rank": 2, "score": 67, "state": "LEADER"},
+    {"ticker": "XLV", "rank": 3, "score": 62, "state": "SKIP"},
+    {"ticker": "XLK", "rank": 4, "score": 48, "state": "SKIP"},
+    {"ticker": "XLC", "rank": 5, "score": 41, "state": "WATCH"},
+    {"ticker": "XLB", "rank": 6, "score": 36, "state": "WEAKENING"},
+    {"ticker": "XLI", "rank": 7, "score": 31, "state": "WEAKENING"},
+    {"ticker": "XLP", "rank": 8, "score": 30, "state": "WEAKENING"},
+    {"ticker": "XLY", "rank": 9, "score": 28, "state": "WEAKENING"},
+    {"ticker": "XLRE", "rank": 10, "score": 26, "state": "WEAKENING"},
+    {"ticker": "XLU", "rank": 11, "score": 24, "state": "WEAKENING"}
+  ]
+}

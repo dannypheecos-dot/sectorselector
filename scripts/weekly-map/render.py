@@ -131,7 +131,7 @@ def render(week: dict) -> Image.Image:
         sy += 30
 
     table_top = sy + 28
-    table_bottom = h - 168
+    table_bottom = h - 210
     table_box = (pad, table_top, w - pad, table_bottom)
     draw.rounded_rectangle(table_box, radius=10, fill=PANEL, outline=LINE, width=1)
     img.alpha_composite(fox_watermark(img.size, table_box))
@@ -141,10 +141,11 @@ def render(week: dict) -> Image.Image:
 
     cols = [
         ("RANK", 22, "left"),
-        ("SECTOR", 110, "left"),
-        ("ETF", 500, "left"),
-        ("SCORE", 680, "right"),
-        ("STATE", 968, "right"),
+        ("SECTOR", 100, "left"),
+        ("ETF", 430, "left"),
+        ("SCORE", 600, "right"),
+        ("STATE", 820, "right"),
+        ("Δ", 968, "right"),
     ]
     head_y = table_top + 52
     for label, x, align in cols:
@@ -169,12 +170,23 @@ def render(week: dict) -> Image.Image:
         draw.text((pad + 500, cy), row["etf"], font=cell_mono, fill=OFF)
         score = str(row["score"])
         sw = draw.textlength(score, font=score_f)
-        draw.text((pad + 680 - sw, cy - 1), score, font=score_f, fill=MINT)
+        draw.text((pad + 600 - sw, cy - 1), score, font=score_f, fill=MINT)
         state = (row.get("state") or "").strip()
         if state:
             color = STATE_COLOR.get(state, MUTED)
             tw = draw.textlength(state, font=state_f)
-            draw.text((pad + 968 - tw, cy + 2), state, font=state_f, fill=color)
+            draw.text((pad + 820 - tw, cy + 2), state, font=state_f, fill=color)
+        if "change" in row and row["change"] is not None:
+            chg = int(row["change"])
+            chg_txt = f"{chg:+d}"
+            if chg > 0:
+                chg_color = MINT
+            elif chg < 0:
+                chg_color = SKIP
+            else:
+                chg_color = MUTED
+            cw = draw.textlength(chg_txt, font=cell_mono)
+            draw.text((pad + 968 - cw, cy), chg_txt, font=cell_mono, fill=chg_color)
 
     foot_y = table_bottom + 22
     for line in wrap(draw, week["footer"], body, sub_w):
