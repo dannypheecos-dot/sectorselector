@@ -1,9 +1,9 @@
 {
   "asOf": "2026-09-14",
   "asOfLabel": "Monday 14 Sep 2026 cash open",
-  "disclosure": "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. Weeks with no setup publish as no ticket.",
+  "disclosure": "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only. Weeks with no setup publish as no ticket — they are not rows.",
   "closedNeededForWinRate": 20,
-  "caption": "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive long naked 66 call filled $1.94. Moderate 66/68 debit call spread filled $0.75. Snapshot ~10:23–10:27 ET. XLE spot ~65.89. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+  "caption": "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive long naked 66 call filled $1.94. Moderate 66/68 debit call spread filled $0.75. Snapshot ~10:23–10:27 ET. XLE spot ~65.89. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. The week of Friday 4 Sep 2026 published as no ticket — Friday structure only, no Monday fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
   "tickets": [
     {
       "id": "2026-09-14-xle-naked",
@@ -58,42 +58,6 @@
       "brokerTranslation": "BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER",
       "source": "TradingView OPRA / Sector Selector Plays, 07:24:54–07:27:05 PT 14 Sep 2026",
       "notes": "SIMULATED RESEARCH. OPEN. Net paper debit $0.75 (long 66 CALL $1.85 at 07:27:05 PT / short 68 CALL $1.10 at 07:24:54 PT). Chain natural ~0.81. Width $2. Max risk $75. Max profit $125. Separate from paper id 2026-08-30-xlv, still OPEN at paper fill $3.83. No P&L on an open ticket. Source: TradingView OPRA / Sector Selector Plays."
-    },
-    {
-      "id": "2026-09-04-xlv-aggressive",
-      "date": "2026-09-04",
-      "ticker": "XLV",
-      "sector": "Health Care",
-      "structure": "Long naked CALL, 30–60 DTE",
-      "kind": "long-naked",
-      "expiration": null,
-      "expirationLabel": "Unpublished structure lock",
-      "longStrike": null,
-      "shortStrike": null,
-      "debit": null,
-      "debitLabel": "UNPUBLISHED — structure only. No Monday fill.",
-      "status": "unpublished",
-      "result": null,
-      "brokerTranslation": "BUY TO OPEN 1 XLV [EXPIRY] [STRIKE] CALL — Monday fill was never published",
-      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Historical Friday 4 Sep structure lock. Monday order details were never published. We do not invent a fill."
-    },
-    {
-      "id": "2026-09-04-xlv-moderate",
-      "date": "2026-09-04",
-      "ticker": "XLV",
-      "sector": "Health Care",
-      "structure": "Debit call spread, 30–60 DTE",
-      "kind": "debit-spread",
-      "expiration": "Oct 16, 2026",
-      "expirationLabel": "Oct 16, 2026 · unpublished structure lock",
-      "longStrike": 170,
-      "shortStrike": 175,
-      "debit": null,
-      "debitLabel": "UNPUBLISHED — structure only. No Monday fill.",
-      "status": "unpublished",
-      "result": null,
-      "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — Monday fill was never published",
-      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Historical Friday 4 Sep structure lock. Prefer Oct 16 2026, long ~170 / short ~175 family. Monday order details were never published. We do not invent a fill. Separate from paper id 2026-08-30-xlv."
     },
     {
       "id": "2026-08-30-xlv",

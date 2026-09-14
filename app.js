@@ -106,11 +106,14 @@
     return status === "unpublished" || status === "structure-only" || t.type === "unpublished";
   }
 
-  function isCurrentLedgerTicket(t) {
+  function isHistoryTicket(t) {
     if (!t || isNoTicket(t) || isUnpublished(t)) return false;
-    if (t.fill != null && t.fill !== "") return true;
-    if (t.debit != null && t.debit !== "") return true;
-    return false;
+    var s = String(t.status || "").toLowerCase();
+    return s === "open" || s === "closed";
+  }
+
+  function isCurrentLedgerTicket(t) {
+    return isHistoryTicket(t);
   }
 
   function hasValue(v) {
@@ -231,7 +234,7 @@
       body.appendChild(empty);
       return;
     }
-    tickets.forEach(function (t) {
+    tickets.filter(isHistoryTicket).forEach(function (t) {
       var tr = document.createElement("tr");
       fillBlotterRow(tr, t);
       body.appendChild(tr);
@@ -329,28 +332,6 @@
               result: null
             },
             {
-              date: "2026-09-04",
-              ticker: "XLV",
-              structure: "Long naked CALL, 30–60 DTE",
-              expirationLabel: "Unpublished structure lock",
-              status: "unpublished",
-              debit: null,
-              debitLabel: "UNPUBLISHED — structure only. No Monday fill.",
-              result: null
-            },
-            {
-              date: "2026-09-04",
-              ticker: "XLV",
-              structure: "Debit call spread, 30–60 DTE",
-              expiration: "Oct 16, 2026",
-              longStrike: 170,
-              shortStrike: 175,
-              status: "unpublished",
-              debit: null,
-              debitLabel: "UNPUBLISHED — structure only. No Monday fill.",
-              result: null
-            },
-            {
               date: "2026-08-30",
               ticker: "XLV",
               structure: "Debit call spread, 30–60 DTE",
@@ -366,10 +347,10 @@
           ]);
           renderRecordStats({
             asOfLabel: "Monday 14 Sep 2026 cash open",
-            caption: "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
-            disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
+            caption: "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. The week of Friday 4 Sep 2026 published as no ticket — Friday structure only, no Monday fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open" }, { status: "open" }, { status: "unpublished" }, { status: "unpublished" }, { status: "open" }]
+            tickets: [{ status: "open" }, { status: "open" }, { status: "open" }]
           });
         }
       });
