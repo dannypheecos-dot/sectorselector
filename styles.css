@@ -643,21 +643,28 @@ body.unlocked .trade-card { display: none; }
 .falls li.next .fall-name,
 .falls li.next .fall-n { color: var(--amber); }
 
-/* map */
+/* map — shrink to the wrap; never crop the Δ column */
 .week-map-card {
   margin: 0 0 1.25rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .week-map-card img {
   display: block;
   width: 100%;
-  max-width: 36rem;
+  max-width: min(36rem, 100%);
   height: auto;
+  object-fit: contain;
+  object-position: left top;
   border: 1px solid var(--line);
   background: #101214;
 }
 .essay .week-map-card img,
 .page-hero .week-map-card img {
-  max-width: 40rem;
+  max-width: min(40rem, 100%);
 }
 
 .board-wrap {
@@ -786,6 +793,11 @@ body.unlocked .trade-card { display: none; }
 }
 .packet .debit-pending { margin: 0.65rem 0 0; }
 .packet .broker-line { margin: 0.65rem 0 0; }
+.packet-facts {
+  margin: 0.55rem 0 0.7rem;
+}
+.packet-facts > div:last-child { border-bottom: 0; }
+.packet > p + p { margin-top: 0.55rem; }
 
 .week-archive {
   display: grid;
