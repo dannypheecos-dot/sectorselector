@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /odte-challenge/
+Disallow: /odte-challenge
+Disallow: /.github/
+Allow: /
+
+Sitemap: https://sectorselector.ai/
