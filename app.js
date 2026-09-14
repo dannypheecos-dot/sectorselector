@@ -293,21 +293,26 @@
         if (track) {
           renderTrackBlotter([
             {
-              date: "2026-09-11",
+              date: "2026-09-14",
               ticker: "XLE",
               structure: "Long naked CALL, 30–60 DTE",
-              expirationLabel: "30–60 DTE · confirm Monday",
+              expiration: "Oct 16, 2026",
+              longStrike: 66,
               status: "open",
-              debit: null,
+              debit: 1.94,
+              fill: 1.94,
               result: null
             },
             {
-              date: "2026-09-11",
+              date: "2026-09-14",
               ticker: "XLE",
               structure: "Debit call spread, 30–60 DTE",
               expiration: "Oct 16, 2026",
+              longStrike: 66,
+              shortStrike: 68,
               status: "open",
-              debit: null,
+              debit: 0.75,
+              fill: 0.75,
               result: null
             },
             {
@@ -345,7 +350,7 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "Friday 11 Sep 2026 close",
+            asOfLabel: "Monday 14 Sep 2026 cash open",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
             closedNeededForWinRate: 20,
             tickets: [{ status: "open" }, { status: "open" }, { status: "open" }, { status: "open" }, { status: "open", notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill." }]
@@ -1344,10 +1349,17 @@
       if (s.label) art.appendChild(el("p", "packet-kicker", s.label));
       art.appendChild(el("h4", null, s.structure || "Structure"));
       if (s.geometry) art.appendChild(el("p", null, s.geometry));
-      var debitText = s.debit == null || s.debit === ""
-        ? (s.debitLabel || "ORDER DETAILS PUBLISH MONDAY AFTER OPEN")
-        : moneyDebit(s.debit);
-      art.appendChild(el("p", s.debit == null || s.debit === "" ? "debit-pending" : "mono", debitText));
+      var debitText;
+      var debitClass = "mono";
+      if (s.fill != null && s.fill !== "") {
+        debitText = moneyDebit(s.fill) + " paper fill";
+      } else if (s.debit == null || s.debit === "") {
+        debitText = s.debitLabel || "ORDER DETAILS PUBLISH MONDAY AFTER OPEN";
+        debitClass = "debit-pending";
+      } else {
+        debitText = s.debitLabel || moneyDebit(s.debit);
+      }
+      art.appendChild(el("p", debitClass, debitText));
       if (s.brokerTranslation) art.appendChild(el("p", "broker-line", s.brokerTranslation));
       if (s.notes) art.appendChild(el("p", "max", s.notes));
       else if (packet.disclosure) art.appendChild(el("p", "max", packet.disclosure));
