@@ -164,9 +164,9 @@
                 <div><dt>Sector score</dt><dd class="mono">88 / 100</dd></div>
                 <div><dt>Relative strength</dt><dd>+10.4 pp 13w vs SPY</dd></div>
                 <div><dt>Location</dt><dd class="mono">+8.3% vs 50d · +17.9% vs 200d</dd></div>
-                <div><dt>Aggressive</dt><dd>Long naked CALL · ATM near ~65.14</dd></div>
-                <div><dt>Moderate</dt><dd>Debit call spread · Oct 16 ATM-ish / ~3–5% OTM</dd></div>
-                <div><dt>Entry debit</dt><dd class="mono debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</dd></div>
+                <div><dt>Aggressive</dt><dd>Long naked CALL · Oct 16 66 · $1.94 paper fill</dd></div>
+                <div><dt>Moderate</dt><dd>Debit call spread · Oct 16 66/68 · $0.75 paper fill</dd></div>
+                <div><dt>Entry debit</dt><dd class="mono">$1.94 naked / $0.75 vertical · paper fills</dd></div>
               </dl>
               <p class="setup-jump"><a href="#research-card">Read the research card →</a></p>
             </div>
@@ -202,8 +202,8 @@
         <article class="unlock-setup">
           <p class="dl-label">This week’s swing packet</p>
           <p class="cash mono">XLE · Aggressive long naked call + Moderate debit spread</p>
-          <p class="setup-line">STRUCTURE LOCKED. Premiums publish Monday after open. Max risk on a long naked is the debit. No naked shorts.</p>
-          <p class="setup-note">Aggressive: BUY TO OPEN 1 XLE [EXPIRY] [STRIKE] CALL. Moderate: Oct 16 ATM-ish / ~3–5% OTM (confirm Monday). Existing paper id 2026-08-30-xlv remains OPEN — no close, no second fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
+          <p class="setup-line">PAPER LOCKED Monday 14 Sep 2026 cash open. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Max risk on a long naked is the debit. No naked shorts.</p>
+          <p class="setup-note">Aggressive: BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER. Moderate: BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83 — no close, no second fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
           <p class="setup-jump"><a href="#research-card">Read the research card →</a> · <a href="#paths">New or experienced →</a></p>
         </article>
       </div>
@@ -407,7 +407,7 @@
     <section class="wrap section" id="research-card">
       <div class="section-head">
         <h2>Weekly swing packet</h2>
-        <p class="asof">#1 Energy · Friday 11 Sep 2026 close · STRUCTURE LOCKED</p>
+        <p class="asof">#1 Energy · Monday 14 Sep 2026 cash-open paper lock · fills ~10:23–10:27 ET</p>
       </div>
       <div class="card-grid">
         <article class="r-card">
@@ -419,23 +419,23 @@
         <article class="r-card packet">
           <p class="packet-kicker">Aggressive</p>
           <h3>Long naked CALL</h3>
-          <p>XLE, 30–60 DTE, ATM near ~65.14. Long call only. Max risk = the debit. No naked shorts. Premiums publish Monday after open from TradingView OPRA.</p>
-          <p class="debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</p>
-          <p class="broker-line">BUY TO OPEN 1 XLE [EXPIRY] [STRIKE] CALL — DEBIT LIMIT PUBLISHES MONDAY AFTER OPEN</p>
+          <p>XLE Oct 16, 2026 (32 DTE). BUY 66 CALL. Spot ~65.89 at Monday cash-open snapshot. Long call only. Max risk = the debit $1.94 ($194 / 1-lot). No naked shorts.</p>
+          <p class="mono">$1.94 paper fill</p>
+          <p class="broker-line">BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER</p>
           <p class="max">SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
         </article>
         <article class="r-card packet">
           <p class="packet-kicker">Moderate</p>
           <h3>Debit call spread</h3>
-          <p>Prefer Oct 16 2026. Long ATM-ish / short ~3–5% OTM (confirm Monday). Paper id 2026-08-30-xlv remains OPEN — this Friday card is separate. Do not invent a close or a second fill.</p>
-          <p class="debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</p>
-          <p class="broker-line">BUY TO OPEN 1 XLE OCT 16 [STRIKE] CALL / SELL TO OPEN 1 XLE OCT 16 [STRIKE] CALL — NET DEBIT PUBLISHES MONDAY AFTER OPEN</p>
+          <p>XLE Oct 16, 2026 (32 DTE). Long 66 call / short 68 call. Width $2. Net paper debit $0.75 (chain natural ~0.81). Max risk $75. Max profit $125. Paper id 2026-08-30-xlv remains OPEN at paper fill $3.83 — this card is separate. Do not invent a close or a second fill.</p>
+          <p class="mono">$0.75 paper fill</p>
+          <p class="broker-line">BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER</p>
           <p class="max">SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
         </article>
       </div>
       <article class="r-card">
         <h3>Exit / invalidation</h3>
-        <p>Exits are dated when premiums publish. We do not move them after the ticket is live. Leadership is the Friday map.</p>
+        <p>Exits are dated on the card. We do not move them after the ticket is live. Leadership is the Friday map.</p>
       </article>
     </section>
 
@@ -453,24 +453,24 @@
         </article>
         <article class="path path-exp">
           <h3>Experienced options trader</h3>
-          <p>The swing packet is on this page: Aggressive long naked call and Moderate debit spread on #1 XLE. STRUCTURE LOCKED. Premiums stay blank until order details publish Monday after open. We do not invent premiums. Long naked means long call or long put only — premium is the max risk. No naked shorts.</p>
+          <p>The swing packet is on this page: Aggressive long naked 66 call at $1.94 paper fill and Moderate 66/68 debit call spread at $0.75 paper fill on #1 XLE. PAPER LOCKED Monday 14 Sep 2026 cash open. We do not invent premiums. Long naked means long call or long put only — premium is the max risk. No naked shorts.</p>
           <button type="button" class="ghost-btn" id="view-full-setup" aria-expanded="false" aria-controls="full-setup">VIEW THE FULL RESEARCH →</button>
           <div class="full-setup" id="full-setup" hidden>
             <dl class="full-setup-dl">
               <div><dt>Sector</dt><dd>Energy</dd></div>
               <div><dt>Ticker</dt><dd>XLE</dd></div>
               <div><dt>Direction</dt><dd>Bullish</dd></div>
-              <div><dt>Aggressive</dt><dd>Long naked CALL, 30–60 DTE, ATM near ~65.14</dd></div>
-              <div><dt>Moderate</dt><dd>Debit call spread · prefer Oct 16 2026 · ATM-ish / ~3–5% OTM</dd></div>
-              <div><dt>Entry debit</dt><dd>ORDER DETAILS PUBLISH MONDAY AFTER OPEN</dd></div>
-              <div><dt>Max risk</dt><dd>Long naked: the debit. Spread: width minus debit, when published.</dd></div>
+              <div><dt>Aggressive</dt><dd>Long naked CALL, Oct 16 66, $1.94 paper fill, max risk $194</dd></div>
+              <div><dt>Moderate</dt><dd>Debit call spread · Oct 16 66 / 68 · $0.75 paper fill · max risk $75 · max profit $125</dd></div>
+              <div><dt>Entry debit</dt><dd>$1.94 naked / $0.75 vertical · paper fills · ~10:23–10:27 ET</dd></div>
+              <div><dt>Max risk</dt><dd>Long naked: $194. Spread: $75.</dd></div>
               <div><dt>Sector score</dt><dd>88 / 100</dd></div>
               <div><dt>Relative strength</dt><dd>+10.4 pp 13w vs SPY</dd></div>
               <div><dt>Location</dt><dd>+8.3% vs 50d · +17.9% vs 200d</dd></div>
               <div><dt>Prior open</dt><dd>2026-08-30-xlv · still OPEN · do not invent a close</dd></div>
             </dl>
-            <p class="broker-line">AGGRESSIVE: BUY TO OPEN 1 XLE [EXPIRY] [STRIKE] CALL — DEBIT LIMIT PUBLISHES MONDAY AFTER OPEN</p>
-            <p class="broker-line">MODERATE: BUY TO OPEN 1 XLE OCT 16 [STRIKE] CALL / SELL TO OPEN 1 XLE OCT 16 [STRIKE] CALL — NET DEBIT PUBLISHES MONDAY AFTER OPEN</p>
+            <p class="broker-line">AGGRESSIVE: BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER</p>
+            <p class="broker-line">MODERATE: BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER</p>
             <p class="max">SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
           </div>
         </article>
@@ -501,25 +501,25 @@
           </thead>
           <tbody id="blotter-body">
             <tr>
-              <td class="mono">2026-09-11</td>
+              <td class="mono">2026-09-14</td>
               <td class="redact blotter-ticker" data-ticker="XLE">████</td>
               <td>Long naked CALL, 30–60 DTE</td>
-              <td class="mono">30–60 DTE · confirm Monday</td>
+              <td class="mono">Oct 16, 2026</td>
+              <td class="mono">66</td>
               <td class="mono">—</td>
-              <td class="mono">—</td>
-              <td class="debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</td>
+              <td class="mono">$1.94 paper fill</td>
               <td><span class="status-open">OPEN</span></td>
               <td>—</td>
               <td><span class="sim-mini">SIMULATED</span> —</td>
             </tr>
             <tr>
-              <td class="mono">2026-09-11</td>
+              <td class="mono">2026-09-14</td>
               <td class="redact blotter-ticker" data-ticker="XLE">████</td>
               <td>Debit call spread, 30–60 DTE</td>
               <td class="mono">Oct 16, 2026</td>
-              <td class="mono">—</td>
-              <td class="mono">—</td>
-              <td class="debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</td>
+              <td class="mono">66</td>
+              <td class="mono">68</td>
+              <td class="mono">$0.75 paper fill</td>
               <td><span class="status-open">OPEN</span></td>
               <td>—</td>
               <td><span class="sim-mini">SIMULATED</span> —</td>
@@ -563,7 +563,7 @@
           </tbody>
         </table>
       </div>
-      <p class="footnote">Friday 11 Sep swing packet on #1 Energy / XLE. STRUCTURE LOCKED. Premiums publish Monday after open. Existing paper id 2026-08-30-xlv remains OPEN. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
+      <p class="footnote">Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
     </section>
 
     <section class="wrap section" id="rule">
