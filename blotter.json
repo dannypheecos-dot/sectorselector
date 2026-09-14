@@ -67,15 +67,15 @@
       "structure": "Long naked CALL, 30–60 DTE",
       "kind": "long-naked",
       "expiration": null,
-      "expirationLabel": "30–60 DTE · confirm Monday",
+      "expirationLabel": "Unpublished structure lock",
       "longStrike": null,
       "shortStrike": null,
       "debit": null,
-      "debitLabel": "ORDER DETAILS PUBLISH MONDAY AFTER OPEN",
-      "status": "open",
+      "debitLabel": "UNPUBLISHED — structure only. No Monday fill.",
+      "status": "unpublished",
       "result": null,
-      "brokerTranslation": "BUY TO OPEN 1 XLV [EXPIRY] [STRIKE] CALL — DEBIT LIMIT PUBLISHES MONDAY AFTER OPEN",
-      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. STRUCTURE LOCKED. Aggressive long naked call on #1 XLV. ATM near ~171. Max risk = debit. Premiums publish Monday after open from TradingView OPRA. No P&L until a debit is published. No naked shorts."
+      "brokerTranslation": "BUY TO OPEN 1 XLV [EXPIRY] [STRIKE] CALL — Monday fill was never published",
+      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Historical Friday 4 Sep structure lock. Monday order details were never published. We do not invent a fill."
     },
     {
       "id": "2026-09-04-xlv-moderate",
@@ -85,15 +85,15 @@
       "structure": "Debit call spread, 30–60 DTE",
       "kind": "debit-spread",
       "expiration": "Oct 16, 2026",
-      "expirationLabel": "Oct 16, 2026 · confirm Monday",
+      "expirationLabel": "Oct 16, 2026 · unpublished structure lock",
       "longStrike": 170,
       "shortStrike": 175,
       "debit": null,
-      "debitLabel": "ORDER DETAILS PUBLISH MONDAY AFTER OPEN",
-      "status": "open",
+      "debitLabel": "UNPUBLISHED — structure only. No Monday fill.",
+      "status": "unpublished",
       "result": null,
-      "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 [STRIKE] CALL / SELL TO OPEN 1 XLV OCT 16 [STRIKE] CALL — NET DEBIT PUBLISHES MONDAY AFTER OPEN",
-      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. STRUCTURE LOCKED. Moderate debit call spread. Prefer Oct 16 2026, long ~170 / short ~175 family (confirm Monday). Separate from paper id 2026-08-30-xlv. Premiums publish Monday after open. No P&L until a debit is published."
+      "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — Monday fill was never published",
+      "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Historical Friday 4 Sep structure lock. Prefer Oct 16 2026, long ~170 / short ~175 family. Monday order details were never published. We do not invent a fill. Separate from paper id 2026-08-30-xlv."
     },
     {
       "id": "2026-08-30-xlv",

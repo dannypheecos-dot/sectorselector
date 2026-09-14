@@ -51,7 +51,7 @@
       "Unlocked. The full sector report is in your inbox. Simulated research. Not advice."
     );
     if (blotterTickets) renderHomeBlotter(blotterTickets);
-    else unlockStaticBlotter();
+    else revealBlotterTickers();
   }
 
   function persistUnlock() {
@@ -84,19 +84,14 @@
     var s = String(status || "").toLowerCase();
     if (s === "open") return "status-open";
     if (s === "closed") return "status-closed";
-    if (s === "no-ticket") return "status-skip";
+    if (s === "no-ticket" || s === "unpublished" || s === "structure-only") return "status-skip";
     return "";
   }
 
-  function publicTicker(ticket) {
-    if (isUnlocked()) return ticket.ticker || "—";
-    return "████";
-  }
-
-  function unlockStaticBlotter() {
-    var cells = document.querySelectorAll("#blotter-body .blotter-ticker");
-    cells.forEach(function (td) {
-      td.textContent = td.getAttribute("data-ticker") || "XLE";
+  function revealBlotterTickers() {
+    document.querySelectorAll("#blotter-body .blotter-ticker, #track-blotter-body .blotter-ticker").forEach(function (td) {
+      var ticker = td.getAttribute("data-ticker");
+      if (ticker) td.textContent = ticker;
       td.classList.remove("redact");
     });
   }
@@ -104,6 +99,22 @@
   function isNoTicket(t) {
     var status = String(t.status || "").toLowerCase();
     return status === "no-ticket" || t.type === "no-ticket";
+  }
+
+  function isUnpublished(t) {
+    var status = String(t.status || "").toLowerCase();
+    return status === "unpublished" || status === "structure-only" || t.type === "unpublished";
+  }
+
+  function isCurrentLedgerTicket(t) {
+    if (!t || isNoTicket(t) || isUnpublished(t)) return false;
+    if (t.fill != null && t.fill !== "") return true;
+    if (t.debit != null && t.debit !== "") return true;
+    return false;
+  }
+
+  function hasValue(v) {
+    return v != null && v !== "";
   }
 
   function moneyDebit(value) {
@@ -114,6 +125,7 @@
 
   function entryDisplay(t) {
     if (isNoTicket(t)) return "—";
+    if (isUnpublished(t)) return t.debitLabel || "UNPUBLISHED — structure only";
     if (t.fill != null && t.fill !== "") {
       return moneyDebit(t.fill) + " paper fill";
     }
@@ -147,7 +159,7 @@
   }
 
   function isDebitPending(t) {
-    if (isNoTicket(t)) return false;
+    if (isNoTicket(t) || isUnpublished(t)) return false;
     if (t.fill != null && t.fill !== "") return false;
     return t.debit == null || t.debit === "";
   }
@@ -179,15 +191,11 @@
     tr.appendChild(td);
   }
 
-  function fillBlotterRow(tr, t, opts) {
-    var redactTicker = opts && opts.redactTicker;
-    var ticker = isNoTicket(t) ? "—" : (redactTicker ? publicTicker(t) : (t.ticker || "—"));
+  function fillBlotterRow(tr, t) {
+    var ticker = isNoTicket(t) ? "—" : (t.ticker || "—");
     var structure = isNoTicket(t) ? (t.structure || "No ticket") : (t.structure || "—");
     addCell(tr, t.date || "—", "mono");
-    var tickerTd = addCell(tr, ticker, "mono");
-    if (redactTicker && !isUnlocked() && !isNoTicket(t)) {
-      tickerTd.className = "redact blotter-ticker mono";
-    }
+    addCell(tr, ticker, "mono");
     addCell(tr, structure);
     addCell(tr, expirationDisplay(t), "mono");
     addCell(tr, strikeDisplay(t, "longStrike"), "mono");
@@ -203,9 +211,9 @@
     if (!body || !tickets || !tickets.length) return;
     blotterTickets = tickets;
     body.textContent = "";
-    tickets.forEach(function (t) {
+    tickets.filter(isCurrentLedgerTicket).forEach(function (t) {
       var tr = document.createElement("tr");
-      fillBlotterRow(tr, t, { redactTicker: true });
+      fillBlotterRow(tr, t);
       body.appendChild(tr);
     });
   }
@@ -225,7 +233,7 @@
     }
     tickets.forEach(function (t) {
       var tr = document.createElement("tr");
-      fillBlotterRow(tr, t, { redactTicker: false });
+      fillBlotterRow(tr, t);
       body.appendChild(tr);
     });
   }
@@ -240,7 +248,7 @@
       var s = String(t.status || "").toLowerCase();
       if (s === "closed") closed += 1;
       else if (s === "open") open += 1;
-      else if (s === "no-ticket" || t.type === "no-ticket") skips += 1;
+      else if (s === "no-ticket" || t.type === "no-ticket" || s === "unpublished" || s === "structure-only") skips += 1;
     });
     var closedEl = $("stat-closed");
     var openEl = $("stat-open");
@@ -260,13 +268,16 @@
     if (asof && data && data.asOfLabel) asof.textContent = "As of " + data.asOfLabel + " · paper blotter";
     var disc = $("record-disclosure");
     if (disc && data && data.disclosure) disc.textContent = data.disclosure;
-    var notes = $("record-notes");
-    if (notes) {
-      var lines = tickets
-        .filter(function (t) { return t.notes; })
-        .map(function (t) { return (t.date || "") + " · " + t.notes; });
-      notes.textContent = lines.join(" ");
-    }
+    applyBlotterCaption(data);
+  }
+
+  function applyBlotterCaption(data) {
+    var text = data && data.caption;
+    if (!text) return;
+    ["blotter-caption", "record-notes"].forEach(function (id) {
+      var node = $(id);
+      if (node) node.textContent = text;
+    });
   }
 
   function renderBlotter(tickets) {
@@ -287,9 +298,11 @@
       .then(function (data) {
         blotterData = data;
         if (data && data.tickets) renderBlotter(data.tickets);
+        applyBlotterCaption(data || {});
         if (track) renderRecordStats(data || {});
       })
       .catch(function () {
+        revealBlotterTickers();
         if (track) {
           renderTrackBlotter([
             {
@@ -319,9 +332,10 @@
               date: "2026-09-04",
               ticker: "XLV",
               structure: "Long naked CALL, 30–60 DTE",
-              expirationLabel: "30–60 DTE · confirm Monday",
-              status: "open",
+              expirationLabel: "Unpublished structure lock",
+              status: "unpublished",
               debit: null,
+              debitLabel: "UNPUBLISHED — structure only. No Monday fill.",
               result: null
             },
             {
@@ -331,8 +345,9 @@
               expiration: "Oct 16, 2026",
               longStrike: 170,
               shortStrike: 175,
-              status: "open",
+              status: "unpublished",
               debit: null,
+              debitLabel: "UNPUBLISHED — structure only. No Monday fill.",
               result: null
             },
             {
@@ -351,9 +366,10 @@
           ]);
           renderRecordStats({
             asOfLabel: "Monday 14 Sep 2026 cash open",
+            caption: "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open" }, { status: "open" }, { status: "open" }, { status: "open" }, { status: "open", notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill." }]
+            tickets: [{ status: "open" }, { status: "open" }, { status: "unpublished" }, { status: "unpublished" }, { status: "open" }]
           });
         }
       });
@@ -1224,6 +1240,98 @@
     return dataAttr("data-history", "data/history/index.json");
   }
 
+  function boardPath() {
+    return dataAttr("data-board", "board.json");
+  }
+
+  function packetExpiryText(s) {
+    if (!s) return "—";
+    if (hasValue(s.expirationLabel)) return String(s.expirationLabel);
+    if (hasValue(s.expiration) && hasValue(s.dte)) return s.expiration + " · " + s.dte + " DTE";
+    if (hasValue(s.expiration)) return String(s.expiration);
+    if (hasValue(s.dte)) return s.dte + " DTE";
+    return "—";
+  }
+
+  function packetStrikeText(s) {
+    if (!s) return "—";
+    var longOk = hasValue(s.longStrike);
+    var shortOk = hasValue(s.shortStrike);
+    if (longOk && shortOk) return String(s.longStrike) + " / " + String(s.shortStrike);
+    if (longOk) return String(s.longStrike);
+    if (shortOk) return String(s.shortStrike);
+    return "—";
+  }
+
+  function packetStrikeHeading(s) {
+    return hasValue(s && s.shortStrike) ? "Long / Short" : "Strike";
+  }
+
+  function appendPacketFacts(art, s) {
+    var dl = el("dl", "brief-dl packet-facts");
+    var exp = document.createElement("div");
+    exp.appendChild(el("dt", null, "Expiration"));
+    exp.appendChild(el("dd", "mono", packetExpiryText(s)));
+    dl.appendChild(exp);
+    var st = document.createElement("div");
+    st.appendChild(el("dt", null, packetStrikeHeading(s)));
+    st.appendChild(el("dd", "mono", packetStrikeText(s)));
+    dl.appendChild(st);
+    art.appendChild(dl);
+  }
+
+  function fillPacketArticle(art, s) {
+    if (!art || !s) return;
+    var exp = art.querySelector("[data-packet-expiration]");
+    if (exp) exp.textContent = packetExpiryText(s);
+    var strike = art.querySelector("[data-packet-strike]");
+    if (strike) strike.textContent = packetStrikeText(s);
+    var strikeDt = art.querySelector("[data-packet-strike-dt]");
+    if (strikeDt) strikeDt.textContent = packetStrikeHeading(s);
+    var geo = art.querySelector("[data-packet-geometry]");
+    if (geo && hasValue(s.geometry)) geo.textContent = s.geometry;
+    var broker = art.querySelector("[data-packet-broker]");
+    if (broker && hasValue(s.brokerTranslation)) broker.textContent = s.brokerTranslation;
+    var debit = art.querySelector("[data-packet-debit]");
+    if (debit) {
+      if (hasValue(s.fill)) {
+        debit.textContent = moneyDebit(s.fill) + " paper fill";
+        debit.className = "mono";
+      } else if (hasValue(s.debitLabel)) {
+        debit.textContent = s.debitLabel;
+      } else if (hasValue(s.debit)) {
+        debit.textContent = moneyDebit(s.debit);
+        debit.className = "mono";
+      }
+    }
+  }
+
+  function hydrateHomePacket() {
+    var grid = $("home-packet-grid");
+    if (!grid) return;
+    fetch(boardPath(), { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("board " + res.status);
+        return res.json();
+      })
+      .then(function (board) {
+        var packet = board && board.swingPacket;
+        if (!packet) return;
+        var asof = $("packet-asof");
+        if (asof) {
+          var packetStamp = packet.status || "Monday cash-open packet";
+          var mapStamp = board.asOfLabel || "Friday map";
+          asof.textContent = packetStamp + " · Rankings: " + mapStamp;
+        }
+        (packet.structures || []).forEach(function (s) {
+          if (!s || !s.label) return;
+          var art = grid.querySelector('[data-structure-label="' + s.label + '"]');
+          fillPacketArticle(art, s);
+        });
+      })
+      .catch(function () {});
+  }
+
   function stateClassName(flag) {
     var key = String(flag || "").toUpperCase();
     if (key === "LEADER") return "state leader";
@@ -1348,6 +1456,7 @@
       var art = el("article", "r-card packet");
       if (s.label) art.appendChild(el("p", "packet-kicker", s.label));
       art.appendChild(el("h4", null, s.structure || "Structure"));
+      appendPacketFacts(art, s);
       if (s.geometry) art.appendChild(el("p", null, s.geometry));
       var debitText;
       var debitClass = "mono";
@@ -1453,7 +1562,9 @@
   bindNav();
   bindBoard();
   bindEtStamps();
+  revealBlotterTickers();
   loadBlotter();
+  hydrateHomePacket();
   loadOdteBlotter();
   loadRankingsArchive();
 

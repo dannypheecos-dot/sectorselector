@@ -27,7 +27,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-board="board.json">
   <a class="skip" href="#map">Skip to the map</a>
 
   <header class="mast">
@@ -164,8 +164,12 @@
                 <div><dt>Sector score</dt><dd class="mono">88 / 100</dd></div>
                 <div><dt>Relative strength</dt><dd>+10.4 pp 13w vs SPY</dd></div>
                 <div><dt>Location</dt><dd class="mono">+8.3% vs 50d · +17.9% vs 200d</dd></div>
-                <div><dt>Aggressive</dt><dd>Long naked CALL · Oct 16 66 · $1.94 paper fill</dd></div>
-                <div><dt>Moderate</dt><dd>Debit call spread · Oct 16 66/68 · $0.75 paper fill</dd></div>
+                <div><dt>Aggressive</dt><dd>Long naked CALL · $1.94 paper fill</dd></div>
+                <div><dt>Aggressive expiration</dt><dd class="mono">Oct 16, 2026 · 32 DTE</dd></div>
+                <div><dt>Aggressive strike</dt><dd class="mono">66</dd></div>
+                <div><dt>Moderate</dt><dd>Debit call spread · $0.75 paper fill</dd></div>
+                <div><dt>Moderate expiration</dt><dd class="mono">Oct 16, 2026 · 32 DTE</dd></div>
+                <div><dt>Moderate long / short</dt><dd class="mono">66 / 68</dd></div>
                 <div><dt>Entry debit</dt><dd class="mono">$1.94 naked / $0.75 vertical · paper fills</dd></div>
               </dl>
               <p class="setup-jump"><a href="#research-card">Read the research card →</a></p>
@@ -202,6 +206,12 @@
         <article class="unlock-setup">
           <p class="dl-label">This week’s swing packet</p>
           <p class="cash mono">XLE · Aggressive long naked call + Moderate debit spread</p>
+          <dl class="brief-dl packet-facts">
+            <div><dt>Aggressive expiration</dt><dd class="mono">Oct 16, 2026 · 32 DTE</dd></div>
+            <div><dt>Aggressive strike</dt><dd class="mono">66</dd></div>
+            <div><dt>Moderate expiration</dt><dd class="mono">Oct 16, 2026 · 32 DTE</dd></div>
+            <div><dt>Moderate long / short</dt><dd class="mono">66 / 68</dd></div>
+          </dl>
           <p class="setup-line">PAPER LOCKED Monday 14 Sep 2026 cash open. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Max risk on a long naked is the debit. No naked shorts.</p>
           <p class="setup-note">Aggressive: BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER. Moderate: BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83 — no close, no second fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
           <p class="setup-jump"><a href="#research-card">Read the research card →</a> · <a href="#paths">New or experienced →</a></p>
@@ -407,7 +417,7 @@
     <section class="wrap section" id="research-card">
       <div class="section-head">
         <h2>Weekly swing packet</h2>
-        <p class="asof">#1 Energy · Monday 14 Sep 2026 cash-open paper lock · fills ~10:23–10:27 ET</p>
+        <p class="asof" id="packet-asof">Packet locked Monday 14 Sep 2026 cash open · Rankings as of Friday 11 Sep 2026 close</p>
       </div>
       <div class="card-grid">
         <article class="r-card">
@@ -415,21 +425,41 @@
           <p>Energy takes the Friday crown after Health Care cooled under its 50-day. Financials hold second. Prior #1 Health Care is still third by score but fails location — SKIP for new tickets. XLE 88/100. +10.4 pp 13-week RS vs SPY. Location +8.3% vs 50d and +17.9% vs 200d.</p>
         </article>
       </div>
-      <div class="packet-grid">
-        <article class="r-card packet">
+      <div class="packet-grid" id="home-packet-grid">
+        <article class="r-card packet" data-structure-label="Aggressive">
           <p class="packet-kicker">Aggressive</p>
           <h3>Long naked CALL</h3>
-          <p>XLE Oct 16, 2026 (32 DTE). BUY 66 CALL. Spot ~65.89 at Monday cash-open snapshot. Long call only. Max risk = the debit $1.94 ($194 / 1-lot). No naked shorts.</p>
-          <p class="mono">$1.94 paper fill</p>
-          <p class="broker-line">BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER</p>
+          <dl class="brief-dl packet-facts">
+            <div>
+              <dt>Expiration</dt>
+              <dd class="mono" data-packet-expiration>Oct 16, 2026 · 32 DTE</dd>
+            </div>
+            <div>
+              <dt data-packet-strike-dt>Strike</dt>
+              <dd class="mono" data-packet-strike>66</dd>
+            </div>
+          </dl>
+          <p data-packet-geometry>XLE Oct 16, 2026 (32 DTE). BUY 66 CALL. Spot ~65.89 at Monday cash-open snapshot. Long call only. Max risk = the debit $1.94 ($194 / 1-lot). No naked shorts.</p>
+          <p class="mono" data-packet-debit>$1.94 paper fill</p>
+          <p class="broker-line" data-packet-broker>BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER</p>
           <p class="max">SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
         </article>
-        <article class="r-card packet">
+        <article class="r-card packet" data-structure-label="Moderate">
           <p class="packet-kicker">Moderate</p>
           <h3>Debit call spread</h3>
-          <p>XLE Oct 16, 2026 (32 DTE). Long 66 call / short 68 call. Width $2. Net paper debit $0.75 (chain natural ~0.81). Max risk $75. Max profit $125. Paper id 2026-08-30-xlv remains OPEN at paper fill $3.83 — this card is separate. Do not invent a close or a second fill.</p>
-          <p class="mono">$0.75 paper fill</p>
-          <p class="broker-line">BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER</p>
+          <dl class="brief-dl packet-facts">
+            <div>
+              <dt>Expiration</dt>
+              <dd class="mono" data-packet-expiration>Oct 16, 2026 · 32 DTE</dd>
+            </div>
+            <div>
+              <dt data-packet-strike-dt>Long / Short</dt>
+              <dd class="mono" data-packet-strike>66 / 68</dd>
+            </div>
+          </dl>
+          <p data-packet-geometry>XLE Oct 16, 2026 (32 DTE). Long 66 call / short 68 call. Width $2. Net paper debit $0.75 (chain natural ~0.81). Max risk $75. Max profit $125. Paper id 2026-08-30-xlv remains OPEN at paper fill $3.83 — this card is separate. Do not invent a close or a second fill.</p>
+          <p class="mono" data-packet-debit>$0.75 paper fill</p>
+          <p class="broker-line" data-packet-broker>BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER</p>
           <p class="max">SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
         </article>
       </div>
@@ -460,7 +490,11 @@
               <div><dt>Sector</dt><dd>Energy</dd></div>
               <div><dt>Ticker</dt><dd>XLE</dd></div>
               <div><dt>Direction</dt><dd>Bullish</dd></div>
+              <div><dt>Aggressive expiration</dt><dd>Oct 16, 2026 · 32 DTE</dd></div>
+              <div><dt>Aggressive strike</dt><dd>66</dd></div>
               <div><dt>Aggressive</dt><dd>Long naked CALL, Oct 16 66, $1.94 paper fill, max risk $194</dd></div>
+              <div><dt>Moderate expiration</dt><dd>Oct 16, 2026 · 32 DTE</dd></div>
+              <div><dt>Moderate long / short</dt><dd>66 / 68</dd></div>
               <div><dt>Moderate</dt><dd>Debit call spread · Oct 16 66 / 68 · $0.75 paper fill · max risk $75 · max profit $125</dd></div>
               <div><dt>Entry debit</dt><dd>$1.94 naked / $0.75 vertical · paper fills · ~10:23–10:27 ET</dd></div>
               <div><dt>Max risk</dt><dd>Long naked: $194. Spread: $75.</dd></div>
@@ -482,7 +516,7 @@
         <h2>Simulated trade history</h2>
         <p class="asof">Institutional traders often call this a trade blotter. <a href="track-record/">Full track record →</a></p>
       </div>
-      <p class="intro">Open tickets show the published limit, not a fill or a mark. Closed rows appear only after a real paper close. No win rate until twenty closed tickets. Every setup stays visible.</p>
+      <p class="intro">ETF symbols are public. Current blotter shows filled paper tickets and still-open prior fills. Unpublished structure locks stay on the <a href="track-record/">full track record</a>. No win rate until twenty closed tickets.</p>
       <div class="blotter-wrap">
         <table class="blotter">
           <thead>
@@ -502,7 +536,7 @@
           <tbody id="blotter-body">
             <tr>
               <td class="mono">2026-09-14</td>
-              <td class="redact blotter-ticker" data-ticker="XLE">████</td>
+              <td class="mono">XLE</td>
               <td>Long naked CALL, 30–60 DTE</td>
               <td class="mono">Oct 16, 2026</td>
               <td class="mono">66</td>
@@ -514,7 +548,7 @@
             </tr>
             <tr>
               <td class="mono">2026-09-14</td>
-              <td class="redact blotter-ticker" data-ticker="XLE">████</td>
+              <td class="mono">XLE</td>
               <td>Debit call spread, 30–60 DTE</td>
               <td class="mono">Oct 16, 2026</td>
               <td class="mono">66</td>
@@ -525,32 +559,8 @@
               <td><span class="sim-mini">SIMULATED</span> —</td>
             </tr>
             <tr>
-              <td class="mono">2026-09-04</td>
-              <td class="redact blotter-ticker" data-ticker="XLV">████</td>
-              <td>Long naked CALL, 30–60 DTE</td>
-              <td class="mono">30–60 DTE · confirm Monday</td>
-              <td class="mono">—</td>
-              <td class="mono">—</td>
-              <td class="debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</td>
-              <td><span class="status-open">OPEN</span></td>
-              <td>—</td>
-              <td><span class="sim-mini">SIMULATED</span> —</td>
-            </tr>
-            <tr>
-              <td class="mono">2026-09-04</td>
-              <td class="redact blotter-ticker" data-ticker="XLV">████</td>
-              <td>Debit call spread, 30–60 DTE</td>
-              <td class="mono">Oct 16, 2026</td>
-              <td class="mono">170</td>
-              <td class="mono">175</td>
-              <td class="debit-pending">ORDER DETAILS PUBLISH MONDAY AFTER OPEN</td>
-              <td><span class="status-open">OPEN</span></td>
-              <td>—</td>
-              <td><span class="sim-mini">SIMULATED</span> —</td>
-            </tr>
-            <tr>
               <td class="mono">2026-08-30</td>
-              <td class="redact blotter-ticker" data-ticker="XLV">████</td>
+              <td class="mono">XLV</td>
               <td>Debit call spread, 30–60 DTE</td>
               <td class="mono">Oct 16, 2026</td>
               <td class="mono">170</td>
@@ -563,7 +573,7 @@
           </tbody>
         </table>
       </div>
-      <p class="footnote">Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
+      <p class="footnote" id="blotter-caption">Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.</p>
     </section>
 
     <section class="wrap section" id="rule">
