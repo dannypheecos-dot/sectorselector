@@ -8,6 +8,7 @@ SVG compass path numbers are drawing, not weights, and are not scanned.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -135,6 +136,28 @@ def check_lock() -> list[str]:
     return errs
 
 
+def check_public_product() -> list[str]:
+    errs: list[str] = []
+    blotter = json.loads((ROOT / "blotter.json").read_text())
+    for ticket in blotter.get("tickets") or []:
+        status = str(ticket.get("status") or "").lower()
+        ticket_id = ticket.get("id") or ticket.get("date") or "?"
+        if status not in {"open", "closed"}:
+            errs.append(f"blotter.json {ticket_id}: status {status!r} is not an open/closed trade")
+    if (ROOT / "odte-challenge").exists():
+        errs.append("odte-challenge/ is on the published Pages tree; park it under .github/parked/")
+    for path in public_files():
+        if path.suffix.lower() != ".html":
+            continue
+        rel = path.relative_to(ROOT).as_posix()
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if re.search(r'href=["\'][^"\']*odte-challenge', text):
+            errs.append(f"{rel}: public 0DTE Challenge link")
+        if re.search(r"status-skip[^>]*>\s*UNPUBLISHED", text):
+            errs.append(f"{rel}: unpublished status still on a public page")
+    return errs
+
+
 def check_history() -> list[str]:
     errs: list[str] = []
     index_path = HISTORY_DIR / "index.json"
@@ -182,7 +205,7 @@ def check_history() -> list[str]:
 
 
 def main() -> int:
-    problems = scan() + check_lock() + check_history()
+    problems = scan() + check_lock() + check_history() + check_public_product()
     if problems:
         print("public copy guard failed:")
         for item in problems:
