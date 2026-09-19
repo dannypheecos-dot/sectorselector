@@ -1,9 +1,11 @@
 {
-  "asOf": "2026-09-14",
-  "asOfLabel": "Monday 14 Sep 2026 cash open",
+  "asOf": "2026-09-18",
+  "asOfLabel": "18 Sep 2026 Friday map refresh (no new closes)",
   "disclosure": "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only. Weeks with no setup publish as no ticket — they are not rows.",
   "closedNeededForWinRate": 20,
-  "caption": "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive long naked 66 call filled $1.94. Moderate 66/68 debit call spread filled $0.75. Snapshot ~10:23–10:27 ET. XLE spot ~65.89. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. The week of Friday 4 Sep 2026 published as no ticket — Friday structure only, no Monday fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+  "caption": "Friday 18 Sep map: Energy remains #1 (score 100). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets this week — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+  "weekNote": "Mon 14 Sep open paper lock on #1 Energy/XLE: naked 66C @1.94 + 66/68 debit spread @0.75. Prior XLV paper 2026-08-30-xlv remains OPEN. 0 closed.",
+  "weekendNote": "Fri 18 Sep board lock: Energy remains #1 (100). All three open paper tickets remain OPEN — no closes invented. Closed count still 0; no win-rate ad.",
   "tickets": [
     {
       "id": "2026-09-14-xle-naked",
@@ -27,7 +29,7 @@
       "spot": 65.89,
       "brokerTranslation": "BUY TO OPEN 1 XLE OCT 16 66 CALL — DEBIT $1.94 PAPER",
       "source": "TradingView OPRA / Sector Selector Plays, 07:23:43 PT 14 Sep 2026",
-      "notes": "SIMULATED RESEARCH. OPEN. Paper fill $1.94 (07:23:43 PT / 10:23 ET). Max risk $194. XLE spot ~65.89. No P&L on an open ticket. Source: TradingView OPRA / Sector Selector Plays."
+      "notes": "SIMULATED RESEARCH. OPEN. Paper fill $1.94 (07:23:43 PT / 10:23 ET). Max risk $194. XLE spot ~65.89. No P&L on an open ticket. Fri 18 Sep: still #1 LEADER. Source: TradingView OPRA / Sector Selector Plays."
     },
     {
       "id": "2026-09-14-xle-vertical",
@@ -57,7 +59,7 @@
       "spot": 65.89,
       "brokerTranslation": "BUY TO OPEN 1 XLE OCT 16 66 CALL / SELL TO OPEN 1 XLE OCT 16 68 CALL — NET DEBIT $0.75 PAPER",
       "source": "TradingView OPRA / Sector Selector Plays, 07:24:54–07:27:05 PT 14 Sep 2026",
-      "notes": "SIMULATED RESEARCH. OPEN. Net paper debit $0.75 (long 66 CALL $1.85 at 07:27:05 PT / short 68 CALL $1.10 at 07:24:54 PT). Chain natural ~0.81. Width $2. Max risk $75. Max profit $125. Separate from paper id 2026-08-30-xlv, still OPEN at paper fill $3.83. No P&L on an open ticket. Source: TradingView OPRA / Sector Selector Plays."
+      "notes": "SIMULATED RESEARCH. OPEN. Net paper debit $0.75 (long 66 CALL $1.85 at 07:27:05 PT / short 68 CALL $1.10 at 07:24:54 PT). Chain natural ~0.81. Width $2. Max risk $75. Max profit $125. Separate from paper id 2026-08-30-xlv, still OPEN at paper fill $3.83. No P&L on an open ticket. Fri 18 Sep: still OPEN. Source: TradingView OPRA / Sector Selector Plays."
     },
     {
       "id": "2026-08-30-xlv",
@@ -83,7 +85,7 @@
       "spot": 170.57,
       "brokerTranslation": "BUY TO OPEN 1 XLV OCT 16 170 CALL / SELL TO OPEN 1 XLV OCT 16 175 CALL — NET DEBIT LIMIT $2.43",
       "source": "TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026",
-      "notes": "SIMULATED RESEARCH. OPEN. Published limit $2.43 or better (mid $2.26). Paper fill $3.83. No second fill. No P&L on an open ticket. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
+      "notes": "SIMULATED RESEARCH. OPEN. Published limit $2.43 or better (mid $2.26). Paper fill $3.83. No second fill. No P&L on an open ticket. Fri 18 Sep: XLV back to #2 LEADER and above 50d (spot board 168.39). Still OPEN. Source: TradingView OPRA, VegasAgent, 10:26 PT 31 Aug 2026."
     }
   ]
 }

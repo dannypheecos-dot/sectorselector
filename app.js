@@ -346,8 +346,8 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "Monday 14 Sep 2026 cash open",
-            caption: "Monday 14 Sep 2026 cash-open paper lock on #1 Energy / XLE. Aggressive 66 call $1.94. Moderate 66/68 $0.75. Existing paper id 2026-08-30-xlv remains OPEN at paper fill $3.83. The week of Friday 4 Sep 2026 published as no ticket — Friday structure only, no Monday fill. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            asOfLabel: "18 Sep 2026 Friday map refresh (no new closes)",
+            caption: "Friday 18 Sep map: Energy remains #1 (score 100). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets this week — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only.",
             closedNeededForWinRate: 20,
             tickets: [{ status: "open" }, { status: "open" }, { status: "open" }]
@@ -1307,6 +1307,14 @@
         (packet.structures || []).forEach(function (s) {
           if (!s || !s.label) return;
           var art = grid.querySelector('[data-structure-label="' + s.label + '"]');
+          if (!art) {
+            var key = String(s.label).toLowerCase();
+            grid.querySelectorAll("[data-structure-label]").forEach(function (node) {
+              if (art) return;
+              var htmlLabel = String(node.getAttribute("data-structure-label") || "").toLowerCase();
+              if (key.indexOf(htmlLabel) === 0 || htmlLabel.indexOf(key) === 0) art = node;
+            });
+          }
           fillPacketArticle(art, s);
         });
       })
@@ -1456,9 +1464,14 @@
       grid.appendChild(art);
     });
     box.appendChild(grid);
-    if (packet.priorOpen && packet.priorOpen.note) {
-      box.appendChild(el("p", "footnote", (packet.priorOpen.id || "Prior open") + " · " + packet.priorOpen.note));
-    }
+    var priors = packet.priorOpen
+      ? (Object.prototype.toString.call(packet.priorOpen) === "[object Array]" ? packet.priorOpen : [packet.priorOpen])
+      : [];
+    priors.forEach(function (prior) {
+      if (prior && prior.note) {
+        box.appendChild(el("p", "footnote", (prior.id || "Prior open") + " · " + prior.note));
+      }
+    });
     return box;
   }
 
@@ -1481,7 +1494,7 @@
       caption: (week.asOfLabel || "") + " sector rankings",
       showChange: (week.rows || []).some(function (r) { return r.changeVsPrior != null; }),
       showLast: (week.rows || []).some(function (r) { return r.last != null; }),
-      changeLabel: week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
+      changeLabel: week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
     }));
     if (week.swingPacket) details.appendChild(renderSwingPacket(week.swingPacket));
     art.appendChild(details);
