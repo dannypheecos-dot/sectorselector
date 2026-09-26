@@ -346,8 +346,8 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "18 Sep 2026 Friday map refresh (no new closes)",
-            caption: "Friday 18 Sep map: Energy remains #1 (score 100). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets this week — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            asOfLabel: "25 Sep 2026 Friday lock — all OPEN (0 closed)",
+            caption: "Friday 25 Sep map: Energy remains #1 (score 80). Technology jumps to #2 LEADER (62). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only.",
             closedNeededForWinRate: 20,
             tickets: [{ status: "open" }, { status: "open" }, { status: "open" }]
@@ -1494,7 +1494,7 @@
       caption: (week.asOfLabel || "") + " sector rankings",
       showChange: (week.rows || []).some(function (r) { return r.changeVsPrior != null; }),
       showLast: (week.rows || []).some(function (r) { return r.last != null; }),
-      changeLabel: week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
+      changeLabel: week.asOf === "2026-09-25" ? "Δ vs 18 Sep" : week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
     }));
     if (week.swingPacket) details.appendChild(renderSwingPacket(week.swingPacket));
     art.appendChild(details);

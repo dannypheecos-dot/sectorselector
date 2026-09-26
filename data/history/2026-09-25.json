@@ -3,13 +3,8 @@
   "asOfLabel": "Friday 25 Sep 2026 close",
   "source": "Yahoo Finance daily Close (price-only). Excess vs SPY + distance to 50-day SMA. TradingView OHLCV cross-check matched SPY/XLE/XLK.",
   "sourceNote": "Same methodology as Fri 18 Sep lock. CHANGE compares to the published 18 Sep board.",
-  "sortDefault": "score",
-  "sortDir": "desc",
   "headline": "Energy / XLE / 80 · +9.4 pp 13w RS vs SPY",
   "story": "Energy keeps the Friday crown at 80 after a softer week of excess vs SPY (+9.4 pp). Technology jumps to #2 and clears both moving averages — LEADER, not the new ticket. Health Care slips to #3 HOLD with location still clear. Weakest: Utilities. Board health 4/11 above the 50-day.",
-  "scoreBlurb": "The Sector Selector Score is a rules-based 0–100 measure of sector leadership. It compares each major U.S. sector with the broad market and evaluates relative strength, trend health, and price location. Higher scores indicate stronger confirmed leadership; lower scores indicate lagging or weakening conditions. The model is recalculated after Friday’s close, while weekday updates explain changes without rewriting the weekly map.",
-  "disclosure": "SIMULATED RESEARCH. CosAnalyst is an AI-assisted research desk. Not individualized advice. Founding 1,000 stay free.",
-  "boardHealthAbove50d": 4,
   "rows": [
     {
       "ticker": "XLE",
@@ -21,8 +16,7 @@
       "rank": 1,
       "score": 80,
       "flag": "LEADER",
-      "changeVsPrior": -20,
-      "role": "ticket"
+      "changeVsPrior": -20
     },
     {
       "ticker": "XLK",
@@ -34,8 +28,7 @@
       "rank": 2,
       "score": 62,
       "flag": "LEADER",
-      "changeVsPrior": 19,
-      "role": "not a ticket"
+      "changeVsPrior": 19
     },
     {
       "ticker": "XLV",
@@ -47,8 +40,7 @@
       "rank": 3,
       "score": 53,
       "flag": "HOLD",
-      "changeVsPrior": -32,
-      "role": "not a ticket"
+      "changeVsPrior": -32
     },
     {
       "ticker": "XLC",
@@ -60,8 +52,7 @@
       "rank": 4,
       "score": 53,
       "flag": "NEUTRAL",
-      "changeVsPrior": 6,
-      "role": "not a ticket"
+      "changeVsPrior": 6
     },
     {
       "ticker": "XLF",
@@ -73,8 +64,7 @@
       "rank": 5,
       "score": 37,
       "flag": "SKIP",
-      "changeVsPrior": -19,
-      "role": "not a ticket"
+      "changeVsPrior": -19
     },
     {
       "ticker": "XLP",
@@ -86,8 +76,7 @@
       "rank": 6,
       "score": 20,
       "flag": "WEAKENING",
-      "changeVsPrior": -20,
-      "role": "not a ticket"
+      "changeVsPrior": -20
     },
     {
       "ticker": "XLY",
@@ -99,8 +88,7 @@
       "rank": 7,
       "score": 19,
       "flag": "WEAKENING",
-      "changeVsPrior": -6,
-      "role": "not a ticket"
+      "changeVsPrior": -6
     },
     {
       "ticker": "XLB",
@@ -112,8 +100,7 @@
       "rank": 8,
       "score": 18,
       "flag": "WEAKENING",
-      "changeVsPrior": -12,
-      "role": "not a ticket"
+      "changeVsPrior": -12
     },
     {
       "ticker": "XLI",
@@ -125,8 +112,7 @@
       "rank": 9,
       "score": 10,
       "flag": "WEAKENING",
-      "changeVsPrior": -11,
-      "role": "not a ticket"
+      "changeVsPrior": -11
     },
     {
       "ticker": "XLRE",
@@ -138,8 +124,7 @@
       "rank": 10,
       "score": 2,
       "flag": "WEAKENING",
-      "changeVsPrior": -29,
-      "role": "not a ticket"
+      "changeVsPrior": -29
     },
     {
       "ticker": "XLU",
@@ -151,8 +136,7 @@
       "rank": 11,
       "score": 0,
       "flag": "WEAKENING",
-      "changeVsPrior": -14,
-      "role": "not a ticket"
+      "changeVsPrior": -14
     }
   ],
   "swingPacket": {
@@ -212,10 +196,5 @@
         "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET."
       }
     ]
-  },
-  "blotter": {
-    "badge": "SIMULATED RESULTS — NOT LIVE MONEY — NOT ADVICE",
-    "caption": "Friday 25 Sep map: Energy remains #1 (score 80). Technology jumps to #2 LEADER (62). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
-    "ledger": "blotter.json"
   }
 }

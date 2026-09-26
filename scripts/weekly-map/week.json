@@ -1,101 +1,101 @@
 {
-  "asOf": "2026-09-18",
+  "asOf": "2026-09-25",
   "title": "This week’s map",
-  "subtitle": "Price-only. Energy keeps #1 at 100. Health Care reclaims second and clears its 50-day — LEADER again, not the new ticket. Financials fail location (SKIP).",
-  "tableKicker": "CURRENT SECTOR RANKINGS · FRIDAY 18 SEP 2026 CLOSE",
-  "footer": "Yahoo Finance daily Close (price-only). Excess vs SPY + distance to 50-day SMA. CHANGE vs Fri 11 Sep published board. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Founding 1,000 stay free. CosAnalyst is an AI-assisted research desk.",
+  "subtitle": "Price-only. Energy keeps #1 at 80. Technology jumps to #2 and clears both moving averages — LEADER, not the new ticket. Health Care is #3 HOLD.",
+  "tableKicker": "CURRENT SECTOR RANKINGS · FRIDAY 25 SEP 2026 CLOSE",
+  "footer": "Yahoo Finance daily Close (price-only). Excess vs SPY + distance to 50-day SMA. CHANGE vs Fri 18 Sep published board. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET. Founding 1,000 stay free. CosAnalyst is an AI-assisted research desk.",
   "output": "brand/this-weeks-map.png",
   "width": 1080,
   "height": 1350,
-  "note": "Friday 18 Sep 2026 lock. Print STATE and Δ on every row. Do not invent ranks. PNG is the attached weekend ship, not a re-render.",
+  "note": "Friday 25 Sep 2026 lock. Print STATE and Δ on every row. Do not invent ranks. PNG is the attached weekend ship, not a re-render.",
   "rows": [
     {
       "rank": "01",
       "sector": "Energy",
       "etf": "XLE",
-      "score": 100,
+      "score": 80,
       "state": "LEADER",
-      "change": 12
+      "change": -20
     },
     {
       "rank": "02",
-      "sector": "Health Care",
-      "etf": "XLV",
-      "score": 85,
+      "sector": "Technology",
+      "etf": "XLK",
+      "score": 62,
       "state": "LEADER",
-      "change": 23
+      "change": 19
     },
     {
       "rank": "03",
-      "sector": "Financials",
-      "etf": "XLF",
-      "score": 56,
-      "state": "SKIP",
-      "change": -11
+      "sector": "Health Care",
+      "etf": "XLV",
+      "score": 53,
+      "state": "HOLD",
+      "change": -32
     },
     {
       "rank": "04",
       "sector": "Communication Services",
       "etf": "XLC",
-      "score": 47,
-      "state": "SKIP",
+      "score": 53,
+      "state": "NEUTRAL",
       "change": 6
     },
     {
       "rank": "05",
-      "sector": "Technology",
-      "etf": "XLK",
-      "score": 43,
-      "state": "WATCH",
-      "change": -5
+      "sector": "Financials",
+      "etf": "XLF",
+      "score": 37,
+      "state": "SKIP",
+      "change": -19
     },
     {
       "rank": "06",
       "sector": "Consumer Staples",
       "etf": "XLP",
-      "score": 40,
+      "score": 20,
       "state": "WEAKENING",
-      "change": 10
+      "change": -20
     },
     {
       "rank": "07",
-      "sector": "Real Estate",
-      "etf": "XLRE",
-      "score": 31,
+      "sector": "Consumer Discretionary",
+      "etf": "XLY",
+      "score": 19,
       "state": "WEAKENING",
-      "change": 5
+      "change": -6
     },
     {
       "rank": "08",
       "sector": "Materials",
       "etf": "XLB",
-      "score": 30,
+      "score": 18,
       "state": "WEAKENING",
-      "change": -6
+      "change": -12
     },
     {
       "rank": "09",
-      "sector": "Consumer Discretionary",
-      "etf": "XLY",
-      "score": 25,
+      "sector": "Industrials",
+      "etf": "XLI",
+      "score": 10,
       "state": "WEAKENING",
-      "change": -3
+      "change": -11
     },
     {
       "rank": "10",
-      "sector": "Industrials",
-      "etf": "XLI",
-      "score": 21,
+      "sector": "Real Estate",
+      "etf": "XLRE",
+      "score": 2,
       "state": "WEAKENING",
-      "change": -10
+      "change": -29
     },
     {
       "rank": "11",
       "sector": "Utilities",
       "etf": "XLU",
-      "score": 14,
+      "score": 0,
       "state": "WEAKENING",
-      "change": -10
+      "change": -14
     }
   ]
 }
