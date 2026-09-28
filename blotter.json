@@ -1,6 +1,6 @@
 {
   "asOf": "2026-09-25",
-  "asOfLabel": "25 Sep 2026 Friday lock — all OPEN (0 closed)",
+  "asOfLabel": "25 Sep 2026 Friday lock — all OPEN (0 closed); Mon 28 Sep marks updated",
   "disclosure": "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. Weeks with no setup publish as no ticket.",
   "closedNeededForWinRate": 20,
   "tickets": [
@@ -94,6 +94,6 @@
   ],
   "weekNote": "Mon 14 Sep open paper lock on #1 Energy/XLE: naked 66C @1.94 + 66/68 debit spread @0.75. Prior XLV paper 2026-08-30-xlv remains OPEN. 0 closed.",
   "weekendNote": "Fri 25 Sep board lock: Energy #1 (80), XLK #2 LEADER (62), XLV #3 HOLD (53). All three open paper tickets remain OPEN — no closes invented. Closed count still 0; no win-rate ad.",
-  "mondayNote": "Mon 21 Sep OPEN PAPER CONTINUES. No new fills. TV OPRA ~07:29 PT: XLE 62.85; Oct16 66C 0.61x0.62 (fill 1.94); 66/68 natural ~0.33 (fill 0.75). XLV 2026-08-30 still OPEN. SIMULATED · NOT A TICKET.",
-  "caption": "Friday 25 Sep map: Energy remains #1 (score 80). Technology jumps to #2 LEADER (62). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET."
+  "mondayNote": "Mon 28 Sep OPEN PAPER CONTINUES. No new fills. TV OPRA ~07:06 PT: XLE 62.47; Oct16 66C 0.35x0.37 (fill 1.94); 66/68 natural ~0.23 (fill 0.75). 18 DTE — inside ~21 DTE invalidation watch on naked (manage open; no invented close). XLV 2026-08-30 still OPEN. Sector Selector Plays equity ~99,322. SIMULATED · NOT A TICKET.",
+  "caption": "Mon 28 Sep OPEN PAPER CONTINUES. Energy still #1 (80). Marks: XLE Oct16 naked 66C mid ~0.36 vs fill 1.94; 66/68 natural ~0.23 vs fill 0.75. Prior XLV still OPEN. Zero closed — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET."
 }
