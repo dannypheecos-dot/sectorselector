@@ -346,8 +346,8 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "25 Sep 2026 Friday lock — all OPEN (0 closed)",
-            caption: "Friday 25 Sep map: Energy remains #1 (score 80). Technology jumps to #2 LEADER (62). Open paper: XLE Oct 16 naked 66C @1.94, XLE 66/68 debit @0.75, prior XLV 2026-08-30 still OPEN. Zero closed tickets — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            asOfLabel: "25 Sep 2026 Friday lock — all OPEN (0 closed); Mon 28 Sep marks updated",
+            caption: "Mon 28 Sep OPEN PAPER CONTINUES. Energy still #1 (80). Marks: XLE Oct16 naked 66C mid ~0.36 vs fill 1.94; 66/68 natural ~0.23 vs fill 0.75. Prior XLV still OPEN. Zero closed — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only.",
             closedNeededForWinRate: 20,
             tickets: [{ status: "open" }, { status: "open" }, { status: "open" }]

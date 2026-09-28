@@ -140,7 +140,7 @@
     }
   ],
   "swingPacket": {
-    "status": "OPEN PAPER CONTINUES — XLE Oct 16 structures from Mon 14 Sep remain the live card; no new premiums invented this weekend",
+    "status": "OPEN PAPER CONTINUES — Mon 28 Sep marks only (no new fill). XLE Oct16 66C 0.35x0.37 vs fill 1.94; 66/68 natural ~0.23 vs fill 0.75. 18 DTE inside ~21 DTE invalidation watch on naked — manage open, no invented close.",
     "disclosure": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
     "priorOpen": [
       {
@@ -195,6 +195,17 @@
         "status": "open",
         "notes": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET."
       }
-    ]
+    ],
+    "mondayOpen": {
+      "asOf_pt": "2026-09-28 ~07:06 PT",
+      "decision": "OPEN_PAPER_CONTINUES",
+      "spot": 62.47,
+      "dte": 18,
+      "marks": {
+        "66C": "0.35x0.37",
+        "68C": "0.14x0.15",
+        "natural_66_68": 0.23
+      }
+    }
   }
 }
