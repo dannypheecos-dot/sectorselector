@@ -177,6 +177,8 @@ def check_history() -> list[str]:
         errs.append("history index missing 2026-09-18")
     if "2026-09-25" not in as_ofs:
         errs.append("history index missing 2026-09-25")
+    if "2026-10-02" not in as_ofs:
+        errs.append("history index missing 2026-10-02")
     if as_ofs and as_ofs != sorted(as_ofs, reverse=True):
         errs.append("history index must list weeks newest-first")
     prior = HISTORY_DIR / "2026-08-28.json"

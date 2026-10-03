@@ -1,0 +1,72 @@
+{
+  "asOf": "2026-10-02",
+  "asOfLabel": "Friday 2 Oct 2026 close",
+  "rows": [
+    {
+      "ticker": "XLE",
+      "rank": 1,
+      "score": 89,
+      "state": "LEADER"
+    },
+    {
+      "ticker": "XLK",
+      "rank": 2,
+      "score": 82,
+      "state": "LEADER"
+    },
+    {
+      "ticker": "XLV",
+      "rank": 3,
+      "score": 43,
+      "state": "SKIP"
+    },
+    {
+      "ticker": "XLC",
+      "rank": 4,
+      "score": 38,
+      "state": "SKIP"
+    },
+    {
+      "ticker": "XLF",
+      "rank": 5,
+      "score": 22,
+      "state": "WEAKENING"
+    },
+    {
+      "ticker": "XLP",
+      "rank": 6,
+      "score": 22,
+      "state": "WEAKENING"
+    },
+    {
+      "ticker": "XLB",
+      "rank": 7,
+      "score": 21,
+      "state": "WEAKENING"
+    },
+    {
+      "ticker": "XLY",
+      "rank": 8,
+      "score": 18,
+      "state": "WEAKENING"
+    },
+    {
+      "ticker": "XLI",
+      "rank": 9,
+      "score": 16,
+      "state": "WEAKENING"
+    },
+    {
+      "ticker": "XLRE",
+      "rank": 10,
+      "score": 7,
+      "state": "WEAKENING"
+    },
+    {
+      "ticker": "XLU",
+      "rank": 11,
+      "score": 0,
+      "state": "WEAKENING"
+    }
+  ]
+}
