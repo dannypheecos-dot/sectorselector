@@ -1201,7 +1201,7 @@
       var hit = parts.filter(function (p) { return p.type === type; })[0];
       return hit ? hit.value : "";
     };
-    return get("month") + " " + get("day") + ", " + get("year") + ", " + get("hour") + ":" + get("minute") + " " + get("dayPeriod") + " ET";
+    return get("month") + " " + get("day") + ", " + get("year") + " · " + get("hour") + ":" + get("minute") + " " + get("dayPeriod") + " ET";
   }
 
   function bindEtStamps() {
@@ -1211,7 +1211,7 @@
       var text = /T\d{2}:\d{2}/.test(raw) ? formatEtClock(raw) : formatEtDateOnly(raw);
       if (!text) return;
       if (approx && /T\d{2}:\d{2}/.test(raw)) {
-        text = text.replace(/, (\d{1,2}:\d{2})/, ", ~$1");
+        text = text.replace(/ · (\d{1,2}:\d{2})/, " · ~$1");
       }
       el.textContent = text;
     });
