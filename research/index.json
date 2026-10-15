@@ -1,10 +1,18 @@
 {
-  "asOf": "2026-09-01",
+  "asOf": "2026-10-15",
   "timezone": "America/New_York",
   "stampLabel": "ET",
   "desk": "Sector Selector",
   "model": "Product notes on the Friday map. Not a magazine. Unlock this month’s plan or see the current map.",
   "articles": [
+    {
+      "slug": "energy-crown-hormuz-october.html",
+      "date": "2026-10-15",
+      "datetime": "2026-10-15T10:30:00-07:00",
+      "stamp": "Oct 15, 2026 · morning PT",
+      "title": "Energy maxed the board while Hormuz kept $WTI hot",
+      "dek": "Friday 9 Oct 2026 map: Energy (XLE) 100/100 LEADER with +15.1 pp 13-week RS vs SPY as Middle East risk kept crude elevated. SIMULATED RESEARCH · NOT A TICKET."
+    },
     {
       "slug": "no-recut-after-the-vol.html",
       "date": "2026-09-01",
