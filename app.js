@@ -314,10 +314,12 @@
               structure: "Long naked CALL, 30–60 DTE",
               expiration: "Oct 16, 2026",
               longStrike: 66,
-              status: "open",
+              status: "closed",
               debit: 1.94,
               fill: 1.94,
-              result: null
+              exit: 2.24,
+              result: "win",
+              notes: "SIMULATED RESEARCH. Closed at Oct 16 expiry, marked at Friday close intrinsic. Honest note: rode to expiry; the ~21 DTE time stop was not enforced."
             },
             {
               date: "2026-09-14",
@@ -326,10 +328,12 @@
               expiration: "Oct 16, 2026",
               longStrike: 66,
               shortStrike: 68,
-              status: "open",
+              status: "closed",
               debit: 0.75,
               fill: 0.75,
-              result: null
+              exit: 2.0,
+              result: "win",
+              notes: "SIMULATED RESEARCH. Closed at Oct 16 expiry, marked at Friday close intrinsic. Honest note: rode to expiry; the ~21 DTE time stop was not enforced."
             },
             {
               date: "2026-08-30",
@@ -338,19 +342,20 @@
               expiration: "Oct 16, 2026",
               longStrike: 170,
               shortStrike: 175,
-              status: "open",
+              status: "closed",
               debit: 2.43,
               fill: 3.83,
-              result: null,
-              notes: "SIMULATED RESEARCH. OPEN. Paper fill $3.83. No second fill."
+              exit: 5.0,
+              result: "win",
+              notes: "SIMULATED RESEARCH. Closed at Oct 16 expiry, marked at Friday close intrinsic. Honest note: rode to expiry; the ~21 DTE time stop was not enforced."
             }
           ]);
           renderRecordStats({
-            asOfLabel: "2 Oct 2026 Friday lock — all OPEN (0 closed)",
-            caption: "Fri 2 Oct lock: Energy #1 (89), XLK #2 (82). Papers OPEN. Zero closed — no win-rate ad. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            asOfLabel: "16 Oct 2026 Friday lock — 3 closed (3W/0L), 0 open",
+            caption: "Fri 16 Oct lock: Energy #1 (100). 3 paper tickets closed at Oct 16 expiry (3W/0L), 0 open. No win rate until 20 closed. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "open" }, { status: "open" }, { status: "open" }]
+            tickets: [{ status: "closed" }, { status: "closed" }, { status: "closed" }]
           });
         }
       });
@@ -1494,7 +1499,7 @@
       caption: (week.asOfLabel || "") + " sector rankings",
       showChange: (week.rows || []).some(function (r) { return r.changeVsPrior != null; }),
       showLast: (week.rows || []).some(function (r) { return r.last != null; }),
-      changeLabel: week.asOf === "2026-10-02" ? "Δ vs 25 Sep" : week.asOf === "2026-09-25" ? "Δ vs 18 Sep" : week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
+      changeLabel: week.asOf === "2026-10-16" ? "Δ vs 9 Oct" : week.asOf === "2026-10-09" ? "Δ vs 2 Oct" : week.asOf === "2026-10-02" ? "Δ vs 25 Sep" : week.asOf === "2026-09-25" ? "Δ vs 18 Sep" : week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
     }));
     if (week.swingPacket) details.appendChild(renderSwingPacket(week.swingPacket));
     art.appendChild(details);
