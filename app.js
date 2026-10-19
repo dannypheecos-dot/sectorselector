@@ -309,6 +309,34 @@
         if (track) {
           renderTrackBlotter([
             {
+              id: "2026-10-19-xle-naked",
+              date: "2026-10-19",
+              ticker: "XLE",
+              structure: "Long naked CALL, 30–60 DTE",
+              expiration: "Nov 20, 2026",
+              longStrike: 68,
+              shortStrike: null,
+              status: "open",
+              debit: 2.48,
+              fill: 2.48,
+              debitLabel: "$2.48 paper fill",
+              result: null
+            },
+            {
+              id: "2026-10-19-xle-vertical",
+              date: "2026-10-19",
+              ticker: "XLE",
+              structure: "Debit call spread, 30–60 DTE",
+              expiration: "Nov 20, 2026",
+              longStrike: 68,
+              shortStrike: 70,
+              status: "open",
+              debit: 1.0,
+              fill: 1.0,
+              debitLabel: "$1.00 paper fill",
+              result: null
+            },
+            {
               date: "2026-09-14",
               ticker: "XLE",
               structure: "Long naked CALL, 30–60 DTE",
@@ -351,11 +379,11 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "16 Oct 2026 Friday lock — 3 closed (3W/0L), 0 open",
-            caption: "Fri 16 Oct lock: Energy #1 (100). 3 paper tickets closed at Oct 16 expiry (3W/0L), 0 open. No win rate until 20 closed. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
-            disclosure: "SIMULATED RESULTS NOT LIVE MONEY. No advertised win rate until 20 closed paper tickets. This table lists open or closed paper tickets only.",
+            asOfLabel: "19 Oct 2026 Monday open — 3 closed (3W/0L), 2 open",
+            caption: "Mon 19 Oct open: Energy card OPEN (Nov 20 68C 2.48; 68/70 1.00). 3 closed (3W/0L), 2 open. No win rate until 20 closed. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            disclosure: "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. Weeks with no setup publish as no ticket.",
             closedNeededForWinRate: 20,
-            tickets: [{ status: "closed" }, { status: "closed" }, { status: "closed" }]
+            tickets: [{ status: "open" }, { status: "open" }, { status: "closed" }, { status: "closed" }, { status: "closed" }]
           });
         }
       });
@@ -1266,6 +1294,12 @@
     art.appendChild(dl);
   }
 
+  function setPacketField(art, selector, value) {
+    var node = art.querySelector(selector);
+    if (!node || !hasValue(value)) return;
+    node.textContent = String(value);
+  }
+
   function fillPacketArticle(art, s) {
     if (!art || !s) return;
     var exp = art.querySelector("[data-packet-expiration]");
@@ -1285,11 +1319,19 @@
         debit.className = "mono";
       } else if (hasValue(s.debitLabel)) {
         debit.textContent = s.debitLabel;
+        debit.className = "mono";
       } else if (hasValue(s.debit)) {
         debit.textContent = moneyDebit(s.debit);
         debit.className = "mono";
       }
     }
+    setPacketField(art, "[data-packet-thesis]", s.thesis);
+    setPacketField(art, "[data-packet-kill]", s.kill);
+    setPacketField(art, "[data-packet-fill-time]", s.fillTime);
+    setPacketField(art, "[data-packet-max-risk]", s.maxRisk);
+    setPacketField(art, "[data-packet-max-value]", s.maxValue);
+    setPacketField(art, "[data-packet-max-profit]", s.maxProfit);
+    setPacketField(art, "[data-packet-legs]", s.legFills);
   }
 
   function hydrateHomePacket() {
