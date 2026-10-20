@@ -1285,11 +1285,15 @@ time.stamp-et {
   color: var(--off);
   margin: 1.65rem 0 0.7rem;
 }
+.essay ul,
 .essay ol {
   margin: 0 0 1rem;
   padding-left: 1.2rem;
   color: var(--text);
 }
+.essay ul ::marker,
+.essay ol ::marker { color: var(--mint); }
+.essay ul li,
 .essay ol li { margin: 0 0 0.4rem; }
 .essay figure {
   margin: 0 0 1.2rem;

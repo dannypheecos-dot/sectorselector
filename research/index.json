@@ -1,10 +1,18 @@
 {
-  "asOf": "2026-10-15",
+  "asOf": "2026-10-20",
   "timezone": "America/New_York",
   "stampLabel": "ET",
   "desk": "Sector Selector",
   "model": "Product notes on the Friday map. Not a magazine. Unlock this month’s plan or see the current map.",
   "articles": [
+    {
+      "slug": "defensive-rotation-health-care-takes-techs-seat.html",
+      "date": "2026-10-20",
+      "datetime": "2026-10-20T07:45:00-07:00",
+      "stamp": "Oct 20, 2026 · morning PT",
+      "title": "Defensive sector rotation: Health Care takes Tech's seat",
+      "dek": "Friday 16 Oct 2026 map: Health Care (XLV) up 22 points to #2 LEADER at 78 as Technology (XLK) slipped under its 50-day to #4 SKIP. Energy still #1 at 100. SIMULATED RESEARCH · NOT A TICKET."
+    },
     {
       "slug": "energy-crown-hormuz-october.html",
       "date": "2026-10-15",
