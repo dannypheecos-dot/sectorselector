@@ -1,0 +1,216 @@
+{
+  "asOf": "2026-10-23",
+  "asOfLabel": "Friday 23 Oct 2026 close",
+  "source": "Yahoo Finance daily Close (price-only), cross-checked with TradingView. Excess vs SPY + distance to 50-day SMA.",
+  "sourceNote": "CHANGE compares to the published 16 Oct board.",
+  "sortDefault": "score",
+  "sortDir": "desc",
+  "headline": "Energy / XLE / 100 · +16.0 pp 13w RS vs SPY",
+  "story": "Energy holds the crown at 100, widening its lead to +16.0 pp vs SPY over 13 weeks. Health Care stays #2 LEADER at 75 (down 3). Technology edges up to #3 at 55 but stays SKIP, still 3.4% under its 50-day; Staples sit #4 HOLD at 55 above both averages. Discretionary jumps 13 points to 47, a hair under its 50-day. Industrials drop 14 to 6 and are the new weakest. Board health 5/11 above the 50-day.",
+  "scoreBlurb": "The Sector Selector Score is a rules-based 0–100 measure of sector leadership. It compares each major U.S. sector with the broad market and evaluates relative strength, trend health, and price location. Higher scores indicate stronger confirmed leadership; lower scores indicate lagging or weakening conditions. The model is recalculated after Friday’s close, while weekday updates explain changes without rewriting the weekly map.",
+  "disclosure": "SIMULATED RESEARCH. CosAnalyst is an AI-assisted research desk. Not individualized advice. Founding 1,000 stay free.",
+  "boardHealthAbove50d": 5,
+  "rows": [
+    {
+      "ticker": "XLE",
+      "name": "Energy",
+      "last": 69.33,
+      "rs13w": 16.0,
+      "vs50": 7.8,
+      "vs200": 19.2,
+      "rank": 1,
+      "score": 100,
+      "flag": "LEADER",
+      "changeVsPrior": 0,
+      "role": "ticket"
+    },
+    {
+      "ticker": "XLV",
+      "name": "Health Care",
+      "last": 179.28,
+      "rs13w": 6.9,
+      "vs50": 4.8,
+      "vs200": 13.4,
+      "rank": 2,
+      "score": 75,
+      "flag": "LEADER",
+      "changeVsPrior": -3,
+      "role": "leader"
+    },
+    {
+      "ticker": "XLK",
+      "name": "Technology",
+      "last": 183.23,
+      "rs13w": 2.3,
+      "vs50": -3.4,
+      "vs200": 8.7,
+      "rank": 3,
+      "score": 55,
+      "flag": "SKIP",
+      "changeVsPrior": 2,
+      "role": ""
+    },
+    {
+      "ticker": "XLP",
+      "name": "Consumer Staples",
+      "last": 88.26,
+      "rs13w": 0.6,
+      "vs50": 4.6,
+      "vs200": 4.7,
+      "rank": 4,
+      "score": 55,
+      "flag": "HOLD",
+      "changeVsPrior": 1,
+      "role": "hold"
+    },
+    {
+      "ticker": "XLY",
+      "name": "Consumer Discretionary",
+      "last": 113.1,
+      "rs13w": -0.8,
+      "vs50": -0.3,
+      "vs200": -2.3,
+      "rank": 5,
+      "score": 47,
+      "flag": "WEAKENING",
+      "changeVsPrior": 13,
+      "role": ""
+    },
+    {
+      "ticker": "XLB",
+      "name": "Materials",
+      "last": 51.31,
+      "rs13w": -3.0,
+      "vs50": 0.6,
+      "vs200": 0.6,
+      "rank": 6,
+      "score": 41,
+      "flag": "WATCH",
+      "changeVsPrior": -5,
+      "role": ""
+    },
+    {
+      "ticker": "XLF",
+      "name": "Financials",
+      "last": 55.9,
+      "rs13w": -4.5,
+      "vs50": -0.3,
+      "vs200": 4.1,
+      "rank": 7,
+      "score": 35,
+      "flag": "WEAKENING",
+      "changeVsPrior": -2,
+      "role": ""
+    },
+    {
+      "ticker": "XLC",
+      "name": "Communication Services",
+      "last": 105.51,
+      "rs13w": -4.8,
+      "vs50": -5.5,
+      "vs200": -6.9,
+      "rank": 8,
+      "score": 31,
+      "flag": "WEAKENING",
+      "changeVsPrior": -8,
+      "role": ""
+    },
+    {
+      "ticker": "XLU",
+      "name": "Utilities",
+      "last": 42.56,
+      "rs13w": -9.7,
+      "vs50": 1.7,
+      "vs200": -3.9,
+      "rank": 9,
+      "score": 20,
+      "flag": "WATCH",
+      "changeVsPrior": -2,
+      "role": ""
+    },
+    {
+      "ticker": "XLRE",
+      "name": "Real Estate",
+      "last": 42.57,
+      "rs13w": -9.8,
+      "vs50": -0.7,
+      "vs200": -1.7,
+      "rank": 10,
+      "score": 18,
+      "flag": "WEAKENING",
+      "changeVsPrior": 0,
+      "role": ""
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrials",
+      "last": 164.62,
+      "rs13w": -13.0,
+      "vs50": -4.4,
+      "vs200": -4.9,
+      "rank": 11,
+      "score": 6,
+      "flag": "WEAKENING",
+      "changeVsPrior": -14,
+      "role": ""
+    }
+  ],
+  "swingPacket": {
+    "status": "OPEN — Fri 23 Oct lock. Energy/XLE stays #1 LEADER (100), so the Mon 19 Oct Nov 20 paper card stays OPEN: no kill rule hit (XLE closed 69.33, above its 50-day ~64.3, still #1). Hard time stop at the Fri 30 Oct close (~21 DTE). No new card this week. Marks come from the live TradingView chain Monday; no weekend premiums.",
+    "disclosure": "SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+    "priorOpen": [
+      {
+        "id": "2026-09-14-xle-naked",
+        "note": "CLOSED at Oct 16 expiry. XLE 66C paper fill 1.94, marked at Fri close intrinsic 2.24 (XLE 68.24): +$30 (+15.5%) WIN. SIMULATED."
+      },
+      {
+        "id": "2026-09-14-xle-vertical",
+        "note": "CLOSED at Oct 16 expiry. XLE 66/68 call spread paper fill 0.75, marked at max value 2.00: +$125 (+166.7%) WIN. SIMULATED."
+      },
+      {
+        "id": "2026-08-30-xlv",
+        "note": "CLOSED at Oct 16 expiry. XLV 170/175 call spread paper fill 3.83, marked at max value 5.00 (XLV 176.71): +$117 (+30.5%) WIN. SIMULATED."
+      }
+    ],
+    "structures": [
+      {
+        "label": "Aggressive",
+        "structure": "Long naked CALL, 30–60 DTE",
+        "expiration": "Nov 20, 2026",
+        "longStrike": 68,
+        "shortStrike": null,
+        "debit": 2.48,
+        "debitLabel": "$2.48 paper fill",
+        "bidAsk": "2.35 × 2.48",
+        "maxRisk": 248,
+        "fillTime": "2026-10-19 06:44:01 PT",
+        "brokerTranslation": "BUY TO OPEN 1 XLE NOV 20 68 CALL — DEBIT $2.48 PAPER",
+        "thesis": "Energy is #1 at 100 for a fifth straight Friday lock: +14.9 pp 13w RS vs SPY, +7.4% above 50d, +18.4% above 200d, in a defensive-rotation tape.",
+        "kill": "Out on an XLE daily close under its 50-day (~63.5 from Fri board) or if XLE loses #1/LEADER on a Friday lock; hard time stop at ~21 DTE (Fri 30 Oct close) - enforce it this time."
+      },
+      {
+        "label": "Moderate",
+        "structure": "Debit call spread, 30–60 DTE",
+        "expiration": "Nov 20, 2026",
+        "longStrike": 68,
+        "shortStrike": 70,
+        "width": 2.0,
+        "debit": 1.0,
+        "debitLabel": "$1.00 paper fill",
+        "legFills": "68C 2.50 / 70C 1.50",
+        "maxRisk": 100,
+        "maxValue": 200,
+        "maxProfit": 100,
+        "fillTime": "2026-10-19 06:44:43 PT",
+        "brokerTranslation": "BUY TO OPEN 1 XLE NOV 20 68 CALL / SELL TO OPEN 1 XLE NOV 20 70 CALL — NET DEBIT $1.00 PAPER",
+        "thesis": "Energy is #1 at 100 for a fifth straight Friday lock: +14.9 pp 13w RS vs SPY, +7.4% above 50d, +18.4% above 200d, in a defensive-rotation tape.",
+        "kill": "Out on an XLE daily close under its 50-day (~63.5 from Fri board) or if XLE loses #1/LEADER on a Friday lock; hard time stop at ~21 DTE (Fri 30 Oct close) - enforce it this time."
+      }
+    ]
+  },
+  "blotter": {
+    "badge": "SIMULATED RESULTS — NOT LIVE MONEY — NOT ADVICE",
+    "caption": "Fri 23 Oct lock: Energy #1 (100), XLV #2 LEADER (75). Energy card (XLE Nov 20 68C 2.48; 68/70 1.00 debit) stays OPEN; time stop Fri 30 Oct. 3 closed (3W/0L), 2 open. No win rate until 20 closed. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+    "ledger": "blotter.json"
+  }
+}

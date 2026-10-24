@@ -379,8 +379,8 @@
             }
           ]);
           renderRecordStats({
-            asOfLabel: "19 Oct 2026 Monday open — 3 closed (3W/0L), 2 open",
-            caption: "Mon 19 Oct open: Energy card OPEN (Nov 20 68C 2.48; 68/70 1.00). 3 closed (3W/0L), 2 open. No win rate until 20 closed. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
+            asOfLabel: "23 Oct 2026 Friday lock — 3 closed (3W/0L), 2 open",
+            caption: "Fri 23 Oct lock: Energy #1 (100), XLV #2 LEADER (75). Energy card (XLE Nov 20 68C 2.48; 68/70 1.00 debit) stays OPEN; time stop Fri 30 Oct. 3 closed (3W/0L), 2 open. No win rate until 20 closed. SIMULATED RESEARCH · BOOK FACT · NOT A TICKET.",
             disclosure: "SIMULATED RESULTS NOT LIVE MONEY. Simulated research. Not advice. Every idea stays dated, including losers. No advertised win rate until 20 closed paper tickets. Weeks with no setup publish as no ticket.",
             closedNeededForWinRate: 20,
             tickets: [{ status: "open" }, { status: "open" }, { status: "closed" }, { status: "closed" }, { status: "closed" }]
@@ -1541,7 +1541,7 @@
       caption: (week.asOfLabel || "") + " sector rankings",
       showChange: (week.rows || []).some(function (r) { return r.changeVsPrior != null; }),
       showLast: (week.rows || []).some(function (r) { return r.last != null; }),
-      changeLabel: week.asOf === "2026-10-16" ? "Δ vs 9 Oct" : week.asOf === "2026-10-09" ? "Δ vs 2 Oct" : week.asOf === "2026-10-02" ? "Δ vs 25 Sep" : week.asOf === "2026-09-25" ? "Δ vs 18 Sep" : week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
+      changeLabel: week.asOf === "2026-10-23" ? "Δ vs 16 Oct" : week.asOf === "2026-10-16" ? "Δ vs 9 Oct" : week.asOf === "2026-10-09" ? "Δ vs 2 Oct" : week.asOf === "2026-10-02" ? "Δ vs 25 Sep" : week.asOf === "2026-09-25" ? "Δ vs 18 Sep" : week.asOf === "2026-09-18" ? "Δ vs 11 Sep" : week.asOf === "2026-09-11" ? "Δ vs 4 Sep" : week.asOf === "2026-09-04" ? "Δ vs 28 Aug" : "Δ vs prior"
     }));
     if (week.swingPacket) details.appendChild(renderSwingPacket(week.swingPacket));
     art.appendChild(details);
